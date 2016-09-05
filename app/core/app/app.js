@@ -3,11 +3,7 @@ angular.module(config.moduleName, config.dependencies);
 
 angular.module(config.moduleName).config(['$locationProvider', '$httpProvider',
 function($locationProvider, $httpProvider) {
-  $locationProvider.html5Mode({
-    enabled: true,
-    requireBase: true,
-    rewriteLinks: true
-  }).hashPrefix('!');
+  $locationProvider.html5Mode(true).hashPrefix('!');
 }]);
 
 angular.module(config.moduleName).run(function ($rootScope, $state, $http, $location) {
