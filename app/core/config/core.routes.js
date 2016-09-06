@@ -17,6 +17,11 @@
     .state('entrepreneur', {
       url: '/entrepreneur',
       templateUrl: 'app/core/views/entrepreneur.html'
+    })
+    .state('faqs', {
+      url: '/faqs',
+      templateUrl: 'app/core/views/faqs.html',
+      controller: 'FaqsController'
     });
   }
 } ());
