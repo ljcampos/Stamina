@@ -9,10 +9,37 @@
     //   });
     // });
 
+    /*
+    .state('index', {
+            url: '/',
+            views: {
+              '@' : {
+                templateUrl: 'layout.html',
+                controller: 'IndexCtrl'
+              },
+              'top@index' : { templateUrl: 'tpl.top.html',},
+              'left@index' : { templateUrl: 'tpl.left.html',},
+              'main@index' : { templateUrl: 'tpl.main.html',},
+            },
+          })
+        .state('index.list', {
+            url: '/list',
+            templateUrl: 'list.html',
+            controller: 'ListCtrl'
+          })
+    */
+
     $stateProvider
     .state('admin', {
       url: '/',
-      templateUrl: 'app/core/views/admin.html'
+      views:{
+        '@': {
+          //templateUrl: 'app/core/views/admin.html'
+          templateUrl: 'app/templates/layouts/admin_layout.html'
+        },
+        'admin_aside@admin': {templateUrl: 'app/templates/partials/admin_aside.html'},
+        'admin_navbar@admin': {templateUrl: 'app/templates/partials/admin_navbar.html'}
+      }
     })
     .state('entrepreneur', {
       url: '/entrepreneur',
