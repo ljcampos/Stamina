@@ -1,0 +1,70 @@
+<div class="app">
+  <!-- content -->
+  <div id="content" class="app-content" role="main">
+    <div class="box">
+      <!-- Content Navbar -->
+      <div class="navbar md-whiteframe-z1 no-radius grey-900">
+        <!-- Open side - Naviation on mobile -->
+        <!--<a md-ink-ripple  data-toggle="modal" data-target="#aside" class="navbar-item pull-left visible-xs visible-sm"><i class="mdi-navigation-menu i-24"></i></a>-->
+        <!-- / -->
+        <!-- Page title - Bind to $state's title -->
+        <div class="navbar-item">
+          <img class="img-stamina" src="images/stamina.png" style="height:64px;"><!--width:208px-->
+        </div>
+        <!-- / -->
+        <!-- Common tools -->
+        <ul class="nav nav-sm navbar-tool pull-right">
+          <!--<li>
+            <a md-ink-ripple ui-toggle-class="show" target="#search">
+              <i class="mdi-action-search i-24"></i>
+            </a>
+          </li>-->
+          <li>
+            <a md-ink-ripple>
+              <i class="mdi-action-home i-24"></i>
+            </a>
+          </li>
+          <li>
+            <a md-ink-ripple data-toggle="modal" data-target="#user">
+              <i class="mdi-social-person-outline i-24"></i>
+            </a>
+          </li>
+          <!--<li class="dropdown">
+            <a md-ink-ripple data-toggle="dropdown">
+              <i class="mdi-navigation-more-vert i-24"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-scale pull-right pull-up text-color">
+              <li><a href>Single-column view</a></li>
+              <li><a href>Sort by date</a></li>
+              <li><a href>Sort by name</a></li>
+              <li class="divider"></li>
+              <li><a href>Help &amp; feedback</a></li>
+            </ul>
+          </li>-->
+          <li>
+            <a href="#!function_cerarsesion()" md-ink-ripple>
+              <i class="fa i-20">Salir </i>&nbsp; <i class="fa fa-sign-out i-24"></i>
+            </a>
+          </li>
+        </ul>
+        <div class="pull-right" ui-view="navbar@"></div>
+        <!-- / -->
+      </div>
+      <!-- Content -->
+      <div class="box-row">
+        <div class="box-cell">
+          <div class="box-inner padding">
+      			<div class="row row-center">
+      				<div class="col-lg-10 col-md-11 col-sm-11 col-xs-12 col-center">
+      					<div class="row">
+                  <ui-view></ui-view>
+      					</div>
+      				</div>
+      			</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / content -->
+</div>
