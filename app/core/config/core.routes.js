@@ -31,7 +31,6 @@
 
     $stateProvider
     .state('admin', {
-      url: '/',
       views:{
         '@': {
           //templateUrl: 'app/core/views/admin.html'
@@ -41,9 +40,26 @@
         'admin_navbar@admin': {templateUrl: 'app/templates/partials/admin_navbar.html'}
       }
     })
-    .state('entrepreneur', {
-      url: '/entrepreneur',
-      templateUrl: 'app/core/views/entrepreneur.html'
+    .state('admin.dashboard', {
+      url: '/',
+      templateUrl: 'app/core/views/admin.home.html'
     })
+
+    .state('admin.menthor', {
+      templateUrl: 'app/menthor/views/mentor.html'
+    })
+
+    .state('entrepreneur', {
+      // views:{
+      //   '@': {
+          templateUrl: 'app/templates/layouts/entrepreneur_layout.html'
+        //}
+        //'entrepreneur_navbar@entrepreneur': {templateUrl: 'app/templates/partials/admin_aside.html'},
+      //}
+    })
+    .state('entrepreneur.dashboard', {
+      url: '/emprendedor',
+      templateUrl: '/app/entrepreneur/views/entrepreneur.home.html'
+    });
   }
 } ());
