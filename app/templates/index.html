@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<base href='/'>
+	<!-- <meta name="fragment" content="!"> -->
 	<meta charset="utf-8" />
 	<title>Stamina | Sign In</title>
 	<meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
@@ -48,8 +49,7 @@
 	}
   </style>
 </head>
-<body>
-	<ui-view></ui-view>
+<body ui-view>
 	<!-- Assets Scripts -->
 	<script src="../libs/jquery/jquery/dist/jquery.js"></script>
 	<script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
@@ -80,5 +80,9 @@
 	<script src='../app/menthor/config/menthor.routes.js'></script>
 	<script src='../app/menthor/controller/menthor.controller.js'></script>
 	<script src='../app/menthor/services/menthor.service.js'></script>
+
+	<script src='../app/entrepreneur/entrepreneur.js'></script>
+	<script src='../app/entrepreneur/config/entrepreneur.routes.js'></script>
+	<!-- <script src='/app/entrepreneur/views/home.html'></script> -->
 </body>
 </html>

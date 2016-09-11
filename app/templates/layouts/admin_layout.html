@@ -1,0 +1,23 @@
+<div class="app">
+	<!-- aside -->
+	<aside aside id="aside" class="app-aside modal fade " role="menu" ui-view="admin_aside"></aside>
+	<!-- / aside -->
+
+	<!-- content -->
+	<div id="content" class="app-content" role="main">
+		<div class="box">
+			<!-- Content Navbar -->
+			<div ui-view="admin_navbar" class="navbar md-whiteframe-z1 no-radius grey-900"></div>
+			<!-- / -->
+			<!-- Content -->
+			<div class="box-row">
+				<div class="box-cell">
+					<!-- <div class="box-inner padding"> -->
+						<ui-view></ui-view>
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / content -->
+</div>
