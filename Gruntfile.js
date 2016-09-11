@@ -18,45 +18,39 @@ module.exports = function(grunt) {
 					'app/**/*.js'
 				],
 				dest: 'index.html'
-			},
-			buildMainFiles: {
-				options: {
-					scriptTemplate: '<script src="{{ path }}"></script>',
-					//linkTemplate: '<link href="{{ path }}"/>',
-					openTag: '<!-- start template tags -->',
-					closeTag: '<!-- end template tags -->'
-				},
-				src: [
-					//'app/core/*.js',
-					//'!app/core/app/config.js',
-					//'!app/core/app/app.js',
-				],
-				dest: 'index.html'
-			},
-			buildOthers: {
-				options: {
-					scriptTemplate: '<script src="{{ path }}"></script>',
-					//linkTemplate: '<link href="{{ path }}"/>',
-					openTag: '<!-- start template tags -->',
-					closeTag: '<!-- end template tags -->'
-				},
-				src: [
-					// 'app/**/*.js',
-					'app/core/app/config.js',
-					'app/core/app/app.js',
-					//'app/core/core.js',
-					// '!app/app.js',
-					// '!app/config.js'
-				],
-				dest: 'index.html'
 			}
 		}
+		// watch: {
+		// 	options: {
+		// 		livereload: true,
+		// 		spawn: false
+		// 	},
+		// 	scripts: {
+		// 		options: {
+		// 			event: ['added', 'deleted', 'changed']
+		// 		},
+		// 		files: [
+		// 			'app/core/app/config.js',
+		// 			'app/core/app/app.js',
+		// 			'app/*/*.js',
+		// 			'app/**/*.js'
+		// 		]
+		// 		tasks: ['tags:buildConfig']
+		// 	}
+		// }
 
 	});
 	// Load plugin's
 	grunt.loadNpmTasks('grunt-script-link-tags');
+	//grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Register tasks
 	grunt.registerTask('default', ['tags:buildConfig']);
+
+	// grunt.event.on('watch', function(action, filepath) {
+	// 	if(grunt.file.isMatch(grunt.config('watch.styles.files'), filepath)) {
+	// 		grunt.config('compass.dev.options.specify', [filepath]);
+	// 	}
+	// });
 
 }
