@@ -37,7 +37,7 @@
           templateUrl: 'app/templates/layouts/admin_layout.html'
         },
         'admin_aside@admin': {templateUrl: 'app/templates/partials/admin_aside.html'},
-        'admin_navbar@admin': {templateUrl: 'app/templates/partials/admin_navbar.html'}
+        'admin_navbar@admin': {templateUrl: 'app/templates/partials/admin_navbar.html', controller: 'HeaderController'}
       }
     })
     .state('admin.dashboard', {

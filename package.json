@@ -9,5 +9,8 @@
   "author": "irvnig campos",
   "license": "MIT",
   "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-script-link-tags": "^1.0.2"
   }
 }
