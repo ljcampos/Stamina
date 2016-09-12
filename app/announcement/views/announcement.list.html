@@ -10,10 +10,10 @@
 </style>
 <div class="md-whiteframe-z0">
 	<ul class="nav nav-lines nav-tabs nav-justified grey-800 tabs-convocatorias">
-		<li class="active">
+		<li>
 			<a href="" data-toggle="tab" data-target="#tab_1">TODAS</a>
 		</li>
-		<li>
+		<li class="active">
 			<a href="" data-toggle="tab" data-target="#tab_2">ACTIVAS</a>
 		</li>
 		<li>
@@ -24,115 +24,256 @@
 		</li>
 	</ul>
 	<div class="tab-content p m-b-md clear b-t b-t-2x">
-		<div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_1">
-			<div class="panel-card bg-white p clearfix m-b-xs">
-				<div class="pull-right text-sm text-muted">
-				  <a href="edit.menthor.html" class="btn btn-sm btn-primary waves-effect" tooltip="Editar">
-				    <i class="fa fa-eye"></i>
-				  </a>
-				  <a href="edit.menthor.html" class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-				    <i class="fa fa-pencil"></i>
-				  </a>
-				  <a class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
-				    <i class="fa fa-trash-o"></i>
-				  </a>
-				</div>
-				<div class="row">
-				  <div class="col-md-1">
-				    <!--<a class="pull-left m-r">-->
-				      <img ng-src="images/a10.jpg" class="img-responsive rounded" src="images/a9.jpg">
-				    <!--</a>-->
-				  </div>
-				  <div class="clear col-md-9">
-				    <a ui-sref='admin.menthor.view'>
-				      <div>
-				        <h4 class="text-md ng-binding" ui-sref='admin.menthor.view' style="margin:0px;">Convocatoria #1</h4>
-				      </div>
-				      <strong>Engineer in informatics systems</strong>
-				      <!--<span class="label bg-light m-l-sm ng-binding">angular</span>-->
-				      <div class="text-ellipsis m-t-xs text-muted-dk text-sm ng-binding">
-				        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-				      </div>
-				    </a>
-				  </div>      
-				</div>
-			</div>
-			<div class="panel-card bg-white p clearfix m-b-xs">
-				<div class="pull-right text-sm text-muted">
-				  <a href="edit.menthor.html" class="btn btn-sm btn-primary waves-effect" tooltip="Editar">
-				    <i class="fa fa-eye"></i>
-				  </a>
-				  <a href="edit.menthor.html" class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-				    <i class="fa fa-pencil"></i>
-				  </a>
-				  <a class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
-				    <i class="fa fa-trash-o"></i>
-				  </a>
-				</div>
-				<div class="row">
-				  <div class="col-md-1">
-				    <!--<a class="pull-left m-r">-->
-				      <img ng-src="images/a10.jpg" class="img-responsive rounded" src="images/a9.jpg">
-				    <!--</a>-->
-				  </div>
-				  <div class="clear col-md-9">
-				    <a href="view.mentor.html">
-				      <div>
-				        <h4 class="text-md ng-binding" href="#/app/inbox/10" style="margin:0px;">Convocatoria #1</h4>
-				      </div>
-				      <strong>Engineer in informatics systems</strong>
-				      <!--<span class="label bg-light m-l-sm ng-binding">angular</span>-->
-				      <div class="text-ellipsis m-t-xs text-muted-dk text-sm ng-binding">
-				        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-				      </div>
-				    </a>
-				  </div>      
-				</div>
-			</div>
-			<div class="panel-card bg-white p clearfix m-b-xs">
-				<div class="pull-right text-sm text-muted">
-				  <a href="edit.menthor.html" class="btn btn-sm btn-primary waves-effect" tooltip="Editar">
-				    <i class="fa fa-eye"></i>
-				  </a>
-				  <a href="edit.menthor.html" class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-				    <i class="fa fa-pencil"></i>
-				  </a>
-				  <a class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
-				    <i class="fa fa-trash-o"></i>
-				  </a>
-				</div>
-				<div class="row">
-				  <div class="col-md-1">
-				    <!--<a class="pull-left m-r">-->
-				      <img ng-src="images/a10.jpg" class="img-responsive rounded" src="images/a9.jpg">
-				    <!--</a>-->
-				  </div>
-				  <div class="clear col-md-9">
-				    <a href="view.mentor.html">
-				      <div>
-				        <h4 class="text-md ng-binding" href="#/app/inbox/10" style="margin:0px;">Convocatoria #1</h4>
-				      </div>
-				      <strong>Engineer in informatics systems</strong>
-				      <!--<span class="label bg-light m-l-sm ng-binding">angular</span>-->
-				      <div class="text-ellipsis m-t-xs text-muted-dk text-sm ng-binding">
-				        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-				      </div>
-				    </a>
-				  </div>      
-				</div>
+		<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_1">
+			<div class="panel panel-card table-responsive">
+				<table class="table table-striped b-t b-b">
+					<thead>
+						<tr>
+							<th>Convocatoria</th>
+							<th>Universidad</th>
+							<th style="text-align:center;">Fecha Inicio</th>
+							<th style="text-align:center;">Fecha Final</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr role="row">
+							<td style="vertical-align:middle;">Convocaria de Emprendimiento ESR</td>
+							<td style="vertical-align:middle;">Universidad Modelo</td>
+							<td style="text-align:center;vertical-align:middle;">19 de Septiembre</td>
+							<td style="text-align:center;vertical-align:middle;">18 de Octubre </td>
+							<td>
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="../MANUALES/Manual-Instalacion-Windows.md.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+						<tr role="row">
+							<td style="vertical-align:middle;">Convocaria de Emprendimiento ESR</td>
+							<td style="vertical-align:middle;">Universidad Modelo</td>
+							<td style="text-align:center;vertical-align:middle;">19 de Septiembre</td>
+							<td style="text-align:center;vertical-align:middle;">18 de Octubre </td>
+							<td>
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="../MANUALES/Manual-Instalacion-Windows.md.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+						<tr role="row">
+							<td style="vertical-align:middle;">Convocaria de Emprendimiento ESR</td>
+							<td style="vertical-align:middle;">Universidad Modelo</td>
+							<td style="text-align:center;vertical-align:middle;">19 de Septiembre</td>
+							<td style="text-align:center;vertical-align:middle;">18 de Octubre </td>
+							<td>
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="../MANUALES/Manual-Instalacion-Windows.md.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
-		<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_2">
-			Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+		<div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_2">
+			<div class="panel panel-card table-responsive">
+				<table class="table table-striped b-t b-b">
+					<thead>
+						<tr>
+							<th>Convocatoria</th>
+							<th>Universidad</th>
+							<th style="text-align:center;">Fecha Inicio</th>
+							<th style="text-align:center;">Fecha Final</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr role="row">
+							<td style="vertical-align:middle;">Convocaria de Emprendimiento ESR</td>
+							<td style="vertical-align:middle;">Universidad Modelo</td>
+							<td style="text-align:center;vertical-align:middle;">19 de Septiembre</td>
+							<td style="text-align:center;vertical-align:middle;">18 de Octubre </td>
+							<td>
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="../MANUALES/Manual-Instalacion-Windows.md.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
-			Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+			<div class="panel panel-card table-responsive">
+				<table class="table table-striped b-t b-b">
+					<thead>
+						<tr>
+							<th>Convocatoria</th>
+							<th>Universidad</th>
+							<th style="text-align:center;">Fecha Inicio</th>
+							<th style="text-align:center;">Fecha Final</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr role="row">
+							<td style="vertical-align:middle;">Convocaria de Emprendimiento ESR</td>
+							<td style="vertical-align:middle;">Universidad Modelo</td>
+							<td style="text-align:center;vertical-align:middle;">19 de Septiembre</td>
+							<td style="text-align:center;vertical-align:middle;">18 de Octubre </td>
+							<td>
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="../MANUALES/Manual-Instalacion-Windows.md.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_4">
-			Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher.
+			<div class="panel panel-card table-responsive">
+				<table class="table table-striped b-t b-b">
+					<thead>
+						<tr>
+							<th>Convocatoria</th>
+							<th>Universidad</th>
+							<th style="text-align:center;">Fecha Inicio</th>
+							<th style="text-align:center;">Fecha Final</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr role="row">
+							<td style="vertical-align:middle;">Convocaria de Emprendimiento ESR</td>
+							<td style="vertical-align:middle;">Universidad Modelo</td>
+							<td style="text-align:center;vertical-align:middle;">19 de Septiembre</td>
+							<td style="text-align:center;vertical-align:middle;">18 de Octubre </td>
+							<td>
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="../MANUALES/Manual-Instalacion-Windows.md.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
-<a ui-sref='admin.menthor.add' class="md-btn md-fab md-fab-bottom-right pos-fix teal">
+<a ui-sref='admin.announcement.add' class="md-btn md-fab md-fab-bottom-right pos-fix teal">
   <i class="mdi-content-add i-24"></i>
 </a>

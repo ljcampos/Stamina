@@ -52,6 +52,10 @@
     .state('admin.announcement', {
       templateUrl: 'app/announcement/views/announcement.html'
     })
+    
+    .state('admin.university', {
+      templateUrl: 'app/university/views/university.html'
+    })
 
     .state('entrepreneur', {
       // views:{
