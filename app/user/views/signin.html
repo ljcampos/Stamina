@@ -10,14 +10,15 @@
     <div class="p-lg panel md-whiteframe-z1 text-color m">
       <div class="m-b text-sm">
         Por favor escribe tu cuenta de correo electrónico y contraseña para iniciar
+        {{name}}
       </div>
-      <form name="form">
+      <form name="sigin-form" ng-submit='login()'>
         <div class="md-form-group float-label">
-          <input type="email" class="md-input" required>
+          <input type="email" class="md-input" ng-model='email' required>
           <label>Correo Electrónico</label>
         </div>
         <div class="md-form-group float-label">
-          <input type="password" class="md-input" required>
+          <input type="password" class="md-input" ng-model='password' required>
           <label>Contraseña</label>
         </div>
         <div class="m-b-md">

@@ -6,9 +6,31 @@ function($locationProvider, $httpProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
 }]);
 
-angular.module(config.moduleName).run(function ($rootScope, $state, $http, $location) {
-  $rootScope.$on('$locationChangeStart', function(event, next, current) {
+angular.module(config.moduleName).run(function ($rootScope, $state, $http, $location, UserService) {
+  // $rootScope.$on('$locationChangeStart', function(event, next, current) {
+  //   //console.log('paso');
+  // });
+
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     console.log('paso');
+    var requireLogin = toState.data.requireLogin;
+
+    // if (UserService.isLogged()) {
+    //   return $state.go('admin.dashboard');
+    //   event.preventDefault();
+    // }
+    if (requireLogin && !UserService.isLogged()) {
+      event.preventDefault();
+      $state.go('signin');
+    } else {
+      var userRole = toState.data.role;
+      // if (userRole === 1) {
+        $location.path('/');
+      // }
+      // else {
+      //   $location.path('/emprendedor');
+      // }
+    }
   });
 
   // // Record previous state

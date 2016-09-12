@@ -12,11 +12,19 @@
     $stateProvider
     .state('signin', {
       url: '/signin',
-      templateUrl: 'app/user/views/signin.html'
+      templateUrl: 'app/user/views/signin.html',
+      controller: 'UserController',
+      data: {
+        requireLogin: false
+      }
     })
     .state('signup', {
       url: '/signup',
-      templateUrl: '/app/user/views/signup.html'
+      templateUrl: '/app/user/views/signup.html',
+      data: {
+        requireLogin: false
+      }
+      //controller: 'UserController'
     });
   }
 } ());

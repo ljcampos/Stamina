@@ -8,26 +8,7 @@
     //     location: false
     //   });
     // });
-
-    /*
-    .state('index', {
-            url: '/',
-            views: {
-              '@' : {
-                templateUrl: 'layout.html',
-                controller: 'IndexCtrl'
-              },
-              'top@index' : { templateUrl: 'tpl.top.html',},
-              'left@index' : { templateUrl: 'tpl.left.html',},
-              'main@index' : { templateUrl: 'tpl.main.html',},
-            },
-          })
-        .state('index.list', {
-            url: '/list',
-            templateUrl: 'list.html',
-            controller: 'ListCtrl'
-          })
-    */
+    //$urlRouterProvider.otherwise("/signin");
 
     $stateProvider
     .state('admin', {
@@ -37,12 +18,16 @@
           templateUrl: 'app/templates/layouts/admin_layout.html'
         },
         'admin_aside@admin': {templateUrl: 'app/templates/partials/admin_aside.html'},
-        'admin_navbar@admin': {templateUrl: 'app/templates/partials/admin_navbar.html', controller: 'HeaderController'}
+        'admin_navbar@admin': {templateUrl: 'app/templates/partials/admin_navbar.html', controller: 'UserController'}
       }
     })
     .state('admin.dashboard', {
       url: '/',
-      templateUrl: 'app/core/views/admin.home.html'
+      templateUrl: 'app/core/views/admin.home.html',
+      data: {
+        requireLogin: true,
+        role: 1
+      }
     })
 
     .state('admin.menthor', {
@@ -59,7 +44,11 @@
     })
     .state('entrepreneur.dashboard', {
       url: '/emprendedor',
-      templateUrl: '/app/entrepreneur/views/entrepreneur.home.html'
+      templateUrl: '/app/entrepreneur/views/entrepreneur.home.html',
+      data: {
+        requireLogin: true,
+        role: 0
+      }
     });
   }
 } ());

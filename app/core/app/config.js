@@ -1,7 +1,10 @@
 'use strict';
 var config = (function() {
   var moduleName = 'myApp';
-  var dependencies = ['ui.router'];
+  var dependencies = [
+    'ui.router',
+    'ngStorage'
+  ];
 
   var addModule = function(moduleN, dependenciesN) {
     angular.module(moduleN, dependenciesN || []);

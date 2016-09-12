@@ -50,6 +50,18 @@
 </head>
 <body>
 	<ui-view></ui-view>
+
+	<script src="https://www.gstatic.com/firebasejs/3.3.2/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyCAmm5enJUX46v6aT4AGG0vuT5rwzkzoT0",
+	    authDomain: "retoemprendedor-3d622.firebaseapp.com",
+	    databaseURL: "https://retoemprendedor-3d622.firebaseio.com",
+	    storageBucket: "retoemprendedor-3d622.appspot.com",
+	  };
+	  firebase.initializeApp(config);
+	</script>
 	<!-- Assets Scripts -->
 	<script src="../libs/jquery/jquery/dist/jquery.js"></script>
 	<script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
@@ -67,6 +79,7 @@
 	<script src="../bower_components/angular/angular.js"></script>
 	<!-- <script src="../bower_components/angular-route/angular-route.js"></script> -->
 	<script src='../bower_components/angular-ui-router/release/angular-ui-router.js'></script>
+	<script src='../bower_components/ngstorage/ngStorage.js'></script>
 	
 	<!-- <script src='../app/core/app/config.js'></script>
 	<script src='../app/core/app/app.js'></script> -->
