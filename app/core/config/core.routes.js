@@ -57,6 +57,10 @@
       templateUrl: 'app/university/views/university.html'
     })
 
+    .state('admin.faq', {
+      templateUrl: 'app/faq/views/faq.html'
+    })
+
     .state('entrepreneur', {
       // views:{
       //   '@': {
