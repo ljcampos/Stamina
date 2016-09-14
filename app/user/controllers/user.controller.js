@@ -9,6 +9,8 @@
     $scope.password = '';
     $scope.header = 'title';
 
+    $scope.error = false;
+
     angular.element(document).ready(function() {
 			loadUsers();
 		});
@@ -27,12 +29,19 @@
     $scope.login = function() {
       console.log($scope.email, $scope.password);
       UserService.sigin($scope.email, $scope.password)
-      .then(function(response) {
-        console.log($scope.email, $scope.password);
-        $state.go('admin.dashboard');
-      })
       .catch(function(error) {
         console.log(error);
+        $scope.error = true;
+      })
+      .then(function(response) {
+        if (response.code === 1) {
+          $state.go('admin.dashboard');
+          $scope.error = false;
+        }
+        else
+          $scope.error = true;
+        //console.log($scope.email, $scope.password);
+        //console.log('xdvd');
       });
     };
 

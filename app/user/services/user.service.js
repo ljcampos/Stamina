@@ -27,19 +27,35 @@
       return users.promise;
     }
 
-    function sigin(email, password) {
+    function sigin(email, pwd) {
       var userDefer = $q.defer();
 
-      firebase.auth().signInWithEmailAndPassword(email, password)
-      .catch(function(error) {
-        console.log(error);
-        userDefer.reject(error);
-      })
-      .then(function(response) {
+      // firebase.auth().signInWithEmailAndPassword(email, password)
+      // .catch(function(error) {
+      //   console.log(error);
+      //   userDefer.reject(error);
+      // })
+      // .then(function(response) {
+      //   console.log(response);
+      //   userDefer.resolve(response);
+      //   setToken(response.uid);
+      // });
+      var credentials = {
+        'email': email,
+        'pwd': pwd
+      };
+
+      $http.post('http://www.stamina.dev/API/public/api/v1/usuario/auth/', credentials)
+      .success(function(response) {
         console.log(response);
         userDefer.resolve(response);
-        setToken(response.uid);
+        setToken('sds561dsd');
+      })
+      .error(function(error) {
+        console.log(error);
+        userDefer.reject(error);
       });
+
 
       return userDefer.promise;
     }

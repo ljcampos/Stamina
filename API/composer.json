@@ -1,0 +1,27 @@
+{
+    "name": "stamina project",
+    "description": "stamina project",
+    "keywords": ["stamina", "api", "php", "psr7"],
+    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aarón López Sosa",
+            "email": "aaronlopezsosa@gmail.com",
+            "homepage": "http://www.aaronlopezsosa.com.mx/"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.1",
+        "monolog/monolog": "^1.17",
+        "illuminate/database": "~5.1"
+    },
+    "autoload": {
+        "classmap": [
+            "src/class/",
+            "src/controllers/",
+            "src/models/"
+        ]
+    }
+}

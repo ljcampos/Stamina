@@ -10,7 +10,7 @@
     <div class="p-lg panel md-whiteframe-z1 text-color m">
       <div class="m-b text-sm">
         Por favor escribe tu cuenta de correo electrónico y contraseña para iniciar
-        {{name}}
+        <span ng-if="error" class='bg-danger'>{{name}}</span>
       </div>
       <form name="sigin-form" ng-submit='login()'>
         <div class="md-form-group float-label">
