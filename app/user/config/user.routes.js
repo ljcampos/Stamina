@@ -21,10 +21,10 @@
     .state('signup', {
       url: '/signup',
       templateUrl: '/app/user/views/signup.html',
+      controller: 'UserController',
       data: {
         requireLogin: false
       }
-      //controller: 'UserController'
     });
   }
 } ());

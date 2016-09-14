@@ -10,7 +10,9 @@
     <div class="p-lg panel md-whiteframe-z1 text-color m">
       <div class="m-b text-sm">
         Por favor escribe tu cuenta de correo electrónico y contraseña para iniciar
-        <span ng-if="error" class='bg-danger'>{{name}}</span>
+        <div ng-if="error" class='alert ng-isolate-scope alert-danger alert-dismissable text-center'>
+          Usuario o contraseña invalidos.
+        </div>
       </div>
       <form name="sigin-form" ng-submit='login()'>
         <div class="md-form-group float-label">
@@ -35,7 +37,7 @@
       	<button md-ink-ripple class="md-btn ">Olvidé mi contraseña</button>
       </div>
       <div>
-      	<button md-ink-ripple class="md-btn">Aún no me he registrado <u>Registrarme</u></button>
+      	<button ui-sref='signup' md-ink-ripple class="md-btn">Aún no me he registrado <u>Registrarme</u></button>
       </div>
     </div>
   </div>

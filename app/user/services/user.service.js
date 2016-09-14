@@ -30,16 +30,6 @@
     function sigin(email, pwd) {
       var userDefer = $q.defer();
 
-      // firebase.auth().signInWithEmailAndPassword(email, password)
-      // .catch(function(error) {
-      //   console.log(error);
-      //   userDefer.reject(error);
-      // })
-      // .then(function(response) {
-      //   console.log(response);
-      //   userDefer.resolve(response);
-      //   setToken(response.uid);
-      // });
       var credentials = {
         'email': email,
         'pwd': pwd
@@ -60,8 +50,20 @@
       return userDefer.promise;
     }
 
-    function sigup(email, password) {
-      console.log(email, password);
+    function sigup(data) {
+      var userDefer = $q.defer();
+      // http://www.stamina.dev/API/public/api/v1/usuario/
+      console.log(data);
+      $http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+      .success(function(response) {
+        console.log(response);
+        userDefer.resolve(response);
+      })
+      .error(function(error) {
+        console.log(error);
+        userDefer.reject(error);
+      });
+      return userDefer.promise;
     }
 
     function logout() {

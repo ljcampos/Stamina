@@ -10,6 +10,9 @@
     $scope.header = 'title';
 
     $scope.error = false;
+    $scope.success = false;
+
+    $scope.form = {};
 
     angular.element(document).ready(function() {
 			loadUsers();
@@ -48,6 +51,28 @@
     $scope.logout = function() {
       UserService.logout();
       $state.go('signin');
+    };
+
+    $scope.signup = function() {
+      var data = {
+        'username': $scope.form.name + $scope.form.lastname,
+        'nombre': $scope.form.name,
+        'paterno': $scope.form.lastname,
+        'materno': $scope.form.firstname,
+        'email': $scope.form.email,
+        'password': $scope.form.password,
+        'isMentor': 0,
+        'rol': 3
+      };
+      UserService.sigup(data)
+      .catch(function(error) {
+        console.log(error);
+        $scope.success = false;
+      })
+      .then(function(response) {
+        console.log(response);
+        $scope.success = true;
+      });
     };
 
 

@@ -11,24 +11,26 @@
     <div class="p-lg panel md-whiteframe-z1 text-color m">
       <div class="text-sm m-b">
         Regístrese para su cuenta en la plataforma de emprendedores
+        <hr />
+        <div ng-if='success' class='alert ng-isolate-scope alert-success alert-dismissable text-center'>Te registraste con exito...</div>
       </div>
-      <form name="form">
+      <form name="form" ng-submit='signup()'>
         <div class="row">
           <div class="col-md-4">
             <div class="md-form-group float-label">
-              <input type="text" class="md-input" required>
+              <input type="text" class="md-input" ng-model='form.name' required>
               <label>Nombres</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="md-form-group float-label">
-              <input type="text" class="md-input" required>
+              <input type="text" class="md-input" ng-model='form.lastname' required>
               <label>Apellido Paterno</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="md-form-group float-label">
-              <input type="text" class="md-input" required>
+              <input type="text" class="md-input" ng-model='form.firstname' required>
               <label>Apellido Materno</label>
             </div>
           </div>
@@ -48,27 +50,27 @@
           </div>
         </div>-->
         <div class="md-form-group float-label">
-          <input type="email" class="md-input" required>
+          <input type="email" class="md-input" ng-model='form.email' required>
           <label>Correo Electrónico</label>
         </div>
         <div class="md-form-group float-label">
-          <input type="password" class="md-input" required>
+          <input type="password" class="md-input" ng-model='form.password' required>
           <label>Contraseña</label>
         </div>
         <div class="md-form-group float-label">
-          <input type="repy_password" class="md-input" required>
+          <input type="password" class="md-input" ng-model='form.confirm' required>
           <label>Repetir Contraseña</label>
         </div>
         <div class="m-b-md">
           <label class="md-check">
-            <input type="checkbox" ng-model="agree" required><i class="grey-900"></i> Acepto los <a href="#">términos y condiciones</a>
+            <input type="checkbox" ng-model='form.agree'" required><i class="grey-900"></i> Acepto los <a href="#">términos y condiciones</a>
           </label>
         </div>
-        <button md-ink-ripple type="submit" class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme</button>
+        <button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme</button>
       </form>
     </div>
     <div class="p-v-lg text-center">
-      <div>¿Ya tienes una cuenta? <button md-ink-ripple class="md-btn">Iniciar Sesion</button></div>
+      <div>¿Ya tienes una cuenta? <button ui-sref='signin' md-ink-ripple class="md-btn">Iniciar Sesion</button></div>
     </div>
   </div>
 </div>
