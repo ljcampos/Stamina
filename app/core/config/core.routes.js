@@ -48,6 +48,7 @@
     .state('entrepreneur', {
       templateUrl: 'app/templates/layouts/entrepreneur_layout.html'
     })
+
     .state('entrepreneur.dashboard', {
       url: '/emprendedor',
       templateUrl: '/app/entrepreneur/views/entrepreneur.home.html',

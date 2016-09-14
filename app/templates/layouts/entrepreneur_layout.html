@@ -9,7 +9,9 @@
         <!-- / -->
         <!-- Page title - Bind to $state's title -->
         <div class="navbar-item">
-          <img class="img-stamina" src="images/0.png" style="height:64px;"><!--width:208px-->
+          <a ui-sref='entrepreneur.dashboard'>
+            <img class="img-stamina" src="images/0.png" style="height:64px;"><!--width:208px-->
+          </a>
         </div>
         <!-- / -->
         <!-- Common tools -->
@@ -54,13 +56,13 @@
       <div class="box-row">
         <div class="box-cell">
           <div class="box-inner padding">
-      			<div class="row row-center">
+      			<!-- <div class="row row-center">
       				<div class="col-lg-10 col-md-11 col-sm-11 col-xs-12 col-center">
-      					<div class="row">
+      					<div class="row"> -->
                   <ui-view></ui-view>
-      					</div>
+      					<!-- </div>
       				</div>
-      			</div>
+      			</div> -->
           </div>
         </div>
       </div>
