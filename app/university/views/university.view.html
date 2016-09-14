@@ -1,3 +1,9 @@
+<script type="text/javascript">
+		$(document).ready(function(){
+		    $('#dt').DataTable();
+		    $('#dt1').DataTable();
+		});
+</script>
 <style type="text/css">
 	.col-md-3{
 		padding: 0px;
@@ -47,7 +53,7 @@
 	</ul>
 	<div class="tab-content p b-a no-b-t bg-white m-b-md clear">
 	    <div role="tabpanel" class="tab-pane animated fadeIn active" id="tab7">
-			<table class="table table-striped b-t b-b">
+			<table id="dt" class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Nombre</th>
@@ -59,8 +65,8 @@
 				<tbody>
 					<tr role="row">
 						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
+						<td style="vertical-align:middle;">Instituto Tecnológico de Mérida</td>
+						<td style="vertical-align:middle;">Proyecto A</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
 								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
@@ -81,9 +87,9 @@
 						</td>
 					</tr>
 					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
+						<td style="vertical-align:middle;">Irving Gerardo Campos Yah</td>
+						<td style="vertical-align:middle;">Universidad Autónoma de Yucatán</td>
+						<td style="vertical-align:middle;">Proyecto B</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
 								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
@@ -104,9 +110,9 @@
 						</td>
 					</tr>
 					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
+						<td style="vertical-align:middle;">Aarón López Sosa</td>
+						<td style="vertical-align:middle;">Universidad Tecnologica de Tabasco</td>
+						<td style="vertical-align:middle;">Proyecto C</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
 								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
@@ -127,9 +133,9 @@
 						</td>
 					</tr>
 					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
+						<td style="vertical-align:middle;">José Joaquín Contreras Jorge</td>
+						<td style="vertical-align:middle;">Universidad Tecnologica Metropolitana</td>
+						<td style="vertical-align:middle;">Proyecto J</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
 								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
@@ -150,124 +156,9 @@
 						</td>
 					</tr>
 					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-								<button ui-sref='admin.university.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-								<button ui-sref='admin.university.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-								<button ui-sref='admin.university.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-								<button ui-sref='admin.university.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-								<button ui-sref='admin.university.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-								<button ui-sref='admin.university.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-								<button ui-sref='admin.university.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-								<button ui-sref='admin.university.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-								<button ui-sref='admin.university.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-								<button ui-sref='admin.university.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
+						<td style="vertical-align:middle;">Fernando Hernandez</td>
+						<td style="vertical-align:middle;">Universidad del Valle de México</td>
+						<td style="vertical-align:middle;">Proyecto F</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
 								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
@@ -291,7 +182,7 @@
 			</table>
 	    </div>
 	    <div role="tabpanel" class="tab-pane animated fadeIn" id="tab8">
-			<table class="table table-striped b-t b-b">
+			<table id="dt1" class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Nombre</th>
@@ -303,8 +194,8 @@
 				<tbody>
 					<tr role="row">
 						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
+						<td style="vertical-align:middle;">Instituto Tecnológico de Mérida</td>
+						<td style="vertical-align:middle;">Proyecto A</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
 								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
@@ -325,9 +216,9 @@
 						</td>
 					</tr>
 					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
+						<td style="vertical-align:middle;">Irving Gerardo Campos Yah</td>
+						<td style="vertical-align:middle;">Universidad Autónoma de Yucatán</td>
+						<td style="vertical-align:middle;">Proyecto B</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
 								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
@@ -348,78 +239,9 @@
 						</td>
 					</tr>
 					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-								<button ui-sref='admin.university.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-								<button ui-sref='admin.university.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-								<button ui-sref='admin.university.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-								<button ui-sref='admin.university.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-								<button ui-sref='admin.university.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-								<button ui-sref='admin.university.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-									<i class="fa fa-pencil"></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Universidad Modelo</td>
-						<td style="vertical-align:middle;">Proyecto XYZ</td>
+						<td style="vertical-align:middle;">José Joaquín Contreras Jorge</td>
+						<td style="vertical-align:middle;">Universidad Tecnologica Metropolitana</td>
+						<td style="vertical-align:middle;">Proyecto J</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
 								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
