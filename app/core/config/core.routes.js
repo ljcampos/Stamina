@@ -34,6 +34,18 @@
       templateUrl: 'app/menthor/views/mentor.html'
     })
 
+    .state('admin.announcement', {
+      templateUrl: 'app/announcement/views/announcement.html'
+    })
+    
+    .state('admin.university', {
+      templateUrl: 'app/university/views/university.html'
+    })
+
+    .state('admin.faq', {
+      templateUrl: 'app/faq/views/faq.html'
+    })
+
     .state('entrepreneur', {
       // views:{
       //   '@': {
