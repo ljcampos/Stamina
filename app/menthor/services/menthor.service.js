@@ -12,7 +12,6 @@
 			var users = $q.defer();
 			$http.get('https://jsonplaceholder.typicode.com/users')
 			.success(function(response) {
-				console.log(response);
 				users.resolve(response);
 			})
 			.error(function(error) {
@@ -22,4 +21,25 @@
 			return users.promise;
 		}
 	}
+
+	angular.module('menthor').service('MenthorServiceView', ['$q', '$http', MenthorServiceView]);
+	function MenthorServiceView($q, $http) {
+		return {
+			getDataUser: getDataUser
+		};
+
+		function getDataUser(id) {
+			var user = $q.defer();
+			$http.get('https://jsonplaceholder.typicode.com/users?id='+id)
+			.success(function(response) {
+				user.resolve(response);
+			})
+			.error(function(error) {
+				console.log(error);
+				user.reject(error);
+			});
+			return user.promise;
+		}
+	}
+
 } ());
