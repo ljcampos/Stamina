@@ -16,7 +16,7 @@
         '@': {
           templateUrl: 'app/templates/layouts/admin_layout.html'
         },
-        'admin_aside@admin': {templateUrl: 'app/templates/partials/admin_aside.html'},
+        'admin_aside@admin': {templateUrl: 'app/templates/partials/admin_aside.html', controller: 'UserController'},
         'admin_navbar@admin': {templateUrl: 'app/templates/partials/admin_navbar.html', controller: 'UserController'}
       }
     })

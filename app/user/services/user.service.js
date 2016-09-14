@@ -10,7 +10,8 @@
       sigup: sigup,
       getToken: getToken,
       isLogged: isLogged,
-      logout: logout
+      logout: logout,
+      getUser: getUser
     };
 
     function getAllUsers() {
@@ -39,7 +40,7 @@
       .success(function(response) {
         console.log(response);
         userDefer.resolve(response);
-        setToken('sds561dsd');
+        setToken('sds561dsd', response);
       })
       .error(function(error) {
         console.log(error);
@@ -75,9 +76,9 @@
       return $sessionStorage.token;
     }
 
-    function setToken(token) {
+    function setToken(token, user) {
       $sessionStorage.token = token;
-      $localStorage.user = 'username';
+      $localStorage.user = user;
     }
 
     function isLogged() {
@@ -85,6 +86,10 @@
         return true;
       }
       return false;
+    }
+
+    function getUser() {
+      return $localStorage.user;
     }
   }
 } ());

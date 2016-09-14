@@ -13,6 +13,7 @@
     $scope.success = false;
 
     $scope.form = {};
+    $scope.userData = UserService.getUser();
 
     angular.element(document).ready(function() {
 			loadUsers();
