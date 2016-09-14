@@ -14,7 +14,6 @@
     .state('admin', {
       views:{
         '@': {
-          //templateUrl: 'app/core/views/admin.html'
           templateUrl: 'app/templates/layouts/admin_layout.html'
         },
         'admin_aside@admin': {templateUrl: 'app/templates/partials/admin_aside.html'},
@@ -37,7 +36,7 @@
     .state('admin.announcement', {
       templateUrl: 'app/announcement/views/announcement.html'
     })
-    
+
     .state('admin.university', {
       templateUrl: 'app/university/views/university.html'
     })
@@ -47,12 +46,7 @@
     })
 
     .state('entrepreneur', {
-      // views:{
-      //   '@': {
-          templateUrl: 'app/templates/layouts/entrepreneur_layout.html'
-        //}
-        //'entrepreneur_navbar@entrepreneur': {templateUrl: 'app/templates/partials/admin_aside.html'},
-      //}
+      templateUrl: 'app/templates/layouts/entrepreneur_layout.html'
     })
     .state('entrepreneur.dashboard', {
       url: '/emprendedor',

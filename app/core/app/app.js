@@ -24,8 +24,9 @@ angular.module(config.moduleName).run(function ($rootScope, $state, $http, $loca
       $state.go('signin');
     } else {
       var userRole = toState.data.role;
+      console.log('role', userRole);
       // if (userRole === 1) {
-        $location.path('/');
+        //$location.path('/');
       // }
       // else {
       //   $location.path('/emprendedor');

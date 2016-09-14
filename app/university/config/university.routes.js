@@ -8,15 +8,27 @@
     .state('admin.university.list', {
       url: '/university',
       templateUrl: 'app/university/views/university.list.html',
-      controller: 'UniversityController'
+      controller: 'UniversityController',
+      data: {
+        requireLogin: true,
+        role: 0
+      }
     })
     .state('admin.university.view', {
       url: '/university/view',
-      templateUrl: 'app/university/views/university.view.html'
+      templateUrl: 'app/university/views/university.view.html',
+      data: {
+        requireLogin: true,
+        role: 0
+      }
     })
     .state('admin.university.add', {
       url: '/university/add',
-      templateUrl: 'app/university/views/university.add.html'
+      templateUrl: 'app/university/views/university.add.html',
+      data: {
+        requireLogin: true,
+        role: 0
+      }
     });
   }
 } ());

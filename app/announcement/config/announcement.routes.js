@@ -8,15 +8,27 @@
     .state('admin.announcement.list', {
       url: '/announcement',
       templateUrl: 'app/announcement/views/announcement.list.html',
-      controller: 'AnnouncementController'
+      controller: 'AnnouncementController',
+      data: {
+        requireLogin: true,
+        role: 0
+      }
     })
     .state('admin.announcement.view', {
       url: '/announcement/view',
-      templateUrl: 'app/announcement/views/announcement.view.html'
+      templateUrl: 'app/announcement/views/announcement.view.html',
+      data: {
+        requireLogin: true,
+        role: 0
+      }
     })
     .state('admin.announcement.add', {
       url: '/announcement/add',
-      templateUrl: 'app/announcement/views/announcement.add.html'
+      templateUrl: 'app/announcement/views/announcement.add.html',
+      data: {
+        requireLogin: true,
+        role: 0
+      }
     });
   }
 } ());
