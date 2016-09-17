@@ -46,7 +46,8 @@
     })
 
     .state('entrepreneur', {
-      templateUrl: 'app/templates/layouts/entrepreneur_layout.html'
+      templateUrl: 'app/templates/layouts/entrepreneur_layout.html',
+      controller: 'UserController'
     })
 
     .state('entrepreneur.dashboard', {
@@ -54,7 +55,7 @@
       templateUrl: '/app/entrepreneur/views/entrepreneur.home.html',
       data: {
         requireLogin: true,
-        role: 0
+        role: 3
       }
     });
   }

@@ -39,13 +39,16 @@
       })
       .then(function(response) {
         if (response.code === 1) {
-          $state.go('admin.dashboard');
+          console.log(response.data.roles[0].rol_id);
+          if (response.data.roles[0].rol_id === 3) {
+            $state.go('entrepreneur.dashboard');
+          } else {
+            $state.go('admin.dashboard');
+          }
           $scope.error = false;
         }
         else
           $scope.error = true;
-        //console.log($scope.email, $scope.password);
-        //console.log('xdvd');
       });
     };
 

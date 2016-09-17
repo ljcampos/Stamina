@@ -11,7 +11,7 @@
       controller: 'AnnouncementController',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     })
     .state('admin.announcement.view', {
@@ -19,7 +19,7 @@
       templateUrl: 'app/announcement/views/announcement.view.html',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     })
     .state('admin.announcement.add', {
@@ -27,7 +27,7 @@
       templateUrl: 'app/announcement/views/announcement.add.html',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     });
   }

@@ -11,7 +11,7 @@
       controller: 'UniversityController',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     })
     .state('admin.university.view', {
@@ -19,7 +19,7 @@
       templateUrl: 'app/university/views/university.view.html',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     })
     .state('admin.university.add', {
@@ -27,7 +27,7 @@
       templateUrl: 'app/university/views/university.add.html',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     });
   }

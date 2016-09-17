@@ -15,7 +15,8 @@
       templateUrl: 'app/user/views/signin.html',
       controller: 'UserController',
       data: {
-        requireLogin: false
+        requireLogin: false,
+        role: 0
       }
     })
     .state('signup', {
@@ -23,7 +24,8 @@
       templateUrl: '/app/user/views/signup.html',
       controller: 'UserController',
       data: {
-        requireLogin: false
+        requireLogin: false,
+        role: 0
       }
     });
   }

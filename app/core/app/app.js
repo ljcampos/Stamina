@@ -15,41 +15,27 @@ angular.module(config.moduleName).run(function ($rootScope, $state, $http, $loca
     console.log('paso');
     var requireLogin = toState.data.requireLogin;
 
-    // if (UserService.isLogged()) {
-    //   return $state.go('admin.dashboard');
-    //   event.preventDefault();
-    // }
     if (requireLogin && !UserService.isLogged()) {
       event.preventDefault();
       $state.go('signin');
-    } else {
-      var userRole = toState.data.role;
-      console.log('role', userRole);
-      // if (userRole === 1) {
-        //$location.path('/');
-      // }
-      // else {
-      //   $location.path('/emprendedor');
-      // }
+    } else if(UserService.isLogged()) {
+      var rol = UserService.isAdmin();
+
+      if (rol) {
+        if (toState.data.role === 1 || toState.data.role === 2) {
+          $location.state(toState.name);
+        } else {
+          $location.url('/');
+        }
+      } else {
+        if (toState.data.role === 3) {
+          $location.state(toState.name);
+        } else {
+          $location.url('/emprendedor');
+        }
+      }
     }
   });
-
-  // // Record previous state
-  // $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-  //   storePreviousState(fromState, fromParams);
-  // });
-  //
-  // // Store previous state
-  // function storePreviousState(state, params) {
-  //   // only store this state if it shouldn't be ignored
-  //   if (!state.data || !state.data.ignoreState) {
-  //     $state.previous = {
-  //       state: state,
-  //       params: params,
-  //       href: $state.href(state, params)
-  //     };
-  //   }
-  // }
 });
 
 angular.element(document).ready(function () {

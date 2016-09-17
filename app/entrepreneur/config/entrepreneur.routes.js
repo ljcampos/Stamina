@@ -10,7 +10,7 @@
 			templateUrl: 'app/entrepreneur/views/application.form.html',
 			data: {
 				requireLogin: true,
-				role: 0
+				role: 3
 			}
 		});
 	}

@@ -11,7 +11,7 @@
       controller: 'FaqController',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     })
     .state('admin.faq.view', {
@@ -19,7 +19,7 @@
       templateUrl: 'app/faq/views/faq.view.html',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     })
     .state('admin.faq.add', {
@@ -27,7 +27,7 @@
       templateUrl: 'app/faq/views/faq.add.html',
       data: {
         requireLogin: true,
-        role: 0
+        role: 1
       }
     });
   }

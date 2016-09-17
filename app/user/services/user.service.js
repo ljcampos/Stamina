@@ -11,7 +11,8 @@
       getToken: getToken,
       isLogged: isLogged,
       logout: logout,
-      getUser: getUser
+      getUser: getUser,
+      isAdmin: isAdmin
     };
 
     function getAllUsers() {
@@ -90,6 +91,14 @@
 
     function getUser() {
       return $localStorage.user;
+    }
+
+    function isAdmin() {
+      var user = getUser();
+      if (user.data.roles[0].rol_id !== 3) {
+        return true;
+      }
+      return false;
     }
   }
 } ());
