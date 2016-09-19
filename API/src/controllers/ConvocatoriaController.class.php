@@ -5,10 +5,11 @@
 class ConvocatoriaController extends Controller
 {
 	static $routes = array(
-		'all' 	=>	'getAll',
-		'one' 	=>	'getById',
-		'add' 	=>	'create',
-		'auth'	=>	'authentication'
+		'all' 		=>	'getAll',
+		'one' 		=>	'getById',
+		'add' 		=>	'create',
+		'update'	=>	'update',
+		'delete' 	=>	'delete'
 	);
 
 	/**
@@ -199,7 +200,182 @@ class ConvocatoriaController extends Controller
 		return $json;
 	}
 
-		
+
+	/**
+	* 
+	*/
+	public function update(Array $params)
+	{
+		if (count($params) == 0 || ($this->checkAttributes($params)) == false) 
+		{
+			$this->response['code'] = 2;
+			$this->response['message'] = 'Todos los parámetros son requeridos';
+			$this->response['atributos'] = $this->checkAttributes($params);
+		}
+		else 
+		{
+			$params = $this->sanitize($params);
+			$messages = array();
+
+			if (empty($params['id']) || !is_int(intval($params['id'])))
+			{
+				$messages[] = 'Identificador no valido.';	
+			}
+
+			if (empty($params['nombre']) || strlen($params['nombre']) == 0 || strlen($params['nombre']) > 255)
+			{
+				$messages[] = 'El campo nombre no puede quedar vacío ni tener una longitud mayor a 255 caracteres';
+			}
+			elseif (count(Convocatoria::where('nombre', '=', $params['nombre'])
+										->where('id', '!=', $params['id'])->get()) > 0)
+			{
+				$messages[] = 'Ya existe una convocatoria con el nombre: \'' . $params['nombre'] . '\'';
+			}
+
+			if (strtotime($params['fecha_inicio']) === false)
+			{
+				$messages[] = 'Fecha inicio no valida';
+			}
+			
+			if (strtotime($params['fecha_cierre']) === false)
+			{
+				$messages[] = 'Fecha cierre no valida';
+			}
+
+			if (Universidad::find(intval($params['universidad_id'])) === null)
+			{
+				$messages[] = 'Universidad con el identificador: \'' . $params['universidad_id'] . '\' no existe';	
+			}
+
+			if (count($messages) > 0)
+			{
+				$this->response['code'] = 2;
+				$this->response['data'] = $params;
+				$this->response['message'] = $messages;
+			}
+			else
+			{
+				$db = Connection::getConnection();
+				$db::beginTransaction();
+				$saved = false;
+
+				try 
+				{
+					$inicio = strtotime($params['fecha_inicio']);
+					$fin 		=	strtotime($params['fecha_cierre']);
+
+					if ($inicio < $fin)
+					{
+						$convocatoria = Convocatoria::find(intval($params['id']));
+						if ($convocatoria != null)
+						{
+							$convocatoria->nombre = $params['nombre'];
+							$convocatoria->fecha_inicio = $params['fecha_inicio'];
+							$convocatoria->fecha_cierre = $params['fecha_cierre'];
+							$convocatoria->universidad_id = $params['universidad_id'];
+
+							$parametros = $this->saveImage();
+
+							if ($parametros['saved'] == true)
+							{
+								if (file_exists($convocatoria->path)) { unlink($convocatoria->path); }
+								$convocatoria->path = $parametros['url'];	
+							}
+							
+							if ($convocatoria->save()) { $saved = true; }							
+						}
+						
+					}
+					else 
+					{
+						$this->response['message'][] = 'La fecha inicio no puede ser mayor a la fecha fin';
+					}
+					
+					if ($saved === true)
+					{
+						$this->response['code'] = 1;
+						$this->response['data'] = $convocatoria;
+						$this->response['message'][] = 'Se ha modificado correctamente';
+						$db::commit();
+					}
+					else
+					{
+						$this->response['code'] = 5;
+						$this->response['data'] = $params;
+						$this->response['message'][] = 'Ha ocurrido un error';
+						$db::commit();
+					}
+
+				} catch (PDOException $e) 
+				{
+					$db::rollBack();
+					$this->response['code'] = 5;
+					$this->response['data'][] = $params;
+					$this->response['message'][] = 'No se ha podido completar la acción, inténtelo más tarde.';
+					$this->response['message'][] = $e->getMessage();
+				}
+			}
+		}
+
+		$json = json_encode($this->response, JSON_FORCE_OBJECT);
+		return $json;
+	}
+
+
+	/**
+	* 
+	*/
+	public function delete($id)
+	{
+		$params = $this->sanitize(array($id));
+		$messages = array();
+
+		if (!is_int(intval($params[0])))
+		{
+			$messages[] = 'El identificador debe ser de tipo numérico.';
+		}
+		if (Convocatoria::find(intval($params[0])) == null)
+		{
+			$messages[] = 'Recurso no encontrado.';
+		}
+		if (count(EmprendedorConvocatoria::where('id_convocatoria', '=', $params[0])->get()) > 0)
+		{
+			$messages[] = 'Existen referencias.';
+		}
+
+		if (count($messages) > 0)
+		{
+			$this->response['code'] = 2;
+			$this->response['message'] = $messages;
+		}
+		else
+		{
+			$db = Connection::getConnection();
+			$db::beginTransaction();
+
+			try 
+			{
+				$convocatoria = Convocatoria::find(intval($params[0]));	
+				if (file_exists($convocatoria->path)) { unlink($convocatoria->path); }
+				if ($convocatoria->delete())
+				{	
+
+					$this->response['code'] = 1;
+					$this->response['message'] = 'Se ha eliminado correctamente';
+				}
+			} 
+			catch (Exception $e) 
+			{
+				$db::rollBack();
+				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
+			}
+			
+		}
+
+		$json = json_encode($this->response, JSON_FORCE_OBJECT);
+		return $json;
+	}
+
 	/**
 	* 
 	*/

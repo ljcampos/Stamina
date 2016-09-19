@@ -10,6 +10,7 @@ class UserController extends Controller
 		'one'			=>	'getById',
 		'add' 		=>	'create',
 		'update'	=>	'update',
+		'suscrip'	=>	'suscribirse',
 		'auth'		=>	'authentication',
 		'img'			=>	'addImage'
 	);
@@ -314,6 +315,74 @@ class UserController extends Controller
 					$this->response['message'][] = 'No se ha podido completar la acción, inténtelo más tarde.';
 					$this->response['message'][] = $e->getMessage();
 				}
+			}
+		}
+
+		$json = json_encode($this->response, JSON_FORCE_OBJECT);
+		return $json;
+	}
+
+	/**
+	* 
+	*/
+	public function suscribirse(Array $params)
+	{	
+		$params = $this->sanitize($params);
+		$messages = array();
+
+		if (User::find(intval($params['usuario_id'])) === null)
+		{
+			$message[] = 'No existe un usuario asociado al identificador \'' . $params['usuario_id'] . '\'';
+		}
+
+		if (Convocatoria::find(intval($params['convocatoria_id'])) == null) 
+		{
+			$message[] = 'No existe una convocatoria asociado al identificador \'' . $params['convocatoria_id'] . '\'';		
+		}
+
+		if (!array_key_exists('estatus', $params['post']) || !is_int(intval($params['post']['estatus'])))
+		{
+			$messages[] = 'Debe enviar el parámetro estatus.';	
+		}
+
+		if (count(EmprendedorConvocatoria::where('id_emprendedor', '=', $params['usuario_id'])->get()) > 0)
+		{
+			$messages[] = 'Ya se inscribió a la convocatoria';
+		}
+
+		if (count($messages) > 0)
+		{
+			$this->response['code'] = 2;
+			$this->response['message'] = $messages;
+		}
+		else
+		{
+			$db = Connection::getConnection();
+			$db::beginTransaction();
+
+			try 
+			{
+				$obj = new EmprendedorConvocatoria();
+				$obj->id_emprendedor = $params['usuario_id'];
+				$obj->id_convocatoria = $params['convocatoria_id'];
+				$obj->estatus = intval($params['post']['estatus']);
+
+				if ($obj->save())
+				{
+					$db::commit();
+					$this->response['code'] = 1;
+					$this->response['message'] = 'Se ha agregado correctamente';
+				}
+				else 
+				{
+					$this->response['message'] = 'algo';
+				}
+			} 
+			catch (Exception $e) 
+			{
+				$db::rollBack();
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
 			}
 		}
 

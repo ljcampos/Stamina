@@ -93,6 +93,22 @@ $app->group('/api/v1/usuario', function ()
 
 	})->setName('set_image');
 
+
+	/**
+	* 
+	*/
+	$this->post('/{usuario_id}/convocatoria/{convocatoria_id}/suscrip/', function ($request, $response, $args)
+	{
+		$params = array('usuario_id' => $args['usuario_id'], 'convocatoria_id' => $args['convocatoria_id'], 'post' => $request->getParams());
+		$controller = new UserController();
+		$json = $controller->callAction('suscrip', $params);
+
+		header('Content-Type: application/json');
+		echo $_GET["callback"]."(" . $json . ")";
+		//echo $json;
+
+	})->setName('sus_conv');
+
 });
 
 /**
@@ -181,7 +197,7 @@ $app->group('/api/v1/convocatoria', function ()
 		echo $json;
 		//echo $_GET["callback"]."(" . $json . ")";
 
-	})->setName('get_convocatorias');
+	})->setName('all_convocatorias');
 
 	/**
 	* 
@@ -213,6 +229,38 @@ $app->group('/api/v1/convocatoria', function ()
 		//echo $_GET["callback"]."(" . $json . ")";
 
 	})->setName('get_convocatoria');
+
+	/**
+	* 
+	*/
+	$this->post('/{convocatoria_id}/update/', function ($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$params['id'] = $args['convocatoria_id'];
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('update', $params);
+
+		header('Content-Type: application/json');
+		echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";		
+
+	})->setName('update_conv');
+
+	/**
+	* 
+	*/
+	$this->post('/{convocatoria_id}/delete/', function ($request, $response, $args)
+	{
+
+		$id = $args['convocatoria_id'];
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('delete', $id);
+
+		header('Content-Type: application/json');
+		echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";				
+
+	})->setName('delete_conv');
 
 });
 
