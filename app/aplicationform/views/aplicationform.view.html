@@ -1,0 +1,75 @@
+<script type="text/javascript">
+		$(document).ready(function(){
+		    $('#dt').DataTable();
+		});
+</script>
+<style type="text/css">
+	.tabs-convocatorias li a{
+		color: black;
+		font-size: 14px;
+	}
+	.tabs-convocatorias li.active a{
+		color: black;
+		font-size: 14px;
+	}
+</style>
+<div class="md-whiteframe-z1">
+	<ul class="nav nav-lines nav-tabs nav-justified bg-white tabs-convocatorias">
+		<li class="active">
+			<a href="" data-toggle="tab" data-target="#tab_1">Sección #1</a>
+		</li>
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_2">Sección #2</a>
+		</li>
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_3">Sección #3</a>
+		</li>
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_4">Sección #4</a>
+		</li>
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_5">Sección #5</a>
+		</li>
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_6">Sección #6</a>
+		</li>
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_7">Sección #7</a>
+		</li>
+	</ul>
+</div>
+<div class="tab-content p m-b-md clear b-t b-t-2x">
+	<div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_1">
+		<div class="panel panel-card p table-responsive">
+			<table class="table table-striped table-bordered" id="dt">
+				<thead>
+					<tr>
+						<th>Pregunta</th>
+						<th>Nota</th>
+						<th>Ayuda</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row" ng-repeat="question in questionsList">
+						<td style="vertical-align:middle;">{{question.pregunta}}</td>
+						<td style="vertical-align:middle;">{{question.nota}}</td>
+						<td style="vertical-align:middle;">{{question.ayuda}}</td>
+						<td style="vertical-align:middle;tex-align:center;">
+							<div class="hidden-xs hidden-sm text-center">
+								<button ui-sref='admin.aplicationform.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+									<i class="fa fa-pencil"></i>
+								</button>
+							</div>
+							<div class="hidden-md hidden-lg text-center">
+								<button ui-sref='admin.aplicationform.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+									<i class="fa fa-pencil"></i>
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

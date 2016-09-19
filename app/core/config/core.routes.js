@@ -45,6 +45,10 @@
       templateUrl: 'app/faq/views/faq.html'
     })
 
+    .state('admin.aplicationform', {
+      templateUrl: 'app/aplicationform/views/aplicationform.html'
+    })
+
     .state('entrepreneur', {
       templateUrl: 'app/templates/layouts/entrepreneur_layout.html',
       controller: 'UserController'
