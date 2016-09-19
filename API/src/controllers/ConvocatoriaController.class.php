@@ -6,6 +6,7 @@ class ConvocatoriaController extends Controller
 {
 	static $routes = array(
 		'all' 	=>	'getAll',
+		'one' 	=>	'getById',
 		'add' 	=>	'create',
 		'auth'	=>	'authentication'
 	);
@@ -57,6 +58,40 @@ class ConvocatoriaController extends Controller
 		return $json;
 
 	}	
+
+	/**
+	* 
+	*/
+	public function getById($convocatoria_id)
+	{
+		$params = $this->sanitize(array($convocatoria_id));
+		
+		if (is_int(intval($params[0])))
+		{
+			$convocatoria = Convocatoria::find(intval($params[0]));
+
+			if ($convocatoria != null)
+			{	
+				$convocatoria->universidad;			
+				$this->response['code'] = 1;
+				$this->response['data'] = $convocatoria->toArray();
+				$this->response['message'] = 'Recurso encontrado';
+			}
+			else
+			{
+				$this->response['code'] = 4;
+				$this->response['message'] = 'Recurso no encontrado';		
+			}
+		}	
+		else
+		{
+			$this->response['code'] = 2;
+			$this->response['message'] = 'El identificador de la convocatoria debe ser de tipo número.';
+		}
+
+		$json = json_encode($this->response, JSON_FORCE_OBJECT);
+		return $json;
+	}
 
 	/**
 	* 
@@ -123,6 +158,10 @@ class ConvocatoriaController extends Controller
 						$convocatoria->fecha_cierre = $params['fecha_cierre'];
 						$convocatoria->universidad_id = $params['universidad_id'];
 
+						$parametros = $this->saveImage();
+
+						$convocatoria->path = ($parametros['saved'] == true) ? $parametros['url'] : '';
+
 						if ($convocatoria->save()) { $saved = true; }
 					}
 					else 
@@ -160,7 +199,37 @@ class ConvocatoriaController extends Controller
 		return $json;
 	}
 
-	
+		
+	/**
+	* 
+	*/
+	public function saveImage()
+	{
+		$params = array('saved' => false, 'url' => '') ;
+
+		if (!empty($_FILES) && $_FILES['file']['error'] === 0)
+		{
+			$mimes 		= array('image/png', 'image/jpeg');
+			$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
+			$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
+
+			if (in_array($mime, $mimes))
+			{
+				$nombre_archivo = date('Y_m_d') . '_' . uniqid();
+				$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
+				$fichero_subido = __DIR__ . '/../../uploads/' . $nombre_archivo;
+
+				if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
+				{	
+					$params['saved'] = true;
+					$params['url'] = $fichero_subido;
+				}		
+			}
+		}
+
+		return $params;
+	}
+
 
 	/**
 	* 

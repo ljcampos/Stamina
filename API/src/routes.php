@@ -22,14 +22,31 @@ $app->group('/api/v1/usuario', function ()
 	*/
 	$this->get('/', function ($request, $response, $args)
 	{
+		$params = $request->getParams();
 		$controller = new UserController();
-		$json = $controller->callAction('all');
+		$json = $controller->callAction('all', $params);
 
 		header('Content-Type: application/json');
-		echo $_GET["callback"]."(" . $json . ")";
-		// echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+		echo $json;
 
 	})->setName('get_users');
+
+
+	/**
+	* 
+	*/
+	$this->get('/{usuario_id}/', function ($request, $response, $args)
+	{
+		$usuario_id = $args['usuario_id'];
+		$controller = new UserController();
+		$json = $controller->callAction('one', $usuario_id);
+
+		header('Content-Type: application/json');
+		//echo $_GET["callback"]."(" . $json . ")";
+		echo $json;
+
+	})->setName('get_one_user');
 
 	/**
 	* 
@@ -41,8 +58,8 @@ $app->group('/api/v1/usuario', function ()
 		$json = $controller->callAction('add', $post);
 
 		header('Content-Type: application/json');
-		//echo $_GET["callback"]."(" . $json . ")";
-		echo $json;
+		echo $_GET["callback"]."(" . $json . ")";
+		//echo $json;
 
 	})->setName('create_user');
 
@@ -56,10 +73,25 @@ $app->group('/api/v1/usuario', function ()
 		$json = $controller->callAction('auth', $post);
 
 		header('Content-Type: application/json');
-		//echo $_GET["callback"]."(" . $json . ")";
-		echo $json;
+		echo $_GET["callback"]."(" . $json . ")";
+		//echo $json;
 
 	})->setName('auth');
+
+	/**
+	* 
+	*/
+	$this->post('/{usuario_id}/imagen/', function ($request, $response, $args) 
+	{
+
+		$usuario_id = $args['usuario_id'];
+		$controller = new UserController();
+		$json = $controller->callAction('img', $usuario_id);
+		header('Content-Type: application/json');
+		echo $_GET["callback"]."(" . $json . ")";
+		//echo $json;
+
+	})->setName('set_image');
 
 });
 
@@ -94,8 +126,22 @@ $app->group('/api/v1/universidad', function ()
 		header('Content-Type: application/json');
 		echo $json;
 		//echo $_GET["callback"]."(" . $json . ")";
-
 	})->setName('create_univ');
+
+	/**
+	* 
+	*/
+	$this->get('/{universidad_id}/', function ($request, $response, $args)
+	{
+		$universidad_id = $args['universidad_id'];
+		$controller = new UniversidadController();
+		$json = $controller->callAction('one', $universidad_id);
+
+		header('Content-Type: application/json');
+		echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+
+	})->setName('get_univ');
 
 	/**
 	* 
@@ -151,6 +197,22 @@ $app->group('/api/v1/convocatoria', function ()
 		//echo $_GET["callback"]."(" . $json . ")";
 
 	})->setName('add_convocatoria');
+
+
+	/**
+	* 
+	*/
+	$this->get('/{convocatoria_id}/', function ($request, $response, $args)
+	{
+		$convocatoria_id = $args['convocatoria_id'];
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('one', $convocatoria_id);
+
+		header('Content-Type: application/json');
+		echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+
+	})->setName('get_convocatoria');
 
 });
 

@@ -7,6 +7,7 @@ class UniversidadController extends Controller
 {
 	static $routes = array(
 		'all' 		=>	'getAll',
+		'one'			=>	'getById',
 		'add' 		=>	'create',
 		'update'	=>	'update'
 	);
@@ -45,6 +46,7 @@ class UniversidadController extends Controller
 			foreach ($universidades as $key => $universidad) {
 				$universidad->user;
 				$universidad->user->status;
+				$universidad->convocatorias;
 				unset($universidad->user->password);
 				unset($universidad->user->salt);
 				unset($universidad->user->token);
@@ -59,6 +61,40 @@ class UniversidadController extends Controller
 		return $json;
 
 	}	
+
+	/**
+	* 
+	*/
+	public function getById($universidad_id)
+	{
+		$params = $this->sanitize(array($universidad_id));
+		
+		if (is_int(intval($params[0])))
+		{
+			$universidad = Universidad::find(intval($params[0]));
+
+			if ($universidad != null)
+			{
+				$universidad->convocatorias;
+				$this->response['code'] = 1;
+				$this->response['data'] = $universidad->toArray();
+				$this->response['message'] = 'Recurso encontrado';
+			}
+			else
+			{
+				$this->response['code'] = 4;
+				$this->response['message'] = 'Recurso no encontrado';		
+			}
+		}	
+		else
+		{
+			$this->response['code'] = 2;
+			$this->response['message'] = 'El identificador de la universidad debe ser de tipo número.';
+		}
+
+		$json = json_encode($this->response, JSON_FORCE_OBJECT);
+		return $json;
+	}
 
 	/**
 	* 
@@ -124,6 +160,8 @@ class UniversidadController extends Controller
 					$universidad->nombre = $params['nombre'];
 					$universidad->usuario_id = $params['usuario_id'];
 					$universidad->estado_id = $params['estado_id'];
+					$imagen = $this->saveImage();
+					$universidad->imagen = ($imagen['saved'] == true) ? $imagen['url'] : '';
 
 					if ($universidad->save())
 					{
@@ -137,6 +175,7 @@ class UniversidadController extends Controller
 						$this->response['code'] = 5;
 						$this->response['data'][] = $params;
 						$this->response['message'] = 'No se ha podido completar la acción, inténtelo más tarde.';
+						unlink($image['url']);
 					}
 					
 				} catch (PDOException $e) 
@@ -231,6 +270,17 @@ class UniversidadController extends Controller
 					$universidad->nombre = $nombre;
 					$universidad->usuario_id = $usuario_id; 
 					$universidad->estado_id = $estado_id;
+
+					$imagen = $this->saveImage();
+					if ($imagen['saved'] == true)
+					{	
+						try { unlink($universidad->imagen); } 
+						catch (Exception $e) { }
+
+						$universidad->imagen = $imagen['url'];	
+					}
+					
+
 					$universidad->save();
 
 					$db::commit();
@@ -251,6 +301,37 @@ class UniversidadController extends Controller
 
 		$json = json_encode($this->response, JSON_FORCE_OBJECT);
 		return $json;
+	}
+
+
+	/**
+	* 
+	*/
+	public function saveImage()
+	{
+		$params = array('saved' => false, 'url' => '') ;
+
+		if (!empty($_FILES) && $_FILES['file']['error'] === 0)
+		{
+			$mimes 		= array('image/png', 'image/jpeg');
+			$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
+			$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
+
+			if (in_array($mime, $mimes))
+			{
+				$nombre_archivo = date('Y_m_d') . '_' . uniqid();
+				$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
+				$fichero_subido = __DIR__ . '/../../uploads/' . $nombre_archivo;
+
+				if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
+				{	
+					$params['saved'] = true;
+					$params['url'] = $fichero_subido;
+				}		
+			}
+		}
+
+		return $params;
 	}
 
 	/**

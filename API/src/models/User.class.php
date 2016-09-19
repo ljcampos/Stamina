@@ -18,4 +18,8 @@ class User extends Model {
 		return $this->belongsToMany('Role', 'rol_usuario', 'user_id', 'rol_id');
 	}
 
+	public function persona() {
+		return $this->hasOne('Persona', 'persona_id', 'usuario_id');
+	}
+
 }

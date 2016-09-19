@@ -11,7 +11,7 @@ class Role extends Model {
 	public 		$timestamps =	true;
 
 	public function users () {
-		return $this->belongsToMany('Role', 'rol_usuario', 'rol_id', 'user_id');
+		return $this->belongsToMany('User', 'rol_usuario', 'rol_id', 'user_id');
 	}
 
 	public function permisos () {

@@ -6,9 +6,12 @@
 class UserController extends Controller
 {
 	static $routes = array(
-		'all' 	=>	'getAll',
-		'add' 	=>	'create',
-		'auth'	=>	'authentication'
+		'all' 		=>	'getAll',
+		'one'			=>	'getById',
+		'add' 		=>	'create',
+		'update'	=>	'update',
+		'auth'		=>	'authentication',
+		'img'			=>	'addImage'
 	);
 
 	/**
@@ -23,7 +26,7 @@ class UserController extends Controller
 	/**
 	* 
 	*/
-	private $attributes = array('username', 'email', 'password', 'nombre', 'paterno', 'materno', 'isMentor', 'rol');
+	private $attributes = array('username', 'email', 'password', 'nombre', 'paterno', 'materno', 'type');
 
 	/**
 	* 
@@ -36,17 +39,49 @@ class UserController extends Controller
 	/**
 	* 
 	*/
-	public function getAll()
-	{
-		$usuarios = User::all();
+	public function getAll(Array $params)
+	{	
+		$usuarios = null;
 		$lista_usuarios = array();
+		$params = $this->sanitize($params);
+		$type = 0;
+
+		if (array_key_exists('type', $params)) { $type = intval($params['type']); }
+
+		if ($type === 0 && is_int($type)) // Todos los usuarios
+		{
+			$usuarios = User::orderBy('username', 'ASC')->get();
+		}
+		elseif ($type === 1 && $type != null) // Usuarios de tipo emprendedor
+		{
+			$rol = Role::where('rol', '=', 'emprendedor')->get();
+			if (count($rol) > 0) { $usuarios = $rol[0]->users; }
+		}
+		elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
+		{
+			$rol = Role::where('rol', '=', 'mentor')->get();
+			if (count($rol) > 0) { $usuarios = $rol[0]->users; }
+		}
+		elseif ($type === 3 && $type != null) // Usuarios de tipo administrador
+		{
+			$rol = Role::where('rol', '=', 'admin')->get();
+			if (count($rol) > 0) { $usuarios = $rol[0]->users; }	
+		}
+		else 
+		{
+			$this->response['message'] = 'El parámetro type es requerido y debe de ser un tipo de dato numérico.';
+		}
 
 		if (count($usuarios) > 0)
 		{
 			foreach ($usuarios as $key => $value) {
 				$usr = new User();
 				$usr->username = $value->username;
+				$usr->nombre = $value->persona->nombre;
+				$usr->paterno = $value->persona->apellido_paterno;
+				$usr->materno = $value->persona->apellido_materno;
 				$usr->email = $value->email;
+				$usr->imagen = $value->image;
 				$usr->last_login = $value->last_login;
 				$usr->estatus = $value->status;
 
@@ -61,16 +96,61 @@ class UserController extends Controller
 
 				$lista_usuarios[] = $usr;
 			}
+			$this->response['message'] = 'Correcto';
 		}
 
 		$this->response['code'] = 1;
 		$this->response['data'] = $lista_usuarios;
-		$this->response['message'] = 'Correcto';
 
 		$json = json_encode($this->response, JSON_FORCE_OBJECT);
 		return $json;
-
 	}	
+
+	/**
+	* 
+	*/
+	public function getById($usuario_id)
+	{
+
+		$params = $this->sanitize(array($usuario_id));
+
+		if (is_int(intval($params[0])))
+		{
+			$usuario_id = intval($params[0]);
+			$usuario = User::with('roles')->where('usuario_id', '=', $usuario_id)->get();
+
+			if (count($usuario) > 0)
+			{
+				$usr = new User();
+				$usr->username 		= $usuario[0]->username;
+				$usr->nombre 			= $usuario[0]->persona->nombre;
+				$usr->paterno 		= $usuario[0]->persona->apellido_paterno;
+				$usr->materno 		= $usuario[0]->persona->apellido_materno;
+				$usr->email 			= $usuario[0]->email;
+				$usr->imagen 			= $usuario[0]->imagen;
+				$usr->last_login 	= $usuario[0]->last_login;
+				$usr->estatus 		= $usuario[0]->status;
+				$usr->roles 			= $usuario[0]->roles;
+				$usr->roles->permisos;
+				$this->response['code'] = 1;
+				$this->response['data'] = $usr;
+				$this->response['message'] = 'Recurso encontrado';
+			}
+			else
+			{
+				$this->response['code'] = 4;
+				$this->response['message'] = 'El usuario con el identificaro \'' . $params[0] . '\' no existe.';		
+			}
+		}
+		else
+		{
+			$this->response['code'] = 2;
+			$this->response['message'] = 'El identificador del usuario debe ser de tipo número.';
+		}
+
+		$json = json_encode($this->response, JSON_FORCE_OBJECT);
+		return $json;
+	}
 
 	/**
 	* 
@@ -131,9 +211,9 @@ class UserController extends Controller
 				$messages[] = 'El campo password no puede quedar vacío';
 			}
 
-			if (empty($params['rol']) || $params['rol'] === null)
+			if (empty($params['type']) || $params['type'] === null || intval($params['type']) == null)
 			{
-				$messages[] = 'Debe enviar el rol';
+				$messages[] = 'El campo type debe ser de tipo numérico';
 			}
 
 			if (count($messages) > 0)
@@ -155,6 +235,8 @@ class UserController extends Controller
 					$pwd 		= $params['password'] + $salt;
 					$pwd 		= hash('sha256', $pwd);
 
+
+					// Modelo Usuario
 					$user = new User();
 					$user->username = $params['username'];
 					$user->email = $params['email'];
@@ -164,11 +246,7 @@ class UserController extends Controller
 					$user->estatus_id = 1;
 					$user->save();
 
-					$rol = new RolUsuario();
-					$rol->rol_id = $params['rol'];
-					$rol->user_id = $user->usuario_id;
-					$rol->save();
-
+					// Modelo Persona
 					$persona = new Persona();
 					$persona->persona_id = $user->usuario_id;
 					$persona->nombre = $params['nombre'];
@@ -176,15 +254,39 @@ class UserController extends Controller
 					$persona->apellido_materno = $params['materno'];
 					$persona->save();
 
-					if (intval($params['isMentor']) === 1)
+					$type = intval($params['type']);
+					$rol_id = 0;
+					
+					if ($type === 1 && $type != null) // Usuario de tipo emprendedor
 					{
-						$mentor = new Mentor();
-						$mentor->mentor_id = $user->usuario_id;
-						$mentor->cargo = $params['cargo'];
-						$mentor->descr = $params['descr'];
-
-						if ($mentor->save()) { $saved = true; }
+						$rol = Role::where('rol', '=', 'emprendedor')->get();
+						if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
 					}
+					elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
+					{
+						$rol = Role::where('rol', '=', 'mentor')->get();
+						if (count($rol) > 0) 
+						{ 
+							$rol_id = $rol[0]->rol_id; 
+							$mentor = new Mentor();
+							$mentor->mentor_id = $user->usuario_id;
+							$mentor->cargo = $params['cargo'];
+							$mentor->descr = $params['descr'];
+
+							if ($mentor->save()) { $saved = true; }
+						}
+					}
+					elseif ($type === 3 && $type != null) // Usuarios de tipo administrador
+					{
+						$rol = Role::where('rol', '=', 'admin')->get();
+						if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
+					}
+
+					// Asociación Usuario - Rol
+					$rol = new RolUsuario();
+					$rol->rol_id = $rol_id;
+					$rol->user_id = $user->usuario_id;
+					$rol->save();
 					
 					$usr = new User;
 					$usr->username = $user->username;
@@ -298,6 +400,79 @@ class UserController extends Controller
 					$this->response['message'] = 'El usuario no existe';
 				}
 			}
+		}
+
+		$json = json_encode($this->response, JSON_FORCE_OBJECT);
+		return $json;
+	}
+
+
+	/**
+	* 
+	*/
+	public function addImage($usuario_id)
+	{
+
+		$params = $this->sanitize(array($usuario_id));
+		$usuario = User::find($params[0]);
+
+		if ($usuario != null)
+		{
+			if (!empty($_FILES) && $_FILES['file']['error'] === 0)
+			{
+				$mimes 		= array('image/png', 'image/jpeg');
+				$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
+				$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
+
+				if (in_array($mime, $mimes))
+				{
+					$nombre_archivo = date('Y_m_d') . '_' . uniqid();
+					$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
+					$fichero_subido = __DIR__ . '/../../uploads/' . $nombre_archivo;
+
+					if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
+					{
+						$db = Connection::getConnection();
+						$db::beginTransaction();
+
+						try 
+						{
+							$usuario->imagen = $fichero_subido;
+							$usuario->save();
+							$db::commit();
+
+							$this->response['code'] = 1;
+							$this->response['data'] = $fichero_subido;
+						} 
+						catch (Exception $e) 
+						{
+							$db::rollBack();
+							$this->response['code'] = 5;
+							$this->response['message'] = 'Ocurrió un error.';
+						}
+					}
+					else
+					{
+						$this->response['code'] = 5;
+					$this->response['message'] = 'Ocurrió un error.';	
+					}
+				}
+				else
+				{
+					$this->response['code'] = 6;
+					$this->response['message'] = 'Debe enviar una imagen con las siguientes extensiones: image/png, image/jpeg';
+				}
+			}
+			else
+			{
+				$this->response['code']	= 2;
+				$this->response['message'] = 'Debe enviar una imagen.';
+			}
+		}
+		else
+		{
+			$this->response['code'] = 4;
+			$this->response['message']  = 'Usuario con el identificador \'' . $params[0] . '\' no existe';
 		}
 
 		$json = json_encode($this->response, JSON_FORCE_OBJECT);
