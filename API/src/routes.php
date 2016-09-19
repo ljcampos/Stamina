@@ -73,8 +73,8 @@ $app->group('/api/v1/usuario', function ()
 		$json = $controller->callAction('auth', $post);
 
 		header('Content-Type: application/json');
-		echo $_GET["callback"]."(" . $json . ")";
-		//echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+		echo $json;
 
 	})->setName('auth');
 
