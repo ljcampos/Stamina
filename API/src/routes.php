@@ -589,8 +589,67 @@ $app->group('/api/v1/estados', function ()
 	})->setName('update_estado');
 });
 
-$app->get('/prueba/json/', function ($request, $response, $args) {
+/**
+* 
+*/
+$app->group('/api/v1/pregunta', function ()
+{
+	/**
+	* 
+	*/
+	$this->get('/', function ($request, $response, $args)
+	{
+		$controller = new PreguntaController();
+		$json = $controller->callAction('all');
 
-	$json = $request->getParsedBody();
-	var_dump($json);
+		header('Content-Type: application/json');
+		echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+	})->setName('get_questions');
+
+	/**
+	* 
+	*/
+	$this->get('/{id}/', function ($request, $response, $args)
+	{	
+		$id = $args['id'];
+		$controller = new PreguntaController();
+		$json = $controller->callAction('one', $id);
+
+		header('Content-Type: application/json');
+		echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+
+	})->setName('get_one_question');
+
+	/**
+	* 
+	*/
+	$this->post('/', function($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$controller = new PreguntaController();
+		$json = $controller->callAction('add', $params);
+
+		header('Content-Type: application/json');
+		echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+	})->setName('create_question');
+
+	/**
+	* 
+	*/
+	$this->post('/{id}/update/', function ($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$params['id'] = $args['id'];
+		$controller = new PreguntaController();
+		$json = $controller->callAction('update', $params);
+
+		header('Content-Type: application/json');
+		echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+
+	})->setName('update_question');
+
 });

@@ -330,14 +330,14 @@ class UserController extends Controller
 		$params = $this->sanitize($params);
 		$messages = array();
 
-		if (User::find(intval($params['usuario_id'])) === null)
+		if (User::find(intval($params['usuario_id'])) == null)
 		{
-			$message[] = 'No existe un usuario asociado al identificador \'' . $params['usuario_id'] . '\'';
+			$messages[] = 'No existe un usuario asociado al identificador \'' . $params['usuario_id'] . '\'';
 		}
 
 		if (Convocatoria::find(intval($params['convocatoria_id'])) == null) 
 		{
-			$message[] = 'No existe una convocatoria asociado al identificador \'' . $params['convocatoria_id'] . '\'';		
+			$messages[] = 'No existe una convocatoria asociado al identificador \'' . $params['convocatoria_id'] . '\'';		
 		}
 
 		if (!array_key_exists('estatus', $params['post']) || !is_int(intval($params['post']['estatus'])))
