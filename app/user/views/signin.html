@@ -1,3 +1,4 @@
+<div id="fb-root"></div><!-- facebook div -->
 <div class="app grey-900">
   <div class="center-block w-xxl w-auto-xs p-v-md">
     <div class="navbar">
@@ -13,11 +14,6 @@
         <div ng-if="error" class='alert ng-isolate-scope alert-danger alert-dismissable text-center'>
           Usuario o contraseña invalidos.
         </div>
-      </div>
-      <div class="fb-like"
-        data-share="true"
-        data-width="450"
-        data-show-faces="false">
       </div>
       <form name="sigin-form" ng-submit='login()'>
         <div class="md-form-group float-label">
@@ -35,6 +31,10 @@
         </div>
         <button md-ink-ripple type="submit" class="md-btn md-raised grey-900 btn-block p-h-md">Acceder</button>
       </form>
+      <br />
+      <div class='text-center'>
+        <button class='md-btn md-raised grey-900 btn-block p-h-md' ng-click='facebookLogin()'><i class='fa fa-facebook-square'></i> Acceder con facebook</button>
+      </div>
     </div>
 
     <div class="p-v-lg text-center">

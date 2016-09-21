@@ -30,6 +30,10 @@
       // });
     }
 
+    $scope.facebookLogin = function() {
+      UserService.facebookSignin();
+    };
+
     $scope.login = function() {
       console.log($scope.email, $scope.password);
       UserService.sigin($scope.email, $scope.password)
