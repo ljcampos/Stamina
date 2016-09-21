@@ -12,22 +12,15 @@
         <i class="mdi-action-search i-24"></i>
       </a>
     </li>-->
-    <li>
+    <!--<li>
       <a md-ink-ripple data-toggle="modal" data-target="#user">
         <i class="mdi-social-person-outline i-24"></i>
       </a>
-    </li>
-    <li class="dropdown">
-      <a md-ink-ripple data-toggle="dropdown">
-        <i class="mdi-navigation-more-vert i-24"></i>
+    </li>-->
+    <li>
+      <a ng-click='logout()' md-ink-ripple>
+        <i class="icon mdi-action-exit-to-app i-24"></i><span class="icon i-24 pull-left">Salir&nbsp;</span>
       </a>
-      <ul class="dropdown-menu dropdown-menu-scale pull-right pull-up text-color">
-        <li><a ng-click='logout()'>logout</a></li>
-        <li><a href>Sort by date</a></li>
-        <li><a href>Sort by name</a></li>
-        <li class="divider"></li>
-        <li><a href>Help &amp; feedback</a></li>
-      </ul>
     </li>
   </ul>
   <div class="pull-right" ui-view="navbar@"></div>

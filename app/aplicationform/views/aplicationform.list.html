@@ -46,23 +46,31 @@
           <tr>
             <th>Pregunta</th>
             <th>Nota</th>
-            <th>Ayuda</th>
-            <th></th>
+            <th style="width:60px;"></th>
           </tr>
         </thead>
         <tbody>
-          <tr role="row">
-            <td style="vertical-align:middle;">Convocaria de Emprendimiento ESR</td>
-            <td style="vertical-align:middle;">Universidad Modelo</td>
-            <td style="vertical-align:middle;">Universidad Modelo</td>
-            <td style="vertical-align:middle;tex-align:center;">
+          <tr role="row" ng-repeat="question in questionsList">
+            <td style="vertical-align:middle;">
+              {{question.pregunta}}
+            </td>
+            <td style="vertical-align:middle;">
+              {{question.nota}}
+            </td>
+            <td style="vertical-align:middle;tex-align:center;width:60px;">
               <div class="hidden-xs hidden-sm text-center">
-                <button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+                <button ui-sref='admin.aplicationform.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button ui-sref='admin.aplicationform.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
                   <i class="fa fa-pencil"></i>
                 </button>
               </div>
               <div class="hidden-md hidden-lg text-center">
-                <button ui-sref='admin.announcement.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+                <button ui-sref='admin.aplicationform.view' class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button ui-sref='admin.aplicationform.edit' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
                   <i class="fa fa-pencil"></i>
                 </button>
               </div>

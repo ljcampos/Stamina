@@ -1,3 +1,38 @@
+<style type="text/css">
+  .user-img-custom a img{
+    height: 35px;
+    margin-top: 12px;
+  }
+  .toolbar-custom{
+    margin-right: 145px;
+  }
+  .panel{
+    background: none !important;
+  }
+  @media screen and (max-width: 1199px) and (min-width: 992px) {
+    .toolbar-custom{
+      margin-right: 75px;
+    }
+  }
+  @media screen and (max-width: 991px) and (min-width: 768px) {
+    .toolbar-custom{
+      margin-right: 20px;
+    }
+    .user-img-custom a img{
+      height: 30px;
+      margin-top: 12px;
+    }
+  }
+  @media screen and (max-width: 767px) and (min-width: 268px) {
+    .toolbar-custom{
+      margin-right: 0px;
+    }
+    .user-img-custom a img{
+      height: 30px;
+      margin-top: 12px;
+    }
+  }
+</style>
 <div class="app">
   <!-- content -->
   <div id="content" class="app-content" role="main">
@@ -15,41 +50,19 @@
         </div>
         <!-- / -->
         <!-- Common tools -->
-        <ul class="nav nav-sm navbar-tool pull-right">
-          <!--<li>
-            <a md-ink-ripple ui-toggle-class="show" target="#search">
-              <i class="mdi-action-search i-24"></i>
-            </a>
-          </li>-->
-          <li>
-            <a md-ink-ripple>
-              <i class="mdi-action-home i-24"></i>
+        <ul class="nav nav-sm navbar-tool pull-right toolbar-custom">
+          <li style="height: 64px;" class="user-img-custom">
+            <a md-ink-ripple="" data-toggle="modal" data-target="#user">
+              <img src="images/a0.jpg" class="img-responsive rounded">
             </a>
           </li>
-          <li>
-            <a md-ink-ripple data-toggle="modal" data-target="#user">
-              <i class="mdi-social-person-outline i-24"></i>
-            </a>
-          </li>
-          <!--<li class="dropdown">
-            <a md-ink-ripple data-toggle="dropdown">
-              <i class="mdi-navigation-more-vert i-24"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-scale pull-right pull-up text-color">
-              <li><a href>Single-column view</a></li>
-              <li><a href>Sort by date</a></li>
-              <li><a href>Sort by name</a></li>
-              <li class="divider"></li>
-              <li><a href>Help &amp; feedback</a></li>
-            </ul>
-          </li>-->
           <li>
             <a ng-click='logout()' md-ink-ripple>
-              <i class="fa i-20">Salir </i>&nbsp; <i class="fa fa-sign-out i-24"></i>
+              <i class="icon mdi-action-exit-to-app i-24"></i><span class="icon i-24 pull-left">Salir&nbsp;</span>
             </a>
           </li>
         </ul>
-        <div class="pull-right" ui-view="navbar@"></div>
+        <!--<div class="pull-right" ui-view="navbar@"></div>-->
         <!-- / -->
       </div>
       <!-- Content -->

@@ -12,6 +12,38 @@
 				requireLogin: true,
 				role: 3
 			}
+		})
+		.state('entrepreneur.faqs', {
+			url: '/faqs',
+			templateUrl: 'app/entrepreneur/views/faqs.view.html',
+			data: {
+				requireLogin: true,
+				role: 3
+			}
+		})
+		.state('entrepreneur.announcements', {
+			url: '/convocatorias',
+			templateUrl: 'app/entrepreneur/views/announcements.available.html',
+			data: {
+				requireLogin: true,
+				role: 3
+			}
+		})
+		.state('entrepreneur.announcement', {
+			url: '/convocatoria',
+			templateUrl: 'app/entrepreneur/views/announcement.view.html',
+			data: {
+				requireLogin: true,
+				role: 3
+			}
+		})
+		.state('entrepreneur.menthors', {
+			url: '/ponentes_y_mentores',
+			templateUrl: 'app/entrepreneur/views/menthors.html',
+			data: {
+				requireLogin: true,
+				role: 3
+			}
 		});
 	}
 } ());

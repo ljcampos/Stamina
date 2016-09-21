@@ -8,7 +8,7 @@
 		$scope.questionsList = null;
 
 		$scope.questionsSection1 = function() {
-			AplicationformService.getQuestionsSection1()
+			AplicationformService.getQuestionsSection1(2)
 			.then(function(response) {
 				$scope.questionsList = response;
 				console.log(response);
