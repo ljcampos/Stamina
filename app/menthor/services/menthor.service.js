@@ -10,7 +10,8 @@
 
 		function getUsers() {
 			var users = $q.defer();
-			$http.get('https://jsonplaceholder.typicode.com/users')
+			var data={'type':2}
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/',data)
 			.success(function(response) {
 				users.resolve(response);
 			})
@@ -29,8 +30,28 @@
 		};
 
 		function getDataUser(id) {
-			var user = $q.defer();
-			$http.get('https://jsonplaceholder.typicode.com/users?id='+id)
+			var user = $q.defer();			
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/')
+			.success(function(response) {
+				user.resolve(response);
+			})
+			.error(function(error) {
+				console.log(error);
+				user.reject(error);
+			});
+			return user.promise;
+		}
+	}
+
+	angular.module('menthor').service('MenthorServiceEdit', ['$q', '$http', MenthorServiceEdit]);
+	function MenthorServiceEdit($q, $http) {
+		return {
+			getDataUser: getDataUser
+		};
+
+		function getDataUser(id) {
+			var user = $q.defer();			
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/')
 			.success(function(response) {
 				user.resolve(response);
 			})

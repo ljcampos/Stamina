@@ -132,7 +132,7 @@ class UserController extends Controller
 				$usr->last_login 	= $usuario[0]->last_login;
 				$usr->estatus 		= $usuario[0]->status;
 				$usr->roles 			= $usuario[0]->roles;
-				$usr->roles->permisos;
+				$usr->roles->permisos   = $usuario[0]->roles;
 				$this->response['code'] = 1;
 				$this->response['data'] = $usr;
 				$this->response['message'] = 'Recurso encontrado';

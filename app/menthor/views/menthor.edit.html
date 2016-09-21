@@ -14,22 +14,21 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{dataUser.name}}">
-                                <label>Nombre del mentor</label></div>
+                                <input class="md-input has-value" required value="{{user.nombre}} {{user.paterno}} {{user.materno}}">
+                                <label>Nombre del mentor
+                                </label>
+                            </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{dataUser.company.name}}">
+                                <input class="md-input has-value" required value="{{user.email}}">
                                 <label>Área</label>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
                                 <textarea class="md-input has-value" rows="3">
-                                  {{dataUser.phone}}         
-                                  {{dataUser.website}}
-                                  {{dataUser.address.city}}
-                                  {{dataUser.company.name}}
+                                  {{user.roles[0].descr}}
                                 </textarea>
                                 <label>Descripción</label>
                             </div>
@@ -47,7 +46,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{dataUser.email}}">
+                                <input class="md-input has-value" required value="{{user.email}}">
                                 <label>Correo Electrónico</label>
                             </div>
                         </div>

@@ -33,7 +33,7 @@
     }).state('admin.menthor.edit', {
       url: '/mentor/edit/:id',
       templateUrl: 'app/menthor/views/menthor.edit.html',
-      controller: 'MenthorControllerView',
+      controller: 'MenthorControllerEdit',
       data: {
         requireLogin: true,
         role: 1
