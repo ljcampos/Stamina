@@ -1,4 +1,8 @@
 <style type="text/css">
+  .light-blue-700{
+    background: #5a9ab7;
+  }
+
   .user-img-custom a img{
     height: 35px;
     margin-top: 12px;
@@ -32,13 +36,32 @@
       margin-top: 12px;
     }
   }
+  .md-input:focus, .md-input.focus {
+    padding-bottom: 1px;
+    border-color: #feee00 !important;
+    border-color: #c12e3b !important;
+    border-color: #5a9ab7 !important;
+    border-bottom-width: 2px;
+  }
+  .md-input:focus ~ label, .md-input.focus ~ label {
+    top: 0 !important;
+    font-size: 0.85em !important;
+    color: #feee00 !important;
+    color: #c12e3b !important;
+    color: #5a9ab7 !important;
+    opacity: 1;
+  }
+  body{
+    /*color: #c12e3b !important;
+    color: #5a9ab7 !important;*/
+  }
 </style>
 <div class="app">
   <!-- content -->
   <div id="content" class="app-content" role="main">
     <div class="box">
       <!-- Content Navbar -->
-      <div class="navbar md-whiteframe-z1 no-radius bg-white">
+      <div class="navbar md-whiteframe-z1 no-radius light-blue-700">
         <!-- Open side - Naviation on mobile -->
         <!--<a md-ink-ripple  data-toggle="modal" data-target="#aside" class="navbar-item pull-left visible-xs visible-sm"><i class="mdi-navigation-menu i-24"></i></a>-->
         <!-- / -->
