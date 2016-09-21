@@ -37,6 +37,14 @@
 				role: 3
 			}
 		})
+		.state('entrepreneur.profile', {
+			url: '/perfil',
+			templateUrl: 'app/entrepreneur/views/entrepreneur.profile.html',
+			data: {
+				requireLogin: true,
+				role: 3
+			}
+		})
 		.state('entrepreneur.menthors', {
 			url: '/ponentes_y_mentores',
 			templateUrl: 'app/entrepreneur/views/menthors.html',
