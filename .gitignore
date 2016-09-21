@@ -3,4 +3,4 @@ node_modules
 bower_components
 /API/vendor
 /API/composer.lock
-/API/src/config/
+/API/src/config/conf.db.ini
