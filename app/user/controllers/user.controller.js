@@ -31,7 +31,59 @@
     }
 
     $scope.facebookLogin = function() {
-      UserService.facebookSignin();
+      UserService.facebookSignin()
+      .then(function(response) {
+        UserService.sigin(response.email, 12345678)
+        .then(function(response) {
+          console.log(response);
+          if (response.code === 1) {
+            if (response.data.roles[0].rol_id === 3) {
+              $state.go('entrepreneur.dashboard');
+            }
+            $scope.error = false;
+          } else
+            $scope.error = true;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      })
+      .catch(function(error) {
+        if (error.status === 'not_authorized') {
+          $state.go('signup');
+        }
+        console.log(error);
+      });
+    };
+
+    $scope.facebookSignup = function() {
+      var newUser = {};
+      UserService.facebookSignup()
+      .then(function(response) {
+        console.log(response);
+        newUser.username = response.name;
+        newUser.nombre = response.name;
+        newUser.paterno = response.first_name;
+        newUser.materno = response.last_name;
+        newUser.email = response.email;
+        newUser.password = 12345678;
+        newUser.isMentor = 0;
+        newUser.type = 3;
+        newUser.rol = 3;
+        // create new user with facebook data
+        UserService.sigup(newUser)
+        .then(function(response) {
+          console.log(response);
+          $scope.success = true;
+        })
+        .catch(function(error) {
+          console.log(error);
+          $scope.success = false;
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
     };
 
     $scope.login = function() {
@@ -70,16 +122,17 @@
         'email': $scope.form.email,
         'password': $scope.form.password,
         'isMentor': 0,
+        'type': 3,
         'rol': 3
       };
       UserService.sigup(data)
-      .catch(function(error) {
-        console.log(error);
-        $scope.success = false;
-      })
       .then(function(response) {
         console.log(response);
         $scope.success = true;
+      })
+      .catch(function(error) {
+        console.log(error);
+        $scope.success = false;
       });
     };
 

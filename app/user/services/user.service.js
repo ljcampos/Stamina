@@ -13,7 +13,8 @@
       logout: logout,
       getUser: getUser,
       isAdmin: isAdmin,
-      facebookSignin: facebookSignin
+      facebookSignin: facebookSignin,
+      facebookSignup: facebookSignup
     };
 
     function getAllUsers() {
@@ -31,46 +32,49 @@
     }
 
     function facebookSignin() {
-      console.log('service');
-      // FB.login(function(response){
-      //   // Handle the response object, like in statusChangeCallback() in our demo
-      //   // code.
-      // }, {scope: 'public_profile,email'});
+      var facebookUser = $q.defer();
       FB.getLoginStatus(function(response) {
+        // user has permissions and is logged
         if (response.status === 'connected') {
-          console.log('Logged in.');
-          FB.api('/me?fields=email,picture,first_name,last_name,middle_name,name,birthday,gender', function(response) {
-            console.log('response ' , response);
-          });
+          facebookUser.resolve(getFacebookUserData(response));
         } else if (response.status === 'not_authorized') {
-          // The person is logged into Facebook, but not your app.
-          //console.log('no not_authorized', response);
-          //facebookFBLogin(response);
-          if ($state.current.name !== 'signup') {
-            $state.go('signup');
-          } else {
-            facebookFBLogin(response);
-          }
-        }
-        else {
+          // user is logged but hasn't permissions
+          facebookUser.reject(response);
+        } else {
+          // user is not logged
           console.log('not logged');
-          facebookFBLogin(response);
+          //facebookFBLogin(response);
         }
       });
+      return facebookUser.promise;
     }
 
-    function facebookFBLogin(response) {
+    function facebookSignup() {
+      return FBLogin();
+    }
+
+    function FBLogin() {
+      var facebookUser = $q.defer();
       FB.login(function(response) {
-        console.log('login', response);
         if (response.authResponse) {
-          console.log('Welcome!  Fetching your information.... ');
-          FB.api('/me', function(response) {
-            console.log('response ' , response);
-          });
+          facebookUser.resolve(getFacebookUserData(response));
         } else {
-          console.log('User cancelled login or did not fully authorize.');
+          facebookUser.reject(response);
         }
-      }, {scope: 'public_profile,email'});
+      }, {scope: 'public_profile, email'});
+      return facebookUser.promise;
+    }
+
+    function getFacebookUserData(response) {
+      var facebookUser = $q.defer();
+      FB.api('/me?fields=email,picture,first_name,last_name,middle_name,name,birthday,gender', function(response) {
+        if (!response || response.error) {
+          facebookUser.reject('Error occured');
+        } else {
+          facebookUser.resolve(response);
+        }
+      });
+      return facebookUser.promise;
     }
 
     function sigin(email, pwd) {
@@ -91,7 +95,6 @@
         console.log(error);
         userDefer.reject(error);
       });
-
 
       return userDefer.promise;
     }
