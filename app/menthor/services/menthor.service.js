@@ -62,5 +62,22 @@
 			return user.promise;
 		}
 	}
+	angular.module('menthor').service('MenthorServiceAdd', ['$q', '$http', MenthorServiceEdit]);
+	function MenthorServiceAdd($q, $http) {
+		function addUser(data) {
+			console.log('entrando al service')
+			var userDefer = $q.defer();			
+			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+	      	.success(function(response) {
+	        	console.log(response);
+	        	userDefer.resolve(response);
+	      	})
+	      	.error(function(error) {
+	        	console.log(error);
+	        	userDefer.reject(error);
+	      	});
+	      return userDefer.promise;
+	    }
+	}
 
 } ());

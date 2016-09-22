@@ -2,7 +2,7 @@
   'use strict';
   angular.module('user').controller('UserController', ['$scope', '$state', 'UserService', UserController]);
 
-  function UserController($scope, $state, UserService) {
+  function UserController($scope, $`, UserService) {
     $scope.name = 'userName';
     $scope.usersList = null;
     $scope.email = '';

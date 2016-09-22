@@ -26,6 +26,7 @@
     .state('admin.menthor.add', {
       url: '/mentor/add',
       templateUrl: 'app/menthor/views/menthor.add.html',
+      controller: 'MenthorControllerAdd',
       data: {
         requireLogin: true,
         role: 1
