@@ -62,16 +62,11 @@
 			return user.promise;
 		}
 	}
-	angular.module('menthor').service('MenthorServiceAdd', ['$q', '$http', MenthorServiceAdd]);
+	angular.module('menthor').service('MenthorServiceAdd', ['$q', '$http', MenthorServiceEdit]);
 	function MenthorServiceAdd($q, $http) {
-		return {
-			addUser: addUser
-		};
-
 		function addUser(data) {
+			console.log('entrando al service')
 			var userDefer = $q.defer();			
-			console.log('entrando al service');
-			console.log(data)
 			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
 	      	.success(function(response) {
 	        	console.log(response);

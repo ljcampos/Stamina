@@ -1,8 +1,8 @@
 (function() {
   'use strict';
-  angular.module('user').controller('UserController', ['$scope','UserService', UserController]);
+  angular.module('user').controller('UserController', ['$scope', '$state', 'UserService', UserController]);
 
-  function UserController($scope, UserService) {
+  function UserController($scope, $`, UserService) {
     $scope.name = 'userName';
     $scope.usersList = null;
     $scope.email = '';
@@ -16,8 +16,8 @@
     $scope.userData = UserService.getUser();
 
     angular.element(document).ready(function() {
-      loadUsers();
-    });
+			loadUsers();
+		});
 
     function loadUsers() {
       // UserService.getAllUsers()
