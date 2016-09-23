@@ -17,13 +17,25 @@
             <div class="col-sm-12">
               <div class="md-form-group float-label">
                 <input class="md-input" required ng-model='form.name'>
-                <label>Nombre del mentor</label>
+                <label>Nombre</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required ng-model='form.area'>
-                <label>Área</label>
+                <input class="md-input" required ng-model='form.lastname'>
+                <label>Apellido paterno</label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="md-form-group float-label">
+                <input class="md-input" required ng-model='form.firstname'>
+                <label>Apellido Materno</label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="md-form-group float-label">
+                <input class="md-input" required ng-model='form.position'>
+                <label>Cargo</label>
               </div>
             </div>
             <div class="col-sm-12">
@@ -51,13 +63,13 @@
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required ng-model='form.pass'>
+                <input type="password" class="md-input" ng-model='form.pass' required>
                 <label>Contraseña</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required ng-model='form.confirmpass'>
+                <input type="password" class="md-input" ng-model='form.confirmpass' required>
                 <label>Repetir Contraseña</label>
               </div>
             </div>

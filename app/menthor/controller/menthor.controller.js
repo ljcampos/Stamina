@@ -43,34 +43,50 @@
 	}
 
 	angular.module('menthor').controller('MenthorControllerAdd', ['$scope','$state','$location','MenthorServiceAdd', MenthorControllerAdd]);
-	function MenthorControllerEdit($scope,Sstate,$location,MenthorServiceAdd){
+	function MenthorControllerAdd($scope,Sstate,$location,MenthorServiceAdd){
+		console.log('entrando al controlador add')
 		$scope.add=function(){
-			console.log('entrando al controlador')
-			var nombre= separateName($scope.form.name);
-			var data={
-			'username':nombre[0],
-	        'nombre' : nombre[0],
-	        'paterno': nombre[1],
-	        'materno': nombre[2],
-	        'cargo' : $scope.form.cargo,
-	        'descr' : $scope.form.description,
-	        'email' : $scope.form.email,
-	        'password': $scope.form.password,
-	        'isMentor': 1,
-	        'rol': 2}
+			console.log('entrando al controlador');
+	 	    var data = {
+		        'username': $scope.form.name,
+		        'nombre' : $scope.form.name,
+		        'paterno': $scope.form.lastname,
+		        'materno': $scope.form.firstname,
+		        'cargo'  : $scope.form.position,
+			    'descr'  : $scope.form.description,
+		        'email'  : $scope.form.email,
+		        'password': $scope.form.pass,
+		        'isMentor': 1,
+		        'rol': 2,
+			    'type':2
+	      	};
+	      	console.log('>>>>>>>>>>>>>>>>>>>>>>')
 	        console.log(data)
+	      	console.log('>>>>>>>>>>>>>>>>>>>>>>')
 			MenthorServiceAdd.addUser(data)
 			.then(function(response){
-				console.log(response)
+				$scope.succes=true;
 			})
 			.catch(function(error){
-				console.log(error);
+				$scope.succes=false;
 			})
 		}
-		function separateName(name){
-			var data= name.split(' ');
-			console.log(data);
-			return data;
+
+		function comparePassword(){
+			if($scope.form.pass!=null && $scope.form.pass!=''){
+				if($scope.form.confirmpass!=null && $scope.form.confirmpass!=''){
+					if($scope.form.pass==$scope.form.confirmpass){
+						return true;
+					}else{
+						$scope.error=0;
+					}
+				}else{
+					$scope.error=1;
+				}
+			}else{
+				$scope.error=3;
+			}		
+			return false;
 		}
 	}
 
