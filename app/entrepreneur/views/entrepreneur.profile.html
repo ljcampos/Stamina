@@ -2,11 +2,32 @@
   .card-body{
     padding-top: 5px !important;
   }
+  .red-900{
+    background: #212121;
+    background: #c12e3b;
+    background: #FFFFFF;
+    background: #212121;
+    color: white;
+    /*color: #5a9ab7 !important;*/
+  }
+  body{
+    background: #c12e3b;
+    background: #5a9ab7;
+  }
+  .toolbar-custom{
+    color: #212121 !important;
+    color: white !important;
+  }
   @media screen and (max-width: 1199px) and (min-width: 992px) {
   }
   @media screen and (max-width: 991px) and (min-width: 768px) {
   }
   @media screen and (max-width: 767px) and (min-width: 268px) {
+  }
+  .btn-custom:hover{
+    color: #ffffff !important;
+    background-color: #5a9ab7 !important;
+    border-color: #5a9ab7 !important;
   }
 </style>
 <div class="row row-center">
@@ -18,11 +39,14 @@
   <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11 col-center">
     <div class="row">
       <div class="col-lg-4 text-center">
-        <img src="images/mentores/mentor.jpg" class="w-full circle">
-        <br><br>
-        <button md-ink-ripple="" class="md-btn md-raised m-b btn-fw bg-white">Cambiar Foto<div class="md-ripple-container"></div></button>
-        <br><br>
-        <span class="label label-lg">Gabriel Regalado Sanchez</span>
+        <img src="images/not_image/3.jpg" class="w-full circle">
+        <br>
+        <br>
+        <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
+          <i class="mdi-image-image i-20"></i> Cambiar Foto
+        </button>
+        <!--<br><br>
+        <span class="label bg-white label-lg">Gabriel Regalado Sanchez</span>-->
       </div>
       <div class="col-lg-8">
         <div class="row">
@@ -32,7 +56,9 @@
                 <h2>Información Básica</h2>
               </div>
               <div class="card-tools">
-                <button md-ink-ripple="" class="md-btn md-raised m-b btn-fw blue">Editar</button>
+                <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-info btn-custom">
+                  <i class="mdi-editor-mode-edit i-20"></i>EDITAR
+                </button>
               </div>
               <div class="card-body">
                 <div class="row">
@@ -78,7 +104,9 @@
                 <h2>Información de Contacto</h2>
               </div>
               <div class="card-tools">
-                <button md-ink-ripple="" class="md-btn md-raised m-b btn-fw blue">Editar</button>
+                <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-info btn-custom">
+                  <i class="mdi-editor-mode-edit i-20"></i>EDITAR
+                </button>
               </div>
               <div class="card-body">
                 <div class="row">

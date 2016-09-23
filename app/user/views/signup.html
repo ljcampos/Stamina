@@ -1,34 +1,35 @@
-<div class="app grey-900">
-  <!--<div class="center-block w-xxl w-auto-xs p-v-md">-->
-  <div class="col-md-5">
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <div class="pull-right">
-      <img class="img-responsive" src="images/stamina.png">
-    </div>
-  </div>
-  <div class="col-md-6">
-    <br><br><br>
-    <div class="p-lg panel md-whiteframe-z1 text-color m">
-      <div class="text-sm m-b">
-        Regístrese para su cuenta en la plataforma de emprendedores
-        <hr />
+<style type="text/css">
+  body{
+    background: #FEEE00;
+  }
+  .img_corner{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+</style>
+<div class="row row-center">
+  <div class="col-lg-5 col-md-6 col-sm-9 col-xs-12 col-center">
+    <div class="p-lg panel md-whiteframe-z1 text-color m" style="z-index: 100;">
+      <div class="text-sm m-b text-center">
+        <strong>Regístrese para su cuenta en la plataforma de emprendedores</strong>
         <div ng-if='success' class='alert ng-isolate-scope alert-success alert-dismissable text-center'>Te registraste con exito...</div>
       </div>
       <form name="form" ng-submit='signup()'>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-4 col-xs-4">
             <div class="md-form-group float-label">
               <input type="text" class="md-input" ng-model='form.name' required>
               <label>Nombres</label>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-4 col-xs-4">
             <div class="md-form-group float-label">
               <input type="text" class="md-input" ng-model='form.lastname' required>
               <label>Apellido Paterno</label>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-4 col-xs-4">
             <div class="md-form-group float-label">
               <input type="text" class="md-input" ng-model='form.firstname' required>
               <label>Apellido Materno</label>
@@ -74,3 +75,4 @@
     </div>
   </div>
 </div>
+<img class="img-responsive img_corner hidden-sm hidden-xs" src="images/plataformaemprendedor/jobs.png">
