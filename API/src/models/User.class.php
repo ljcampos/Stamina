@@ -22,4 +22,8 @@ class User extends Model {
 		return $this->hasOne('Persona', 'persona_id', 'usuario_id');
 	}
 
+	public function calificacion () {
+		return $this->hasMany('Calificacion', 'id_usuario', 'usuario_id');
+	}
+
 }
