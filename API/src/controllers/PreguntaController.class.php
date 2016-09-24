@@ -10,6 +10,7 @@ class PreguntaController extends Controller
 		'one'			=>	'getById',
 		'add' 		=>	'create',
 		'update'	=>	'update',
+		'del'		=>	'delete'
 	);
 
 	/**
@@ -157,6 +158,7 @@ class PreguntaController extends Controller
 					$db::rollBack();
 					$this->response['code'] = 5;
 					$this->response['messages'] = 'Ocurrió un error, favor de contactar al administrador.';
+					$this->response['error'] = $e->getMessage();
 				}
 			}
 
@@ -242,7 +244,7 @@ class PreguntaController extends Controller
 						$db::commit();
 						$this->response['code'] = 1;
 						$this->response['data'] = $pregunta;
-						$this->response['message'] = 'Se ha guardado correctamente la pregunta.';
+						$this->response['message'] = 'Se ha actualizado correctamente la pregunta.';
 					}
 					else
 					{
@@ -269,6 +271,67 @@ class PreguntaController extends Controller
 		$json = json_encode($this->response, JSON_FORCE_OBJECT);
 		return $json;
 	}
+
+	public function delete($id)
+	{
+		$params = $this->sanitize(array($id));
+		$pregunta = Pregunta::with('users')
+							->with('permisos')
+							->with('respuesta')
+							->where('id', '=', $params[0])->get();
+
+		if (count($pregunta) > 0)
+		{
+			if (count($pregunta[0]->users) > 0)
+			{
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Existen referencias con usuarios.';
+			}
+			if (count($pregunta[0]->permisos) > 0)
+			{
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Existen referencias con permisos.';
+			}
+			if (count($pregunta[0]->respuesta) > 0)
+			{
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Existen referencias con respuestas.';
+			}
+			else
+			{
+				$db = Connection::getConnection();
+				$db::beginTransaction();
+
+				try 
+				{
+					if ($pregunta[0]->delete())
+					{
+						$db::commit();
+						$this->response['code'] = 1;
+						$this->response['message'] = 'Se ha eliminado correctamente.';
+					}
+				} 
+				catch (Exception $e) 
+				{
+					$db::rollBack();
+					$this->response['code'] = 5;
+					$this->response['message'] = 'Ocurrió un error, favor de contactar al administrado.';
+					$this->response['error'] = $e->getMessage();
+
+				}
+			}
+		}
+		else
+		{
+			$this->response['code'] = 4;
+			$this->response['message'] = 'Recurso no encontrado.';
+		}
+
+		$json = json_encode($this->response, JSON_FORCE_OBJECT);
+		return $json;
+	}
+
+
 
 	/**
 	* 
