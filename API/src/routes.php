@@ -652,4 +652,14 @@ $app->group('/api/v1/pregunta', function ()
 
 	})->setName('update_question');
 
+	$this->post('/{id}/delete/', function ($request, $response, $args)
+	{
+		$controller = new PreguntaController();
+		$json = $controller->callAction('del', $args['id']);
+
+		header('Content-Type: application/json');
+		echo $json;
+
+	})->setName('delete_question');
+
 });
