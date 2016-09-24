@@ -1,4 +1,4 @@
-<div class="box-inner padding">
+<div class="box-inner padding" ng-init='getDataUser(id)'>
     <div class="row row-center">
         <div class="col-md-9 col-center">
             <a href="mentor/view/{{id}}" class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</a>
@@ -14,23 +14,34 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{dataUser.name}}">
-                                <label>Nombre del mentor</label></div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{dataUser.company.name}}">
-                                <label>Área</label>
+                                <input class="md-input has-value" required value="{{user.nombre}}">
+                                <label>Nombre
+                                </label>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <textarea class="md-input has-value" rows="3">
-                                  {{dataUser.phone}}         
-                                  {{dataUser.website}}
-                                  {{dataUser.address.city}}
-                                  {{dataUser.company.name}}
-                                </textarea>
+                                <input class="md-input has-value" required value="{{user.paterno}}">
+                                <label>Apelido paterno
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="md-form-group float-label">
+                                <input class="md-input has-value" required value="{{user.materno}}">
+                                <label>Apellido materno
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="md-form-group float-label">
+                                <input class="md-input has-value" required value="{{user.estatus.descr}}">
+                                <label>Cargo</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="md-form-group float-label">
+                                <textarea class="md-input has-value" rows="3">{{user.estatus.descr}}</textarea>
                                 <label>Descripción</label>
                             </div>
                         </div>
@@ -47,7 +58,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{dataUser.email}}">
+                                <input class="md-input has-value" required value="{{user.email}}">
                                 <label>Correo Electrónico</label>
                             </div>
                         </div>
