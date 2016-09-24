@@ -14,4 +14,8 @@ class EmprendedorConvocatoria extends Model {
 		return $this->hasMany('Respuesta', 'id_emprendedor_convocatoria' , 'id');
 	}
 
+	public function promedio () {
+		return $this->hasMany('Promedio', 'id_emprendedor_convocatoria', 'id');
+	}
+
 }
