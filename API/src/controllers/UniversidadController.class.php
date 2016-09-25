@@ -160,8 +160,8 @@ class UniversidadController extends Controller
 					$universidad->nombre = $params['nombre'];
 					$universidad->usuario_id = $params['usuario_id'];
 					$universidad->estado_id = $params['estado_id'];
-					$imagen = $this->saveImage();
-					$universidad->imagen = ($imagen['saved'] == true) ? $imagen['url'] : '';
+					//$imagen = $this->saveImage();
+					//$universidad->imagen = ($imagen['saved'] == true) ? $imagen['url'] : '';
 
 					if ($universidad->save())
 					{
@@ -271,14 +271,14 @@ class UniversidadController extends Controller
 					$universidad->usuario_id = $usuario_id; 
 					$universidad->estado_id = $estado_id;
 
-					$imagen = $this->saveImage();
-					if ($imagen['saved'] == true)
-					{	
+					//$imagen = $this->saveImage();
+					//if ($imagen['saved'] == true)
+					/*{	
 						try { unlink($universidad->imagen); } 
 						catch (Exception $e) { }
 
-						$universidad->imagen = $imagen['url'];	
-					}
+						//$universidad->imagen = $imagen['url'];	
+					}*/
 					
 
 					$universidad->save();

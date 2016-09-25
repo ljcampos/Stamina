@@ -57,9 +57,12 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('add', $post);
 
-		header('Content-Type: application/json');
+		/**header('Content-Type: application/json');
 		echo $_GET["callback"]."(" . $json . ")";
-		//echo $json;
+		//echo $json;*/
+		header('Content-Type: application/json');
+		//echo $_GET["callback"]."(" . $json . ")";
+		echo $json;
 
 	})->setName('create_user');
 

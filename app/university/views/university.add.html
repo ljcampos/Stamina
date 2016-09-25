@@ -14,26 +14,26 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
+                <input class="md-input" required ng-model="university.nombre">
                 <label>Nombre de la universidad</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input has-value" required type="date">
+                <input class="md-input has-value" required type="date" ng-model="university.fecha_inicio">
                 <label>Fecha Inicio del servicio</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input has-value" required type="date">
+                <input class="md-input has-value" required type="date" ng-model="university.fecha_final">
                 <label>Fecha Final del servicio</label>
               </div>
             </div>
             <div class="col-sm-12">
                 <label>Subir Logo</label>
                 <br>
-                <input class="md-input" required type="file">
+                <input class="md-input" required type="file"  ng-model="university.logo">
             </div>
           </div>
         </div>
@@ -48,13 +48,13 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
-                <label>Nombre de usuario</label>
+                <input class="md-input" required ng-model="university.email">
+                <label>Correo Electrónico</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
+                <input class="md-input" required ng-model="university.pass">
                 <label>Contraseña</label>
               </div>
             </div>
@@ -72,7 +72,7 @@
   <div class="row row-center">
     <div class="col-md-9 col-center">
       <div class="pull-right">
-        <button class="btn btn-lg btn-success">
+        <button type="button" class="btn btn-lg btn-success" ng-click="addUniversity(university)">
           Guardar
         </button>
       </div>

@@ -5,8 +5,50 @@
 
 	function UniversityService($q, $http) {
 		return {
+			getAllUniversities: getAllUniversities,
+			addUniversity: addUniversity,
+			addUserUniversity: addUserUniversity,
 			getUsers: getUsers
 		};
+
+		function getAllUniversities() {
+			var universityDefer = $q.defer();
+
+			$http.get('http://www.stamina.dev/API/public/api/v1/universidad/')
+			.success(function(response) {
+				universityDefer.resolve(response);
+			})
+			.error(function(error) {
+				universityDefer.reject(error);
+			});
+
+			return universityDefer.promise;
+		}
+
+		function addUniversity(data) {
+			var universityDefer = $q.defer();
+			$http.post('http://www.stamina.dev/API/public/api/v1/universidad/', data)
+			.success(function(response) {
+				universityDefer.resolve(response);
+			})
+			.error(function(error) {
+				universityDefer.reject(error);
+			});
+			return universityDefer.promise;
+		}
+
+		function addUserUniversity(data) {
+			var universityDefer = $q.defer();
+			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+			.success(function(response) {
+				universityDefer.resolve(response);
+			})
+			.error(function(error) {
+				universityDefer.reject(error);
+				console.log(error);
+			});
+			return universityDefer.promise;
+		}
 
 		function getUsers() {
 			var users = $q.defer();

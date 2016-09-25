@@ -25,6 +25,7 @@
     .state('admin.university.add', {
       url: '/university/add',
       templateUrl: 'app/university/views/university.add.html',
+      controller: 'UniversityController',
       data: {
         requireLogin: true,
         role: 1
