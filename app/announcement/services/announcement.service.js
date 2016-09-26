@@ -5,6 +5,7 @@
 
 	function AnnouncementService($q, $http) {
 		return {
+			getAllUniversities: getAllUniversities,
 			getAllAnnouncements: getAllAnnouncements,
 			getAnnouncementById: getAnnouncementById,
 			addAnnouncement: addAnnouncement,
@@ -12,6 +13,20 @@
 			deleteAnnouncement: deleteAnnouncement
 
 		};
+
+		function getAllUniversities() {
+			var universityDefer = $q.defer();
+			$http.get('http://www.stamina.dev/API/public/api/v1/universidad/')
+			.success(function(response) {
+				universityDefer.resolve(response);
+				console.log(response);
+			})
+			.error(function(error) {
+				universityDefer.reject(error);
+				console.log(error);
+			});
+			return universityDefer.promise;
+		}
 
 		function getAllAnnouncements() {
 			var announcementDefer = $q.defer();
@@ -48,7 +63,7 @@
 		function addAnnouncement(data) {
 			var announcementDefer = $q.defer();
 
-			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+			$http.post('http://www.stamina.dev/API/public/api/v1/convocatoria/', data)
 			.success(function(response) {
 				console.log(response);
 				announcementDefer.resolve(response);
