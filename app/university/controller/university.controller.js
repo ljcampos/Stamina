@@ -5,19 +5,11 @@
 
 	function UniversityController($state, $scope, UniversityService) {
 		$scope.university = [];
-		$scope.dato = "dasdas";
-		/*$scope.university.nombre		= null;
-		$scope.university.fecha_inicio	= null;
-		$scope.university.fecha_final	= null;
-		$scope.university.logo			= null;
-		$scope.university.username		= null;
-		$scope.university.pass			= null;*/
 
 		$scope.universityList = null;
 
 		$scope.init = function() {
-			console.log("dasdaskjd");
-			//getUniversities();
+			getUniversities();
 		};
 
 		angular.element(document).ready(function() {
@@ -57,11 +49,11 @@
 				console.log(error);
 			});
 		};
-		/*$scope.deleteUniversity = function(id) {
+		$scope.deleteUniversity = function(id) {
 			var r = confirm("¿Está seguro de que desea eliminar permanentemente el elemento especificado de la base de datos?");
 			if(r){
 				console.log("CODIGO ELIMINAR");
 			}
-		};*/
+		};
 	}
 } ());

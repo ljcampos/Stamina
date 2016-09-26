@@ -66,7 +66,7 @@
         'email': $scope.form.email,
         'password': $scope.form.password,
         'isMentor': 0,
-        'rol': 3
+        'type': 3
       };
       UserService.sigup(data)
       .catch(function(error) {

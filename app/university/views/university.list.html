@@ -13,7 +13,7 @@
 						<th>Usuario</th>
 						<th style="text-align:center;">Servicio Inicio</th>
 						<th style="text-align:center;">Servicio Final</th>
-						<th>{{dato}}</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,9 +24,9 @@
 						<td style="text-align:center;vertical-align:middle;">{{university.updated_at}}</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
-								<a class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+								<button ui-sref='admin.university.view({id:university.universidad_id})' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
 									<i class="fa fa-eye"></i>
-								</a>
+								</button>
 								<button ui-sref='admin.university.edit({id:university.universidad_id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
 									<i class="fa fa-pencil"></i>
 								</button>

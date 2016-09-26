@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('university').controller('UniversityController', ['$state', '$scope', 'UniversityService', UniversityController]);
+	angular.module('university').controller('UniversityDeleteController', ['$state', '$scope', 'UniversityService', UniversityDeleteController]);
 
-	function UniversityController($state, $scope, UniversityService) {
+	function UniversityDeleteController($state, $scope, UniversityService) {
 		$scope.university				= [];
 		
 		$scope.init = function() {
