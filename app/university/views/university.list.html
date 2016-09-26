@@ -10,7 +10,7 @@
 				<thead>
 					<tr>
 						<th>Universidad</th>
-						<th>Usuario</th>
+						<th>Correo electrónico</th>
 						<th style="text-align:center;">Servicio Inicio</th>
 						<th style="text-align:center;">Servicio Final</th>
 						<th></th>
@@ -19,7 +19,7 @@
 				<tbody>
 					<tr role="row" ng-repeat="university in universityList">
 						<td style="vertical-align:middle;">{{university.nombre}}</td>
-						<td style="vertical-align:middle;">{{university.usuario_id}}</td>
+						<td style="vertical-align:middle;">{{university.user.email}}</td>
 						<td style="text-align:center;vertical-align:middle;">{{university.created_at}}</td>
 						<td style="text-align:center;vertical-align:middle;">{{university.updated_at}}</td>
 						<td>
