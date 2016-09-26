@@ -9,7 +9,8 @@ class EstadoController extends Controller
 		'all' 		=> 	'getAll',
 		'add' 		=>	'create',
 		'one'			=>	'getById',
-		'update' 	=> 'update'
+		'update' 	=> 	'update',
+		'del'			=>	'delete'
 	);
 
 	/**
@@ -38,9 +39,8 @@ class EstadoController extends Controller
 		$estados = Estado::orderBy('estado', 'ASC')->get();
 		$this->response['data'] = $estados;
 		$this->response['message'] = 'Lista de estados';
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-
-		return $json;
+		
+		return $this->response;
 	}	
 
 	/**
@@ -62,11 +62,6 @@ class EstadoController extends Controller
 			{ 
 				$messages[] = 'El campo estado no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
 			}
-
-			/*if (strlen($params['descr']) == 0 || strlen($params['descr']) > 250)
-			{
-				$messages[] = 'El campo descripción no puede quedar vacío ni tener una longitud mayor a 250 caracteres';	
-			}*/
 
 			if (count($messages) > 0)
 			{
@@ -115,8 +110,7 @@ class EstadoController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -148,8 +142,7 @@ class EstadoController extends Controller
 			$this->response['message'][] = 'Ha ocurrido un error, favor de contactar al administrador';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 
@@ -172,11 +165,6 @@ class EstadoController extends Controller
 			{ 
 				$messages[] = 'El campo estado no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
 			}
-
-			/*if (strlen($params['descr']) == 0 || strlen($params['descr']) > 250)
-			{
-				$messages[] = 'El campo descripción no puede quedar vacío ni tener una longitud mayor a 250 caracteres';	
-			}*/
 
 			if (count($messages) > 0)
 			{
@@ -238,8 +226,55 @@ class EstadoController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
+	}
+
+
+	/**
+	* 
+	*/
+	public function delete($id)
+	{
+		$params = $this->sanitize(array($id));
+		$estado = Estado::with('universidades')->where('estado_id', '=', $params[0])->get();
+
+		if (count($estado) > 0)
+		{
+			if (count($estado[0]->universidades) > 0)
+			{
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Existen referencias.';
+			}
+			else
+			{
+				$db = Connection::getConnection();
+				$db::beginTransaction();
+				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
+				try 
+				{
+						if ($estado[0]->delete())
+						{
+							$db::commit();
+							$this->response['code'] = 1;
+							$this->response['message'] = 'Se eliminó correctamente.';
+						}
+				} 
+				catch (Exception $e) 
+				{
+					$db::rollBack();
+					$this->response['message'] = $e->getMessage();
+					$this->response['code'] = 5;
+					//$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
+				}
+			}
+		}
+		else
+		{
+			$this->response['code'] = 4;
+			$this->response['message'] = 'Recurso no encontrado';
+		}
+
+		return $this->response;
 	}
 
 	/**

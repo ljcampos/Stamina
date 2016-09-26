@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
 * 
 */
@@ -10,6 +9,7 @@ class RolController extends Controller
 		'add' 			=>	'create',
 		'one'				=>	'getById',
 		'update' 		=> 	'update',
+		'del'				=>	'delete',
 		'permisos' 	=> 	'getPermisos',
 		'addPerm'		=>	'addPermisos',
 		'delPerm'		=>	'delPermisos'
@@ -24,12 +24,9 @@ class RolController extends Controller
 		'message'	=>	''
 	);
 
-	/**
-	* 
-	*/
-	public function __construct($app = null)
+	function __construct()
 	{
-		$this->app = $app;
+		
 	}
 
 	/**
@@ -38,13 +35,12 @@ class RolController extends Controller
 	public function getAll()
 	{
 		
-		$roles = Role::with('permisos')->orderBy('rol', 'ASC')->get()->toArray();
+		$roles = Role::with('permisos')->orderBy('rol', 'ASC')->get();
 		$this->response['data'] = $roles;
 		$this->response['message'] = 'Lista de roles creados para la plataforma';
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-
-		return $json;
-	}	
+		
+		return $this->response;
+	}
 
 	/**
 	* 
@@ -119,8 +115,7 @@ class RolController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -133,11 +128,12 @@ class RolController extends Controller
 			$params = array($rol_id);
 			$params = $this->sanitize($params);
 
-			$rol = Role::find($params[0]);
+			$rol = Role::with('permisos')->where('rol_id', '=', $params[0])->get();
 
-			if ($rol != null)
+			if (count($rol) > 0)
 			{
-				$this->response['data'] = $rol->toArray();
+				$this->response['code'] = 1;
+				$this->response['data'] = $rol[0];
 				$this->response['message'] = 'Recurso encontrado';
 			}
 			else
@@ -152,8 +148,7 @@ class RolController extends Controller
 			$this->response['message'][] = 'Ha ocurrido un error, favor de contactar al administrador';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 
@@ -242,8 +237,58 @@ class RolController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
+	}
+
+	/**
+	* 
+	*/
+	public function delete($id)
+	{
+		$params = $this->sanitize(array($id));
+		$rol = Role::with('users', 'permisos')->where('rol_id', '=', $params[0])->get();
+
+		if (count($rol) > 0)
+		{
+			if (count($rol[0]->users) > 0 || count($rol[0]->permisos) > 0)
+			{
+				$this->response['code'] = 2;
+				$this->response['message'] = 'Existen referencias.';
+			}
+			else
+			{
+				$db = Connection::getConnection();
+				$db::beginTransaction();
+
+				try 
+				{
+					if ($rol[0]->delete()) 
+					{
+						$db::commit();
+						$this->response['code'] = 1;
+						$this->response['message'] = 'Se ha eliminado correctamente.';
+					}
+					else
+					{
+						$this->response['code'] = 5;
+						$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
+					}
+				} 
+				catch (Exception $e) 
+				{
+					$db::rollBack();
+					$this->response['code'] = 5;
+					$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
+				}
+			}
+		}
+		else
+		{
+			$this->response['code'] = 4;
+			$this->response['message'] = 'Recurso no encontrado.';
+		}
+
+		return $this->response;
 	}
 
 
@@ -282,8 +327,7 @@ class RolController extends Controller
 			$this->response['message'] = 'Recurso no encontrado';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -364,8 +408,7 @@ class RolController extends Controller
 			$this->response['message'] = 'La lista de permisos no puede estar vacía';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -448,8 +491,7 @@ class RolController extends Controller
 			$this->response['message'] = 'La lista de permisos no puede estar vacía';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -482,5 +524,6 @@ class RolController extends Controller
 
 		return $params;
 	}
-
+	
 }
+?>

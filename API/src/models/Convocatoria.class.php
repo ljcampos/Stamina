@@ -14,8 +14,8 @@ class Convocatoria extends Model {
 		 return $this->belongsTo('Universidad', 'universidad_id', 'universidad_id');
 	}
 
-	/*public function roles() {
-		return $this->belongsToMany('Role', 'rol_usuario', 'user_id', 'rol_id');
-	}*/
+	public function emprendedores() {
+		return $this->belongsToMany('User', 'emprendedor_convocatoria', 'id_convocatoria', 'id_emprendedor');
+	}
 
 }

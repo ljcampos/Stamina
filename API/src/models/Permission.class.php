@@ -11,6 +11,6 @@ class Permission extends Model {
 	public 		$timestamps =	true;
 
 	public function roles () {
-		return $this->belongsTo('Role', 'rol_id');
+		return $this->belongsToMany('Role', 'permiso_rol', 'permiso_id', 'rol_id');
 	}
 }

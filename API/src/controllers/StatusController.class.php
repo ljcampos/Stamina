@@ -9,7 +9,8 @@ class StatusController extends Controller
 		'all' 		=> 	'getAll',
 		'add' 		=>	'create',
 		'one'			=>	'getById',
-		'update' 	=> 'update'
+		'update' 	=> 	'update',
+		'del'			=>	'delete'
 	);
 
 	/**
@@ -38,9 +39,8 @@ class StatusController extends Controller
 		$status = Status::orderBy('estatus', 'ASC')->get();
 		$this->response['data'] = $status;
 		$this->response['message'] = 'Lista de estatus disponibles';
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-
-		return $json;
+		
+		return $this->response;
 	}	
 
 	/**
@@ -116,8 +116,7 @@ class StatusController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -149,8 +148,7 @@ class StatusController extends Controller
 			$this->response['message'][] = 'Ha ocurrido un error, favor de contactar al administrador';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 
@@ -239,8 +237,54 @@ class StatusController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
+	}
+
+	/**
+	* 
+	*/
+	public function delete($id)
+	{
+		$params = $this->sanitize(array($id));
+		$estatus = Status::with('users')->where('estatus_id', '=', $params[0])->get();
+
+		if (count($estatus) > 0)
+		{
+			if (count($estatus[0]->users) > 0)
+			{	
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Existen referencias';		
+			}
+			else
+			{
+				$db = Connection::getConnection();
+				$db::beginTransaction();
+				$this->response['message'] = 'Ocurrió un error favor de contactar al administrador.';	
+
+				try 
+				{
+					if ($estatus[0]->delete()) 
+					{
+						$db::commit();
+						$this->response['code'] = 1;
+						$this->response['message'] = 'Se ha eliminado correctamente.';		
+					}
+				} 
+				catch (Exception $e) 
+				{
+					$db::rollBack();
+					$this->response['code'] = 5;
+					$this->response['message'] = 'Ocurrió un error favor de contactar al administrador.';	
+				}
+			}
+		}
+		else
+		{
+			$this->response['code'] = 4;
+			$this->response['message'] = 'Recurso no encontrado';
+		}
+
+		return $this->response;
 	}
 
 	/**

@@ -22,4 +22,8 @@ class User extends Model {
 		return $this->hasOne('Persona', 'persona_id', 'usuario_id');
 	}
 
+	public function convocatorias() {
+		return $this->belongsToMany('Convocatoria', 'emprendedor_convocatoria', 'id_emprendedor', 'id_convocatoria');
+	}
+
 }

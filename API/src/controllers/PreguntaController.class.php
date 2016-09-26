@@ -44,8 +44,7 @@ class PreguntaController extends Controller
 		$this->response['data'] = $preguntas;
 		$this->response['message'] = 'Lista completa de preguntas';
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}	
 
 	/**
@@ -76,8 +75,7 @@ class PreguntaController extends Controller
 			$this->response['message'] = 'El identificador de pregunta debe ser de tipo numérico.';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -168,8 +166,7 @@ class PreguntaController extends Controller
 			$this->response['message'] = 'Todos los parámetros son requeridos.';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -266,8 +263,7 @@ class PreguntaController extends Controller
 			$this->response['message'] = 'Todos los parámetros son requeridos.';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**

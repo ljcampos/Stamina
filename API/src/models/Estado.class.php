@@ -10,7 +10,7 @@ class Estado extends Model {
 	protected 	$primaryKey =	'estado_id';
 	public 		$timestamps =	true;
 
-	/*public function users () {
-		return $this->hasMany('User', 'role_id');
-	}*/
+	public function universidades () {
+		return $this->hasMany('Universidad', 'estado_id', 'estado_id');
+	}
 }

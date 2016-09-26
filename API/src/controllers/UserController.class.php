@@ -15,6 +15,9 @@ class UserController extends Controller
 		'img'			=>	'addImage'
 	);
 
+	private $DIRECTORY = __DIR__ . '/../../uploads/usuario/';
+	private $MAX_FILE_UPLOAD = 1572864;
+
 	/**
 	* 
 	*/
@@ -76,13 +79,15 @@ class UserController extends Controller
 		if (count($usuarios) > 0)
 		{
 			foreach ($usuarios as $key => $value) {
+				
 				$usr = new User();
+				$usr->usuario_id = $value->usuario_id;
 				$usr->username = $value->username;
 				$usr->nombre = $value->persona->nombre;
 				$usr->paterno = $value->persona->apellido_paterno;
 				$usr->materno = $value->persona->apellido_materno;
 				$usr->email = $value->email;
-				$usr->imagen = $value->image;
+				$usr->imagen = ($value->imagen != "" || $value->imagen != null) ? $this->DIRECTORY . $value->imagen : '';
 				$usr->last_login = $value->last_login;
 				$usr->estatus = $value->status;
 
@@ -91,7 +96,37 @@ class UserController extends Controller
 				if (count($usr->roles) > 0)
 				{
 					foreach ($usr->roles as $key => $r) {
+
+						if (strtoupper($r->rol) === 'MENTOR')
+						{
+							$mentor = Mentor::find($usr->usuario_id);
+							$usr->cargo = $mentor->cargo;
+							$usr->descr = $mentor->descr;
+						}
+
+						if (strtoupper($r->rol) === 'EMPRENDEDOR')
+						{
+							if (count($usr->convocatorias) > 0)
+							{
+								foreach ($usr->convocatorias as $llave => $convocatoria) {
+									$convocatoria->path = (strlen($convocatoria->path) > 0) ? __DIR__ . '/../../uploads/convocatoria/' . $convocatoria->path : '';
+									$convocatoria->universidad;
+									$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $convocatoria->universidad->imagen : '';
+									unset($convocatoria->universidad_id);
+									unset($convocatoria->pivot);
+								}
+							}
+						}
+
 						$r->permisos = $r->permisos;
+						unset($r->pivot);
+
+						if (count($r->permisos) > 0)
+						{
+							foreach ($r->permisos as $k => $permiso) {
+								unset($permiso->pivot);
+							}
+						}
 					}
 				}
 
@@ -103,8 +138,7 @@ class UserController extends Controller
 		$this->response['code'] = 1;
 		$this->response['data'] = $lista_usuarios;
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}	
 
 	/**
@@ -123,16 +157,45 @@ class UserController extends Controller
 			if (count($usuario) > 0)
 			{
 				$usr = new User();
+				$usr->usuario_id 	=	$usuario[0]->usuario_id;
 				$usr->username 		= $usuario[0]->username;
 				$usr->nombre 			= $usuario[0]->persona->nombre;
 				$usr->paterno 		= $usuario[0]->persona->apellido_paterno;
 				$usr->materno 		= $usuario[0]->persona->apellido_materno;
 				$usr->email 			= $usuario[0]->email;
-				$usr->imagen 			= $usuario[0]->imagen;
+				$usr->imagen 			= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? $this->DIRECTORY . $usuario[0]->imagen : '';
 				$usr->last_login 	= $usuario[0]->last_login;
 				$usr->estatus 		= $usuario[0]->status;
 				$usr->roles 			= $usuario[0]->roles;
-				$usr->roles->permisos;
+
+				if (count($usr->roles) > 0)
+				{
+					foreach ($usr->roles as $key => $rol) {
+						if (strtoupper($rol->rol) === 'MENTOR')
+						{
+							$mentor = Mentor::find($usr->usuario_id);
+							$usr->cargo = $mentor->cargo;
+							$usr->descr = $mentor->descr;
+						}
+
+						if (strtoupper($rol->rol) === 'EMPRENDEDOR')
+						{
+							if (count($usr->convocatorias) > 0)
+							{
+								foreach ($usr->convocatorias as $llave => $convocatoria) {
+									$convocatoria->path = (strlen($convocatoria->path) > 0) ? __DIR__ . '/../../uploads/convocatoria/' . $convocatoria->path : '';
+									$convocatoria->universidad;
+									$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $convocatoria->universidad->imagen : '';
+									unset($convocatoria->universidad_id);
+									unset($convocatoria->pivot);
+								}
+							}
+						}
+
+						$rol->permisos;
+					}
+				}
+
 				$this->response['code'] = 1;
 				$this->response['data'] = $usr;
 				$this->response['message'] = 'Recurso encontrado';
@@ -140,7 +203,7 @@ class UserController extends Controller
 			else
 			{
 				$this->response['code'] = 4;
-				$this->response['message'] = 'El usuario con el identificaro \'' . $params[0] . '\' no existe.';		
+				$this->response['message'] = 'El usuario con el identificador \'' . $params[0] . '\' no existe.';		
 			}
 		}
 		else
@@ -149,8 +212,7 @@ class UserController extends Controller
 			$this->response['message'] = 'El identificador del usuario debe ser de tipo número.';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -178,7 +240,7 @@ class UserController extends Controller
 				$messages[] = 'Ya existe una cuenta de usuario con el nombre: \'' . $params['username'] . '\'';
 			}
 
-			if (empty($params['email']) || strlen($params['email']) == 0 || strlen($params['username']) > 50)
+			if (empty($params['email']) || strlen($params['email']) == 0 || strlen($params['email']) > 50)
 			{
 				$messages[] = 'El campo email no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
 			}
@@ -290,6 +352,7 @@ class UserController extends Controller
 					$rol->save();
 					
 					$usr = new User;
+					$usr->usuario_id = $user->usuario_id;
 					$usr->username = $user->username;
 					$usr->email = $user->email;
 					$usr->estatus = $user->status;
@@ -299,6 +362,7 @@ class UserController extends Controller
 					{
 						foreach ($usr->roles as $key => $r) {
 							$r->permisos = $r->permisos;
+							unset($r->pivot);
 						}
 					}
 
@@ -318,8 +382,7 @@ class UserController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -345,7 +408,8 @@ class UserController extends Controller
 			$messages[] = 'Debe enviar el parámetro estatus.';	
 		}
 
-		if (count(EmprendedorConvocatoria::where('id_emprendedor', '=', $params['usuario_id'])->get()) > 0)
+		if (count(EmprendedorConvocatoria::where('id_emprendedor', '=', $params['usuario_id'])
+																		->where('id_convocatoria', '=', $params['convocatoria_id'])->get()) > 0)
 		{
 			$messages[] = 'Ya se inscribió a la convocatoria';
 		}
@@ -362,20 +426,32 @@ class UserController extends Controller
 
 			try 
 			{
-				$obj = new EmprendedorConvocatoria();
-				$obj->id_emprendedor = $params['usuario_id'];
-				$obj->id_convocatoria = $params['convocatoria_id'];
-				$obj->estatus = intval($params['post']['estatus']);
+				$convocatoria = Convocatoria::find(intval($params['convocatoria_id']));
+				$fecha_actual = strtotime(date('Y-m-d'));
 
-				if ($obj->save())
-				{
-					$db::commit();
-					$this->response['code'] = 1;
-					$this->response['message'] = 'Se ha agregado correctamente';
+				if ($fecha_actual <= strtotime($convocatoria->fecha_cierre))
+				{					
+					$obj = new EmprendedorConvocatoria();
+					$obj->id_emprendedor = $params['usuario_id'];
+					$obj->id_convocatoria = $params['convocatoria_id'];
+					$obj->estatus = intval($params['post']['estatus']);
+
+					if ($obj->save())
+					{
+						$db::commit();
+						$this->response['code'] = 1;
+						$this->response['message'] = 'Se ha agregado correctamente';
+					}
+					else 
+					{
+						$this->response['code'] = 5;
+						$this->response['message'] = 'Ocurrió un error, favor de intentarlo mas tarde';
+					}
 				}
-				else 
+				else
 				{
-					$this->response['message'] = 'algo';
+					$this->response['code'] = 2;
+					$this->response['message'] = 'La fecha actual es mayor a la fecha de cierre de la convocatoria';
 				}
 			} 
 			catch (Exception $e) 
@@ -386,8 +462,7 @@ class UserController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -489,47 +564,64 @@ class UserController extends Controller
 		{
 			if (!empty($_FILES) && $_FILES['file']['error'] === 0)
 			{
-				$mimes 		= array('image/png', 'image/jpeg');
-				$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
-				$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
-
-				if (in_array($mime, $mimes))
+				if ($_FILES['file']['size'] <= $this->MAX_FILE_UPLOAD)
 				{
-					$nombre_archivo = date('Y_m_d') . '_' . uniqid();
-					$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
-					$fichero_subido = __DIR__ . '/../../uploads/' . $nombre_archivo;
+					$mimes 		= array('image/png', 'image/jpeg');
+					$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
+					$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
 
-					if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
+					if (in_array($mime, $mimes))
 					{
-						$db = Connection::getConnection();
-						$db::beginTransaction();
+						$nombre_archivo = date('Y_m_d') . '_' . uniqid();
+						$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
+						$fichero_subido = $this->DIRECTORY . $nombre_archivo;
 
-						try 
+						if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
 						{
-							$usuario->imagen = $fichero_subido;
-							$usuario->save();
-							$db::commit();
+							$db = Connection::getConnection();
+							$db::beginTransaction();
 
-							$this->response['code'] = 1;
-							$this->response['data'] = $fichero_subido;
-						} 
-						catch (Exception $e) 
+							try 
+							{	
+								if ($usuario->imagen != '' || $usuario->imagen != null)
+								{
+									if (file_exists($this->DIRECTORY . $usuario->imagen))
+									{
+										unlink($this->DIRECTORY . $usuario->imagen);
+									}
+								}
+
+								$usuario->imagen = $nombre_archivo;
+								$usuario->save();
+								$db::commit();
+
+								$this->response['code'] = 1;
+								$this->response['data'] = $fichero_subido;
+								$this->response['message'] = 'Se ha guardado correctamente';
+							} 
+							catch (Exception $e) 
+							{
+								$db::rollBack();
+								$this->response['code'] = 5;
+								$this->response['message'] = 'Ocurrió un error.';
+							}
+						}
+						else
 						{
-							$db::rollBack();
 							$this->response['code'] = 5;
-							$this->response['message'] = 'Ocurrió un error.';
+							$this->response['message'] = 'Ocurrió un error.';	
 						}
 					}
 					else
 					{
-						$this->response['code'] = 5;
-					$this->response['message'] = 'Ocurrió un error.';	
+						$this->response['code'] = 6;
+						$this->response['message'] = 'Debe enviar una imagen con las siguientes extensiones: image/png, image/jpeg';
 					}
 				}
-				else
+				else 
 				{
 					$this->response['code'] = 6;
-					$this->response['message'] = 'Debe enviar una imagen con las siguientes extensiones: image/png, image/jpeg';
+						$this->response['message'] = 'Debe ser un archivo de máximo 1.5MB';
 				}
 			}
 			else
@@ -544,8 +636,7 @@ class UserController extends Controller
 			$this->response['message']  = 'Usuario con el identificador \'' . $params[0] . '\' no existe';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**

@@ -12,6 +12,10 @@ class ConvocatoriaController extends Controller
 		'delete' 	=>	'delete'
 	);
 
+	private $DIRECTORY = __DIR__ . '/../../uploads/convocatoria/';
+	private $MIME = 'application/pdf';
+	private $MAX_FILE_UPLOAD = 1572864;
+
 	/**
 	* 
 	*/
@@ -44,10 +48,23 @@ class ConvocatoriaController extends Controller
 		if(count($convocatorias) > 0)
 		{
 			foreach ($convocatorias as $key => $value) {
+				$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
 				unset($value->universidad->user->password);
 				unset($value->universidad->user->salt);
 				unset($value->universidad->user->token);
 				$value->universidad->user->status;
+				$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+
+				if (count($value->emprendedores) > 0)
+				{
+					foreach ($value->emprendedores as $k => $val) {
+						$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						unset($val->password);
+						unset($val->salt);
+						unset($val->token);
+						unset($val->pivot);
+					}
+				}
 			}
 		}
 
@@ -55,8 +72,7 @@ class ConvocatoriaController extends Controller
 		$this->response['data'] = $convocatorias;
 		$this->response['message'] = 'Correcto';
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 
 	}	
 
@@ -73,7 +89,21 @@ class ConvocatoriaController extends Controller
 
 			if ($convocatoria != null)
 			{	
-				$convocatoria->universidad;			
+				$convocatoria->universidad;
+				unset($value->universidad_id);
+				$convocatoria->path = (strlen($convocatoria->path) > 0) ? $this->DIRECTORY . $convocatoria->path : '';
+				$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $convocatoria->universidad->imagen : '';
+
+				if (count($convocatoria->emprendedores) > 0)
+				{	
+					foreach ($convocatoria->emprendedores as $key => $value) {
+						$value->imagen = ($value->imagen != "" || $value->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $value->imagen : '';
+						unset($convocatoria->emprendedores[$key]->token);
+						unset($convocatoria->emprendedores[$key]->password);
+						unset($convocatoria->emprendedores[$key]->salt);
+						unset($convocatoria->emprendedores[$key]->pivot);
+					}
+				}
 				$this->response['code'] = 1;
 				$this->response['data'] = $convocatoria->toArray();
 				$this->response['message'] = 'Recurso encontrado';
@@ -90,8 +120,7 @@ class ConvocatoriaController extends Controller
 			$this->response['message'] = 'El identificador de la convocatoria debe ser de tipo número.';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -160,8 +189,15 @@ class ConvocatoriaController extends Controller
 						$convocatoria->universidad_id = $params['universidad_id'];
 
 						$parametros = $this->saveImage();
-
-						$convocatoria->path = ($parametros['saved'] == true) ? $parametros['url'] : '';
+						if ($parametros['saved'] == true) 
+						{
+							$convocatoria->path = $parametros['url'];
+						}
+						else
+						{
+							$convocatoria->path = '';
+							$this->response['message'][] = 'archivo invalido';
+						}
 
 						if ($convocatoria->save()) { $saved = true; }
 					}
@@ -171,7 +207,8 @@ class ConvocatoriaController extends Controller
 					}
 					
 					if ($saved === true)
-					{
+					{	
+						$convocatoria->path = (strlen($convocatoria->path) > 0) ? $this->DIRECTORY . $convocatoria->path : '';
 						$this->response['code'] = 1;
 						$this->response['data'] = $convocatoria;
 						$this->response['message'][] = 'Se ha creado una nueva convocatoria';
@@ -196,8 +233,7 @@ class ConvocatoriaController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 
@@ -247,6 +283,11 @@ class ConvocatoriaController extends Controller
 				$messages[] = 'Universidad con el identificador: \'' . $params['universidad_id'] . '\' no existe';	
 			}
 
+			if (Convocatoria::find(intval($params['id'])) === null)
+			{
+				$messages[] = 'La convocatoria no existe';
+			}
+
 			if (count($messages) > 0)
 			{
 				$this->response['code'] = 2;
@@ -276,14 +317,22 @@ class ConvocatoriaController extends Controller
 
 							$parametros = $this->saveImage();
 
-							if ($parametros['saved'] == true)
+							if ($parametros['saved'] == true) 
 							{
-								if (file_exists($convocatoria->path)) { unlink($convocatoria->path); }
+								if (file_exists($this->DIRECTORY . $convocatoria->path)) 
+								{ 
+									unlink($this->DIRECTORY . $convocatoria->path); 
+								}
 								$convocatoria->path = $parametros['url'];	
+							}
+							else
+							{
+								$this->response['message'][] = 'archivo invalido';
 							}
 							
 							if ($convocatoria->save()) { $saved = true; }							
 						}
+						
 						
 					}
 					else 
@@ -293,6 +342,7 @@ class ConvocatoriaController extends Controller
 					
 					if ($saved === true)
 					{
+						$convocatoria->path = (strlen($convocatoria->path) > 0) ? $this->DIRECTORY . $convocatoria->path : '';
 						$this->response['code'] = 1;
 						$this->response['data'] = $convocatoria;
 						$this->response['message'][] = 'Se ha modificado correctamente';
@@ -317,8 +367,7 @@ class ConvocatoriaController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 
@@ -328,52 +377,51 @@ class ConvocatoriaController extends Controller
 	public function delete($id)
 	{
 		$params = $this->sanitize(array($id));
-		$messages = array();
+		$convocatoria = Convocatoria::with('emprendedores')->where('id', '=', $params[0])->get();
 
-		if (!is_int(intval($params[0])))
+		if (count($convocatoria) > 0)
 		{
-			$messages[] = 'El identificador debe ser de tipo numérico.';
-		}
-		if (Convocatoria::find(intval($params[0])) == null)
-		{
-			$messages[] = 'Recurso no encontrado.';
-		}
-		if (count(EmprendedorConvocatoria::where('id_convocatoria', '=', $params[0])->get()) > 0)
-		{
-			$messages[] = 'Existen referencias.';
-		}
+			if (count(EmprendedorConvocatoria::where('id_convocatoria', '=', $convocatoria[0]->id)
+																				->get()) > 0)
+			{
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Existen referencias.';
+			}
+			else
+			{
+				$db = Connection::getConnection();
+				$db::beginTransaction();
+				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
 
-		if (count($messages) > 0)
-		{
-			$this->response['code'] = 2;
-			$this->response['message'] = $messages;
+				try 
+				{
+					if (file_exists($this->DIRECTORY . $convocatoria[0]->path)) 
+					{ 
+						unlink($this->DIRECTORY . $convocatoria[0]->path); 
+					}
+					if ($convocatoria[0]->delete())
+					{	
+						$db::commit();
+						$this->response['code'] = 1;
+						$this->response['message'] = 'Se ha eliminado correctamente';
+					}
+				} 
+				catch (Exception $e) 
+				{
+					$db::rollBack();
+					$this->response['e'] = $e->getMessage();
+					$this->response['code'] = 5;
+					$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
+				}
+			}
 		}
 		else
 		{
-			$db = Connection::getConnection();
-			$db::beginTransaction();
-
-			try 
-			{
-				$convocatoria = Convocatoria::find(intval($params[0]));	
-				if (file_exists($convocatoria->path)) { unlink($convocatoria->path); }
-				if ($convocatoria->delete())
-				{	
-
-					$this->response['code'] = 1;
-					$this->response['message'] = 'Se ha eliminado correctamente';
-				}
-			} 
-			catch (Exception $e) 
-			{
-				$db::rollBack();
-				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
-			}
-			
+			$this->response['code'] = 4;
+			$this->response['message'] = 'Recurso no encontrado.';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -385,21 +433,24 @@ class ConvocatoriaController extends Controller
 
 		if (!empty($_FILES) && $_FILES['file']['error'] === 0)
 		{
-			$mimes 		= array('image/png', 'image/jpeg');
-			$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
-			$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
 
-			if (in_array($mime, $mimes))
+			if ($_FILES['size'] <= $this->MAX_FILE_UPLOAD) 
 			{
-				$nombre_archivo = date('Y_m_d') . '_' . uniqid();
-				$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
-				$fichero_subido = __DIR__ . '/../../uploads/' . $nombre_archivo;
+				$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
+				$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
 
-				if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
-				{	
-					$params['saved'] = true;
-					$params['url'] = $fichero_subido;
-				}		
+				if ($this->MIME === $mime)
+				{
+					$nombre_archivo = date('Y_m_d') . '_' . uniqid();
+					$nombre_archivo = $nombre_archivo . '.pdf';
+					$fichero_subido = $this->DIRECTORY . $nombre_archivo;
+
+					if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
+					{	
+						$params['saved'] = true;
+						$params['url'] = $nombre_archivo;
+					}		
+				}
 			}
 		}
 

@@ -9,8 +9,12 @@ class UniversidadController extends Controller
 		'all' 		=>	'getAll',
 		'one'			=>	'getById',
 		'add' 		=>	'create',
-		'update'	=>	'update'
-	);
+		'update'	=>	'update',
+		'del'			=>	'delete'
+	);	
+
+	private $DIRECTORY = __DIR__ . '/../../uploads/universidad/';
+	private $MAX_FILE_UPLOAD = 1572864;
 
 	/**
 	* 
@@ -44,22 +48,29 @@ class UniversidadController extends Controller
 		if (count($universidades) > 0)
 		{
 			foreach ($universidades as $key => $universidad) {
+				$universidad->imagen = (strlen($universidad->imagen) > 0) ? $this->DIRECTORY . $universidad->imagen : '';
 				$universidad->user;
+				$universidad->user->imagen = ($universidad->user->imagen != "" || $universidad->user->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $universidad->user->imagen : '';
 				$universidad->user->status;
-				$universidad->convocatorias;
 				unset($universidad->user->password);
 				unset($universidad->user->salt);
 				unset($universidad->user->token);
 				unset($universidad->user->estatus_id);
+
+				if (count($universidad->convocatorias) > 0)
+				{
+					foreach ($universidad->convocatorias as $k => $conv) {
+						$conv->path = (strlen($conv->path) > 0) ? __DIR__ . '/../../uploads/convocatoria/' . $conv->path : '';
+					}
+				}
 			}
 		}
 
 		$this->response['code'] = 1;
 		$this->response['data'] = $universidades;
 		$this->response['message'] = 'Correcto';
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
-
+		
+		return $this->response;
 	}	
 
 	/**
@@ -75,7 +86,22 @@ class UniversidadController extends Controller
 
 			if ($universidad != null)
 			{
-				$universidad->convocatorias;
+				$universidad->imagen = (strlen($universidad->imagen) > 0) ? $this->DIRECTORY . $universidad->imagen : '';
+				$universidad->user;
+				$universidad->user->imagen = ($universidad->user->imagen != "" || $universidad->user->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $universidad->user->imagen : '';
+				$universidad->user->status;
+				unset($universidad->user->password);
+				unset($universidad->user->salt);
+				unset($universidad->user->token);
+				unset($universidad->user->estatus_id);
+
+				if (count($universidad->convocatorias) > 0)
+				{
+					foreach ($universidad->convocatorias as $k => $conv) {
+						$conv->path = (strlen($conv->path) > 0) ? __DIR__ . '/../../uploads/convocatoria/' . $conv->path : '';
+					}
+				}
+
 				$this->response['code'] = 1;
 				$this->response['data'] = $universidad->toArray();
 				$this->response['message'] = 'Recurso encontrado';
@@ -92,8 +118,7 @@ class UniversidadController extends Controller
 			$this->response['message'] = 'El identificador de la universidad debe ser de tipo número.';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -161,10 +186,20 @@ class UniversidadController extends Controller
 					$universidad->usuario_id = $params['usuario_id'];
 					$universidad->estado_id = $params['estado_id'];
 					$imagen = $this->saveImage();
-					$universidad->imagen = ($imagen['saved'] == true) ? $imagen['url'] : '';
+
+					if ($imagen['saved'] === true)
+					{
+						$universidad->imagen = $imagen['url'];
+					}
+					else
+					{
+						$universidad->imagen = '';
+						$this->response['error_image'] = 'Imagen invalida';
+					}
 
 					if ($universidad->save())
 					{
+						$universidad->path = (strlen($universidad->path) > 0) ? $this->DIRECTORY . $universidad->path : '';
 						$this->response['code'] = 1;
 						$this->response['data'] = $universidad;
 						$this->response['message'] = 'Se ha creado un nuevo registro de universidad';
@@ -186,8 +221,7 @@ class UniversidadController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
 	}
 
 	/**
@@ -273,20 +307,33 @@ class UniversidadController extends Controller
 
 					$imagen = $this->saveImage();
 					if ($imagen['saved'] == true)
-					{	
-						try { unlink($universidad->imagen); } 
-						catch (Exception $e) { }
+					{
+						if ($universidad->imagen != '' || $universidad->imagen != null)
+						{	
+							$url = $this->DIRECTORY . $universidad->imagen;
+							if (file_exists($url) === true)
+							{
+								try { unlink($this->DIRECTORY . $universidad->imagen); }
+								catch (Exception $e) { }
+							}
+						}
 
 						$universidad->imagen = $imagen['url'];	
 					}
+					else
+					{
+						$this->response['error_image'] = 'Imagen invalida';
+					}
 					
-
-					$universidad->save();
-
-					$db::commit();
-					$this->response['code'] = 1;
-					$this->response['data'] = $universidad;
-					$this->response['message'] = 'Se ha actualizado correctamente';
+					if ($universidad->save())
+					{
+						$db::commit();
+						$universidad->imagen = (strlen($universidad->imagen) > 0) ? $this->DIRECTORY . $universidad->imagen : '';
+						$this->response['code'] = 1;
+						$this->response['data'] = $universidad;
+						$this->response['message'] = 'Se ha actualizado correctamente';
+					}
+				
 					
 				} catch (PDOException $e) 
 				{
@@ -299,8 +346,68 @@ class UniversidadController extends Controller
 			}
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		return $this->response;
+	}
+
+	/**
+	* 
+	*/
+	public function delete($id)
+	{
+		$params = $this->sanitize(array($id));
+		$universidad = Universidad::with('convocatorias')->where('universidad_id', '=', $params[0])->get();
+
+		if (count($universidad) > 0)
+		{
+			if (count($universidad[0]->convocatorias) > 0)
+			{
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Existen referencias.';
+			}
+			else
+			{
+				$db = Connection::getConnection();
+				$db::beginTransaction();
+				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrado.';
+				try 
+				{
+					if ($universidad[0]->delete())
+					{
+						$db::commit();
+
+						try 
+						{
+							if ($universidad[0]->imagen != '' || $universidad[0]->imagen != null)
+							{
+								if (file_exists($this->DIRECTORY . $universidad[0]->imagen))
+								{
+									unlink($this->DIRECTORY . $universidad[0]->imagen);
+								}
+							}	
+						} catch (Exception $e) 
+						{
+							
+						}
+
+						$this->response['code'] = 1;
+						$this->response['message'] = 'Se ha eliminado correctamente.';
+					}
+				} 
+				catch (Exception $e) 
+				{
+					$db::rollBack();
+					$this->response['code'] = 5;
+					$this->response['message'] = 'Ocurrió un error, favor de contactar al administrado.';
+				}
+			}
+		}
+		else
+		{
+			$this->response['code'] = 4;
+			$this->response['message'] = 'Recurso no encontrado.';
+		}
+
+		return $this->response;
 	}
 
 
@@ -313,21 +420,24 @@ class UniversidadController extends Controller
 
 		if (!empty($_FILES) && $_FILES['file']['error'] === 0)
 		{
-			$mimes 		= array('image/png', 'image/jpeg');
-			$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
-			$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
-
-			if (in_array($mime, $mimes))
+			if ($_FILES['file']['size'] <= $this->MAX_FILE_UPLOAD)
 			{
-				$nombre_archivo = date('Y_m_d') . '_' . uniqid();
-				$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
-				$fichero_subido = __DIR__ . '/../../uploads/' . $nombre_archivo;
+				$mimes 		= array('image/png', 'image/jpeg');
+				$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
+				$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
 
-				if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
-				{	
-					$params['saved'] = true;
-					$params['url'] = $fichero_subido;
-				}		
+				if (in_array($mime, $mimes))
+				{
+					$nombre_archivo = date('Y_m_d') . '_' . uniqid();
+					$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
+					$fichero_subido = $this->DIRECTORY . $nombre_archivo;
+
+					if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
+					{	
+						$params['saved'] = true;
+						$params['url'] = $nombre_archivo;
+					}		
+				}
 			}
 		}
 
