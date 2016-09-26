@@ -15,19 +15,30 @@
     $scope.form = {};
     $scope.userData = UserService.getUser();
 
+    $scope.init = function() {
+      if (UserService.isLogged()) {
+        if (UserService.getFacebookPicture() !== undefined)
+          $scope.facebookImage = UserService.getFacebookPicture();
+        else
+          $scope.facebookImage = 'images/a0.jpg';
+      }
+    };
+
     angular.element(document).ready(function() {
-			loadUsers();
+			$scope.init();
 		});
 
-    function loadUsers() {
-      // UserService.getAllUsers()
-      // .then(function(response) {
-      //   console.log(response);
-      //   $scope.usersList = response;
-      // })
-      // .catch(function(error) {
-      //   console.log(error);
-      // });
+    function facebookPicture() {
+      console.log('picture');
+      UserService.getFacebookPicture()
+      .then(function(response) {
+        console.log(response);
+        $scope.facebookImage.url = response.data.url;
+      })
+      .catch(function(error) {
+        console.log(error);
+        $scope.facebookImage.url = 'images/a0.jpg';
+      });
     }
 
     $scope.facebookLogin = function() {
@@ -175,6 +186,7 @@
               console.log(response);
               if (response.code === 1) {
                 if (response.data.roles[0].rol_id === 3) {
+                  $scope.facebookImage = fbResponse.picture.data.url;
                   $state.go('entrepreneur.dashboard');
                 }
                 $scope.error = false;

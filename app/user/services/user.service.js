@@ -15,7 +15,8 @@
       isAdmin: isAdmin,
       facebookSignin: facebookSignin,
       facebookSignup: facebookSignup,
-      getFacebookUserById: getFacebookUserById
+      getFacebookUserById: getFacebookUserById,
+      getFacebookPicture: getFacebookPicture
     };
 
     function getAllUsers() {
@@ -120,9 +121,18 @@
           facebookUser.reject('Error occured');
         } else {
           facebookUser.resolve(response);
+          setFacebookPicture(response.picture.data.url);
         }
       });
       return facebookUser.promise;
+    }
+
+    function setFacebookPicture(picture) {
+      $sessionStorage.picture = picture;
+    }
+
+    function getFacebookPicture() {
+      return $sessionStorage.picture;
     }
 
     function sigin(credentials) {
