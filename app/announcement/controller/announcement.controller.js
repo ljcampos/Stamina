@@ -5,7 +5,7 @@
 
 	function AnnouncementController($scope, AnnouncementService) {
 		$scope.text = 'xsdfsf';
-		$scope.userList = null;
+		$scope.announcesList = {};
 		
 		$scope.init = function() {
 			getAnnouncements();
@@ -19,6 +19,7 @@
 			AnnouncementService.getAllAnnouncements()
 			.then(function(response) {
 				console.log(response);
+				$scope.announcesList = response.data;
 			})
 			.catch(function(error) {
 				console.log(error);

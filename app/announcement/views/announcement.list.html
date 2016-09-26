@@ -1,6 +1,6 @@
 <script type="text/javascript">
 		$(document).ready(function(){
-		    $('#dt').DataTable();
+		    $('#dt00').DataTable();
 		});
 </script>
 <style type="text/css">
@@ -149,14 +149,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr role="row">
-							<td style="vertical-align:middle;">Convocaria de TIC's</td>
-							<td style="vertical-align:middle;">Universidad UNID</td>
-							<td style="text-align:center;vertical-align:middle;">12 de Agosto</td>
-							<td style="text-align:center;vertical-align:middle;">28 de Octubre </td>
+						<tr role="row" ng-repeat="announce in announcesList">
+							<td style="vertical-align:middle;">{{announce.nombre}}</td>
+							<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
 							<td>
 								<div class="hidden-xs hidden-sm pull-right">
-									<a target="_blank" href="pdfs/stamina_convocatoria.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+									<a target="_blank" href="res/convocatorias/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
 										<i class="fa fa-file"></i>
 									</a>
 									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
