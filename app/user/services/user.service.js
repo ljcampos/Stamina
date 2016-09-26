@@ -14,7 +14,8 @@
       getUser: getUser,
       isAdmin: isAdmin,
       facebookSignin: facebookSignin,
-      facebookSignup: facebookSignup
+      facebookSignup: facebookSignup,
+      getFacebookUserById: getFacebookUserById
     };
 
     function getAllUsers() {
@@ -31,7 +32,53 @@
       return users.promise;
     }
 
+    function getFacebookUserById(id) {
+      //http://www.stamina.dev/API/public/api/v1/usuario/facebook/
+      var userDefer = $q.defer();
+
+      $http.get('http://www.stamina.dev/API/public/api/v1/usuario/facebook/' + id)
+      .success(function(response) {
+        console.log(response);
+        userDefer.resolve(response);
+      })
+      .error(function(error) {
+        console.log(error);
+        userDefer.reject(error);
+      });
+
+      return userDefer.promise;
+    }
+
     function facebookSignin() {
+      var facebookUser = $q.defer();
+      getFacebookUserStatus()
+      .then(function(response) {
+        console.log(response);
+        facebookUser.resolve(getFacebookUserData(response));
+      })
+      .catch(function(error) {
+        console.log(error);
+        facebookUser.reject(error);
+      });
+      return facebookUser.promise;
+    }
+
+    function facebookSignup() {
+      var facebookUser = $q.defer();
+      getFacebookUserStatus()
+      .then(function(response) {
+        console.log(response);
+        facebookUser.resolve(getFacebookUserData(response));
+      })
+      .catch(function(error) {
+        console.log(error);
+        //FBLogin();
+        facebookUser.reject(error);
+      });
+      return facebookUser.promise;
+    }
+
+    function getFacebookUserStatus() {
       var facebookUser = $q.defer();
       FB.getLoginStatus(function(response) {
         // user has permissions and is logged
@@ -39,26 +86,27 @@
           facebookUser.resolve(getFacebookUserData(response));
         } else if (response.status === 'not_authorized') {
           // user is logged but hasn't permissions
-          facebookUser.reject(response);
+          //facebookUser.reject(response);
+          console.log('not_authorized');
+          facebookUser.resolve(FBLogin());
         } else {
           // user is not logged
           console.log('not logged');
-          //facebookFBLogin(response);
+          facebookUser.resolve(FBLogin());
         }
       });
       return facebookUser.promise;
     }
 
-    function facebookSignup() {
-      return FBLogin();
-    }
-
-    function FBLogin() {
+    function FBLogin(response) {
       var facebookUser = $q.defer();
       FB.login(function(response) {
+        console.log(response);
         if (response.authResponse) {
+          console.log('paso');
           facebookUser.resolve(getFacebookUserData(response));
         } else {
+          console.log('no paso');
           facebookUser.reject(response);
         }
       }, {scope: 'public_profile, email'});
@@ -77,13 +125,8 @@
       return facebookUser.promise;
     }
 
-    function sigin(email, pwd) {
+    function sigin(credentials) {
       var userDefer = $q.defer();
-
-      var credentials = {
-        'email': email,
-        'pwd': pwd
-      };
 
       $http.post('http://www.stamina.dev/API/public/api/v1/usuario/auth/', credentials)
       .success(function(response) {

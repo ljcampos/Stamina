@@ -49,6 +49,24 @@ $app->group('/api/v1/usuario', function ()
 	})->setName('get_one_user');
 
 	/**
+	*
+	**/
+	$this->get('/facebook/{id}', function($request, $response, $args) {
+		$facebookUserId = $args['id'];
+		$controller = new UserController();
+		$json = $controller->callAction('search', $facebookUserId);
+
+		if ($json['code'] == 2 || $json['code'] == 4) {
+            return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 401);
+        }
+        return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 200);
+	})->setName('search');
+
+	/**
 	* 
 	*/
 	$this->post('/', function ($request, $response, $args) 
@@ -57,8 +75,17 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('add', $post);
 
-		header('Content-Type: application/json');
-		echo $_GET["callback"]."(" . $json . ")";
+		if ($json['code'] == 2 || $json['code'] == 4) {
+            return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 401);
+        }
+        return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 200);
+
+		//header('Content-Type: application/json');
+		//echo $_GET["callback"]."(" . $json . ")";
 		//echo $json;
 
 	})->setName('create_user');
@@ -72,9 +99,18 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('auth', $post);
 
-		header('Content-Type: application/json');
+		if ($json['code'] == 2 || $json['code'] == 4) {
+            return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 401);
+        }
+        return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 200);
+
+		// header('Content-Type: application/json');
 		//echo $_GET["callback"]."(" . $json . ")";
-		echo $json;
+		// echo $json;
 
 	})->setName('auth');
 
