@@ -8,20 +8,22 @@
 			getAllUniversities: getAllUniversities,
 			addUniversity: addUniversity,
 			addUserUniversity: addUserUniversity,
+			getUniversityById: getUniversityById,
+			editUniversity: editUniversity,
 			getUsers: getUsers
 		};
 
 		function getAllUniversities() {
 			var universityDefer = $q.defer();
-
 			$http.get('http://www.stamina.dev/API/public/api/v1/universidad/')
 			.success(function(response) {
 				universityDefer.resolve(response);
+				console.log(response);
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
+				console.log(error);
 			});
-
 			return universityDefer.promise;
 		}
 
@@ -33,6 +35,36 @@
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
+			});
+			return universityDefer.promise;
+		}
+
+		function getUniversityById(id) {
+			var universityDefer = $q.defer();
+
+			$http.get('http://www.stamina.dev/API/public/api/v1/universidad/'+id+'/')
+			.success(function(response) {
+				universityDefer.resolve(response);
+				console.log(response);
+			})
+			.error(function(error) {
+				universityDefer.reject(error);
+				console.log(error);
+			});
+
+			return universityDefer.promise;
+		}
+
+		function editUniversity(id,data) {
+			var universityDefer = $q.defer();
+			$http.post('http://www.stamina.dev/API/public/api/v1/universidad/'+id+'/update/',data)
+			.success(function(response) {
+				universityDefer.resolve(response);
+				console.log(response);
+			})
+			.error(function(error) {
+				universityDefer.reject(error);
+				console.log(error);
 			});
 			return universityDefer.promise;
 		}

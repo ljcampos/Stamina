@@ -4,41 +4,28 @@
 	angular.module('university').controller('UniversityController', ['$state', '$scope', 'UniversityService', UniversityController]);
 
 	function UniversityController($state, $scope, UniversityService) {
-		$scope.university = [];
-		$scope.dato = "dasdas";
-		/*$scope.university.nombre		= null;
-		$scope.university.fecha_inicio	= null;
-		$scope.university.fecha_final	= null;
-		$scope.university.logo			= null;
-		$scope.university.username		= null;
-		$scope.university.pass			= null;*/
-
-		$scope.universityList = null;
-
+		$scope.university				= [];
+		
 		$scope.init = function() {
-			console.log("dasdaskjd");
 			//getUniversities();
 		};
-
+		
 		angular.element(document).ready(function() {
 			$scope.init();
 		});
 
-		function getUniversities() {
-			UniversityService.getAllUniversities()
-			.then(function(response) {
-				console.log(response);
-				$scope.universityList = response.data;
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
+		$scope.deleteUniversity = function(id) {
+			var r = confirm("Press a button!");
+			if (r == true) {
+				console.log("ELIMINAR");
+			} else {
+				console.log("CANCELAR");
+			}
 		};
-
-		/* :::::::::::::::::::::::::::::::::: */
 
 		$scope.addUniversity = function(university) {
 			var data 	=	{};
+
 			data.username 			=	university.email;
 			data.email 				=	university.email;
 			data.password 			=	university.pass;
@@ -57,11 +44,5 @@
 				console.log(error);
 			});
 		};
-		/*$scope.deleteUniversity = function(id) {
-			var r = confirm("¿Está seguro de que desea eliminar permanentemente el elemento especificado de la base de datos?");
-			if(r){
-				console.log("CODIGO ELIMINAR");
-			}
-		};*/
 	}
 } ());

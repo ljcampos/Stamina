@@ -63,7 +63,6 @@
 
 		function updateAnnouncement(data) {
 			var announcementDefer = $q.defer();
-
 			$http.put('http://www.stamina.dev/API/public/api/v1/usuario/', data)
 			.success(function(response) {
 				console.log(response);
@@ -73,7 +72,6 @@
 				announcementDefer.reject(error);
 				console.log(error);
 			});
-
 			return announcementDefer.promise;
 		}
 

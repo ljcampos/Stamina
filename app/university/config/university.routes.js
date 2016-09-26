@@ -15,8 +15,18 @@
       }
     })
     .state('admin.university.view', {
-      url: '/university/view',
+      url: '/university/view/:id',
+      controller: 'UniversityViewController',
       templateUrl: 'app/university/views/university.view.html',
+      data: {
+        requireLogin: true,
+        role: 1
+      }
+    })
+    .state('admin.university.edit', {
+      url: '/university/edit/:id',
+      controller: 'UniversityEditController',
+      templateUrl: 'app/university/views/university.edit.html',
       data: {
         requireLogin: true,
         role: 1

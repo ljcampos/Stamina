@@ -76,6 +76,7 @@ class UniversidadController extends Controller
 			if ($universidad != null)
 			{
 				$universidad->convocatorias;
+				$universidad->user;
 				$this->response['code'] = 1;
 				$this->response['data'] = $universidad->toArray();
 				$this->response['message'] = 'Recurso encontrado';
