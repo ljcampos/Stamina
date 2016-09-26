@@ -4,6 +4,7 @@
     <a href="mentor" class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</a>
     </div>
   </div>
+<form name="form" ng-submit='add()'>
   <div class="row row-center">
     <div class="col-md-5 col-center">
       <div class="card">
@@ -14,19 +15,31 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
-                <label>Nombre del mentor</label>
+                <input class="md-input" required ng-model='form.name'>
+                <label>Nombre</label>
+              </div>
+            </div>
+             <div class="col-sm-12">
+              <div class="md-form-group float-label">
+                <input class="md-input" required ng-model='form.lastname'>
+                <label>Apellido paterno</label>
+              </div>
+            </div>
+             <div class="col-sm-12">
+              <div class="md-form-group float-label">
+                <input class="md-input" required ng-model='form.firstname'>
+                <label>Apellido materno</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
-                <label>Área</label>
+                <input class="md-input" required ng-model='form.position'>
+                <label>Cargo</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <textarea class="md-input" rows="3"></textarea>
+                <textarea class="md-input" rows="3" required  ng-model='form.description'></textarea>
                 <label>Descripción</label>
               </div>
             </div>
@@ -43,22 +56,22 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
+                <input type="email" class="md-input" required ng-model='form.email'>
                 <label>Correo Electrónico</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
+                <input type="password" class="md-input" required ng-model='form.password'>
                 <label>Contraseña</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
+                <input type="password" class="md-input" required ng-model='form.password2'>
                 <label>Repetir Contraseña</label>
               </div>
-            </div>
+            </div>           
           </div>
         </div>
       </div>
@@ -67,10 +80,10 @@
   <div class="row row-center">
     <div class="col-md-9 col-center">
       <div class="pull-right">
-        <button class="btn btn-lg btn-success">
-          Guardar
-        </button>
+        <strong class="float-label">{{success}}</strong>
+        <input type="submit" name="" class="btn btn-lg btn-success"  value="Guardar">
       </div>
     </div>
   </div>
+</form>
 </div>

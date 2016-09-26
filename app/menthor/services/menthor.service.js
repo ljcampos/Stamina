@@ -2,15 +2,17 @@
 	'use strict';
 
 	angular.module('menthor').service('MenthorService', ['$q', '$http', MenthorService]);
-
 	function MenthorService($q, $http) {
 		return {
-			getUsers: getUsers
+			getUsers : getUsers,
+			getUser  : getUser,
+			addUser  : addUser
 		};
 
 		function getUsers() {
 			var users = $q.defer();
-			$http.get('https://jsonplaceholder.typicode.com/users')
+			var data={'type':2}
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/',data)
 			.success(function(response) {
 				users.resolve(response);
 			})
@@ -20,17 +22,11 @@
 			});
 			return users.promise;
 		}
-	}
 
-	angular.module('menthor').service('MenthorServiceView', ['$q', '$http', MenthorServiceView]);
-	function MenthorServiceView($q, $http) {
-		return {
-			getDataUser: getDataUser
-		};
-
-		function getDataUser(id) {
-			var user = $q.defer();
-			$http.get('https://jsonplaceholder.typicode.com/users?id='+id)
+		function getUser(id){
+			var data={'type':2}
+			var user= $q.defer();
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/', data)
 			.success(function(response) {
 				user.resolve(response);
 			})
@@ -40,6 +36,18 @@
 			});
 			return user.promise;
 		}
-	}
 
+		function addUser(data) {
+			var userDefer = $q.defer();			
+			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+	      	.success(function(response) {
+	        	userDefer.resolve(response);
+	      	})
+	      	.error(function(error) {
+	        	console.log(error);
+	        	userDefer.reject(error);
+	      	});
+	      	return userDefer.promise;
+	    }
+	}
 } ());

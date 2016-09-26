@@ -25,5 +25,9 @@ class User extends Model {
 	public function convocatorias() {
 		return $this->belongsToMany('Convocatoria', 'emprendedor_convocatoria', 'id_emprendedor', 'id_convocatoria');
 	}
+	
+	public function calificacion () {
+		return $this->hasMany('Calificacion', 'id_usuario', 'usuario_id');
+	}
 
 }

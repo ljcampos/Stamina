@@ -45,6 +45,10 @@
       templateUrl: 'app/faq/views/faq.html'
     })
 
+    .state('admin.aplicationform', {
+      templateUrl: 'app/aplicationform/views/aplicationform.html'
+    })
+
     .state('entrepreneur', {
       templateUrl: 'app/templates/layouts/entrepreneur_layout.html',
       controller: 'UserController'
@@ -52,7 +56,7 @@
 
     .state('entrepreneur.dashboard', {
       url: '/emprendedor',
-      templateUrl: '/app/entrepreneur/views/entrepreneur.home.html',
+      templateUrl: '/app/entrepreneur/views/_entrepreneur.home.html',
       data: {
         requireLogin: true,
         role: 3

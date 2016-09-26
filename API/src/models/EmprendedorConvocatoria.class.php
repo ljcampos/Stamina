@@ -10,4 +10,12 @@ class EmprendedorConvocatoria extends Model {
 	protected 	$primaryKey =	'id';
 	public 		$timestamps =	false;
 
+	public function respuestaEmprendedor () {
+		return $this->hasMany('Respuesta', 'id_emprendedor_convocatoria' , 'id');
+	}
+
+	public function promedio () {
+		return $this->hasMany('Promedio', 'id_emprendedor_convocatoria', 'id');
+	}
+
 }

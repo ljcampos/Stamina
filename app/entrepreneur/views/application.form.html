@@ -1,702 +1,710 @@
+<style type="text/css">
+   .nav-tabs li a{background: #c12e3b;color: white;}
+</style>
 <div class="row row-center">
-      				<div class="col-lg-10 col-center">
-      					<div class="md-whiteframe-z0 bg-white">
-      						<ul class="nav nav-lines nav-tabs nav-justified">
-      							<li class="active">
-      								<a href="" data-toggle="tab" data-target="#tab_1">Sección #1</a>
-      							</li>
-      							<li class="disable">
-      								<a class=".disabledTab" href="" data-toggle="tab" data-target="#tab_2">Sección #2</a>
-      							</li>
-      							<li class="disable">
-      								<a class=".disabledTab" href="" data-toggle="tab" data-target="#tab_3">Sección #3</a>
-      							</li>
-      							<li class="disable">
-      								<a class=".disabledTab" href="" data-toggle="tab" data-target="#tab_4">Sección #4</a>
-      							</li>
-      							<li class="disable">
-      								<a class=".disabledTab" href="" data-toggle="tab" data-target="#tab_5">Sección #5</a>
-      							</li>
-      							<li class="disable">
-      								<a class=".disabledTab" href="" data-toggle="tab" data-target="#tab_6">Sección #6</a>
-      							</li>
-      							<li class="disable">
-      								<a class=".disabledTab" href="" data-toggle="tab" data-target="#tab_7">Sección #7</a>
-      							</li>
-      						</ul>
-      						<div class="tab-content p m-b-md clear b-t b-t-2x">
-      							<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_1">
-                      <form>
+  <div class="col-lg-10 col-center">
+    <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-rounded btn-stroke btn-addon bg-white b-2x m-b btn-fw">
+      <i class="mdi-navigation-arrow-back i-24"></i>Regresar
+    </button>
+  </div>
+	<div class="col-lg-10 col-center">
+		<ul class="nav nav-tabs nav-justified" style="background: #c12e3b;">
+			<li class="active">
+				<a href="" data-toggle="tab" data-target="#tab_1">Sección #1</a>
+			</li>
+			<li class="disable">
+				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_2">Sección #2</a>
+			</li>
+			<li class="disable">
+				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_3">Sección #3</a>
+			</li>
+			<li class="disable">
+				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_4">Sección #4</a>
+			</li>
+			<li class="disable">
+				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_5">Sección #5</a>
+			</li>
+			<li class="disable">
+				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_6">Sección #6</a>
+			</li>
+			<li class="disable">
+				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_7">Sección #7</a>
+			</li>
+		</ul>
+    <div class="md-whiteframe-z0 bg-white">
+			<div class="tab-content p m-b-md clear b-t b-t-2x">
+				<div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_1">
+          <form>
+            <div class="row">
+              <div class="col-md-7">
+                <div class="row">
+                <div class="col-md-12">
+                  <h4>Datos Personales del Representante</h4>
+                </div>
+                  <div class="col-md-4">
+  									<div class="md-form-group float-label">
+  										<input class="md-input" required="">
+  										<label>Nombre(s)</label>
+  									</div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="md-form-group float-label">
+                      <input class="md-input" required="">
+                      <label>Apellido Paterno</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+  									<div class="md-form-group float-label">
+  										<input class="md-input" required="">
+  										<label>Apellido Materno</label>
+                    </div>
+  								</div>
+                  <div class="col-md-4">
+                    <div class="md-form-group float-label">
+                      <input type="date" class="md-input has-value" required="">
+                      <label>Fecha de nacimiento</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4" style="margin-top:-8px;">
+                    <label>Género</label>
+                    <div class="">
+                      <select class="form-control has-value">
+                        <option>Elija una opción</option>
+                        <option>Másculino</option>
+                        <option>Femenino</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-md-offset-1">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h4>Datos de Contacto del Representante</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="md-form-group float-label">
+                    <input class="md-input" required="">
+                    <label>Email</label>
+                  </div>
+                  <div class="col-md-12">
+                    </div>
+                    <div class="md-form-group float-label">
+                    <input class="md-input" required="">
+                    <label>Teléfono Móvil</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h4>Datos Académicos del Representante</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="md-form-group float-label">
+                      <input class="md-input" required="">
+                      <label>Nivel Académico</label>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="md-form-group float-label">
+                      <input class="md-input" required="">
+                      <label>Escuela de Procedencia</label>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="md-form-group float-label">
+                      <input class="md-input" required="">
+                      <label>Escuela de Formación</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+					</form>
+				</div>
+        <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_2">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <h4>Datos del Proyecto</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group form-group-lg">
+                      <label class="col-sm-12 control-label"><strong>1.- Nombre del Proyecto</strong></label>
+                      <div class="col-sm-12">
+                        <input class="form-control" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label"><br><strong>2. Cuéntanos sobre el problema, oportunidad o necesidad no satisfecha que has detectado.</strong></label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>3. ¿Quién o quienes  tienen este problema o necesidad? Háblanos un poco de tu target  de mercado.</strong><small>(Causas, sus efectos emocionales o sociales, sus aspiraciones y motivaciones. Haz un esfuerzo por identificar y satisfacer un nicho de mercado)</small>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>4. ¿Tienes “idea” de cuántas personas podrían tener este problema?</strong><small>(Estimaciones, Características Socio-demográficas, ubicación geográfica, Fuente de datos.) *No se vale decir "Todo el Mundo".  Haz un esfuerzo por ser lo más específico posible)</small>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>5. ¿Haz platicado con alguna persona representativa de tu "Nicho de mercado" para corroborar que existe dicha “Oportunidad” de negocio o únicamente existe en tu mente?</strong><small>(Menciona si has utilizado alguna herramienta como encuestas en persona u online, entrevistas formales o informales, grabaciones, etc. y si has encontrado alguna correlación como resultado de esto)</small>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>6. ¿Cómo planeas resolver el problema o satisfacer la necesidad identificada? ¿Qué solución visualizas para esto?</strong><small>(Describe brevemente si es a través de innovación en producto, servicio o modelo de negocio. Explícanos el proceso y las tres principales características o funciones de tu solución)</small>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>7. Utilizas alguna aplicación de la Tecnología, hechizo obscuro o poción mágica para resolver el problema?</strong><small>(Procura investigar antes qué es Tecnología para evitar errores)</small>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>8. ¿Ha desarrollado algún prototipo de la solución?</strong><small>(Prototipo de Alta Fidelidad, Video animado sobre el funcionamiento, bosquejo, mock-up, empaque, etc.)</small>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>9. ¿Has invertido capital propio para el desarrollo del prototipo? Si / no ¿Cuánto?</strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>10. Industria en la que incursionarás con la propuesta:</strong>
+                      </label>
+                      <div class="col-sm-6">
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Internet de las Cosas (IoT)
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Comercio electrónico (e-commerce)
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Salud (Healt Informatics )
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Wearables Tecnhology
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Educación (Ed Tech)
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Energía & Tecnologías Sustentables ( Clean Tech)
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Finanzas (FinTech)
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Video Juegos
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Salud & Biotecnología
+                        </label>
+                      </div>
+                      <div class="col-sm-6">
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>IT & Software
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Mobile & Wireless
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Recursos Naturales - minería, alimentos, etc.
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Media
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Empresa Social
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Social Media/Social Network
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Turismo
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="checkbox" class="has-value">
+                          <i class="grey-900"></i>Otro (Especifica)
+                        </label>
+                        <input class="form-control" type="text" placeholder="Este input sale cuando el checbox se activa (isChecked)">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>11. Link de un video donde aparezcas explicando tu proyecto</strong><small>(duración de 1:30 min)</small>
+                      </label>
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=*">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <h4>Datos del Equipo</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group-lg">
+                      <label class="col-sm-12 control-label"><strong>12. ¿Cuentas con un equipo para el desarrollo del proyecto?</strong></label>
+                      <div class="col-sm-12">
+                        <select class="form-control">
+                          <option>Elija Una Opción</option>
+                          <option>Sí, tengo un equipo para el proyecto</option>
+                          <option>No, tengo un equipo para el proyecto</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 text-center">
+                    <br>
+                    <button type="button" class="text-sm btn btn-lg btn-rounded btn-stroke btn-accent m-r waves-effect">
+                      <i class="fa mdi-social-person-add fa-2x pull-left"></i>
+                      <span class="block clear text-left">
+                        <b class="text-lg block font-bold">Agregar miembro</b>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <strong>Nombre(s)</strong>
+                          <input class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <strong>Apellido Paterno</strong>
+                          <input class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <strong>Apellido Materno</strong>
+                          <input class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <strong>Teléfono</strong>
+                          <input class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <strong>Correo</strong>
+                          <input class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <strong>Nivel Académico</strong>
+                          <input class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <strong>Describe el rol que desempeña dentro del equipo (Cuáles son las actividades que realiza en el proyecto)</strong>
+                          <textarea class="form-control"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <strong>De las siguientes habilidades, ¿Cuáles se encuentran cubiertas por los miembros fundadores?</strong>
+                      <textarea class="form-control"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+				</div>
+				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_4">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <h4>Formalidad del Negocio</h4>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label"><br><strong>13. El proyecto se encuentra constituido legalmente</strong><small>(SAT, Acta constitutiva)</small></label>
+                      <div class="col-sm-12">
                         <div class="row">
+                          <div class="col-md-12">
+                            <label class="md-check">
+                              <input type="radio" name="radio" class="has-value">
+                              <i class="indigo"></i> Sí
+                            </label>
+                          </div>
+                          <div class="col-md-12">
+                            <label class="md-check">
+                              <input type="radio" name="radio" class="has-value">
+                              <i class="indigo"></i> No
+                            </label>
+                          </div>
+                        </div>
+                        <!--<input type="" class="form-control">-->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>14. Qué porcentaje de participación accionaría tiene cada socio?</strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <input class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>15. Han platicado qué porcentaje accionario le corresponderá a cada uno de los integrantes del proyecto si este se constituye legalmente?</strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <input class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>16. ¿Has recibido ofertas (serias) de inversión de una persona o institución externa a los fundadores?</strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label class="md-check">
+                              <input type="radio" name="radio" class="has-value">
+                              <i class="indigo"></i> No
+                            </label>
+                          </div>
                           <div class="col-md-7">
                             <div class="row">
-                            <div class="col-md-12">
-                              <h4>Datos Personales del Representante</h4>
-                            </div>
-                              <div class="col-md-4">
-              									<div class="md-form-group float-label">
-              										<input class="md-input" required="">
-              										<label>Nombre(s)</label>
-              									</div>
+                              <div class="col-md-2">
+                                <label class="md-check">
+                                  <input type="radio" name="radio" class="has-value">
+                                  <i class="indigo"></i> Sí
+                                </label>
                               </div>
-                              <div class="col-md-4">
-                                <div class="md-form-group float-label">
-                                  <input class="md-input" required="">
-                                  <label>Apellido Paterno</label>
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-              									<div class="md-form-group float-label">
-              										<input class="md-input" required="">
-              										<label>Apellido Materno</label>
-                                </div>
-              								</div>
-                              <div class="col-md-4">
-                                <div class="md-form-group float-label">
-                                  <input type="date" class="md-input has-value" required="">
-                                  <label>Fecha de nacimiento</label>
-                                </div>
-                              </div>
-                              <div class="col-md-4" style="margin-top:-8px;">
-                                <label>Género</label>
-                                <div class="">
-                                  <select class="form-control has-value">
-                                    <option>Elija una opción</option>
-                                    <option>Másculino</option>
-                                    <option>Femenino</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-md-offset-1">
-                            <div class="row">
-                              <div class="col-md-12">
-                                <h4>Datos de Contacto del Representante</h4>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="md-form-group float-label">
-                                <input class="md-input" required="">
-                                <label>Email</label>
-                              </div>
-                              <div class="col-md-12">
-                                </div>
-                                <div class="md-form-group float-label">
-                                <input class="md-input" required="">
-                                <label>Teléfono Móvil</label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-5">
-                            <div class="row">
-                              <div class="col-md-12">
-                                <h4>Datos Académicos del Representante</h4>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="md-form-group float-label">
-                                  <input class="md-input" required="">
-                                  <label>Nivel Académico</label>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="md-form-group float-label">
-                                  <input class="md-input" required="">
-                                  <label>Escuela de Procedencia</label>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="md-form-group float-label">
-                                  <input class="md-input" required="">
-                                  <label>Escuela de Formación</label>
-                                </div>
+                              <div class="col-md-5 form-group form-group-sm">
+                                <input class="form-control" type="" name="" placeholder="Podemos saber de Quién?">
                               </div>
                             </div>
                           </div>
                         </div>
-      								</form>
-      							</div>
-                    <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_2">
-                      <form>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="row">
-                              <div class="col-md-12 text-center">
-                                <h4>Datos del Proyecto</h4>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group form-group-lg">
-                                  <label class="col-sm-12 control-label"><strong>1.- Nombre del Proyecto</strong></label>
-                                  <div class="col-sm-12">
-                                    <input class="form-control" type="text">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label"><br><strong>2. Cuéntanos sobre el problema, oportunidad o necesidad no satisfecha que has detectado.</strong></label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>3. ¿Quién o quienes  tienen este problema o necesidad? Háblanos un poco de tu target  de mercado.</strong><small>(Causas, sus efectos emocionales o sociales, sus aspiraciones y motivaciones. Haz un esfuerzo por identificar y satisfacer un nicho de mercado)</small>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>4. ¿Tienes “idea” de cuántas personas podrían tener este problema?</strong><small>(Estimaciones, Características Socio-demográficas, ubicación geográfica, Fuente de datos.) *No se vale decir "Todo el Mundo".  Haz un esfuerzo por ser lo más específico posible)</small>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>5. ¿Haz platicado con alguna persona representativa de tu "Nicho de mercado" para corroborar que existe dicha “Oportunidad” de negocio o únicamente existe en tu mente?</strong><small>(Menciona si has utilizado alguna herramienta como encuestas en persona u online, entrevistas formales o informales, grabaciones, etc. y si has encontrado alguna correlación como resultado de esto)</small>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>6. ¿Cómo planeas resolver el problema o satisfacer la necesidad identificada? ¿Qué solución visualizas para esto?</strong><small>(Describe brevemente si es a través de innovación en producto, servicio o modelo de negocio. Explícanos el proceso y las tres principales características o funciones de tu solución)</small>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>7. Utilizas alguna aplicación de la Tecnología, hechizo obscuro o poción mágica para resolver el problema?</strong><small>(Procura investigar antes qué es Tecnología para evitar errores)</small>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>8. ¿Ha desarrollado algún prototipo de la solución?</strong><small>(Prototipo de Alta Fidelidad, Video animado sobre el funcionamiento, bosquejo, mock-up, empaque, etc.)</small>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>9. ¿Has invertido capital propio para el desarrollo del prototipo? Si / no ¿Cuánto?</strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>10. Industria en la que incursionarás con la propuesta:</strong>
-                                  </label>
-                                  <div class="col-sm-6">
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Internet de las Cosas (IoT)
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Comercio electrónico (e-commerce)
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Salud (Healt Informatics )
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Wearables Tecnhology
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Educación (Ed Tech)
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Energía & Tecnologías Sustentables ( Clean Tech)
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Finanzas (FinTech)
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Video Juegos
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Salud & Biotecnología
-                                    </label>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>IT & Software
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Mobile & Wireless
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Recursos Naturales - minería, alimentos, etc.
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Media
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Empresa Social
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Social Media/Social Network
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Turismo
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="checkbox" class="has-value">
-                                      <i class="grey-900"></i>Otro (Especifica)
-                                    </label>
-                                    <input class="form-control" type="text" placeholder="Este input sale cuando el checbox se activa (isChecked)">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>11. Link de un video donde aparezcas explicando tu proyecto</strong><small>(duración de 1:30 min)</small>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=*">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
+                      </div>
                     </div>
-      							<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
-                      <form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+				</div>
+				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_5">
+					<form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <h4>Experiencia</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <strong>1. ¿Has colaborado en el desarrollo de algún producto, servicio tecnológico ó proyecto de investigación? Si, ¿Cúal?</strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="4"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>2. ¿Has participado en la creación o gestión de alguna empresa? (Ya sea como fundador o como colaborador) Si, menciona que papel juegas</strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="4"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>3. Menciona el reto más grande de tu vida y cómo lo solucionaste?<small>(No aplica para situaciones amorosas, ni escolares)</small></strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <h4>Apoyo</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <strong>1. Por qué eres un buen candidato para formar parte del programa de entrenamiento?</strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <textarea class="form-control" rows="3"></textarea> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>2. ¿Qué tipo de apoyo esperas recibir de los Organizadores de la Convocatoria, si quedarás seleccionado?</strong>
+                      </label>
+                      <div class="col-sm-12">
                         <div class="row">
                           <div class="col-md-12">
-                            <div class="row">
-                              <div class="col-md-12 text-center">
-                                <h4>Datos del Equipo</h4>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group-lg">
-                                  <label class="col-sm-12 control-label"><strong>12. ¿Cuentas con un equipo para el desarrollo del proyecto?</strong></label>
-                                  <div class="col-sm-12">
-                                    <select class="form-control">
-                                      <option>Elija Una Opción</option>
-                                      <option>Sí, tengo un equipo para el proyecto</option>
-                                      <option>No, tengo un equipo para el proyecto</option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12 text-center">
-                                <br>
-                                <button type="button" class="text-sm btn btn-lg btn-rounded btn-stroke btn-accent m-r waves-effect">
-                                  <i class="fa mdi-social-person-add fa-2x pull-left"></i>
-                                  <span class="block clear text-left">
-                                    <b class="text-lg block font-bold">Agregar miembro</b>
-                                  </span>
-                                </button>
-                              </div>
-                              <div class="col-md-7">
-                                <div class="row">
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                      <strong>Nombre(s)</strong>
-                                      <input class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                      <strong>Apellido Paterno</strong>
-                                      <input class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                      <strong>Apellido Materno</strong>
-                                      <input class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                      <strong>Teléfono</strong>
-                                      <input class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                      <strong>Correo</strong>
-                                      <input class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                      <strong>Nivel Académico</strong>
-                                      <input class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="col-md-12">
-                                    <div class="form-group">
-                                      <strong>Describe el rol que desempeña dentro del equipo (Cuáles son las actividades que realiza en el proyecto)</strong>
-                                      <textarea class="form-control"></textarea>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-5">
-                                <div class="form-group">
-                                  <strong>De las siguientes habilidades, ¿Cuáles se encuentran cubiertas por los miembros fundadores?</strong>
-                                  <textarea class="form-control"></textarea>
-                                </div>
-                              </div>
-                            </div>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Dirección Estratégica en Innovación
+                            </label>
+                            <br>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Agencias de Marketing
+                            </label>
+                            <br>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Vinculación con Mercados 
+                            </label>
+                            <br>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Desarrollo de Prototipo
+                            </label>
+                            <br>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Vinculación con Fondos Públicos
+                            </label>
+                            <br>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Vinculación con Fondos Privados / Ángeles Inversionistas
+                            </label>
+                            <br>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Apoyo en Elaboración de Campaña de Crowdfunding
+                            </label>
+                            <br>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Conformación Legal de Empresa
+                            </label>
+                            <br>
+                            <label class="md-check">
+                              <input type="checkbox" class="has-value">
+                              <i class="grey-900"></i>Internet de las Cosas (IoT)
+                            </label>
                           </div>
                         </div>
-                      </form>
-      							</div>
-      							<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_4">
-                      <form>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="row">
-                              <div class="col-md-12 text-center">
-                                <h4>Formalidad del Negocio</h4>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label"><br><strong>13. El proyecto se encuentra constituido legalmente</strong><small>(SAT, Acta constitutiva)</small></label>
-                                  <div class="col-sm-12">
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <label class="md-check">
-                                          <input type="radio" name="radio" class="has-value">
-                                          <i class="indigo"></i> Sí
-                                        </label>
-                                      </div>
-                                      <div class="col-md-12">
-                                        <label class="md-check">
-                                          <input type="radio" name="radio" class="has-value">
-                                          <i class="indigo"></i> No
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <!--<input type="" class="form-control">-->
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>14. Qué porcentaje de participación accionaría tiene cada socio?</strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <input class="form-control">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>15. Han platicado qué porcentaje accionario le corresponderá a cada uno de los integrantes del proyecto si este se constituye legalmente?</strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <input class="form-control">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>16. ¿Has recibido ofertas (serias) de inversión de una persona o institución externa a los fundadores?</strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <div class="row">
-                                      <div class="col-md-2">
-                                        <label class="md-check">
-                                          <input type="radio" name="radio" class="has-value">
-                                          <i class="indigo"></i> No
-                                        </label>
-                                      </div>
-                                      <div class="col-md-7">
-                                        <div class="row">
-                                          <div class="col-md-2">
-                                            <label class="md-check">
-                                              <input type="radio" name="radio" class="has-value">
-                                              <i class="indigo"></i> Sí
-                                            </label>
-                                          </div>
-                                          <div class="col-md-5 form-group form-group-sm">
-                                            <input class="form-control" type="" name="" placeholder="Podemos saber de Quién?">
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-      							</div>
-      							<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_5">
-      								<form>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="row">
-                              <div class="col-md-12 text-center">
-                                <h4>Experiencia</h4>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <strong>1. ¿Has colaborado en el desarrollo de algún producto, servicio tecnológico ó proyecto de investigación? Si, ¿Cúal?</strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="4"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>2. ¿Has participado en la creación o gestión de alguna empresa? (Ya sea como fundador o como colaborador) Si, menciona que papel juegas</strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="4"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>3. Menciona el reto más grande de tu vida y cómo lo solucionaste?<small>(No aplica para situaciones amorosas, ni escolares)</small></strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="5"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="row">
-                              <div class="col-md-12 text-center">
-                                <h4>Apoyo</h4>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <strong>1. Por qué eres un buen candidato para formar parte del programa de entrenamiento?</strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <textarea class="form-control" rows="3"></textarea> 
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>2. ¿Qué tipo de apoyo esperas recibir de los Organizadores de la Convocatoria, si quedarás seleccionado?</strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Dirección Estratégica en Innovación
-                                        </label>
-                                        <br>
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Agencias de Marketing
-                                        </label>
-                                        <br>
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Vinculación con Mercados 
-                                        </label>
-                                        <br>
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Desarrollo de Prototipo
-                                        </label>
-                                        <br>
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Vinculación con Fondos Públicos
-                                        </label>
-                                        <br>
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Vinculación con Fondos Privados / Ángeles Inversionistas
-                                        </label>
-                                        <br>
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Apoyo en Elaboración de Campaña de Crowdfunding
-                                        </label>
-                                        <br>
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Conformación Legal de Empresa
-                                        </label>
-                                        <br>
-                                        <label class="md-check">
-                                          <input type="checkbox" class="has-value">
-                                          <i class="grey-900"></i>Internet de las Cosas (IoT)
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <br><strong>2. ¿Cómo te enteraste de la convocatoria?</strong>
-                                  </label>
-                                  <div class="col-sm-6">
-                                    <label class="md-check">
-                                    <input type="radio" name="radio" class="has-value">
-                                    <i class="indigo"></i>Web
-                                    </label><br>
-                                    <label class="md-check">
-                                    <input type="radio" name="radio" class="has-value">
-                                    <i class="indigo"></i>Redes Sociales
-                                    </label><br>
-                                    <label class="md-check">
-                                    <input type="radio" name="radio" class="has-value">
-                                    <i class="indigo"></i>Medios Impresos o Tradicionales
-                                    </label>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <label class="md-check">
-                                    <input type="radio" name="radio" class="has-value">
-                                    <i class="indigo"></i>Invitación Personalizada
-                                    </label><br>
-                                    <label class="md-check">
-                                    <input type="radio" name="radio" class="has-value">
-                                    <i class="indigo"></i>Red de Amigos
-                                    </label><br>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-      							</div>
-      							<div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_6">
-                      <form>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="row">
-                              <div class="col-md-12 text-center">
-                                <h4>Términos y condiciones</h4>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <label class="col-sm-12 control-label">
-                                    <strong>
-                                      En caso de ser seleccionado, acepto que el contenido, conocimiento, procedimiento y materiales  transmitidos por los organizadores está resguardado y normado bajo la Ley Mexicana de Propiedad Industrial e Intelectual siendo autora y propietaria la Empresa “STAMINA Business SCP”, por lo cual únicamente podré utilizarla para los fines pertenecientes de la convocatoria:
-                                    </strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <label class="md-check">
-                                      <input type="radio" name="radio" class="has-value">
-                                      <i class="indigo"></i> Acepto
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="radio" name="radio" class="has-value">
-                                      <i class="indigo"></i> No Acepto
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <br><br><br>
-                                  <label class="col-sm-12 control-label">
-                                    <strong>
-                                      Por este medio aplico para la presente convocatoria y manifiesto que la información que he proveído en mi aplicación es veraz, actual, completa, y que he leído los Términos en la sección de Preguntas Frecuentes (FAQ´s) en la página electrónica de la convocatoria:
-                                    </strong>
-                                  </label>
-                                  <div class="col-sm-12">
-                                    <label class="md-check">
-                                      <input type="radio" name="radio" class="has-value">
-                                      <i class="indigo"></i> Acepto
-                                    </label>
-                                    <br>
-                                    <label class="md-check">
-                                      <input type="radio" name="radio" class="has-value">
-                                      <i class="indigo"></i> No Acepto
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-      							</div>
-      							<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_7">
-      								Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher.
-      							</div>
-      						</div>
-      					</div>
-      				</div>
-      			</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <br><strong>2. ¿Cómo te enteraste de la convocatoria?</strong>
+                      </label>
+                      <div class="col-sm-6">
+                        <label class="md-check">
+                        <input type="radio" name="radio" class="has-value">
+                        <i class="indigo"></i>Web
+                        </label><br>
+                        <label class="md-check">
+                        <input type="radio" name="radio" class="has-value">
+                        <i class="indigo"></i>Redes Sociales
+                        </label><br>
+                        <label class="md-check">
+                        <input type="radio" name="radio" class="has-value">
+                        <i class="indigo"></i>Medios Impresos o Tradicionales
+                        </label>
+                      </div>
+                      <div class="col-sm-6">
+                        <label class="md-check">
+                        <input type="radio" name="radio" class="has-value">
+                        <i class="indigo"></i>Invitación Personalizada
+                        </label><br>
+                        <label class="md-check">
+                        <input type="radio" name="radio" class="has-value">
+                        <i class="indigo"></i>Red de Amigos
+                        </label><br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+				</div>
+				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_6">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <h4>Términos y condiciones</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-12 control-label">
+                        <strong>
+                          En caso de ser seleccionado, acepto que el contenido, conocimiento, procedimiento y materiales  transmitidos por los organizadores está resguardado y normado bajo la Ley Mexicana de Propiedad Industrial e Intelectual siendo autora y propietaria la Empresa “STAMINA Business SCP”, por lo cual únicamente podré utilizarla para los fines pertenecientes de la convocatoria:
+                        </strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <label class="md-check">
+                          <input type="radio" name="radio" class="has-value">
+                          <i class="indigo"></i> Acepto
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="radio" name="radio" class="has-value">
+                          <i class="indigo"></i> No Acepto
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <br><br><br>
+                      <label class="col-sm-12 control-label">
+                        <strong>
+                          Por este medio aplico para la presente convocatoria y manifiesto que la información que he proveído en mi aplicación es veraz, actual, completa, y que he leído los Términos en la sección de Preguntas Frecuentes (FAQ´s) en la página electrónica de la convocatoria:
+                        </strong>
+                      </label>
+                      <div class="col-sm-12">
+                        <label class="md-check">
+                          <input type="radio" name="radio" class="has-value">
+                          <i class="indigo"></i> Acepto
+                        </label>
+                        <br>
+                        <label class="md-check">
+                          <input type="radio" name="radio" class="has-value">
+                          <i class="indigo"></i> No Acepto
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+				</div>
+				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_7">
+					Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

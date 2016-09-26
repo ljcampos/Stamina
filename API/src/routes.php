@@ -40,10 +40,28 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('one', $usuario_id);
 		
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('get_one_user');
+
+	/**
+	*
+	**/
+	$this->get('/facebook/{id}', function($request, $response, $args) {
+		$facebookUserId = $args['id'];
+		$controller = new UserController();
+		$json = $controller->callAction('search', $facebookUserId);
+
+		if ($json['code'] == 2 || $json['code'] == 4) {
+            return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 401);
+        }
+        return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 200);
+	})->setName('search');
 
 	/**
 	* 
@@ -54,7 +72,7 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('add', $post);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('create_user');
@@ -68,9 +86,14 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('auth', $post);
 
-		header('Content-Type: application/json');
-		//echo $_GET["callback"]."(" . $json . ")";
-		echo $json;
+		if ($json['code'] == 2 || $json['code'] == 4) {
+            return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 401);
+        }
+        return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 200);
 
 	})->setName('auth');
 
@@ -84,7 +107,7 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('img', $usuario_id);
 		
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('set_image');
@@ -99,7 +122,7 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('suscrip', $params);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('sus_conv');
@@ -119,7 +142,7 @@ $app->group('/api/v1/universidad', function ()
 		$controller = new UniversidadController();
 		$json = $controller->callAction('all');
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('get_universidades');
@@ -133,7 +156,7 @@ $app->group('/api/v1/universidad', function ()
 		$controller = new UniversidadController();
 		$json = $controller->callAction('add', $post);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('create_univ');
@@ -147,7 +170,7 @@ $app->group('/api/v1/universidad', function ()
 		$controller = new UniversidadController();
 		$json = $controller->callAction('one', $universidad_id);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('get_univ');
@@ -164,7 +187,7 @@ $app->group('/api/v1/universidad', function ()
 		$controller = new UniversidadController();
 		$json = $controller->callAction('update', $post);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('update_univ');
@@ -177,7 +200,7 @@ $app->group('/api/v1/universidad', function ()
 		$controller = new UniversidadController();
 		$json = $controller->callAction('del', $args['universidad_id']);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('delete_univ');
@@ -198,7 +221,7 @@ $app->group('/api/v1/convocatoria', function ()
 		$controller = new ConvocatoriaController();
 		$json = $controller->callAction('all');
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('all_convocatorias');
@@ -212,7 +235,7 @@ $app->group('/api/v1/convocatoria', function ()
 		$controller = new ConvocatoriaController();
 		$json = $controller->callAction('add', $post);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('add_convocatoria');
@@ -227,7 +250,7 @@ $app->group('/api/v1/convocatoria', function ()
 		$controller = new ConvocatoriaController();
 		$json = $controller->callAction('one', $convocatoria_id);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('get_convocatoria');
@@ -242,7 +265,7 @@ $app->group('/api/v1/convocatoria', function ()
 		$controller = new ConvocatoriaController();
 		$json = $controller->callAction('update', $params);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('update_conv');
@@ -257,7 +280,7 @@ $app->group('/api/v1/convocatoria', function ()
 		$controller = new ConvocatoriaController();
 		$json = $controller->callAction('delete', $id);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('delete_conv');
@@ -278,7 +301,7 @@ $app->group('/api/v1/roles', function ()
 		$controller = new RolController();
 		$json = $controller->callAction('all');
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('list_rol');
@@ -293,7 +316,7 @@ $app->group('/api/v1/roles', function ()
 		$controller = new RolController();
 		$json = $controller->callAction('add', $post);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('create_rol');
@@ -306,7 +329,7 @@ $app->group('/api/v1/roles', function ()
 		$controller = new RolController();
 		$json = $controller->callAction('one', $args['id']);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('get_by_id');
@@ -323,7 +346,7 @@ $app->group('/api/v1/roles', function ()
 		$controller = new RolController();
 		$json = $controller->callAction('update', $post);
 		
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('update_role');
@@ -337,7 +360,7 @@ $app->group('/api/v1/roles', function ()
 		$controller = new RolController();
 		$json = $controller->callAction('del', $args['id']);
 		
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('delete_role');
@@ -356,7 +379,7 @@ $app->group('/api/v1/roles', function ()
 		$controller = new RolController();
 		$json = $controller->callAction('permisos', $params);			
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('permissions_by_role');
@@ -387,7 +410,7 @@ $app->group('/api/v1/roles', function ()
 			$json['message'] = 'Debe enviar la lista de identificadores de permisos';
 		}
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('add_permissions_by_role');
@@ -418,7 +441,7 @@ $app->group('/api/v1/roles', function ()
 			$json['message'] = 'Debe enviar la lista de identificadores de permisos';
 		}
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('del_permissions_by_role');	
@@ -438,7 +461,7 @@ $app->group('/api/v1/permisos', function ()
 		$controller = new PermissionController();
 		$json = $controller->callAction('all');
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('list_permissions');
@@ -453,7 +476,7 @@ $app->group('/api/v1/permisos', function ()
 		$controller = new PermissionController();
 		$json = $controller->callAction('add', $post);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('create_permission');
@@ -466,7 +489,7 @@ $app->group('/api/v1/permisos', function ()
 		$controller = new PermissionController();
 		$json = $controller->callAction('one', $args['id']);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('permission_by_id');
@@ -483,7 +506,7 @@ $app->group('/api/v1/permisos', function ()
 		$controller = new PermissionController();
 		$json = $controller->callAction('update', $post);
 		
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('update_permission');
@@ -497,7 +520,7 @@ $app->group('/api/v1/permisos', function ()
 		$controller = new PermissionController();
 		$json = $controller->callAction('del', $args['id']);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('delete_permission');
@@ -517,7 +540,7 @@ $app->group('/api/v1/estatus', function ()
 		$controller = new StatusController();
 		$json = $controller->callAction('all');
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('list_status');
@@ -532,7 +555,7 @@ $app->group('/api/v1/estatus', function ()
 		$controller = new StatusController();
 		$json = $controller->callAction('add', $post);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('create_status');
@@ -545,7 +568,7 @@ $app->group('/api/v1/estatus', function ()
 		$controller = new StatusController();
 		$json = $controller->callAction('one', $args['id']);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('status_by_id');
@@ -562,7 +585,7 @@ $app->group('/api/v1/estatus', function ()
 		$controller = new StatusController();
 		$json = $controller->callAction('update', $post);
 		
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('update_status');
@@ -575,7 +598,7 @@ $app->group('/api/v1/estatus', function ()
 		$controller = new StatusController();
 		$json = $controller->callAction('del', $args['id']);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('del_status');
@@ -595,7 +618,7 @@ $app->group('/api/v1/estados', function ()
 		$controller = new EstadoController();
 		$json = $controller->callAction('all');
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('list_estados');
@@ -610,7 +633,7 @@ $app->group('/api/v1/estados', function ()
 		$controller = new EstadoController();
 		$json = $controller->callAction('add', $post);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('create_estado');
@@ -623,7 +646,7 @@ $app->group('/api/v1/estados', function ()
 		$controller = new EstadoController();
 		$json = $controller->callAction('one', $args['id']);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('estado_by_id');
@@ -640,7 +663,7 @@ $app->group('/api/v1/estados', function ()
 		$controller = new EstadoController();
 		$json = $controller->callAction('update', $post);
 		
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('update_estado');
@@ -653,7 +676,7 @@ $app->group('/api/v1/estados', function ()
 		$controller = new EstadoController();
 		$json = $controller->callAction('del', $args['id']);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('delete_estado');
@@ -673,7 +696,7 @@ $app->group('/api/v1/pregunta', function ()
 		$controller = new PreguntaController();
 		$json = $controller->callAction('all');
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('get_questions');
@@ -687,7 +710,7 @@ $app->group('/api/v1/pregunta', function ()
 		$controller = new PreguntaController();
 		$json = $controller->callAction('one', $id);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('get_one_question');
@@ -701,7 +724,7 @@ $app->group('/api/v1/pregunta', function ()
 		$controller = new PreguntaController();
 		$json = $controller->callAction('add', $params);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('create_question');
@@ -716,9 +739,19 @@ $app->group('/api/v1/pregunta', function ()
 		$controller = new PreguntaController();
 		$json = $controller->callAction('update', $params);
 
-		$code = ($json['code'] == 1) ? 200 : 404;
+		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
 	})->setName('update_question');
+
+	$this->post('/{id}/delete/', function ($request, $response, $args)
+	{
+		$controller = new PreguntaController();
+		$json = $controller->callAction('del', $args['id']);
+
+		header('Content-Type: application/json');
+		echo $json;
+
+	})->setName('delete_question');
 
 });

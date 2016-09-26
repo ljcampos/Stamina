@@ -11,7 +11,7 @@ class Pregunta extends Model {
 	public 		$timestamps =	true;
 
 	public function seccion() {
-
+		return $this->belongsTo('FormularioAplicacion', 'id', 'id_seccion');
 	}
 
 	public function users () {
@@ -20,5 +20,9 @@ class Pregunta extends Model {
 
 	public function permisos () {
 		return $this->belongsToMany('Permission', 'permiso_rol', 'rol_id', 'permiso_id');
+	}
+
+	public function respuesta () {
+		return $this->hasMany('Respuesta', 'id_pregunta', 'id');
 	}
 }

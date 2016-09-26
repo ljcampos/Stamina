@@ -1,3 +1,11 @@
+<style type="text/css">
+  body .app{
+    background: #c12e3b;
+    background: #5a9ab7;
+  }
+</style>
+
+<div id="fb-root"></div><!-- facebook div -->
 <div class="app grey-900">
   <div class="center-block w-xxl w-auto-xs p-v-md">
     <div class="navbar">
@@ -30,6 +38,10 @@
         </div>
         <button md-ink-ripple type="submit" class="md-btn md-raised grey-900 btn-block p-h-md">Acceder</button>
       </form>
+      <br />
+      <div class='text-center'>
+        <button class='md-btn md-raised grey-900 btn-block p-h-md' ng-click='facebookLogin()'><i class='fa fa-facebook-square'></i> Acceder con facebook</button>
+      </div>
     </div>
 
     <div class="p-v-lg text-center">

@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('user').service('UserService', ['$q', '$http', '$localStorage', '$sessionStorage', UserService]);
+  angular.module('user').service('UserService', ['$q', '$http', '$localStorage', '$sessionStorage', '$state', UserService]);
 
-  function UserService($q, $http, $localStorage, $sessionStorage) {
+  function UserService($q, $http, $localStorage, $sessionStorage, $state) {
     return {
       getAllUsers: getAllUsers,
       sigin: sigin,
@@ -12,7 +12,11 @@
       isLogged: isLogged,
       logout: logout,
       getUser: getUser,
-      isAdmin: isAdmin
+      isAdmin: isAdmin,
+      facebookSignin: facebookSignin,
+      facebookSignup: facebookSignup,
+      getFacebookUserById: getFacebookUserById,
+      getFacebookPicture: getFacebookPicture
     };
 
     function getAllUsers() {
@@ -29,13 +33,110 @@
       return users.promise;
     }
 
-    function sigin(email, pwd) {
+    function getFacebookUserById(id) {
+      //http://www.stamina.dev/API/public/api/v1/usuario/facebook/
       var userDefer = $q.defer();
 
-      var credentials = {
-        'email': email,
-        'pwd': pwd
-      };
+      $http.get('http://www.stamina.dev/API/public/api/v1/usuario/facebook/' + id)
+      .success(function(response) {
+        console.log(response);
+        userDefer.resolve(response);
+      })
+      .error(function(error) {
+        console.log(error);
+        userDefer.reject(error);
+      });
+
+      return userDefer.promise;
+    }
+
+    function facebookSignin() {
+      var facebookUser = $q.defer();
+      getFacebookUserStatus()
+      .then(function(response) {
+        console.log(response);
+        facebookUser.resolve(getFacebookUserData(response));
+      })
+      .catch(function(error) {
+        console.log(error);
+        facebookUser.reject(error);
+      });
+      return facebookUser.promise;
+    }
+
+    function facebookSignup() {
+      var facebookUser = $q.defer();
+      getFacebookUserStatus()
+      .then(function(response) {
+        console.log(response);
+        facebookUser.resolve(getFacebookUserData(response));
+      })
+      .catch(function(error) {
+        console.log(error);
+        //FBLogin();
+        facebookUser.reject(error);
+      });
+      return facebookUser.promise;
+    }
+
+    function getFacebookUserStatus() {
+      var facebookUser = $q.defer();
+      FB.getLoginStatus(function(response) {
+        // user has permissions and is logged
+        if (response.status === 'connected') {
+          facebookUser.resolve(getFacebookUserData(response));
+        } else if (response.status === 'not_authorized') {
+          // user is logged but hasn't permissions
+          //facebookUser.reject(response);
+          console.log('not_authorized');
+          facebookUser.resolve(FBLogin());
+        } else {
+          // user is not logged
+          console.log('not logged');
+          facebookUser.resolve(FBLogin());
+        }
+      });
+      return facebookUser.promise;
+    }
+
+    function FBLogin(response) {
+      var facebookUser = $q.defer();
+      FB.login(function(response) {
+        console.log(response);
+        if (response.authResponse) {
+          console.log('paso');
+          facebookUser.resolve(getFacebookUserData(response));
+        } else {
+          console.log('no paso');
+          facebookUser.reject(response);
+        }
+      }, {scope: 'public_profile, email'});
+      return facebookUser.promise;
+    }
+
+    function getFacebookUserData(response) {
+      var facebookUser = $q.defer();
+      FB.api('/me?fields=email,picture,first_name,last_name,middle_name,name,birthday,gender', function(response) {
+        if (!response || response.error) {
+          facebookUser.reject('Error occured');
+        } else {
+          facebookUser.resolve(response);
+          setFacebookPicture(response.picture.data.url);
+        }
+      });
+      return facebookUser.promise;
+    }
+
+    function setFacebookPicture(picture) {
+      $sessionStorage.picture = picture;
+    }
+
+    function getFacebookPicture() {
+      return $sessionStorage.picture;
+    }
+
+    function sigin(credentials) {
+      var userDefer = $q.defer();
 
       $http.post('http://www.stamina.dev/API/public/api/v1/usuario/auth/', credentials)
       .success(function(response) {
@@ -47,7 +148,6 @@
         console.log(error);
         userDefer.reject(error);
       });
-
 
       return userDefer.promise;
     }

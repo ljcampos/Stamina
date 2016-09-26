@@ -1,55 +1,94 @@
+<style type="text/css">
+  .red-900{
+    background: #c12e3b;
+    background: #5a9ab7;
+    /*color: #5a9ab7 !important;*/
+  }
+
+  .user-img-custom a img{
+    height: 35px;
+    margin-top: 12px;
+  }
+  .toolbar-custom{
+    margin-right: 145px;
+  }
+  .panel{
+    background: none !important;
+  }
+  @media screen and (max-width: 1199px) and (min-width: 992px) {
+    .toolbar-custom{
+      margin-right: 75px;
+    }
+  }
+  @media screen and (max-width: 991px) and (min-width: 768px) {
+    .toolbar-custom{
+      margin-right: 20px;
+    }
+    .user-img-custom a img{
+      height: 30px;
+      margin-top: 12px;
+    }
+  }
+  @media screen and (max-width: 767px) and (min-width: 268px) {
+    .toolbar-custom{
+      margin-right: 0px;
+    }
+    .user-img-custom a img{
+      height: 30px;
+      margin-top: 12px;
+    }
+  }
+  .md-input:focus, .md-input.focus {
+    padding-bottom: 1px;
+    border-color: #feee00 !important;
+    border-color: #5a9ab7 !important;
+    border-color: #c12e3b !important;
+    border-bottom-width: 2px;
+  }
+  .md-input:focus ~ label, .md-input.focus ~ label {
+    top: 0 !important;
+    font-size: 0.85em !important;
+    color: #feee00 !important;
+    color: #5a9ab7 !important;
+    color: #c12e3b !important;
+    opacity: 1;
+  }
+  body{
+    /*color: #5a9ab7 !important;
+    color: #c12e3b !important;*/
+  }
+</style>
 <div class="app">
   <!-- content -->
   <div id="content" class="app-content" role="main">
     <div class="box">
       <!-- Content Navbar -->
-      <div class="navbar md-whiteframe-z1 no-radius bg-white">
+      <div class="navbar md-whiteframe-z1 no-radius red-900">
         <!-- Open side - Naviation on mobile -->
         <!--<a md-ink-ripple  data-toggle="modal" data-target="#aside" class="navbar-item pull-left visible-xs visible-sm"><i class="mdi-navigation-menu i-24"></i></a>-->
         <!-- / -->
         <!-- Page title - Bind to $state's title -->
         <div class="navbar-item">
           <a ui-sref='entrepreneur.dashboard'>
-            <img class="img-stamina" src="images/0.png" style="height:64px;"><!--width:208px-->
+            <img class="img-stamina" src="images/stamina.png" style="height:64px;"><!--width:208px-->
           </a>
         </div>
         <!-- / -->
         <!-- Common tools -->
-        <ul class="nav nav-sm navbar-tool pull-right">
-          <!--<li>
-            <a md-ink-ripple ui-toggle-class="show" target="#search">
-              <i class="mdi-action-search i-24"></i>
-            </a>
-          </li>-->
-          <li>
-            <a md-ink-ripple>
-              <i class="mdi-action-home i-24"></i>
+        <ul class="nav nav-sm navbar-tool pull-right toolbar-custom">
+          <li style="height: 64px;" class="user-img-custom">
+            <a ui-sref='entrepreneur.profile' md-ink-ripple="" data-toggle="modal">
+              <!-- <img src="images/a0.jpg" class="img-responsive rounded"> -->
+              <img src='{{facebookImage}}' alt='...' class="img-responsive rounded"/>
             </a>
           </li>
-          <li>
-            <a md-ink-ripple data-toggle="modal" data-target="#user">
-              <i class="mdi-social-person-outline i-24"></i>
-            </a>
-          </li>
-          <!--<li class="dropdown">
-            <a md-ink-ripple data-toggle="dropdown">
-              <i class="mdi-navigation-more-vert i-24"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-scale pull-right pull-up text-color">
-              <li><a href>Single-column view</a></li>
-              <li><a href>Sort by date</a></li>
-              <li><a href>Sort by name</a></li>
-              <li class="divider"></li>
-              <li><a href>Help &amp; feedback</a></li>
-            </ul>
-          </li>-->
           <li>
             <a ng-click='logout()' md-ink-ripple>
-              <i class="fa i-20">Salir </i>&nbsp; <i class="fa fa-sign-out i-24"></i>
+              <i class="icon mdi-action-exit-to-app i-24"></i><span class="icon i-24 pull-left">Salir&nbsp;</span>
             </a>
           </li>
         </ul>
-        <div class="pull-right" ui-view="navbar@"></div>
+        <!--<div class="pull-right" ui-view="navbar@"></div>-->
         <!-- / -->
       </div>
       <!-- Content -->

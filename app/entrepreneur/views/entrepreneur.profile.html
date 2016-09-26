@@ -1,0 +1,133 @@
+<style type="text/css">
+  .card-body{
+    padding-top: 5px !important;
+  }
+  .red-900{
+    background: #212121;
+    background: #c12e3b;
+    background: #FFFFFF;
+    background: #212121;
+    color: white;
+    /*color: #5a9ab7 !important;*/
+  }
+  body{
+    background: #c12e3b;
+    background: #5a9ab7;
+  }
+  .toolbar-custom{
+    color: #212121 !important;
+    color: white !important;
+  }
+  @media screen and (max-width: 1199px) and (min-width: 992px) {
+  }
+  @media screen and (max-width: 991px) and (min-width: 768px) {
+  }
+  @media screen and (max-width: 767px) and (min-width: 268px) {
+  }
+  .btn-custom:hover{
+    color: #ffffff !important;
+    background-color: #5a9ab7 !important;
+    border-color: #5a9ab7 !important;
+  }
+</style>
+<div class="row row-center">
+  <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11 col-center">
+    <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-rounded btn-stroke btn-addon bg-white b-2x m-b btn-fw">
+      <i class="mdi-navigation-arrow-back i-24"></i>Regresar
+    </button>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11 col-center">
+    <div class="row">
+      <div class="col-lg-4 text-center">
+        <img src="images/not_image/3.jpg" class="w-full circle">
+        <br>
+        <br>
+        <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
+          <i class="mdi-image-image i-20"></i> Cambiar Foto
+        </button>
+        <!--<br><br>
+        <span class="label bg-white label-lg">Gabriel Regalado Sanchez</span>-->
+      </div>
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-heading">
+                <h2>Información Básica</h2>
+              </div>
+              <div class="card-tools">
+                <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-info btn-custom">
+                  <i class="mdi-editor-mode-edit i-20"></i>EDITAR
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="md-form-group float-label">
+                      <input class="md-input has-value" disabled value="Gabriel">
+                      <label>Nombre(s)</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="md-form-group float-label">
+                      <input class="md-input has-value" disabled value="Regalado">
+                      <label>Apellido Paterno</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="md-form-group float-label">
+                      <input class="md-input has-value" disabled value="Sanchez">
+                      <label>Apellido Materno</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="md-form-group float-label">
+                      <input type="date" class="md-input has-value" disabled value="26/12/1992">
+                      <label>Fecha de nacimiento</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4" style="margin-top:-8px;">
+                    <small>Género</small>
+                    <div class="">
+                      <select class="form-control has-value" disabled>
+                        <option>Elija una opción</option>
+                        <option selected>Másculino</option>
+                        <option>Femenino</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-heading">
+                <h2>Información de Contacto</h2>
+              </div>
+              <div class="card-tools">
+                <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-info btn-custom">
+                  <i class="mdi-editor-mode-edit i-20"></i>EDITAR
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="md-form-group float-label">
+                      <input type="email" class="md-input has-value" disabled value="isc.resg92@gmail.com">
+                      <label>Correo Electrónico</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="md-form-group float-label">
+                      <input class="md-input has-value" disabled value="999 318 7691">
+                      <label>Teléfono</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
