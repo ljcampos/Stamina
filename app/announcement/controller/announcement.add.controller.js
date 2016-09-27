@@ -1,11 +1,11 @@
 (function() {
 	'use strict';
 
-	angular.module('announcement').controller('AnnouncementController', ['$scope', 'AnnouncementService', AnnouncementController]);
+	angular.module('announcement').controller('AnnouncementAddController', ['$scope', 'AnnouncementService', AnnouncementAddController]);
 
-	function AnnouncementController($scope, AnnouncementService) {
+	function AnnouncementAddController($scope, AnnouncementService) {
 		$scope.text = 'xsdfsf';
-		$scope.announcesList = {};
+		$scope.univesityList = {};
 		
 		$scope.init = function() {
 			getAnnouncements();
@@ -16,10 +16,10 @@
 		});
 
 		function getAnnouncements() {
-			AnnouncementService.getAllAnnouncements()
+			AnnouncementService.getAllUniversities()
 			.then(function(response) {
 				console.log(response);
-				$scope.announcesList = response.data;
+				$scope.univesityList = response.data;
 			})
 			.catch(function(error) {
 				console.log(error);
@@ -36,13 +36,14 @@
 			});
 		};
 
-		$scope.addAnnouncement = function() {
+		$scope.addAnnouncement = function(announce) {
 			var data = {};
-			data.value1 = '';
-			data.value2 = '';
-			data.value3 = '';
-			data.value4 = '';
-			data.value5 = '';
+
+			data.nombre 			=	announce.nombre;
+			data.universidad_id 	=	announce.universidad;
+			data.path 				=	"stamina_convocatoria.pdf";
+			data.fecha_inicio 		=	"2016-10-04";
+			data.fecha_cierre 		=	"2016-12-14";
 
 			AnnouncementService.addAnnouncement(data)
 			.then(function(response) {

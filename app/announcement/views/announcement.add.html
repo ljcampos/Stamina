@@ -14,27 +14,26 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required>
+                <input class="md-input" required ng-model="announce.nombre">
                 <label>Nombre de la convocatoria</label>
               </div>
             </div>
             <div class="col-sm-12">
-                <select class="form-control">
-                  <option selected>Elija una Universidad</option>
-                  <option value="1">Universidad Modelo</option>
-                  <option value="2">Instituto Tecnológico de Conkal</option>
+                <select class="form-control" ng-model="announce.universidad">
+                  <option selected value="">Elija una Universidad</option>
+                  <option ng-repeat="university in univesityList" value="{{university.universidad_id}}">{{university.nombre}}</option>
                 </select>
                 <br>
             </div>
             <div class="col-sm-6">
               <div class="md-form-group float-label">
-                <input class="md-input has-value" required type="date">
+                <input class="md-input has-value" required type="date"  ng-model="announce.fecha_inicio">
                 <label>Fecha Inicio</label>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="md-form-group float-label">
-                <input class="md-input has-value" required type="date">
+                <input class="md-input has-value" required type="date"  ng-model="announce.fecha_final">
                 <label>Fecha Final</label>
               </div>
             </div>
@@ -51,7 +50,7 @@
   <div class="row row-center">
     <div class="col-md-7 col-center">
       <div class="pull-right">
-        <button class="btn btn-lg btn-success">
+        <button class="btn btn-lg btn-success" ng-click="addAnnouncement(announce)">
           Guardar
         </button>
       </div>

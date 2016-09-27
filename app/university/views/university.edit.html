@@ -14,19 +14,19 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required ng-model="university.nombre">
+                <input class="md-input has-value" required ng-model="university.nombre">
                 <label>Nombre de la universidad</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input has-value" required type="date" ng-model="university.fecha_inicio">
+                <input class="md-input has-value" required ng-model="university.created_at">
                 <label>Fecha Inicio del servicio</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input has-value" required type="date" ng-model="university.fecha_final">
+                <input class="md-input has-value" required ng-model="university.updated_at">
                 <label>Fecha Final del servicio</label>
               </div>
             </div>
@@ -48,20 +48,14 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required ng-model="university.email">
+                <input class="md-input has-value" required ng-model="university.user.email">
                 <label>Correo Electrónico</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="md-form-group float-label">
                 <input class="md-input" required ng-model="university.pass">
-                <label>Contraseña</label>
-              </div>
-            </div>
-            <div class="col-sm-12">
-              <div class="md-form-group float-label">
-                <input class="md-input" required>
-                <label>Repetir Contraseña</label>
+                <label>Cambiar Contraseña</label>
               </div>
             </div>
           </div>
@@ -72,7 +66,7 @@
   <div class="row row-center">
     <div class="col-md-9 col-center">
       <div class="pull-right">
-        <button type="button" class="btn btn-lg btn-success" ng-click="addUniversity(university)">
+        <button type="button" class="btn btn-lg btn-success" ng-click="editUniversity(university)">
           Guardar
         </button>
       </div>

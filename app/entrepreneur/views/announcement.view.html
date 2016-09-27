@@ -1,32 +1,41 @@
 <style type="text/css">
-	#download{
-		display: none;
+	.da{
+		position: absolute;
+		bottom: 0px;
+	}
+	.btn-custom{
+		color: white;
+		background: #e13949 !important;
+	}
+	.btn-custom:hover{
+		color: white;
+		background: #e13949 !important;
+		border-radius: 30px;
+	}
+	.btn-custom:focus{
+		color: white;
+		background: #e13949 !important;
+		border-radius: 30px;
 	}
 </style>
 <div class="box-inner padding">
 	<div class="row row-center">
 		<div class="col-lg-10 col-md-10 col-sm-11 col-xs-12 col-center">
-			<style type="text/css">
-				.da{
-					position: absolute;
-					bottom: 0px;
-				}
-			</style>
 			<button ui-sref='entrepreneur.announcements' md-ink-ripple="" class="btn btn-rounded btn-stroke btn-addon bg-white b-2x m-b btn-fw da">
 				<i class="mdi-navigation-arrow-back i-24"></i>Regresar
 			</button>
 			<div class="pull-right">
-				<a href="" class="btn btn-lg b-2x m-b btn btn-fw btn-success">
+				<button class="btn btn-lg b-2x m-b btn btn-fw btn-custom">
 					<span class="block clear text-left m-v-xs">
 						<b class="text-lg block font-bold">APLICA</b>
 					</span>
-				</a>
+				</button>
 			</div>
 		</div>
 		<div class="col-lg-10 col-md-10 col-sm-11 col-xs-12 col-center">
 			<div class="row">
 				<div class="col-md-12">
-					<iframe id="iframe" src="ViewerJS/?zoom=page-width#/pdfs/stamina_convocatoria.pdf" width="100%" height="470px" allowfullscreen webkitallowfullscreen></iframe>
+					<iframe id="iframe" src="pdfs/stamina_convocatoria.pdf" width="100%" height="470px" allowfullscreen webkitallowfullscreen></iframe>
 				</div>
 			</div>
 		</div>

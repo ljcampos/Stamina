@@ -317,6 +317,41 @@ class UserController extends Controller
 						$rol = Role::where('rol', '=', 'emprendedor')->get();
 						if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
 					}
+					
+					elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
+					{
+						$rol = Role::where('rol', '=', 'mentor')->get();
+						if (count($rol) > 0) 
+						{ 
+							$rol_id = $rol[0]->rol_id; 
+							$mentor = new Mentor();
+							$mentor->mentor_id = $user->usuario_id;
+							$mentor->cargo = $params['cargo'];
+							$mentor->descr = $params['descr'];
+
+							if ($mentor->save()) { $saved = true; }
+						}
+					}
+					elseif ($type === 3 && $type != null) // Usuarios de tipo administrador
+					{
+						$rol = Role::where('rol', '=', 'admin')->get();
+						if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
+					}
+					elseif ($type === 4 && $type != null) // Usuarios de tipo universidad
+					{
+						$rol = Role::where('rol', '=', 'universidad')->get();
+						if (count($rol) > 0) {
+							$rol_id = $rol[0]->rol_id;
+
+							$universidad = new Universidad();
+							//$universidad->universidad_id = $user->usuario_id;
+							$universidad->usuario_id = $user->usuario_id;
+							$universidad->nombre = $params['nombre'];
+							$universidad->estado_id = 1;
+
+							if ($universidad->save()) { $saved = true; }
+						}
+					}
 
 					// Asociación Usuario - Rol
 					$rol = new RolUsuario();

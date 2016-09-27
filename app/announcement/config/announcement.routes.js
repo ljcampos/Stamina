@@ -25,6 +25,7 @@
     .state('admin.announcement.add', {
       url: '/announcement/add',
       templateUrl: 'app/announcement/views/announcement.add.html',
+      controller: 'AnnouncementAddController',
       data: {
         requireLogin: true,
         role: 1
