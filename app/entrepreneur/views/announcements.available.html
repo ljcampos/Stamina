@@ -20,12 +20,40 @@
 	.btn-custom{
 		background: #e13949 !important;
 		color: white;
-		margin-top: -120px;
 	}
-	.btn-custom{
-		background: #e13949 !important;
-		color: white;
-		margin-top: -120px;
+	/*.item-hover{
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+	}
+	.item-hover:hover .btn-custom{
+		margin: auto;
+		top: 0;
+		display: block;
+		background-position: 0 0;
+	}*/
+
+	.item-hover:hover .btn-custom {
+		opacity: 1; /* added */
+		z-index: 500;
+		top: 40%;
+		bottom: 10%;
+		position: absolute;
+		left: 12.5%;
+		right: 0;
+		color: white !important;
+		border-radius: 15px;
+	}
+	.item-hover .btn-custom{
+		display: block;
+		position: absolute;
+		top: 0;
+		opacity: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		text-align: center;
+		color: inherit;
 	}
 </style>
 <div class="box-inner padding">
@@ -43,67 +71,52 @@
 			<div class="row row-center">
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-center">
 					<div class="universidad-panel">
-						<div class="item">
+						<div class="item item-hover">
 							<img src="images/universidades/logo_modelo.png" class="w-full r-t" alt="Washed Out">
-						</div>
-						<br>
-						<center>
-							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
+							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white btn-custom">
 								<i class="mdi-file-attachment i-20"></i> Convocatoria
 							</button>
-						</center>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-center">
 					<div class="universidad-panel">
-						<div class="item">
+						<div class="item item-hover">
 							<img src="images/universidades/logo_conkal.png" class="w-full r-t" alt="Washed Out">
-						</div>
-						<br>
-						<center>
-							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
+							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white btn-custom">
 								<i class="mdi-file-attachment i-20"></i> Convocatoria
 							</button>
-						</center>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-center">
 					<div class="universidad-panel">
-						<div class="item">
+						<div class="item item-hover">
 							<img src="images/universidades/logo_tlaxcala.png" class="w-full r-t" alt="Washed Out">
-						</div>
-						<br>
-						<center>
-							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
+							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white btn-custom">
 								<i class="mdi-file-attachment i-20"></i> Convocatoria
 							</button>
-						</center>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-center">
 					<div class="universidad-panel">
-						<div class="item">
+						<div class="item item-hover">
 							<img src="images/universidades/logo_unacar.png" class="w-full r-t" alt="Washed Out">
-						</div>
-						<br>
-						<center>
-							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
+							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white btn-custom">
 								<i class="mdi-file-attachment i-20"></i> Convocatoria
 							</button>
-						</center>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-center">
 					<div class="universidad-panel">
-						<div class="item">
+						<div class="item item-hover">
 							<img src="images/universidades/logo_veracruz.png" class="w-full r-t" alt="Washed Out">
-						</div>
-						<br>
-						<center>
-							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
+							<button ui-sref='entrepreneur.announcement' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white btn-custom">
 								<i class="mdi-file-attachment i-20"></i> Convocatoria
 							</button>
-						</center>
+						</div>
 					</div>
 				</div>
 			</div>
