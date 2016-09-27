@@ -200,7 +200,7 @@ class UserController extends Controller
 				$usr->paterno 		= $usuario[0]->persona->apellido_paterno;
 				$usr->materno 		= $usuario[0]->persona->apellido_materno;
 				$usr->email 			= $usuario[0]->email;
-				$usr->imagen 			= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? $this->DIRECTORY . $usuario[0]->imagen : '';
+				$usr->imagen 			= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario' . $usuario[0]->imagen : '';
 				$usr->last_login 	= $usuario[0]->last_login;
 				$usr->estatus 		= $usuario[0]->status;
 				$usr->roles 			= $usuario[0]->roles;
