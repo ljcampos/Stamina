@@ -24,6 +24,7 @@
 		.state('entrepreneur.announcements', {
 			url: '/convocatorias',
 			templateUrl: 'app/entrepreneur/views/announcements.available.html',
+			controller: 'AnnouncementsAvailableController',
 			data: {
 				requireLogin: true,
 				role: 3

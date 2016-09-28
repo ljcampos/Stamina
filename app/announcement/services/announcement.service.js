@@ -7,6 +7,7 @@
 		return {
 			getAllUniversities: getAllUniversities,
 			getAllAnnouncements: getAllAnnouncements,
+			getAnnouncementsAvailable: getAnnouncementsAvailable,
 			getAnnouncementById: getAnnouncementById,
 			addAnnouncement: addAnnouncement,
 			updateAnnouncement: updateAnnouncement,
@@ -32,6 +33,21 @@
 			var announcementDefer = $q.defer();
 
 			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/')
+			.success(function(response) {
+				console.log(response);
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+
+			return announcementDefer.promise;
+		}
+		function getAnnouncementsAvailable() {
+			var announcementDefer = $q.defer();
+
+			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/actuales/')
 			.success(function(response) {
 				console.log(response);
 				announcementDefer.resolve(response);

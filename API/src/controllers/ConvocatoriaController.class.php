@@ -477,7 +477,8 @@ class ConvocatoriaController extends Controller
 				unset($value->universidad->user->salt);
 				unset($value->universidad->user->token);
 				$value->universidad->user->status;
-				$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				//$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				$value->universidad->imagen = $value->universidad->imagen;
 
 				if (count($value->emprendedores) > 0)
 				{
