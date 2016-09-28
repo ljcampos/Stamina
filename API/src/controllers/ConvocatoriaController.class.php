@@ -48,7 +48,7 @@ class ConvocatoriaController extends Controller
 		if(count($convocatorias) > 0)
 		{
 			foreach ($convocatorias as $key => $value) {
-				$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
+				$value->path = (strlen($value->path) > 0) ? /*$this->DIRECTORY . */'/uploads/convocatoria/' . $value->path : '';
 				unset($value->universidad->user->password);
 				unset($value->universidad->user->salt);
 				unset($value->universidad->user->token);
@@ -91,7 +91,7 @@ class ConvocatoriaController extends Controller
 			{	
 				$convocatoria->universidad;
 				unset($value->universidad_id);
-				$convocatoria->path = (strlen($convocatoria->path) > 0) ? $this->DIRECTORY . $convocatoria->path : '';
+				$convocatoria->path = (strlen($convocatoria->path) > 0) ? /*$this->DIRECTORY .*/ '/uploads/convocatoria/' .  $convocatoria->path : '';
 				$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $convocatoria->universidad->imagen : '';
 
 				if (count($convocatoria->emprendedores) > 0)
