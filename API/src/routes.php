@@ -229,6 +229,20 @@ $app->group('/api/v1/convocatoria', function ()
 	/**
 	* 
 	*/
+	$this->get('/actuales/', function ($request, $response, $args)
+	{
+
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('conAct');
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('all_convocatorias_actuales');
+
+	/**
+	* 
+	*/
 	$this->post('/', function ($request, $response, $args) 
 	{
 		$post = $request->getParams();
