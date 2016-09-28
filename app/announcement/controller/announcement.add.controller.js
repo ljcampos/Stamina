@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('announcement').controller('AnnouncementAddController', ['$scope', 'AnnouncementService', AnnouncementAddController]);
+	angular.module('announcement').controller('AnnouncementAddController', ['$scope', 'AnnouncementService', 'Upload', AnnouncementAddController]);
 
-	function AnnouncementAddController($scope, AnnouncementService) {
+	function AnnouncementAddController($scope, AnnouncementService, Upload) {
 		$scope.text = 'xsdfsf';
 		$scope.announce = {};
 		$scope.univesityList = {};
@@ -37,22 +37,37 @@
 			});
 		};
 
-		$scope.addAnnouncement = function(announce) {
+		$scope.addAnnouncement = function(announce, file) {
 			var data = {};
 
 			data.nombre 			=	announce.nombre;
 			data.universidad_id 	=	announce.universidad;
-			data.path 				=	"stamina_convocatoria.pdf";
-			data.fecha_inicio 		=	announce.fecha_inicio;
-			data.fecha_cierre 		=	announce.fecha_final;
+			//data.path 				=	"stamina_convocatoria.pdf";
+			data.fecha_inicio 		=	"2016-10-04";
+			data.fecha_cierre 		=	"2016-12-14";
+			data.file				=	file;
 
-			AnnouncementService.addAnnouncement(data)
-			.then(function(response) {
-				console.log(response);
+			// console.log(data);
+
+			file.upload = Upload.upload({
+				url: 'http://www.stamina.dev/API/public/api/v1/convocatoria/',
+				method: 'POST',
+				data: data
 			})
-			.catch(function(error) {
-				console.log(error);
+			.then(function(res) {
+				console.log(res);
+			})
+			.catch(function(err) {
+				console.log(err);
 			});
+
+			// AnnouncementService.addAnnouncement(data)
+			// .then(function(response) {
+			// 	console.log(response);
+			// })
+			// .catch(function(error) {
+			// 	console.log(error);
+			// });
 		};
 
 		$scope.updateAnnouncement = function() {
