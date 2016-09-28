@@ -10,81 +10,71 @@
     bottom: 0px;
     right: 0px;
   }
+  .app{
+    overflow-x: hidden;
+  }
 </style>
-<div class="row row-center">
-  <div class="col-lg-5 col-md-6 col-sm-9 col-xs-12 col-center">
-    <img class="p-lg img-responsive" src="images/futuremakers.png" style="margin-top:0px;">
-    <div class="p-lg panel md-whiteframe-z1 text-color m" style="border-radius: 20px;margin-top: -15px;z-index: 100;">
-      <div class="text-sm m-b text-center">
-        <strong>Regístrese para su cuenta en la plataforma de emprendedores</strong>
-        <div ng-if='success' class='alert ng-isolate-scope alert-success alert-dismissable text-center'>Te registraste con exito...</div>
+<div class="app">
+  <div class="row row-center">
+    <div class="col-lg-5 col-md-6 col-sm-9 col-xs-12 col-center text-center">
+      <img class="p-lg img-responsive" src="images/futuremakers.png" style="margin-top:0px;margin:auto !important;">
+      <div class="p-lg panel md-whiteframe-z1 text-color m" style="border-radius: 20px;margin-top: -15px;z-index: 100;">
+        <div class="text-sm m-b text-center">
+          <strong>Regístrese para su cuenta en la plataforma de emprendedores</strong>
+          <div ng-if='success' class='alert ng-isolate-scope alert-success alert-dismissable text-center'>Te registraste con exito...</div>
+        </div>
+        <form name="form" ng-submit='signup()'>
+          <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="md-form-group float-label">
+                <input type="text" class="md-input" ng-model='form.name' required>
+                <label>Nombres</label>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="md-form-group float-label">
+                <input type="text" class="md-input" ng-model='form.lastname' required>
+                <label>Apellido Paterno</label>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="md-form-group float-label">
+                <input type="text" class="md-input" ng-model='form.firstname' required>
+                <label>Apellido Materno</label>
+              </div>
+            </div>
+          </div>
+          <div class="md-form-group float-label">
+            <input type="email" class="md-input" ng-model='form.email' required>
+            <label>Correo Electrónico</label>
+          </div>
+          <div class="md-form-group float-label">
+            <input type="password" class="md-input" ng-model='form.password' required>
+            <label>Contraseña</label>
+          </div>
+          <div class="md-form-group float-label">
+            <input type="password" class="md-input" ng-model='form.confirm' required>
+            <label>Repetir Contraseña</label>
+          </div>
+          <div class="m-b-md">
+            <label class="md-check">
+              <input type="checkbox" ng-model='form.agree'" required><i class="grey-900"></i> Acepto los <a href="#">términos y condiciones</a>
+            </label>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6 m-b">
+              <button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme</button>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 m-b">
+              <button class='md-btn md-raised grey-900 btn-block p-h-md' ng-click='facebookSignup()'>Registrate con &nbsp;<i class='fa fa-facebook-square'></i></button>
+            </div>
+          </div>
+        </form>
       </div>
-      <form name="form" ng-submit='signup()'>
-        <div class="row">
-          <div class="col-md-4 col-sm-4 col-xs-4">
-            <div class="md-form-group float-label">
-              <input type="text" class="md-input" ng-model='form.name' required>
-              <label>Nombres</label>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-4">
-            <div class="md-form-group float-label">
-              <input type="text" class="md-input" ng-model='form.lastname' required>
-              <label>Apellido Paterno</label>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-4">
-            <div class="md-form-group float-label">
-              <input type="text" class="md-input" ng-model='form.firstname' required>
-              <label>Apellido Materno</label>
-            </div>
-          </div>
-        </div>
-        <!--<div class="row">
-          <div class="col-md-4">
-              <div class="md-form-group float-label">
-                <input type="telefono" class="md-input" required>
-                <label>Teléfono</label>
-              </div>
-          </div>
-          <div class="col-md-4">
-              <div class="md-form-group float-label">
-                <input type="escuela" class="md-input" required>
-                <label>Escuela</label>
-              </div>
-          </div>
-        </div>-->
-        <div class="md-form-group float-label">
-          <input type="email" class="md-input" ng-model='form.email' required>
-          <label>Correo Electrónico</label>
-        </div>
-        <div class="md-form-group float-label">
-          <input type="password" class="md-input" ng-model='form.password' required>
-          <label>Contraseña</label>
-        </div>
-        <div class="md-form-group float-label">
-          <input type="password" class="md-input" ng-model='form.confirm' required>
-          <label>Repetir Contraseña</label>
-        </div>
-        <div class="m-b-md">
-          <label class="md-check">
-            <input type="checkbox" ng-model='form.agree'" required><i class="grey-900"></i> Acepto los <a href="#">términos y condiciones</a>
-          </label>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme</button>
-          </div>
-          <div class="col-md-6">
-            <button class='md-btn md-raised grey-900 btn-block p-h-md' ng-click='facebookSignup()'>Registrate con &nbsp;<i class='fa fa-facebook-square'></i></button>
-            <!--<button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme con &nbsp;<i class="fa fa-facebook"></i></button>-->
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="p-v-lg text-center">
-      <div>¿Ya tienes una cuenta? <button ui-sref='signin' md-ink-ripple class="md-btn">Iniciar Sesion</button></div>
+      <div class="text-center">
+        <div>¿Ya tienes una cuenta? <button ui-sref='signin' md-ink-ripple class="md-btn">Iniciar Sesion</button></div>
+      </div>
     </div>
   </div>
+  <img class="img-responsive img_corner hidden-sm hidden-xs" src="images/plataformaemprendedor/tesla.png">
 </div>
-<img class="img-responsive img_corner hidden-sm hidden-xs" src="images/plataformaemprendedor/jobs.png">
