@@ -5,6 +5,7 @@
 
 	function AnnouncementAddController($scope, AnnouncementService) {
 		$scope.text = 'xsdfsf';
+		$scope.announce = {};
 		$scope.univesityList = {};
 		
 		$scope.init = function() {
@@ -42,8 +43,8 @@
 			data.nombre 			=	announce.nombre;
 			data.universidad_id 	=	announce.universidad;
 			data.path 				=	"stamina_convocatoria.pdf";
-			data.fecha_inicio 		=	"2016-10-04";
-			data.fecha_cierre 		=	"2016-12-14";
+			data.fecha_inicio 		=	announce.fecha_inicio;
+			data.fecha_cierre 		=	announce.fecha_final;
 
 			AnnouncementService.addAnnouncement(data)
 			.then(function(response) {
