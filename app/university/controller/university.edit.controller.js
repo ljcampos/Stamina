@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('university').controller('UniversityEditController', ['$state', '$stateParams', '$scope', 'UniversityService', UniversityEditController]);
+	angular.module('university').controller('UniversityEditController', ['$state', '$stateParams', '$scope', 'UniversityService', 'Upload', UniversityEditController]);
 
-	function UniversityEditController($state, $stateParams, $scope, UniversityService) {
+	function UniversityEditController($state, $stateParams, $scope, UniversityService, Upload) {
 		$scope.university = {};
 		$scope.usuario_id = {};
 		$scope.universidad_id = {};
@@ -29,23 +29,35 @@
 			});
 		}
 
-		$scope.editUniversity = function(university) {
+		$scope.editUniversity = function(university, image) {
 			var data 	=	{};
 			
 			data.nombre 		=	university.nombre;
 			data.email 			=	university.email;
 			data.estado_id		=	1;
 			data.usuario_id		=	$scope.usuario_id;
-			data.files			=	"dkashdjksah";
+			data.file			=	image;
 
-			UniversityService.editUniversity($stateParams.id,data)
-			.then(function(response) {
-				console.log(response);
-				$state.go('admin.university.list');
+			image.upload = Upload.upload({
+				url: 'http://www.stamina.dev/API/public/api/v1/universidad/'+$stateParams.id+'/update/',
+				method: 'POST',
+				data: data
 			})
-			.catch(function(error) {
-				console.log(error);
+			.then(function(res) {
+				console.log(res);
+			})
+			.catch(function(err) {
+				console.log(err);
 			});
+
+			// UniversityService.editUniversity($stateParams.id,data)
+			// .then(function(response) {
+			// 	console.log(response);
+			// 	$state.go('admin.university.list');
+			// })
+			// .catch(function(error) {
+			// 	console.log(error);
+			// });
 		};
 	}
 } ());

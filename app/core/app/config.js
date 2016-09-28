@@ -3,7 +3,8 @@ var config = (function() {
   var moduleName = 'myApp';
   var dependencies = [
     'ui.router',
-    'ngStorage'
+    'ngStorage',
+    'ngFileUpload'
   ];
 
   var addModule = function(moduleN, dependenciesN) {

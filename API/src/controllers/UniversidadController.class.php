@@ -48,7 +48,7 @@ class UniversidadController extends Controller
 		if (count($universidades) > 0)
 		{
 			foreach ($universidades as $key => $universidad) {
-				$universidad->imagen = (strlen($universidad->imagen) > 0) ? $this->DIRECTORY . $universidad->imagen : '';
+				$universidad->imagen = (strlen($universidad->imagen) > 0) ? /*$this->DIRECTORY .*/'/API/uploads/universidad/' . $universidad->imagen : '';
 				$universidad->user;
 				$universidad->user->imagen = ($universidad->user->imagen != "" || $universidad->user->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $universidad->user->imagen : '';
 				$universidad->user->status;
@@ -86,7 +86,7 @@ class UniversidadController extends Controller
 
 			if ($universidad != null)
 			{
-				$universidad->imagen = (strlen($universidad->imagen) > 0) ? $this->DIRECTORY . $universidad->imagen : '';
+				$universidad->imagen = (strlen($universidad->imagen) > 0) ? /*$this->DIRECTORY .*/'/API/uploads/universidad/' . $universidad->imagen : '';
 				$universidad->user;
 				$universidad->user->imagen = ($universidad->user->imagen != "" || $universidad->user->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $universidad->user->imagen : '';
 				$universidad->user->status;
@@ -199,7 +199,7 @@ class UniversidadController extends Controller
 
 					if ($universidad->save())
 					{
-						$universidad->path = (strlen($universidad->path) > 0) ? $this->DIRECTORY . $universidad->path : '';
+						$universidad->path = (strlen($universidad->path) > 0) ? /*$this->DIRECTORY .*/ '/API/uploads/universidad/' . $universidad->path : '';
 						$this->response['code'] = 1;
 						$this->response['data'] = $universidad;
 						$this->response['message'] = 'Se ha creado un nuevo registro de universidad';
@@ -328,7 +328,7 @@ class UniversidadController extends Controller
 					if ($universidad->save())
 					{
 						$db::commit();
-						$universidad->imagen = (strlen($universidad->imagen) > 0) ? $this->DIRECTORY . $universidad->imagen : '';
+						$universidad->imagen = (strlen($universidad->imagen) > 0) ? /*$this->DIRECTORY .*/'/API/uploads/universidad/' . $universidad->imagen : '';
 						$this->response['code'] = 1;
 						$this->response['data'] = $universidad;
 						$this->response['message'] = 'Se ha actualizado correctamente';
