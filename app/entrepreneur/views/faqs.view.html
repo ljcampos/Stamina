@@ -1,16 +1,33 @@
+<style type="text/css">
+  #frame-faqs{
+    height: 500px;
+  }
+  @media screen and (max-width: 1199px) and (min-width: 992px) {
+    #frame-faqs{
+      height: 450px;
+    }
+  }
+  @media screen and (max-width: 991px) and (min-width: 768px) {
+    #frame-faqs{
+      height: 450px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    #frame-faqs{
+      height: 450px;
+    }
+  }
+</style>
 <div class="box-inner padding">
   <div class="row row-center">
-    <div class="col-md-9 col-center">
+    <div class="col-lg-10 col-md-10 col-sm-11 col-xs-12 col-center">
       <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-rounded btn-stroke btn-addon bg-white b-2x m-b btn-fw">
         <i class="mdi-navigation-arrow-back i-24"></i>Regresar
       </button>
     </div>
-    <div class="col-md-9 col-center">
-      <iframe src="pdfs/FAQs.pdf" width="100%" height="500px" allowfullscreen webkitallowfullscreen></iframe>
+    <div class="col-lg-10 col-md-10 col-sm-11 col-xs-12 col-center">
+      <iframe id="frame-faqs" src="res/faqs/faqs.pdf" width="100%" allowfullscreen webkitallowfullscreen></iframe>
       <!--<iframe src="ViewerJS/?zoom=page-width#/pdfs/FAQs.pdf" width="100%" height="500px" allowfullscreen webkitallowfullscreen></iframe>-->
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  
-</script>
