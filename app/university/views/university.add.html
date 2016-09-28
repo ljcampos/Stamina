@@ -1,3 +1,29 @@
+<script type="text/javascript" src="jqueryTimepicker/lib/bootstrap-datepicker.js"></script>
+<script>
+      $.fn.datepicker.dates['es'] = {
+          days: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+          daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+          daysMin: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+          months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+          monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+          today: "Hoy",
+          clear: "Limpiar"
+          };
+      $(function(){
+        $("#datePicker1").datepicker({
+          language:"es",
+          orientation:"top auto",
+          format: "yyyy-mm-dd",
+          autoclose: true
+        });
+        $("#datePicker2").datepicker({
+          language:"es",
+          orientation:"top auto",
+          format: "yyyy-mm-dd",
+          autoclose: true
+        });
+      });
+</script>
 <div class="box-inner padding">
   <div class="row row-center">
     <div class="col-md-9 col-center">
@@ -19,14 +45,14 @@
               </div>
             </div>
             <div class="col-sm-12">
-              <div class="md-form-group float-label">
-                <input class="md-input has-value" required type="date">
+              <div class="md-form-group">
+                <input class="md-input has-value" name="datePicker1" id="datePicker1" required readonly type="text">
                 <label>Fecha Inicio del servicio</label>
               </div>
             </div>
             <div class="col-sm-12">
-              <div class="md-form-group float-label">
-                <input class="md-input has-value" required type="date">
+              <div class="md-form-group">
+                <input class="md-input has-value" name="datePicker2" id="datePicker2" required readonly type="text">
                 <label>Fecha Final del servicio</label>
               </div>
             </div>
