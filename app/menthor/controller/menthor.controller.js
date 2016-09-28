@@ -1,15 +1,16 @@
 (function() {
 	'use strict';
 
-	angular.module('menthor').controller('MenthorController', ['$scope','$state', 'MenthorService', MenthorController]);
+	angular.module('menthor').controller('MenthorController', ['$scope','$state','MenthorService', MenthorController]);
 
 	function MenthorController($scope,$state, MenthorService) {
+
 		$scope.getDataUsers=function(){
-			console.log($state);
 			$scope.userList = null;
 			MenthorService.getUsers()
 			.then(function(response) {
-				$scope.userList = response.data;			
+				$scope.userList = response.data;	
+				console.log(response.data);		
 			})
 			.catch(function(error) {
 				console.log(error);
@@ -40,22 +41,45 @@
 	        'email'   : $scope.form.email,
 	        'password': $scope.form.password,
 	        'type': 2,
-	        'rol': 2}
-	        $scope.success='';
+	        'rol': 2};
+
 	        if(angular.equals($scope.form.password,$scope.form.password2)){
 				$scope.success = null;
 				MenthorService.addUser(data)
 				.then(function(response) {
-					console.log('REGISTRADO:::::::::::')
-					$state.go('admin.menthor.list');
+					console.log(response);
+					$("#message").attr('class','float-label alert alert-success');	
+					$("#message").html('¡Registro éxitoso!').fadeOut(4000);						
+					setTimeout(function(){ $state.go('admin.menthor.list'); }, 5000);
 				})
 				.catch(function(error) {
-					$scope.success='<strong class="mdi-alert-error">No se completo el proceso de grabado</strong>';
+					$("#message").attr('class','float-label alert alert-danger');	
+					$("#message").html('¡Registro no completado, inténtelo nuevamente!').show().fadeOut(6000);			
 					console.log(error);
 				});
 			}else{
-				$scope.success='Las contraseñas son diferentes. Inténtelo nuevamente';
+				$("#message").attr('class','float-label alert alert-warning');	
+				$("#message").html('¡Las contraseñas son diferentes, inténtelo nuevamente!').show().fadeOut(6000);	
 			}
 		}
+
+		$scope.uploadPic = function(myFile) {
+	        //console.log('file is ' );
+	        //console.log(myFile);
+	        MenthorService.uploadFile(myFile,$scope.id)
+			.then(function(response) {
+				console.log('success');
+				//console.log(response);
+				$("#msj").attr('class','alert alert-success');	
+				$("#msj").html('Imagen cargada correctamente').show().fadeOut(6000);
+			})
+			.catch(function(error) {
+				console.log('fail');
+				//console.log(error);				
+				$("#msj").attr('class','alert alert-error');	
+				$("#msj").html('Proceso no completado').show().fadeOut(6000);
+			});
+		  }
+
 	}
 } ());

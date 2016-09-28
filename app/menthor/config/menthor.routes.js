@@ -39,6 +39,15 @@
         requireLogin: true,
         role: 1
       }
-    });
+    }).state('admin.menthor.uploadImage', {
+      url: '/mentor/upimg',
+      templateUrl: 'app/menthor/views/uploadImage.html',
+      controller: 'MenthorController',
+      data: {
+        requireLogin: true,
+        role: 1
+      }
+    })
+    ;
   }
 } ());

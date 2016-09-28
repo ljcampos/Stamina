@@ -6,7 +6,8 @@
 		return {
 			getUsers : getUsers,
 			getUser  : getUser,
-			addUser  : addUser
+			addUser  : addUser,
+			uploadFile : uploadFile
 		};
 
 		function getUsers() {
@@ -48,6 +49,26 @@
 	        	userDefer.reject(error);
 	      	});
 	      	return userDefer.promise;
+	    }
+
+	    function uploadFile(file,id){
+			var userDefer = $q.defer();		
+		   	var fd = new FormData();
+	        fd.append('file', file);
+	        //console.log(fd);
+	        $http.post("API/public/api/v1/usuario/"+id+"/imagen/", fd, {
+	            transformRequest: angular.identity,
+	            headers: {'Content-Type': undefined}
+	        })
+	        .success(function(response){
+	        	//console.log('success uploadFile')
+	        	userDefer.resolve(response);
+	        })
+	        .error(function(){
+	        	//console.log('error uploadFile')
+	        	userDefer.reject(error);
+	        });
+	        return userDefer.promise;
 	    }
 	}
 } ());
