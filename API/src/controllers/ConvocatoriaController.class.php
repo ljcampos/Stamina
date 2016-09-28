@@ -7,6 +7,7 @@ class ConvocatoriaController extends Controller
 	static $routes = array(
 		'all' 		=>	'getAll',
 		'one' 		=>	'getById',
+		'conAct'	=>	'convocatoriasActuales',
 		'add' 		=>	'create',
 		'update'	=>	'update',
 		'delete' 	=>	'delete'
@@ -455,6 +456,47 @@ class ConvocatoriaController extends Controller
 		}
 
 		return $params;
+	}
+
+	public function convocatoriasActuales()
+	{
+		$fechaActual 	= date('Y-m-d');
+		$ayer		 	= date('Y-m-d', strtotime('-1 day'));
+
+		$convocatorias 	= Convocatoria::with('universidad')
+									 ->where('fecha_inicio', '<=', $fechaActual)
+									 ->where('fecha_cierre', '>=', $fechaActual)
+									 ->orderBy('fecha_inicio', 'ASC')
+									 ->get();
+
+		if(count($convocatorias) > 0)
+		{
+			foreach ($convocatorias as $key => $value) {
+				$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
+				unset($value->universidad->user->password);
+				unset($value->universidad->user->salt);
+				unset($value->universidad->user->token);
+				$value->universidad->user->status;
+				$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+
+				if (count($value->emprendedores) > 0)
+				{
+					foreach ($value->emprendedores as $k => $val) {
+						$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						unset($val->password);
+						unset($val->salt);
+						unset($val->token);
+						unset($val->pivot);
+					}
+				}
+			}
+		}
+
+		$this->response['code'] = 1;
+		$this->response['data'] = $convocatorias;
+		$this->response['message'] = 'Correcto';
+
+		return $this->response;
 	}
 
 
