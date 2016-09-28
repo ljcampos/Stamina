@@ -88,7 +88,7 @@ class UserController extends Controller
 				$usr->paterno = $value->persona->apellido_paterno;
 				$usr->materno = $value->persona->apellido_materno;
 				$usr->email = $value->email;
-				$usr->imagen = ($value->imagen != "" || $value->imagen != null) ? $this->DIRECTORY . $value->imagen : '';
+				$usr->imagen = ($value->imagen != "" || $value->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario'. $value->imagen : '';
 				$usr->last_login = $value->last_login;
 				$usr->estatus = $value->status;
 
@@ -200,7 +200,7 @@ class UserController extends Controller
 				$usr->paterno 		= $usuario[0]->persona->apellido_paterno;
 				$usr->materno 		= $usuario[0]->persona->apellido_materno;
 				$usr->email 			= $usuario[0]->email;
-				$usr->imagen 			= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? $this->DIRECTORY . $usuario[0]->imagen : '';
+				$usr->imagen 			= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario' . $usuario[0]->imagen : '';
 				$usr->last_login 	= $usuario[0]->last_login;
 				$usr->estatus 		= $usuario[0]->status;
 				$usr->roles 			= $usuario[0]->roles;
@@ -781,40 +781,51 @@ class UserController extends Controller
 						$nombre_archivo = ($mime === $mimes[0]) ? $nombre_archivo .= '.png' : $nombre_archivo .= '.jpeg';
 						$fichero_subido = $this->DIRECTORY . $nombre_archivo;
 
-						if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
+						//if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
+						// verify if is uploaded by httpost
+						if (is_uploaded_file($_FILES['file']['tmp_name']))
 						{
-							$db = Connection::getConnection();
-							$db::beginTransaction();
+							// move the file to folder
+							$result = move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido);
+							if ($result) {
+								$db = Connection::getConnection();
+								$db::beginTransaction();
 
-							try 
-							{	
-								if ($usuario->imagen != '' || $usuario->imagen != null)
+								try
 								{
-									if (file_exists($this->DIRECTORY . $usuario->imagen))
+									if ($usuario->imagen != '' || $usuario->imagen != null)
 									{
-										unlink($this->DIRECTORY . $usuario->imagen);
+										if (file_exists($this->DIRECTORY . $usuario->imagen))
+										{
+											unlink($this->DIRECTORY . $usuario->imagen);
+										}
 									}
+
+									$usuario->imagen = $nombre_archivo;
+									$usuario->save();
+									$db::commit();
+
+									$this->response['code'] = 1;
+									$this->response['data'] = $fichero_subido;
+									$this->response['message'] = 'Se ha guardado correctamente';
 								}
-
-								$usuario->imagen = $nombre_archivo;
-								$usuario->save();
-								$db::commit();
-
-								$this->response['code'] = 1;
-								$this->response['data'] = $fichero_subido;
-								$this->response['message'] = 'Se ha guardado correctamente';
-							} 
-							catch (Exception $e) 
+								catch (Exception $e)
+								{
+									$db::rollBack();
+									$this->response['code'] = 5;
+									$this->response['message'] = 'Ocurrió un error SQL.';
+								}
+							}
+							else
 							{
-								$db::rollBack();
 								$this->response['code'] = 5;
-								$this->response['message'] = 'Ocurrió un error.';
+								$this->response['message'] = 'No se pudo subir tu archivo.';
 							}
 						}
 						else
 						{
 							$this->response['code'] = 5;
-							$this->response['message'] = 'Ocurrió un error.';	
+							$this->response['message'] = 'Ocurrió un error.';
 						}
 					}
 					else
