@@ -13,8 +13,8 @@
 </style>
 <div class="row row-center">
   <div class="col-lg-5 col-md-6 col-sm-9 col-xs-12 col-center">
-    <img class="img-responsive" src="images/futuremakers.png" style="margin-top:15px;">
-    <div class="p-lg panel md-whiteframe-z1 text-color m" style="border-radius: 20px;margin-top: 5px;z-index: 100;">
+    <img class="p-lg img-responsive" src="images/futuremakers.png" style="margin-top:0px;">
+    <div class="p-lg panel md-whiteframe-z1 text-color m" style="border-radius: 20px;margin-top: -15px;z-index: 100;">
       <div class="text-sm m-b text-center">
         <strong>Regístrese para su cuenta en la plataforma de emprendedores</strong>
         <div ng-if='success' class='alert ng-isolate-scope alert-success alert-dismissable text-center'>Te registraste con exito...</div>
@@ -76,14 +76,11 @@
             <button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme</button>
           </div>
           <div class="col-md-6">
-            <button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme con &nbsp;<i class="fa fa-facebook"></i></button>
+            <button class='md-btn md-raised grey-900 btn-block p-h-md' ng-click='facebookSignup()'>Registrate con &nbsp;<i class='fa fa-facebook-square'></i></button>
+            <!--<button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme con &nbsp;<i class="fa fa-facebook"></i></button>-->
           </div>
         </div>
       </form>
-      <br />
-      <div class='text-center'>
-        <button class='md-btn md-raised grey-900 btn-block p-h-md' ng-click='facebookSignup()'><i class='fa fa-facebook-square'></i> Registrate con facebook</button>
-      </div>
     </div>
     <div class="p-v-lg text-center">
       <div>¿Ya tienes una cuenta? <button ui-sref='signin' md-ink-ripple class="md-btn">Iniciar Sesion</button></div>
