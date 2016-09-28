@@ -45,6 +45,7 @@
 			})
 			.then(function(res) {
 				console.log(res);
+				$state.go('admin.university.list');
 			})
 			.catch(function(err) {
 				console.log(err);
