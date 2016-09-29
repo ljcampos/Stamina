@@ -755,3 +755,33 @@ $app->group('/api/v1/pregunta', function ()
 	})->setName('delete_question');
 
 });
+
+/**
+* 
+*/
+$app->group('/api/v1/faq', function () 
+{	
+	/**
+	* 
+	*/
+	$this->get('/', function ($request, $response, $args)
+	{
+		$filename = __DIR__ . '/uploads/faq/faq.pdf';
+		$json = array('code' => 1, 'url' => $filename, 'message' => 'Archivo de preguntas frecuentes');
+		return $response->withJson($json, 200);
+
+	})->setName('get_faq');
+
+	/**
+	* 
+	*/
+	$this->post('/', function ($request, $response, $args)
+	{
+		$controller = new FaqController();
+		$json = $controller->callAction('save');
+		return $response->withJson($json, 200);
+
+	})->setName('post_faq');
+
+});
+
