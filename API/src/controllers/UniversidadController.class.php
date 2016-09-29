@@ -28,7 +28,7 @@ class UniversidadController extends Controller
 	/**
 	* 
 	*/
-	private $attributes = array('nombre', 'usuario_id', 'estado_id');
+	private $attributes = array('nombre', 'usuario_id', 'fecha_inicio_servicio', 'fecha_final_servicio', 'estado_id');
 
 	/**
 	* 
@@ -52,6 +52,8 @@ class UniversidadController extends Controller
 				$universidad->user;
 				$universidad->user->imagen = ($universidad->user->imagen != "" || $universidad->user->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $universidad->user->imagen : '';
 				$universidad->user->status;
+				$universidad->fecha_inicio_servicio;
+				$universidad->fecha_final_servicio;
 				unset($universidad->user->password);
 				unset($universidad->user->salt);
 				unset($universidad->user->token);
@@ -90,6 +92,8 @@ class UniversidadController extends Controller
 				$universidad->user;
 				$universidad->user->imagen = ($universidad->user->imagen != "" || $universidad->user->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $universidad->user->imagen : '';
 				$universidad->user->status;
+				$universidad->fecha_inicio_servicio;
+				$universidad->fecha_final_servicio;
 				unset($universidad->user->password);
 				unset($universidad->user->salt);
 				unset($universidad->user->token);
@@ -141,6 +145,17 @@ class UniversidadController extends Controller
 			{
 				$messages[] = 'El campo nombre no puede quedar vacío ni tener una longitud mayor a 100 caracteres';
 			}
+
+			if (strtotime($params['fecha_inicio_servicio']) === false)
+			{
+				$messages[] = 'Fecha inicio no valida';
+			}
+			
+			if (strtotime($params['fecha_final_servicio']) === false)
+			{
+				$messages[] = 'Fecha final no valida';
+			}
+
 			elseif (count(Universidad::where('nombre', '=', $params['nombre'])->get()) > 0 )
 			{
 				$messages[] = 'Ya existe una universidad con el nombre: \'' . $params['nombre'] . '\'';	
@@ -184,6 +199,8 @@ class UniversidadController extends Controller
 					$universidad = new Universidad();
 					$universidad->nombre = $params['nombre'];
 					$universidad->usuario_id = $params['usuario_id'];
+					$universidad->fecha_inicio_servicio = $params['fecha_inicio_servicio'];
+					$universidad->fecha_final_servicio = $params['fecha_final_servicio'];
 					$universidad->estado_id = $params['estado_id'];
 					$imagen = $this->saveImage();
 
@@ -260,6 +277,16 @@ class UniversidadController extends Controller
 				$messages[] = 'Ya existe una universidad con el nombre: \'' . $params['nombre'] . '\'';	
 			}
 
+			if (strtotime($params['fecha_inicio_servicio']) === false)
+			{
+				$messages[] = 'Fecha inicio no valida';
+			}
+			
+			if (strtotime($params['fecha_final_servicio']) === false)
+			{
+				$messages[] = 'Fecha final no valida';
+			}
+
 			if (empty($params['usuario_id']) || !intval($params['usuario_id']) 
 				|| !filter_var($params['usuario_id'], FILTER_VALIDATE_INT))
 			{
@@ -295,14 +322,18 @@ class UniversidadController extends Controller
 
 				try 
 				{
-					$id = intval($params['universidad_id']);
-					$nombre 		= trim($params['nombre']);
-					$usuario_id = intval($params['usuario_id']);
-					$estado_id  = intval($params['estado_id']);
+					$id 					= intval($params['universidad_id']);
+					$nombre 				= trim($params['nombre']);
+					$fecha_inicio_servicio 	= strtotime($params['fecha_inicio_servicio']);
+					$fecha_final_servicio 	= strtotime($params['fecha_final_servicio']);
+					$usuario_id 			= intval($params['usuario_id']);
+					$estado_id  			= intval($params['estado_id']);
 
 					$universidad = Universidad::find($id);
 					$universidad->nombre = $nombre;
-					$universidad->usuario_id = $usuario_id; 
+					$universidad->usuario_id = $usuario_id;
+					$universidad->fecha_inicio_servicio = $fecha_inicio_servicio;
+					$universidad->fecha_final_servicio = $fecha_final_servicio;
 					$universidad->estado_id = $estado_id;
 
 					$imagen = $this->saveImage();
