@@ -1,16 +1,6 @@
 <?php
 // Routes
 
-$app->get('/', function ($request, $response, $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
-
-    // Render index view
-    //return $this->renderer->render($response, 'index.phtml', $args);
-    echo 'inicio';
-});
-
-
 /**
 * 
 */
@@ -842,8 +832,34 @@ $app->group('/api/v1/pregunta', function ()
 });
 
 /**
-*
+* 
 */
+$app->group('/api/v1/faq', function () 
+{	
+	/**
+	* 
+	*/
+	$this->get('/', function ($request, $response, $args)
+	{
+		$filename = __DIR__ . '/uploads/faq/faq.pdf';
+		$json = array('code' => 1, 'url' => $filename, 'message' => 'Archivo de preguntas frecuentes');
+		return $response->withJson($json, 200);
+
+	})->setName('get_faq');
+
+	/**
+	* 
+	*/
+	$this->post('/', function ($request, $response, $args)
+	{
+		$controller = new FaqController();
+		$json = $controller->callAction('save');
+		return $response->withJson($json, 200);
+
+	})->setName('post_faq');
+
+});
+
 $app->group('/api/v1/respuesta', function(){
 	/**
 	* 
@@ -858,9 +874,6 @@ $app->group('/api/v1/respuesta', function(){
 		//echo $_GET["callback"]."(" . $json . ")";
 	})->setName('get_answers');
 
-	/**
-	* 
-	*/
 	$this->get('/{id}/', function ($request, $response, $args)
 	{	
 		$id = $args['id'];
@@ -1056,4 +1069,5 @@ $app->group('/api/v1/promedio', function(){
 		echo $json;
 
 	})->setName('delete_average');
+
 });

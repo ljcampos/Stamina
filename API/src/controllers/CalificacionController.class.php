@@ -7,10 +7,10 @@ class CalificacionController extends Controller
 {
 	static $routes = array(
 		'all' 		=>	'getAll',
-		'one'		=>	'getById',
+		'one'			=>	'getById',
 		'add' 		=>	'create',
 		'update'	=>	'update',
-		'del'		=>	'delete'
+		'del'			=>	'delete'
 	);
 
 	/**
