@@ -82,7 +82,7 @@
 									<a target="_blank" href="pdfs/stamina_convocatoria.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
 										<i class="fa fa-file"></i>
 									</a>
-									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
 										<i class="fa fa-pencil"></i>
 									</button>
 									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
@@ -112,7 +112,7 @@
 									<a target="_blank" href="pdfs/stamina_convocatoria.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
 										<i class="fa fa-file"></i>
 									</a>
-									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
 										<i class="fa fa-pencil"></i>
 									</button>
 									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
@@ -156,10 +156,10 @@
 							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
 							<td>
 								<div class="hidden-xs hidden-sm pull-right">
-									<a target="_blank" href="res/convocatorias/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+									<a target="_blank" href="{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
 										<i class="fa fa-file"></i>
 									</a>
-									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
 										<i class="fa fa-pencil"></i>
 									</button>
 									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
@@ -206,7 +206,7 @@
 									<a target="_blank" href="pdfs/stamina_convocatoria.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
 										<i class="fa fa-file"></i>
 									</a>
-									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
 										<i class="fa fa-pencil"></i>
 									</button>
 									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
@@ -236,7 +236,7 @@
 									<a target="_blank" href="pdfs/stamina_convocatoria.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
 										<i class="fa fa-file"></i>
 									</a>
-									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
 										<i class="fa fa-pencil"></i>
 									</button>
 									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
@@ -283,7 +283,7 @@
 									<a target="_blank" href="pdfs/stamina_convocatoria.pdf" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
 										<i class="fa fa-file"></i>
 									</a>
-									<button ui-sref='admin.announcement.edit' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
 										<i class="fa fa-pencil"></i>
 									</button>
 									<button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">

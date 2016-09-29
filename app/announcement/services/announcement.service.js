@@ -47,7 +47,7 @@
 		function getAnnouncementById(id) {
 			var announcementDefer = $q.defer();
 
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/')
+			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/'+id+'/')
 			.success(function(response) {
 				console.log(response);
 				announcementDefer.resolve(response);

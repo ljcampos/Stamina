@@ -30,6 +30,15 @@
         requireLogin: true,
         role: 1
       }
+    })
+    .state('admin.announcement.edit', {
+      url: '/announcement/edit/:id',
+      templateUrl: '/app/announcement/views/announcement.edit.html',
+      controller: 'AnnouncementEditController',
+      data: {
+        requireLogin: true,
+        role: 1
+      }
     });
   }
 } ());
