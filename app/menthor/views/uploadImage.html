@@ -4,36 +4,29 @@
             <a href="mentor" class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</a>
         </div>
     </div>
-  <div class="row row-center">
-    <div class="col-md-6 col-center">  
-    
-
-  <form name="myForm">
     <fieldset>
-      <legend>Subir imagenes</legend>
-      id Usuario
-      <input type="text" name="id" ng-model="id" size="31" required>
-      <i ng-show="myForm.userName.$error.required">*Requerido</i>
-      <input type="file" ngf-select ng-model="picFile" name="file"    
-             accept="image/*" ngf-max-size="2MB" required
-             ngf-model-invalid="errorFile">
-      <i ng-show="myForm.file.$error.required">*Requerido</i><br>
-      <i ng-show="myForm.file.$error.maxSize">Archivo demasiado grande {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-      <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"><button ng-click="picFile = null" ng-show="picFile">Remover</button>
-      <br>
-      <button ng-disabled="!myForm.$valid" 
+      <form name="form">
+        <div class="row row-center">
+          <div class="col-md-4 col-center">
+            <div class="panel panel-card" style="height: 400px; width: 400px;">
+              <div class="item">
+                <img style="height:400px;width:400px;align-content:center;" ng-show="form.file.$valid" ngf-thumbnail="picFile">
+              </div>                           
+            </div>
+            <div class="panel panel-card" style="width: 400px;">
+                <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile" class="">
+                <strong ng-show="form.file.$error.maxSize">Archivo demasiado grande {{errorFile.size / 1000000|number:1}}MB: max 2M</strong>
+            </div> 
+          </div>
+        </div>
+        <div class="row row-center">
+          <div class="col-md-9 col-center">
+              <div class="pull-right">
+                    <button ng-disabled="!form.$valid" 
               ng-click="uploadPic(picFile)">Enviar</button>
-      <span class="progress" ng-show="picFile.progress >= 0">
-        <div style="width:{{picFile.progress}}%" 
-            ng-bind="picFile.progress + '%'"></div>
-      </span>
-      <span id="msj"></span>
-      <span ng-show="picFile.result">Proceso completado. Archivo subido.</span>
-      <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+              </div>
+          </div>
+        </div>
+      </form>
     </fieldset>
-    <br>
-  </form>
-
-    </div>
-  </div>
 </div>

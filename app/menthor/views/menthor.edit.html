@@ -4,101 +4,105 @@
             <a href="mentor/view/{{id}}" class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</a>
         </div>
     </div>
-    <div class="row row-center">
-        <div class="col-md-5 col-left">
-            <div class="card">
-                <div class="card-heading">
-                    <h2>Información General</h2>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.nombre}}">
-                                <label>Nombre
-                                </label>
+    <form name="form" ng-submit="update(picFile)">
+        <div class="row row-center">
+            <div class="col-md-4 col-left">
+                <div class="card">
+                    <div class="card-heading">
+                        <h2>Información General</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="md-form-group float-label">
+                                    <input class="md-input has-value" required value="{{user.nombre}}">
+                                    <label>Nombre
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.paterno}}">
-                                <label>Apelido paterno
-                                </label>
+                            <div class="col-sm-12">
+                                <div class="md-form-group float-label">
+                                    <input class="md-input has-value" required value="{{user.paterno}}">
+                                    <label>Apelido paterno
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.materno}}">
-                                <label>Apellido materno
-                                </label>
+                            <div class="col-sm-12">
+                                <div class="md-form-group float-label">
+                                    <input class="md-input has-value" required value="{{user.materno}}">
+                                    <label>Apellido materno
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.estatus.descr}}">
-                                <label>Cargo</label>
+                            <div class="col-sm-12">
+                                <div class="md-form-group float-label">
+                                    <input class="md-input has-value" required value="{{user.estatus.descr}}">
+                                    <label>Cargo</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <textarea class="md-input has-value" rows="3">{{user.estatus.descr}}</textarea>
-                                <label>Descripción</label>
+                            <div class="col-sm-12">
+                                <div class="md-form-group float-label">
+                                    <textarea class="md-input has-value" rows="3">{{user.estatus.descr}}</textarea>
+                                    <label>Descripción</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4 col-left">
-            <div class="card">
-                <div class="card-heading">
-                    <h2>Datos de acceso</h2>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.email}}">
-                                <label>Correo Electrónico</label>
+            <div class="col-md-4 col-left">
+                <div class="card">
+                    <div class="card-heading">
+                        <h2>Datos de acceso</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="md-form-group float-label">
+                                    <input class="md-input has-value" required value="{{user.email}}">
+                                    <label>Correo Electrónico</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <input class="md-input has-value" type="password" required value="cualquiercosaxd">
-                                <label>Contraseña</label>
+                            <div class="col-sm-12">
+                                <div class="md-form-group float-label">
+                                    <input class="md-input has-value" type="password" required value="cualquiercosaxd">
+                                    <label>Contraseña</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="md-form-group float-label">
-                                <input class="md-input has-value" type="password" required value="cualquiercosaxd">
-                                <label>Repetir Contraseña</label>
+                            <div class="col-sm-12">
+                                <div class="md-form-group float-label">
+                                    <input class="md-input has-value" type="password" required value="cualquiercosaxd">
+                                    <label>Repetir Contraseña</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 col-center">
-            <div class="card">
+            <div class="col-md-4 col-center">
+              <div class="card">
                 <div class="card-heading"><h2>Imagen de perfil</h2></div>
                   <div class="card-body">
                     <div class="row">
                       <div class="item">
-                        <img src="images/not_image/4.jpg" class="w-full r-t" alt="Washed Out">
+                        <img style="height:auto;width:300px" ng-show="form.file.$valid" ngf-thumbnail="picFile">
                       </div>
-                      <a ui-sref='#' class="md-btn md-fab md-raised indigo m-r md-fab-offset pull-right waves-effect"><i class="mdi mdi-editor-mode-edit i-24"></i></a>                
-                  </div>
+                    </div>
+                    <div class="row">
+                        <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile" class="">
+                        <strong ng-show="form.file.$error.maxSize">Archivo demasiado grande {{errorFile.size / 1000000|number:1}}MB: max 2M</strong>
+                    </div>
                 </div> 
+              </div>
+            </div>   
+        </div>
+        <div class="row row-center">
+            <div class="col-md-9 col-center">
+                <div class="pull-right">
+                    <strong id="message"></strong>
+                    <input type="submit" name="" class="btn btn-lg btn-success"  value="Guardar">
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row row-center">
-        <div class="col-md-9 col-center">
-            <div class="pull-right">
-                <button class="btn btn-lg btn-success">
-                    Guardar
-                </button>
-            </div>
-        </div>
-    </div>
+    </form>
 </div>

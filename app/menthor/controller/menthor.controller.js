@@ -10,7 +10,8 @@
 			MenthorService.getUsers()
 			.then(function(response) {
 				$scope.userList = response.data;	
-				console.log(response.data);		
+				//console.log(response);
+				console.log(response.data);	
 			})
 			.catch(function(error) {
 				console.log(error);
@@ -30,7 +31,7 @@
 			});
 		}
 
-		$scope.add=function(){
+		$scope.add=function(file){
 			var data={
 			'username': $scope.form.name,
 	        'nombre'  : $scope.form.name,
@@ -47,10 +48,16 @@
 				$scope.success = null;
 				MenthorService.addUser(data)
 				.then(function(response) {
-					console.log(response);
-					$("#message").attr('class','float-label alert alert-success');	
-					$("#message").html('¡Registro éxitoso!').fadeOut(4000);						
-					setTimeout(function(){ $state.go('admin.menthor.list'); }, 5000);
+					//console.log(response.code);
+					//console.log(response.message);
+					if(response.code==1){						
+						$("#message").attr('class','float-label alert alert-success');	
+						$("#message").html(response.message).fadeOut(6000).show().fadeOut(6000);
+					}
+					if(response.code==2){					
+						$("#message").attr('class','float-label alert alert-warning');	
+						$("#message").html('Ya existe un usuario asociado a la cuenta de correo').fadeOut(6000).show().fadeOut(6000);
+					}			
 				})
 				.catch(function(error) {
 					$("#message").attr('class','float-label alert alert-danger');	
@@ -59,17 +66,23 @@
 				});
 			}else{
 				$("#message").attr('class','float-label alert alert-warning');	
-				$("#message").html('¡Las contraseñas son diferentes, inténtelo nuevamente!').show().fadeOut(6000);	
+				$("#message").html('¡Las contraseñas no coinciden, inténtelo nuevamente!').show().fadeOut(6000);	
 			}
 		}
 
-		$scope.uploadPic = function(myFile) {
+		$scope.update=function (file){			
+			$scope.uploadPic(file, $scope.id);
+			console.log(file);
+			console.log($scope.id)
+		}
+
+		$scope.uploadPic = function(file,id) {
 	        //console.log('file is ' );
 	        //console.log(myFile);
-	        MenthorService.uploadFile(myFile,$scope.id)
+	        MenthorService.uploadFile(file,id)
 			.then(function(response) {
 				console.log('success');
-				//console.log(response);
+				console.log(response);
 				$("#msj").attr('class','alert alert-success');	
 				$("#msj").html('Imagen cargada correctamente').show().fadeOut(6000);
 			})

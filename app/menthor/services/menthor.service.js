@@ -12,9 +12,9 @@
 
 		function getUsers() {
 			var users = $q.defer();
-			var data={'type':2}
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/',data)
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/?type=2')
 			.success(function(response) {
+				console.log(response);
 				users.resolve(response);
 			})
 			.error(function(error) {
@@ -25,9 +25,8 @@
 		}
 
 		function getUser(id){
-			var data={'type':2}
 			var user= $q.defer();
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/', data)
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/')
 			.success(function(response) {
 				user.resolve(response);
 			})
@@ -56,7 +55,7 @@
 		   	var fd = new FormData();
 	        fd.append('file', file);
 	        //console.log(fd);
-	        $http.post("API/public/api/v1/usuario/"+id+"/imagen/", fd, {
+	        $http.post("API/public/api/v1/usuario/"+id+"/imagen/",fd, {
 	            transformRequest: angular.identity,
 	            headers: {'Content-Type': undefined}
 	        })

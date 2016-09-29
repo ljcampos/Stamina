@@ -58,8 +58,8 @@ $app->group('/api/v1/usuario', function ()
 		$json = $controller->callAction('add', $post);
 
 		header('Content-Type: application/json');
-		echo $_GET["callback"]."(" . $json . ")";
-		//echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+		echo $json;
 
 	})->setName('create_user');
 
@@ -88,8 +88,8 @@ $app->group('/api/v1/usuario', function ()
 		$controller = new UserController();
 		$json = $controller->callAction('img', $usuario_id);
 		header('Content-Type: application/json');
-		echo $_GET["callback"]."(" . $json . ")";
-		//echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+		echo $json;
 
 	})->setName('set_image');
 
