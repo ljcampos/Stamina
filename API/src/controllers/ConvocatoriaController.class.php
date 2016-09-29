@@ -49,17 +49,20 @@ class ConvocatoriaController extends Controller
 		if(count($convocatorias) > 0)
 		{
 			foreach ($convocatorias as $key => $value) {
-				$value->path = (strlen($value->path) > 0) ? /*$this->DIRECTORY . */'/uploads/convocatoria/' . $value->path : '';
+				//$value->path = (strlen($value->path) > 0) ? /*$this->DIRECTORY . */'/uploads/convocatoria/' . $value->path : '';
+				$value->path = $value->path;
 				unset($value->universidad->user->password);
 				unset($value->universidad->user->salt);
 				unset($value->universidad->user->token);
 				$value->universidad->user->status;
-				$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				//$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				$value->universidad->imagen = $value->universidad->imagen;
 
 				if (count($value->emprendedores) > 0)
 				{
 					foreach ($value->emprendedores as $k => $val) {
-						$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						//$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						$val->imagen = $val->imagen;
 						unset($val->password);
 						unset($val->salt);
 						unset($val->token);
