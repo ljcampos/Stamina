@@ -241,6 +241,34 @@ $app->group('/api/v1/convocatoria', function ()
 	})->setName('all_convocatorias_actuales');
 
 	/**
+	*
+	*/
+	$this->get('/proximas/', function ($request, $response, $args)
+	{
+
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('conPro');
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('all_convocatorias_proximas');
+
+	/**
+	*
+	*/
+	$this->get('/pasadas/', function ($request, $response, $args)
+	{
+
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('conPas');
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('all_convocatorias_pasadas');
+
+	/**
 	* 
 	*/
 	$this->post('/', function ($request, $response, $args) 
