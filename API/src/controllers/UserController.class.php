@@ -347,6 +347,8 @@ class UserController extends Controller
 							//$universidad->universidad_id = $user->usuario_id;
 							$universidad->usuario_id = $user->usuario_id;
 							$universidad->nombre = $params['nombre'];
+							$universidad->fecha_inicio_servicio = $params['inicio_servicio'];
+							$universidad->fecha_final_servicio = $params['final_servicio'];
 							$universidad->estado_id = 1;
 
 							if ($universidad->save()) { $saved = true; }
@@ -523,6 +525,8 @@ class UserController extends Controller
 								//$universidad->universidad_id = $user->usuario_id;
 								$universidad->usuario_id = $user->usuario_id;
 								$universidad->nombre = $params['nombre'];
+								$universidad->fecha_inicio_servicio = $params['inicio_servicio'];
+								$universidad->fecha_final_servicio = $params['final_servicio'];
 								$universidad->estado_id = 1;
 
 								if ($universidad->save()) { $saved = true; }
