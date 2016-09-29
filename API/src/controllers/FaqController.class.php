@@ -56,7 +56,7 @@ class FaqController extends Controller
 				}
 				else { $this->response['code'] = 5; $this->response['message'] = 'El archivo debe ser de tipo PDF.'; }
 			}
-			else {$this->response['message'] = 'Debe enviar un archivo de 1.5MB.'}
+			else {$this->response['message'] = 'Debe enviar un archivo de 1.5MB.';}
 		}
 
 		return $this->response;

@@ -218,22 +218,33 @@ class PromedioController extends Controller
 				try 
 				{
 					$promedio 								= Promedio::find($params['id']);
-					$promedio->promedio 					= $params['promedio'];
-					$promedio->conclusion 					= $params['conclusion'];
-					$promedio->id_emprendedor_convocatoria 	= intval($params['id_emprendedor_convocatoria']);
 
-					if ($promedio->save())
+					if ($promedio == null) 
 					{
-						$db::commit();
-						$this->response['code'] = 1;
-						$this->response['data'] = $promedio;
-						$this->response['message'] = 'Se ha actualizado correctamente la promedio.';
+						$this->response['code'] = 4;
+						$this->response['message'] = 'Recurso no encontrado';	
 					}
 					else
 					{
-						$this->response['code'] = 5;
-						$this->response['messages'] = 'No se pudo completar la acción, intentelo más tarde.';
+						
+						$promedio->promedio 					= $params['promedio'];
+						$promedio->conclusion 					= $params['conclusion'];
+						$promedio->id_emprendedor_convocatoria 	= intval($params['id_emprendedor_convocatoria']);
+
+						if ($promedio->save())
+						{
+							$db::commit();
+							$this->response['code'] = 1;
+							$this->response['data'] = $promedio;
+							$this->response['message'] = 'Se ha actualizado correctamente la promedio.';
+						}
+						else
+						{
+							$this->response['code'] = 5;
+							$this->response['messages'] = 'No se pudo completar la acción, intentelo más tarde.';
+						}
 					}
+					
 				} 
 				catch (Exception $e) 
 				{
