@@ -10,7 +10,7 @@
 			getAnnouncementsAvailable: getAnnouncementsAvailable,
 			getAnnouncementById: getAnnouncementById,
 			addAnnouncement: addAnnouncement,
-			updateAnnouncement: updateAnnouncement,
+			editAnnouncement: editAnnouncement,
 			deleteAnnouncement: deleteAnnouncement
 
 		};
@@ -20,7 +20,6 @@
 			$http.get('http://www.stamina.dev/API/public/api/v1/universidad/')
 			.success(function(response) {
 				universityDefer.resolve(response);
-				console.log(response);
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
@@ -34,7 +33,6 @@
 
 			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/')
 			.success(function(response) {
-				console.log(response);
 				announcementDefer.resolve(response);
 			})
 			.error(function(error) {
@@ -49,7 +47,6 @@
 
 			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/actuales/')
 			.success(function(response) {
-				console.log(response);
 				announcementDefer.resolve(response);
 			})
 			.error(function(error) {
@@ -63,9 +60,8 @@
 		function getAnnouncementById(id) {
 			var announcementDefer = $q.defer();
 
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/')
+			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/'+id+'/')
 			.success(function(response) {
-				console.log(response);
 				announcementDefer.resolve(response);
 			})
 			.error(function(error) {
@@ -81,7 +77,6 @@
 
 			$http.post('http://www.stamina.dev/API/public/api/v1/convocatoria/', data)
 			.success(function(response) {
-				console.log(response);
 				announcementDefer.resolve(response);
 			})
 			.error(function(error) {
@@ -92,11 +87,10 @@
 			return announcementDefer.promise;
 		}
 
-		function updateAnnouncement(data) {
+		function editAnnouncement(data) {
 			var announcementDefer = $q.defer();
 			$http.put('http://www.stamina.dev/API/public/api/v1/usuario/', data)
 			.success(function(response) {
-				console.log(response);
 				announcementDefer.resolve(response);
 			})
 			.error(function(error) {
@@ -111,7 +105,6 @@
 
 			$http.delete('http://www.stamina.dev/API/public/api/v1/usuario/', id)
 			.success(function(response) {
-				console.log(response);
 				announcementDefer.resolve(response);
 			})
 			.error(function(error) {

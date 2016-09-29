@@ -31,8 +31,9 @@
 			}
 		})
 		.state('entrepreneur.announcement', {
-			url: '/convocatoria',
+			url: '/convocatoria/:id',
 			templateUrl: 'app/entrepreneur/views/announcement.view.html',
+			controller: 'EntrepreneurAnnouncementController',
 			data: {
 				requireLogin: true,
 				role: 3

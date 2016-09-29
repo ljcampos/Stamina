@@ -6,9 +6,11 @@
 	function AnnouncementController($scope, AnnouncementService) {
 		$scope.text = 'xsdfsf';
 		$scope.announcesList = {};
+		$scope.announcesAvailableList = {};
 		
 		$scope.init = function() {
 			getAnnouncements();
+			getAnnouncementsAvailable();
 		};
 
 		angular.element(document).ready(function() {
@@ -18,8 +20,16 @@
 		function getAnnouncements() {
 			AnnouncementService.getAllAnnouncements()
 			.then(function(response) {
-				console.log(response);
 				$scope.announcesList = response.data;
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+		}
+		function getAnnouncementsAvailable() {
+			AnnouncementService.getAnnouncementsAvailable()
+			.then(function(response) {
+				$scope.announcesAvailableList = response.data;
 			})
 			.catch(function(error) {
 				console.log(error);

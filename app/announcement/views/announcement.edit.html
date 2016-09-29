@@ -1,0 +1,86 @@
+<script type="text/javascript" src="jqueryTimepicker/lib/bootstrap-datepicker.js"></script>
+<script>
+      $.fn.datepicker.dates['es'] = {
+          days: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+          daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+          daysMin: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+          months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+          monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+          today: "Hoy",
+          clear: "Limpiar"
+          };
+      $(function(){
+        $("#datePicker3").datepicker({
+          language:"es",
+          orientation:"top auto",
+          format: "yyyy-mm-dd",
+          autoclose: true
+        });
+        $("#datePicker4").datepicker({
+          language:"es",
+          orientation:"top auto",
+          format: "yyyy-mm-dd",
+          autoclose: true
+        });
+      });
+</script>
+<div class="box-inner padding">
+  <div class="row row-center">
+    <div class="col-md-7 col-center">
+      <button class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</button>
+    </div>
+  </div>
+  <div class="row row-center">
+    <div class="col-md-7 col-center">
+      <div class="card">
+        <div class="card-heading">
+          <h2>Información General</h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="md-form-group float-label">
+                <input class="md-input has-value" required ng-model="announce.nombre">
+                <label>Nombre de la convocatoria</label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+                <select class="form-control" ng-model="announce.universidad_id">
+                  <option selected value="">Elija una Universidad</option>
+                  <option ng-repeat="university in univesityList" value="{{university.universidad_id}}" ng-selected="selected_universidad==university.universidad_id">{{university.nombre}}</option>
+                </select>
+                <br>
+            </div>
+            <div class="col-sm-6">
+              <div class="md-form-group float-label">
+                <input class="md-input has-value" name="datePicker3" id="datePicker3" required readonly type="text"  ng-model="announce.fecha_inicio">
+                <label>Fecha Inicio</label>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="md-form-group float-label">
+                <input class="md-input has-value" name="datePicker4" id="datePicker4" required readonly type="text"  ng-model="announce.fecha_cierre">
+                <label>Fecha Final</label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+                <label>Subir Archivo (PDF)</label>
+                <br>
+                <!-- <input class="md-input" required type="file"> -->
+                 <input class="md-input" type="file" ngf-select ng-model="file" name="file" ngf-max-size="2MB" required>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-center">
+    <div class="col-md-7 col-center">
+      <div class="pull-right">
+        <button class="btn btn-lg btn-success" ng-click="editAnnouncement(announce, file)">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -94,14 +94,18 @@ class ConvocatoriaController extends Controller
 			if ($convocatoria != null)
 			{	
 				$convocatoria->universidad;
-				unset($value->universidad_id);
-				$convocatoria->path = (strlen($convocatoria->path) > 0) ? /*$this->DIRECTORY .*/ '/uploads/convocatoria/' .  $convocatoria->path : '';
-				$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $convocatoria->universidad->imagen : '';
+				//unset($value->universidad_id);
+				unset($convocatoria->universidad_id);
+				$convocatoria->path = (strlen($convocatoria->path) > 0) ? /*$this->DIRECTORY .*/ '/API/uploads/convocatoria/' .  $convocatoria->path : '';
+				$convocatoria->path = $convocatoria->path;
+				$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../API/uploads/universidad/' . $convocatoria->universidad->imagen : '';
 
 				if (count($convocatoria->emprendedores) > 0)
 				{	
 					foreach ($convocatoria->emprendedores as $key => $value) {
-						$value->imagen = ($value->imagen != "" || $value->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $value->imagen : '';
+						//$value->imagen = ($value->imagen != "" || $value->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $value->imagen : '';
+						$convocatoria->imagen = ($convocatoria->imagen != "" || $convocatoria->imagen != null) ? __DIR__ . '/../../API/uploads/usuario/' . $convocatoria->imagen : '';
+						$convocatoria->imagen = $convocatoria->imagen;
 						unset($convocatoria->emprendedores[$key]->token);
 						unset($convocatoria->emprendedores[$key]->password);
 						unset($convocatoria->emprendedores[$key]->salt);
@@ -475,7 +479,8 @@ class ConvocatoriaController extends Controller
 		if(count($convocatorias) > 0)
 		{
 			foreach ($convocatorias as $key => $value) {
-				$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
+				//$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
+				$value->path = $value->path;
 				unset($value->universidad->user->password);
 				unset($value->universidad->user->salt);
 				unset($value->universidad->user->token);
@@ -486,7 +491,8 @@ class ConvocatoriaController extends Controller
 				if (count($value->emprendedores) > 0)
 				{
 					foreach ($value->emprendedores as $k => $val) {
-						$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						//$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						$val->imagen = $val->imagen;
 						unset($val->password);
 						unset($val->salt);
 						unset($val->token);
