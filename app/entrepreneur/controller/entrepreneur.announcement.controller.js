@@ -23,5 +23,11 @@
 				console.log(error);
 			});
 		}
+		$scope.applyAnnouncement = function(params){
+			console.log(params);
+			/*	CODIGO PARA INSERTAR EN LA TABLA:
+			 *	emprendedor_convocatoria
+			 */
+		}
 	}
 } ());
