@@ -2,6 +2,5 @@
 node_modules
 bower_components
 /API/vendor
-/API/uploads
 /API/composer.lock
 /API/src/config/conf.db.ini
