@@ -1,5 +1,5 @@
-'use strict';
 var config = (function() {
+  'use strict';
   var moduleName = 'myApp';
   var dependencies = [
     'ui.router',
