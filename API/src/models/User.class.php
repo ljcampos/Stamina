@@ -34,4 +34,8 @@ class User extends Model {
 		return $this->hasMany('Mentor', 'mentor_id', 'usuario_id');
 	}
 
+	public function emprendedorConvocatoria () {
+		return $this->hasMany('EmprendedorConvocatoria', 'id_emprendedor', 'usuario_id');
+	}
+
 }
