@@ -10,7 +10,8 @@ class FormularioAplicacionController extends Controller
 		'one'		=>	'getById',
 		'add' 		=>	'create',
 		'update'	=>	'update',
-		'del'		=>	'delete'
+		'del'		=>	'delete',
+		'forPre'	=>	'seccionPreguntas'
 	);
 
 	/**
@@ -287,6 +288,43 @@ class FormularioAplicacionController extends Controller
 		return $json;
 	}
 
+	/**
+	*
+	*/
+	public function seccionPreguntas($id)
+	{
+		try
+		{
+			$params = array($id);
+			$params = $this->sanitize($params);
+
+			$formularioAplicacion = FormularioAplicacion::with('preguntas')
+													->find($params[0]);
+
+			if ($formularioAplicacion != null) 
+			{
+				$this->response['data'] = $formularioAplicacion->toArray();
+				$this->response['message'] = 'Recurso encontrado';
+			}
+			else
+			{
+				$this->response['code'] = 4;
+				$this->response['message'] = 'Recurso no encontrado';
+			}
+
+		}catch(Exception $e)
+		{
+			$this->response['code'] = 5;
+			$this->response['message'][] = 'Ha ocurrido un error, favor de contactar al administrador';
+			$this->response['error'] = $e->getMessage();
+		}
+		
+		$this->response['code'] = 1;
+		$this->response['data'] = $formularioAplicacion;
+		
+		return $this->response;
+		
+	}
 
 	/**
 	* 

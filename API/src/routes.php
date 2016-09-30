@@ -783,7 +783,9 @@ $app->group('/api/v1/formularioAplicacion', function ()
 
 	})->setName('create_seccion');
 
-
+	/**
+	*
+	*/
 	$this->get('/{id}/', function ($request, $response, $args)
 	{
 		$controller = new FormularioAplicacionController();
@@ -795,6 +797,26 @@ $app->group('/api/v1/formularioAplicacion', function ()
 
 	})->setName('formulario_aplicacion_by_id');
 
+	/**
+	*
+	*/
+	$this->get('/{id}/preguntas/', function ($request, $response, $args)
+	{
+		$id_secion = $args['id'];
+		$controller = new FormularioAplicacionController();
+		$json = $controller->callAction('forPre', $id_secion);
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+		// header('Content-Type: application/json');
+		// echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+
+	})->setName('formulario_aplicacion_by_id');
+
+	/**
+	*
+	*/
 	$this->post('/update/{id}/', function ($request, $response, $args)
 	{
 		$id = $args['id'];

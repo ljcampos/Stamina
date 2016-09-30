@@ -10,7 +10,7 @@ class FormularioAplicacion extends Model {
 	protected 	$primaryKey =	'id';
 	public 		$timestamps =	true;
 
-	public function relacionPreguntasFormularioAplicacion() {
+	public function preguntas() {
 		return $this->hasMany('Pregunta', 'id_seccion', 'id');
 	}
 
