@@ -39,6 +39,8 @@
 			data.materno 			=	university.nombre;
 			data.type 				=	4;
 			data.isMentor 			=	0;
+			data.inicio_servicio 	=	university.fecha_inicio;
+			data.final_servicio 	=	university.fecha_final;
 			
 			UniversityService.addUserUniversity(data)
 			.then(function(response) {
