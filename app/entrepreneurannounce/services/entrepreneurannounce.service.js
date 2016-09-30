@@ -5,21 +5,21 @@
 
 	function EntrepreneurannounceService($q, $http) {
 		return {
-			getUsers: getUsers
+			suscribirse: suscribirse
 		};
 
-		function getUsers() {
-			var users = $q.defer();
-			$http.post('https://jsonplaceholder.typicode.com/users')
+		function suscribirse(data) {
+			var entrepreneurannounceDefer = $q.defer();
+			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/'+data.id_emprendedor+'/convocatoria/'+data.id_convocatoria+'/suscrip/', data)
 			.success(function(response) {
 				console.log(response);
-				users.resolve(response);
+				entrepreneurannounceDefer.resolve(response);
 			})
 			.error(function(error) {
 				console.log(error);
-				users.reject(error);
+				entrepreneurannounceDefer.reject(error);
 			});
-			return users.promise;
+			return entrepreneurannounceDefer.promise;
 		}
 	}
 } ());

@@ -26,9 +26,13 @@
 		}
 		$scope.applyAnnouncement = function(id_announce, id_user){
 			//console.log("announce:"+id_announce + " user:"+id_user);
-			EntrepreneurannounceService.getUsers()
+			var data = {};
+			data.id_emprendedor 	=	id_user;
+			data.id_convocatoria 	=	id_announce;
+			data.estatus		 	=	1;
+
+			EntrepreneurannounceService.suscribirse(data)
 			.then(function(response) {
-				$scope.announce = response.data;
 				console.log(response);
 			})
 			.catch(function(error) {
