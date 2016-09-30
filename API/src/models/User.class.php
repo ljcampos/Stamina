@@ -30,4 +30,8 @@ class User extends Model {
 		return $this->hasMany('Calificacion', 'id_usuario', 'usuario_id');
 	}
 
+	public function mentor () {
+		return $this->hasMany('Mentor', 'mentor_id', 'usuario_id');
+	}
+
 }
