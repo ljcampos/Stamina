@@ -38,7 +38,8 @@
 		</ul>
     <div class="md-whiteframe-z2 bg-white">
 			<div class="tab-content p m-b-md clear b-t b-t-2x">
-				<div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_1">
+				<!-- section 1 -->
+        <div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_1">
           <form>
             <div class="row">
               <div class="col-md-7">
@@ -48,7 +49,7 @@
                 </div>
                   <div class="col-md-4">
   									<div class="md-form-group float-label">
-  										<input class="md-input" required="">
+  										<input class="md-input" required="" ng-model='objSection1.name'>
   										<label>Nombre(s)</label>
   									</div>
                   </div>
@@ -127,8 +128,18 @@
                 </div>
               </div>
             </div>
+            <hr />
+            <div class='row'>
+              <div class='col-lg-12'>
+                <div class='pull-right'>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection1()'>Guardar</button>
+                  <button class='btn btn-lg btn-info' ng-disabled='btnSection1'>Siguiente</button>
+                </div>
+              </div>
+            </div>
 					</form>
 				</div>
+        <!-- section 2 -->
         <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_2">
           <form>
             <div class="row">
@@ -333,7 +344,8 @@
             </div>
           </form>
         </div>
-				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
+				<!-- section 3 -->
+        <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
           <form>
             <div class="row">
               <div class="col-md-12">
@@ -419,7 +431,8 @@
             </div>
           </form>
 				</div>
-				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_4">
+				<!-- section 4 -->
+        <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_4">
           <form>
             <div class="row">
               <div class="col-md-12">
@@ -504,7 +517,8 @@
             </div>
           </form>
 				</div>
-				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_5">
+				<!-- section 5 -->
+        <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_5">
 					<form>
             <div class="row">
               <div class="col-md-6">
@@ -652,7 +666,8 @@
             </div>
           </form>
 				</div>
-				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_6">
+				<!-- section 6 -->
+        <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_6">
           <form>
             <div class="row">
               <div class="col-md-12">
@@ -706,6 +721,7 @@
             </div>
           </form>
 				</div>
+        <!-- section 7 -->
 				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_7">
 					Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher.
 				</div>
