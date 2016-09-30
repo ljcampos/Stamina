@@ -30,9 +30,12 @@
 			'announcement': {
 				'list': base + 'convocatoria/',
 				'ById': base + 'convocatoria/:id/',
+				'entrepreneur_announce': base + 'usuario/:id/convocatorias/',
 				'add': base + 'convocatoria/',
 				'update': base + 'convocatoria/:id/update/',
 				'delete': base + 'convocatoria/:id/delete/',
+				'next': base + 'convocatoria/proximas/',
+				'past': base + 'convocatoria/pasadas/',
 				'aviable': base + 'convocatoria/actuales/'
 			},
 			'rol': {
