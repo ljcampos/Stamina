@@ -34,6 +34,20 @@ $app->group('/api/v1/usuario', function ()
 	/**
 	* 
 	*/
+	$this->get('/{usuario_id}/convocatorias/', function ($request, $response, $args)
+	{
+		$usuario_id = $args['usuario_id'];
+		$controller = new UserController();
+		$json = $controller->callAction('empCon', $usuario_id);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('get_one_user_convocatoria');
+
+	/**
+	* 
+	*/
 	$this->get('/{usuario_id}/', function ($request, $response, $args)
 	{
 		$usuario_id = $args['usuario_id'];
@@ -347,6 +361,19 @@ $app->group('/api/v1/roles', function ()
 		return $response->withJson($json, $code);
 
 	})->setName('list_rol');
+
+	/**
+	* 
+	*/
+	$this->get('/menthor/', function ($request, $response, $args) 
+	{
+		$controller = new RolController();
+		$json = $controller->callAction('busMen');
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('list_mentores');
 
 	/**
 	* 
