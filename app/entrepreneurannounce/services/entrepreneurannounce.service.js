@@ -10,7 +10,7 @@
 
 		function getUsers() {
 			var users = $q.defer();
-			$http.get('https://jsonplaceholder.typicode.com/users')
+			$http.post('https://jsonplaceholder.typicode.com/users')
 			.success(function(response) {
 				console.log(response);
 				users.resolve(response);

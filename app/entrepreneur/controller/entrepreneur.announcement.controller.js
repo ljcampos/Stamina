@@ -1,11 +1,12 @@
 (function() {
 	'use strict';
 
-	angular.module('entrepreneur').controller('EntrepreneurAnnouncementController', ['$state', '$stateParams', '$scope', 'AnnouncementService', EntrepreneurAnnouncementController]);
+	angular.module('entrepreneur').controller('EntrepreneurAnnouncementController', ['$state', '$stateParams', '$scope', 'AnnouncementService', 'EntrepreneurannounceService', 'UserService', EntrepreneurAnnouncementController]);
 
-	function EntrepreneurAnnouncementController($state, $stateParams, $scope, AnnouncementService) {
+	function EntrepreneurAnnouncementController($state, $stateParams, $scope, AnnouncementService, EntrepreneurannounceService, UserService){
 		$scope.text = 'xsdfsf';
 		$scope.announce = {};
+		$scope.user = UserService.getUser();
 		$scope.init = function() {
 			getAnnouncementById($stateParams.id);
 			console.log("CONTROLLER");
@@ -23,11 +24,16 @@
 				console.log(error);
 			});
 		}
-		$scope.applyAnnouncement = function(params){
-			console.log(params);
-			/*	CODIGO PARA INSERTAR EN LA TABLA:
-			 *	emprendedor_convocatoria
-			 */
+		$scope.applyAnnouncement = function(id_announce, id_user){
+			//console.log("announce:"+id_announce + " user:"+id_user);
+			EntrepreneurannounceService.getUsers()
+			.then(function(response) {
+				$scope.announce = response.data;
+				console.log(response);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
 		}
 	}
 } ());
