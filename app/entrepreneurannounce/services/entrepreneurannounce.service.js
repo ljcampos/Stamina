@@ -1,16 +1,16 @@
 (function() {
 	'use strict';
 
-	angular.module('faq').service('EntrepreneurannounceService', ['$q', '$http', EntrepreneurannounceService]);
+	angular.module('faq').service('EntrepreneurannounceService', ['$q', '$http', 'API', EntrepreneurannounceService]);
 
-	function EntrepreneurannounceService($q, $http) {
+	function EntrepreneurannounceService($q, $http, API) {
 		return {
 			suscribirse: suscribirse
 		};
 
 		function suscribirse(data) {
 			var entrepreneurannounceDefer = $q.defer();
-			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/'+data.id_emprendedor+'/convocatoria/'+data.id_convocatoria+'/suscrip/', data)
+			$http.post(API.user.list+data.id_emprendedor+'/convocatoria/'+data.id_convocatoria+'/suscrip/', data)
 			.success(function(response) {
 				console.log(response);
 				entrepreneurannounceDefer.resolve(response);

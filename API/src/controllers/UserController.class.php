@@ -59,7 +59,7 @@ class UserController extends Controller
 		{
 			$usuarios = User::orderBy('username', 'ASC')->get();
 		}
-		elseif ($type === 1 && $type != null) // Usuarios de tipo emprendedor
+		elseif ($type === 3 && $type != null) // Usuarios de tipo emprendedor
 		{
 			$rol = Role::where('rol', '=', 'emprendedor')->get();
 			if (count($rol) > 0) { $usuarios = $rol[0]->users; }
@@ -69,7 +69,7 @@ class UserController extends Controller
 			$rol = Role::where('rol', '=', 'mentor')->get();
 			if (count($rol) > 0) { $usuarios = $rol[0]->users; }
 		}
-		elseif ($type === 3 && $type != null) // Usuarios de tipo administrador
+		elseif ($type === 1 && $type != null) // Usuarios de tipo administrador
 		{
 			$rol = Role::where('rol', '=', 'admin')->get();
 			if (count($rol) > 0) { $usuarios = $rol[0]->users; }	
@@ -334,7 +334,7 @@ class UserController extends Controller
 							if ($mentor->save()) { $saved = true; }
 						}
 					}
-					elseif ($type === 3 && $type != null) // Usuarios de tipo administrador
+					elseif ($type === 1 && $type != null) // Usuarios de tipo administrador
 					{
 						$rol = Role::where('rol', '=', 'admin')->get();
 						if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
@@ -493,7 +493,7 @@ class UserController extends Controller
 						$type = intval($params['type']);
 						$rol_id = 0;
 						
-						if ($type === 1 && $type != null) // Usuario de tipo emprendedor
+						if ($type === 3 && $type != null) // Usuario de tipo emprendedor
 						{
 							$rol = Role::where('rol', '=', 'emprendedor')->get();
 							if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
@@ -512,7 +512,7 @@ class UserController extends Controller
 								if ($mentor->save()) { $saved = true; }
 							}
 						}
-						elseif ($type === 3 && $type != null) // Usuarios de tipo administrador
+						elseif ($type === 1 && $type != null) // Usuarios de tipo administrador
 						{
 							$rol = Role::where('rol', '=', 'admin')->get();
 							if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }

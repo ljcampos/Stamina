@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('announcement').service('AnnouncementService', ['$q', '$http', AnnouncementService]);
+	angular.module('announcement').service('AnnouncementService', ['$q', '$http', 'API', AnnouncementService]);
 
-	function AnnouncementService($q, $http) {
+	function AnnouncementService($q, $http, API) {
 		return {
 			getAllUniversities: getAllUniversities,
 			getAllAnnouncements: getAllAnnouncements,
@@ -17,7 +17,7 @@
 
 		function getAllUniversities() {
 			var universityDefer = $q.defer();
-			$http.get('http://www.stamina.dev/API/public/api/v1/universidad/')
+			$http.get(API.university.list)
 			.success(function(response) {
 				universityDefer.resolve(response);
 			})
@@ -31,7 +31,7 @@
 		function getAllAnnouncements() {
 			var announcementDefer = $q.defer();
 
-			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/')
+			$http.get(API.announcement.list)
 			.success(function(response) {
 				announcementDefer.resolve(response);
 			})
@@ -45,7 +45,7 @@
 		function getAnnouncementsAvailable() {
 			var announcementDefer = $q.defer();
 
-			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/actuales/')
+			$http.get(API.announcement.aviable)
 			.success(function(response) {
 				announcementDefer.resolve(response);
 			})
@@ -60,7 +60,7 @@
 		function getAnnouncementById(id) {
 			var announcementDefer = $q.defer();
 
-			$http.get('http://www.stamina.dev/API/public/api/v1/convocatoria/'+id+'/')
+			$http.get(API.announcement.ById.replace(':id', id))
 			.success(function(response) {
 				announcementDefer.resolve(response);
 			})
@@ -75,7 +75,7 @@
 		function addAnnouncement(data) {
 			var announcementDefer = $q.defer();
 
-			$http.post('http://www.stamina.dev/API/public/api/v1/convocatoria/', data)
+			$http.post(API.announcement.add, data)
 			.success(function(response) {
 				announcementDefer.resolve(response);
 			})
@@ -89,7 +89,7 @@
 
 		function editAnnouncement(data) {
 			var announcementDefer = $q.defer();
-			$http.put('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+			$http.put(API.user.add, data)
 			.success(function(response) {
 				announcementDefer.resolve(response);
 			})
@@ -103,7 +103,7 @@
 		function deleteAnnouncement(id) {
 			var announcementDefer = $q.defer();
 
-			$http.delete('http://www.stamina.dev/API/public/api/v1/usuario/', id)
+			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', id)
 			.success(function(response) {
 				announcementDefer.resolve(response);
 			})

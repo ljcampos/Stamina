@@ -33,10 +33,14 @@
 			var data 	=	{};
 			
 			data.nombre 		=	university.nombre;
-			data.email 			=	university.email;
+			data.email 			=	university.user.email;
+			data.fecha_inicio_servicio 		=	university.created_at;
+			data.fecha_final_servicio 		=	university.updated_at;
 			data.estado_id		=	1;
 			data.usuario_id		=	$scope.usuario_id;
 			data.file			=	image;
+
+			// console.log(data);
 
 			image.upload = Upload.upload({
 				url: 'http://www.stamina.dev/API/public/api/v1/universidad/'+$stateParams.id+'/update/',
@@ -51,14 +55,14 @@
 				console.log(err);
 			});
 
-			// UniversityService.editUniversity($stateParams.id,data)
-			// .then(function(response) {
-			// 	console.log(response);
-			// 	$state.go('admin.university.list');
-			// })
-			// .catch(function(error) {
-			// 	console.log(error);
-			// });
+			UniversityService.editUniversity($stateParams.id,data)
+			.then(function(response) {
+				console.log(response);
+				$state.go('admin.university.list');
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
 		};
 	}
 } ());

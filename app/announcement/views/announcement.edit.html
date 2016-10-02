@@ -47,7 +47,7 @@
             <div class="col-sm-12">
                 <select class="form-control" ng-model="announce.universidad_id">
                   <option selected value="">Elija una Universidad</option>
-                  <option ng-repeat="university in univesityList" value="{{university.universidad_id}}" ng-selected="selected_universidad==university.universidad_id">{{university.nombre}}</option>
+                  <option ng-repeat="university in univesityList" value="university.universidad_id" ng-selected="selected_universidad==university.universidad_id">{{university.nombre}}</option>
                 </select>
                 <br>
             </div>

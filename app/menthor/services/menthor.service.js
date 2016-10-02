@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 
-	angular.module('menthor').service('MenthorService', ['$q', '$http', MenthorService]);
-	function MenthorService($q, $http) {
+	angular.module('menthor').service('MenthorService', ['$q', '$http', 'API', MenthorService]);
+	function MenthorService($q, $http, API) {
 		return {
 			getUsers : getUsers,
 			getUser  : getUser,
@@ -11,8 +11,8 @@
 
 		function getUsers() {
 			var users = $q.defer();
-			var data={'type':2}
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/',data)
+			var data={'type':2};
+			$http.get(API.user.list,data)
 			.success(function(response) {
 				users.resolve(response);
 			})
@@ -24,9 +24,9 @@
 		}
 
 		function getUser(id){
-			var data={'type':2}
+			var data={'type':2};
 			var user= $q.defer();
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/', data)
+			$http.get(API.user.list +id+'/', data)
 			.success(function(response) {
 				user.resolve(response);
 			})
@@ -38,8 +38,8 @@
 		}
 
 		function addUser(data) {
-			var userDefer = $q.defer();			
-			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+			var userDefer = $q.defer();
+			$http.post(API.user.list, data)
 	      	.success(function(response) {
 	        	userDefer.resolve(response);
 	      	})

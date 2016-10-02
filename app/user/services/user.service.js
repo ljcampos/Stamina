@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('user').service('UserService', ['$q', '$http', '$localStorage', '$sessionStorage', '$state', UserService]);
+  angular.module('user').service('UserService', ['$q', '$http', '$localStorage', '$sessionStorage', '$state', 'API', UserService]);
 
-  function UserService($q, $http, $localStorage, $sessionStorage, $state) {
+  function UserService($q, $http, $localStorage, $sessionStorage, $state, API) {
     return {
       getAllUsers: getAllUsers,
       sigin: sigin,
@@ -37,7 +37,7 @@
       //http://www.stamina.dev/API/public/api/v1/usuario/facebook/
       var userDefer = $q.defer();
 
-      $http.get('http://www.stamina.dev/API/public/api/v1/usuario/facebook/' + id)
+      $http.get(API.user.facebookUserById.replace(':id', id))
       .success(function(response) {
         console.log(response);
         userDefer.resolve(response);
@@ -138,7 +138,7 @@
     function sigin(credentials) {
       var userDefer = $q.defer();
 
-      $http.post('http://www.stamina.dev/API/public/api/v1/usuario/auth/', credentials)
+      $http.post(API.auth.signin, credentials)
       .success(function(response) {
         console.log(response);
         userDefer.resolve(response);
@@ -154,9 +154,8 @@
 
     function sigup(data) {
       var userDefer = $q.defer();
-      // http://www.stamina.dev/API/public/api/v1/usuario/
-      console.log(data);
-      $http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+
+      $http.post(API.auth.signup, data)
       .success(function(response) {
         console.log(response);
         userDefer.resolve(response);

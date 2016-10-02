@@ -45,7 +45,7 @@
 		$scope.editAnnouncement = function(announce,file) {
 			var data = {};
 			data.nombre 			=	announce.nombre;
-			data.universidad_id 	=	announce.universidad_id;
+			data.universidad_id 	=	announce.universidad.universidad_id;
 			data.fecha_inicio 		=	announce.fecha_inicio;
 			data.fecha_cierre 		=	announce.fecha_cierre;
 			data.file				=	file;

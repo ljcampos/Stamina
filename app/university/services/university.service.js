@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('university').service('UniversityService', ['$q', '$http', UniversityService]);
+	angular.module('university').service('UniversityService', ['$q', '$http', 'API', UniversityService]);
 
-	function UniversityService($q, $http) {
+	function UniversityService($q, $http, API) {
 		return {
 			getAllUniversities: getAllUniversities,
 			addUniversity: addUniversity,
@@ -15,7 +15,7 @@
 
 		function getAllUniversities() {
 			var universityDefer = $q.defer();
-			$http.get('http://www.stamina.dev/API/public/api/v1/universidad/')
+			$http.get(API.university.list)
 			.success(function(response) {
 				universityDefer.resolve(response);
 				console.log(response);
@@ -29,7 +29,7 @@
 
 		function addUniversity(data) {
 			var universityDefer = $q.defer();
-			$http.post('http://www.stamina.dev/API/public/api/v1/universidad/', data)
+			$http.post(API.university.list.add, data)
 			.success(function(response) {
 				universityDefer.resolve(response);
 			})
@@ -42,7 +42,7 @@
 		function getUniversityById(id) {
 			var universityDefer = $q.defer();
 
-			$http.get('http://www.stamina.dev/API/public/api/v1/universidad/'+id+'/')
+			$http.get(API.university.ById.replace(':id',id))
 			.success(function(response) {
 				universityDefer.resolve(response);
 				console.log(response);
@@ -57,7 +57,7 @@
 
 		function editUniversity(id,data) {
 			var universityDefer = $q.defer();
-			$http.post('http://www.stamina.dev/API/public/api/v1/universidad/'+id+'/update/',data)
+			$http.post(API.university.update.replace(':id', id),data)
 			.success(function(response) {
 				universityDefer.resolve(response);
 				console.log(response);
@@ -71,7 +71,7 @@
 
 		function addUserUniversity(data) {
 			var universityDefer = $q.defer();
-			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', data)
+			$http.post(API.user.list, data)
 			.success(function(response) {
 				universityDefer.resolve(response);
 			})
