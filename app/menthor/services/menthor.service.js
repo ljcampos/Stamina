@@ -12,7 +12,7 @@
 
 		function getMenthors() {
 			var users = $q.defer();
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuarios/mentores/')
+			$http.get(API.menthor.list)
 			.success(function(response) {
 				users.resolve(response);
 			})

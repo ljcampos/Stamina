@@ -13,7 +13,8 @@
 				'list': base + 'usuario/',
 				'ById': base + 'usuario/:id/',
 				'add': base + 'usuario/',
-				'facebookUserById': base + 'usuario/facebook/:id'
+				'facebookUserById': base + 'usuario/facebook/:id',
+				'update': base + 'usuario/:id/update/'
 			},
 			'auth': {
 				'signin': base + 'usuario/auth/',
@@ -44,6 +45,13 @@
 				'list': base + 'roles/:id/permisos/',
 				'add': base + 'roles/:id/permisos/',
 				'delete': base + 'roles/:id/permisos/delete/'
+			},
+			'menthor': {
+				'list': base + 'usuarios/mentores/',
+				'ById': base + '...',
+				'add': base + '...',
+				'edit': base + '...',
+				'delete': base + '...'
 			}
 		};
 	}

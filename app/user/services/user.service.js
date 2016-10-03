@@ -37,7 +37,7 @@
 
     function getUserById(id) {
       var users = $q.defer();
-      $http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/')
+      $http.get(API.user.ById.replace(':id', id))
       .success(function(response) {
         console.log(response);
         users.resolve(response);
@@ -51,7 +51,7 @@
 
     function updateUser(id,datos) {
       var users = $q.defer();
-      $http.post('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/update/',datos)
+      $http.post(API.user.update.replace(':id', id), datos)
       .success(function(response) {
         console.log(response);
         users.resolve(response);
