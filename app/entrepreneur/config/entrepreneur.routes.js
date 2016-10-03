@@ -51,6 +51,7 @@
 		.state('entrepreneur.menthors', {
 			url: '/ponentes_y_mentores',
 			templateUrl: 'app/entrepreneur/views/menthors.html',
+			controller: 'MenthorsController',
 			data: {
 				requireLogin: true,
 				role: 3
