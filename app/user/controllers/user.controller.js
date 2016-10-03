@@ -20,7 +20,7 @@
         if (UserService.getFacebookPicture() !== undefined)
           $scope.facebookImage = UserService.getFacebookPicture();
         else
-          $scope.facebookImage = 'images/a0.jpg';
+          $scope.facebookImage = 'images/not_image/3.jpg';
       }
     };
 
@@ -37,7 +37,7 @@
       })
       .catch(function(error) {
         console.log(error);
-        $scope.facebookImage.url = 'images/a0.jpg';
+        $scope.facebookImage.url = 'images/not_image/3.jpg';
       });
     }
 

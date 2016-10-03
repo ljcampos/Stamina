@@ -42,6 +42,7 @@
 		.state('entrepreneur.profile', {
 			url: '/perfil',
 			templateUrl: 'app/entrepreneur/views/entrepreneur.profile.html',
+			controller: 'EntrepreneurProfileController',
 			data: {
 				requireLogin: true,
 				role: 3
