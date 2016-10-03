@@ -53,15 +53,10 @@
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-custom" ng-repeat="menthor in menthorsList">
         <div class="text-center">
           <img src="images/mentores/mentor.jpg" class="w-full circle md-whiteframe-z1">
-          <h4>Gabriel Regalado Sanchez</h4>
-          <strong>Desarrollo de software</strong>
+          <h4>{{menthor.persona.nombre}} {{menthor.persona.apellido_paterno}} {{menthor.persona.apellido_materno}}</h4>
+          <strong>{{menthor.cargo}}</strong>
         </div>
-        <p style="text-align:justify;">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.
-        </p>
+        <p style="text-align:justify;">{{menthor.descr}}</p>
         <p style="text-align:center;">
           <a href="https://www.facebook.com/" target="_blank">
             <img src="images/redessociales/facebook.png">
