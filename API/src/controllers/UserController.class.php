@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+*
 */
 class UserController extends Controller
 {
@@ -17,11 +17,11 @@ class UserController extends Controller
 		'search'	=>  'search'
 	);
 
-	private $DIRECTORY = __DIR__ . '/../../uploads/usuario/';
-	private $MAX_FILE_UPLOAD = 1572864;
+	private $DIRECTORY;
+	private $MAX_FILE_UPLOAD;
 
 	/**
-	* 
+	*
 	*/
 	private $response = array(
 		'code' 		=>	1,
@@ -30,23 +30,25 @@ class UserController extends Controller
 	);
 
 	/**
-	* 
+	*
 	*/
 	private $attributes = array('username', 'email', 'password', 'nombre', 'paterno', 'materno', 'type');
 
 	/**
-	* 
+	*
 	*/
 	public function __construct($app = null)
 	{
 		$this->app = $app;
+		$this->DIRECTORY = __DIR__ . '/../../uploads/usuario/';
+		$this->MAX_FILE_UPLOAD = 1572864;
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function getAll(Array $params)
-	{	
+	{
 		$usuarios = null;
 		$lista_usuarios = array();
 		$params = $this->sanitize($params);
@@ -71,9 +73,9 @@ class UserController extends Controller
 		elseif ($type === 1 && $type != null) // Usuarios de tipo administrador
 		{
 			$rol = Role::where('rol', '=', 'admin')->get();
-			if (count($rol) > 0) { $usuarios = $rol[0]->users; }	
+			if (count($rol) > 0) { $usuarios = $rol[0]->users; }
 		}
-		else 
+		else
 		{
 			$this->response['message'] = 'El parámetro type es requerido y debe de ser un tipo de dato numérico.';
 		}
@@ -81,7 +83,7 @@ class UserController extends Controller
 		if (count($usuarios) > 0)
 		{
 			foreach ($usuarios as $key => $value) {
-				
+
 				$usr = new User();
 				$usr->usuario_id = $value->usuario_id;
 				$usr->username = $value->username;
@@ -141,7 +143,7 @@ class UserController extends Controller
 		$this->response['data'] = $lista_usuarios;
 
 		return $this->response;
-	}	
+	}
 
 	public function search($facebookId) {
 		$params = $this->sanitize(array($facebookId));
@@ -180,7 +182,7 @@ class UserController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function getById($usuario_id)
 	{
@@ -241,7 +243,7 @@ class UserController extends Controller
 			else
 			{
 				$this->response['code'] = 4;
-				$this->response['message'] = 'El usuario con el identificador \'' . $params[0] . '\' no existe.';		
+				$this->response['message'] = 'El usuario con el identificador \'' . $params[0] . '\' no existe.';
 			}
 		}
 		else
@@ -318,13 +320,13 @@ class UserController extends Controller
 						$rol = Role::where('rol', '=', 'emprendedor')->get();
 						if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
 					}
-					
+
 					elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
 					{
 						$rol = Role::where('rol', '=', 'mentor')->get();
-						if (count($rol) > 0) 
-						{ 
-							$rol_id = $rol[0]->rol_id; 
+						if (count($rol) > 0)
+						{
+							$rol_id = $rol[0]->rol_id;
 							$mentor = new Mentor();
 							$mentor->mentor_id = $user->usuario_id;
 							$mentor->cargo = $params['cargo'];
@@ -393,13 +395,13 @@ class UserController extends Controller
 
 		}else { // create user with email
 
-			if (count($params) == 0 || ($this->checkAttributes($params)) == false) 
+			if (count($params) == 0 || ($this->checkAttributes($params)) == false)
 			{
 				$this->response['code'] = 2;
 				$this->response['message'] = 'Todos los parámetros son requeridos';
 				$this->response['atributos'] = $this->checkAttributes($params);
 			}
-			else 
+			else
 			{
 				$params = $this->sanitize($params);
 				$messages = array();
@@ -438,7 +440,7 @@ class UserController extends Controller
 				}
 
 				if (empty($params['materno']) || strlen($params['materno']) == 0 || strlen($params['materno']) > 50)
-				{	
+				{
 					$messages[] = 'El campo paterno no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
 				}
 
@@ -464,7 +466,7 @@ class UserController extends Controller
 					$db::beginTransaction();
 					$saved = false;
 
-					try 
+					try
 					{
 						$salt 	= hash('sha256', uniqid());
 						$token 	= hash('sha256', uniqid());
@@ -491,7 +493,7 @@ class UserController extends Controller
 
 						$type = intval($params['type']);
 						$rol_id = 0;
-						
+
 						if ($type === 3 && $type != null) // Usuario de tipo emprendedor
 						{
 							$rol = Role::where('rol', '=', 'emprendedor')->get();
@@ -500,9 +502,9 @@ class UserController extends Controller
 						elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
 						{
 							$rol = Role::where('rol', '=', 'mentor')->get();
-							if (count($rol) > 0) 
-							{ 
-								$rol_id = $rol[0]->rol_id; 
+							if (count($rol) > 0)
+							{
+								$rol_id = $rol[0]->rol_id;
 								$mentor = new Mentor();
 								$mentor->mentor_id = $user->usuario_id;
 								$mentor->cargo = $params['cargo'];
@@ -522,7 +524,7 @@ class UserController extends Controller
 						$rol->rol_id = $rol_id;
 						$rol->user_id = $user->usuario_id;
 						$rol->save();
-						
+
 						$usr = new User;
 						$usr->usuario_id = $user->usuario_id;
 						$usr->username = $user->username;
@@ -543,7 +545,7 @@ class UserController extends Controller
 						$this->response['message'] = 'Se ha creado un nuevo usuario de manera correcta';
 						$db::commit();
 
-					} catch (PDOException $e) 
+					} catch (PDOException $e)
 					{
 						$db::rollBack();
 						$this->response['code'] = 5;
@@ -556,7 +558,7 @@ class UserController extends Controller
 		}
 
 		return $this->response;
-		
+
 	}
 
 	/**
@@ -571,7 +573,7 @@ class UserController extends Controller
 			$this->response['code'] = 2;
 			$this->response['message'] = 'Todos los parámetros son requeridos 1';
 
-		} 
+		}
 		else { // update user
 
 			//'email', 'nombre', 'paterno', 'materno',
@@ -581,7 +583,7 @@ class UserController extends Controller
 				$this->response['code'] = 2;
 				$this->response['message'] = 'Todos los parámetros son requeridos 22';
 			}
-			else 
+			else
 			{
 				$params = $this->sanitize($params);
 				$messages = array();
@@ -621,7 +623,7 @@ class UserController extends Controller
 				}
 
 				if (empty($params['materno']) || strlen($params['materno']) == 0 || strlen($params['materno']) > 50)
-				{	
+				{
 					$messages[] = 'El campo paterno no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
 				}
 
@@ -637,7 +639,7 @@ class UserController extends Controller
 					$db::beginTransaction();
 					$saved = false;
 
-					try 
+					try
 					{
 						// Modelo Usuario
 						$user = User::find($params['id']);
@@ -653,7 +655,7 @@ class UserController extends Controller
 						$this->response['message'] = 'Se ha actualizado de manera correcta';
 						$db::commit();
 
-					} catch (PDOException $e) 
+					} catch (PDOException $e)
 					{
 						$db::rollBack();
 						$this->response['code'] = 5;
@@ -665,7 +667,7 @@ class UserController extends Controller
 			}
 		}
 
-		return $this->response;	
+		return $this->response;
 	}
 
 	/**
@@ -680,9 +682,9 @@ class UserController extends Controller
 			$this->response['code'] = 4;
 			$this->response['message'] = 'Todos los parámetros son requeridos';
 		}
-		else 
+		else
 		{
-			$user = User::find($params['id']);			
+			$user = User::find($params['id']);
 			if ($user != null)
 			{
 				if ($params['pwd'] != "" || $params['pwd'] != null)
@@ -690,7 +692,7 @@ class UserController extends Controller
 					$db = Connection::getConnection();
 					$db::beginTransaction();
 
-					try 
+					try
 					{
 						$salt 	= hash('sha256', uniqid());
 						$token 	= hash('sha256', uniqid());
@@ -706,8 +708,8 @@ class UserController extends Controller
 							$this->response['code'] = 1;
 							$this->response['message'] = 'Se cambió la contraseña';
 						}
-					} 
-					catch (Exception $e) 
+					}
+					catch (Exception $e)
 					{
 						$db::rollBack();
 						$this->response['code'] = 5;
@@ -715,12 +717,12 @@ class UserController extends Controller
 					}
 				}
 				else
-				{	
+				{
 					$this->response['code'] = 4;
 					$this->response['message'] = 'Contraseña vacía';
 				}
 			}
-			else 
+			else
 			{
 				$this->response['code'] = 4;
 				$this->response['message'] = 'Recurso no encontrado';
@@ -734,7 +736,7 @@ class UserController extends Controller
 	*
 	*/
 	public function suscribirse(Array $params)
-	{	
+	{
 		$params = $this->sanitize($params);
 		$messages = array();
 
@@ -743,14 +745,14 @@ class UserController extends Controller
 			$messages[] = 'No existe un usuario asociado al identificador \'' . $params['usuario_id'] . '\'';
 		}
 
-		if (Convocatoria::find(intval($params['convocatoria_id'])) == null) 
+		if (Convocatoria::find(intval($params['convocatoria_id'])) == null)
 		{
-			$messages[] = 'No existe una convocatoria asociado al identificador \'' . $params['convocatoria_id'] . '\'';		
+			$messages[] = 'No existe una convocatoria asociado al identificador \'' . $params['convocatoria_id'] . '\'';
 		}
 
 		if (!array_key_exists('estatus', $params['post']) || !is_int(intval($params['post']['estatus'])))
 		{
-			$messages[] = 'Debe enviar el parámetro estatus.';	
+			$messages[] = 'Debe enviar el parámetro estatus.';
 		}
 
 		if (count(EmprendedorConvocatoria::where('id_emprendedor', '=', $params['usuario_id'])
@@ -769,13 +771,13 @@ class UserController extends Controller
 			$db = Connection::getConnection();
 			$db::beginTransaction();
 
-			try 
+			try
 			{
 				$convocatoria = Convocatoria::find(intval($params['convocatoria_id']));
 				$fecha_actual = strtotime(date('Y-m-d'));
 
 				if ($fecha_actual <= strtotime($convocatoria->fecha_cierre))
-				{					
+				{
 					$obj = new EmprendedorConvocatoria();
 					$obj->id_emprendedor = $params['usuario_id'];
 					$obj->id_convocatoria = $params['convocatoria_id'];
@@ -787,7 +789,7 @@ class UserController extends Controller
 						$this->response['code'] = 1;
 						$this->response['message'] = 'Se ha agregado correctamente';
 					}
-					else 
+					else
 					{
 						$this->response['code'] = 5;
 						$this->response['message'] = 'Ocurrió un error, favor de intentarlo mas tarde';
@@ -798,8 +800,8 @@ class UserController extends Controller
 					$this->response['code'] = 2;
 					$this->response['message'] = 'La fecha actual es mayor a la fecha de cierre de la convocatoria';
 				}
-			} 
-			catch (Exception $e) 
+			}
+			catch (Exception $e)
 			{
 				$db::rollBack();
 				$this->response['code'] = 5;
@@ -811,7 +813,7 @@ class UserController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function authentication(Array $params)
 	{
@@ -851,7 +853,7 @@ class UserController extends Controller
 				$this->response['message'] = 'Error al iniciar sesion con facebook.';
 			}
 		} else { // login with email and password
-			
+
 			if ((!array_key_exists('email', $params) || !array_key_exists('pwd', $params))) {
 				$this->response['code'] = 2;
 				$this->response['message'] = 'Todos los parámetros son requeridos';
@@ -931,7 +933,7 @@ class UserController extends Controller
 
 
 	/**
-	* 
+	*
 	*/
 	public function addImage($usuario_id)
 	{
@@ -1008,7 +1010,7 @@ class UserController extends Controller
 						$this->response['message'] = 'Debe enviar una imagen con las siguientes extensiones: image/png, image/jpeg';
 					}
 				}
-				else 
+				else
 				{
 					$this->response['code'] = 6;
 						$this->response['message'] = 'Debe ser un archivo de máximo 1.5MB';
@@ -1030,15 +1032,15 @@ class UserController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	private function checkAttributes(Array $params)
 	{
 		$continuar = true;
 
 		foreach ($this->attributes as $key => $attribute) {
-			if (!array_key_exists($attribute, $params)) 
-			{ 
+			if (!array_key_exists($attribute, $params))
+			{
 				$continuar = false;
 				break;
 			}
@@ -1048,7 +1050,7 @@ class UserController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	private function sanitize(Array $params)
 	{
@@ -1063,9 +1065,9 @@ class UserController extends Controller
 					$value = filter_var($value, FILTER_SANITIZE_STRING);
 					$value = htmlspecialchars($value);
 
-					if (is_int($value)) 
-					{ 
-						$value = filter_var($value, FILTER_SANITIZE_NUMBER_INT); 
+					if (is_int($value))
+					{
+						$value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
 						$value = filter_id($value, FILTER_VALIDATE_INT);
 					}
 

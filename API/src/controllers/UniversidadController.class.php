@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+*
 */
 class UniversidadController extends Controller
 {
@@ -11,13 +11,13 @@ class UniversidadController extends Controller
 		'add' 		=>	'create',
 		'update'	=>	'update',
 		'del'			=>	'delete'
-	);	
+	);
 
-	private $DIRECTORY = __DIR__ . '/../../uploads/universidad/';
-	private $MAX_FILE_UPLOAD = 1572864;
+	private $DIRECTORY;
+	private $MAX_FILE_UPLOAD;
 
 	/**
-	* 
+	*
 	*/
 	private $response = array(
 		'code' 		=>	1,
@@ -26,20 +26,22 @@ class UniversidadController extends Controller
 	);
 
 	/**
-	* 
+	*
 	*/
 	private $attributes = array('nombre', 'usuario_id', 'fecha_inicio_servicio', 'fecha_final_servicio', 'estado_id');
 
 	/**
-	* 
+	*
 	*/
 	public function __construct($app = null)
 	{
 		$this->app = $app;
+		$this->DIRECTORY = __DIR__ . '/../../uploads/universidad/';
+		$this->MAX_FILE_UPLOAD = 1572864;
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function getAll()
 	{
@@ -71,17 +73,17 @@ class UniversidadController extends Controller
 		$this->response['code'] = 1;
 		$this->response['data'] = $universidades;
 		$this->response['message'] = 'Correcto';
-		
+
 		return $this->response;
-	}	
+	}
 
 	/**
-	* 
+	*
 	*/
 	public function getById($universidad_id)
 	{
 		$params = $this->sanitize(array($universidad_id));
-		
+
 		if (is_int(intval($params[0])))
 		{
 			$universidad = Universidad::find(intval($params[0]));
@@ -113,9 +115,9 @@ class UniversidadController extends Controller
 			else
 			{
 				$this->response['code'] = 4;
-				$this->response['message'] = 'Recurso no encontrado';		
+				$this->response['message'] = 'Recurso no encontrado';
 			}
-		}	
+		}
 		else
 		{
 			$this->response['code'] = 2;
@@ -126,21 +128,21 @@ class UniversidadController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function create(Array $params)
 	{
-		if (count($params) == 0 || ($this->checkAttributes($params)) == false) 
+		if (count($params) == 0 || ($this->checkAttributes($params)) == false)
 		{
 			$this->response['code'] = 2;
 			$this->response['message'] = 'Todos los parámetros son requeridos';
 		}
-		else 
+		else
 		{
 			$params = $this->sanitize($params);
 			$messages = array();
 
-			if (empty($params['nombre']) || is_null($params['nombre']) 
+			if (empty($params['nombre']) || is_null($params['nombre'])
 				|| strlen($params['nombre']) == 0 || strlen($params['nombre']) > 100)
 			{
 				$messages[] = 'El campo nombre no puede quedar vacío ni tener una longitud mayor a 100 caracteres';
@@ -150,7 +152,7 @@ class UniversidadController extends Controller
 			{
 				$messages[] = 'Fecha inicio no valida';
 			}
-			
+
 			if (strtotime($params['fecha_final_servicio']) === false)
 			{
 				$messages[] = 'Fecha final no valida';
@@ -158,17 +160,17 @@ class UniversidadController extends Controller
 
 			elseif (count(Universidad::where('nombre', '=', $params['nombre'])->get()) > 0 )
 			{
-				$messages[] = 'Ya existe una universidad con el nombre: \'' . $params['nombre'] . '\'';	
+				$messages[] = 'Ya existe una universidad con el nombre: \'' . $params['nombre'] . '\'';
 			}
 
-			if (empty($params['usuario_id']) || !intval($params['usuario_id']) 
+			if (empty($params['usuario_id']) || !intval($params['usuario_id'])
 				|| !filter_var($params['usuario_id'], FILTER_VALIDATE_INT))
 			{
 				$messages[] = 'El id del usuario no es valido';
 			}
 			elseif (User::find(intval($params['usuario_id'])) === null)
 			{
-				$messages[] = 'Usuario con el identificador: \'' . $params['usuario_id'] . '\' no existe';	
+				$messages[] = 'Usuario con el identificador: \'' . $params['usuario_id'] . '\' no existe';
 			}
 
 			if (empty($params['estado_id']) || !intval($params['estado_id'])
@@ -194,7 +196,7 @@ class UniversidadController extends Controller
 				$db::beginTransaction();
 				$saved = false;
 
-				try 
+				try
 				{
 					$universidad = new Universidad();
 					$universidad->nombre = $params['nombre'];
@@ -229,8 +231,8 @@ class UniversidadController extends Controller
 						$this->response['message'] = 'No se ha podido completar la acción, inténtelo más tarde.';
 						unlink($image['url']);
 					}
-					
-				} catch (PDOException $e) 
+
+				} catch (PDOException $e)
 				{
 					$db::rollBack();
 					$this->response['message'] = $e->getMessage();
@@ -242,16 +244,16 @@ class UniversidadController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function update(Array $params)
 	{
-		if (count($params) == 0 || ($this->checkAttributes($params)) == false) 
+		if (count($params) == 0 || ($this->checkAttributes($params)) == false)
 		{
 			$this->response['code'] = 2;
 			$this->response['message'] = 'Todos los parámetros son requeridos';
 		}
-		else 
+		else
 		{
 			$params = $this->sanitize($params);
 			$messages = array();
@@ -266,7 +268,7 @@ class UniversidadController extends Controller
 				$messages[] = 'Universidad con el identificador: \'' . $params['univresidad_id'] . '\' no existe';
 			}
 
-			if (empty($params['nombre']) || is_null($params['nombre']) 
+			if (empty($params['nombre']) || is_null($params['nombre'])
 				|| strlen($params['nombre']) == 0 || strlen($params['nombre']) > 100)
 			{
 				$messages[] = 'El campo nombre no puede quedar vacío ni tener una longitud mayor a 100 caracteres';
@@ -274,27 +276,27 @@ class UniversidadController extends Controller
 			elseif (count(Universidad::where('nombre', '=', $params['nombre'])
 										->where('universidad_id', '!=', $params['universidad_id'])->get()) > 0 )
 			{
-				$messages[] = 'Ya existe una universidad con el nombre: \'' . $params['nombre'] . '\'';	
+				$messages[] = 'Ya existe una universidad con el nombre: \'' . $params['nombre'] . '\'';
 			}
 
 			if (strtotime($params['fecha_inicio_servicio']) === false)
 			{
 				$messages[] = 'Fecha inicio no valida';
 			}
-			
+
 			if (strtotime($params['fecha_final_servicio']) === false)
 			{
 				$messages[] = 'Fecha final no valida';
 			}
 
-			if (empty($params['usuario_id']) || !intval($params['usuario_id']) 
+			if (empty($params['usuario_id']) || !intval($params['usuario_id'])
 				|| !filter_var($params['usuario_id'], FILTER_VALIDATE_INT))
 			{
 				$messages[] = 'El id del usuario no es valido';
 			}
 			elseif (User::find(intval($params['usuario_id'])) === null)
 			{
-				$messages[] = 'Usuario con el identificador: \'' . $params['usuario_id'] . '\' no existe';	
+				$messages[] = 'Usuario con el identificador: \'' . $params['usuario_id'] . '\' no existe';
 			}
 
 			if (empty($params['estado_id']) || !intval($params['estado_id'])
@@ -320,7 +322,7 @@ class UniversidadController extends Controller
 				$db::beginTransaction();
 				$saved = false;
 
-				try 
+				try
 				{
 					$id 					= intval($params['universidad_id']);
 					$nombre 				= trim($params['nombre']);
@@ -340,7 +342,7 @@ class UniversidadController extends Controller
 					if ($imagen['saved'] == true)
 					{
 						if ($universidad->imagen != '' || $universidad->imagen != null)
-						{	
+						{
 							$url = $this->DIRECTORY . $universidad->imagen;
 							if (file_exists($url) === true)
 							{
@@ -349,13 +351,13 @@ class UniversidadController extends Controller
 							}
 						}
 
-						$universidad->imagen = $imagen['url'];	
+						$universidad->imagen = $imagen['url'];
 					}
 					else
 					{
 						$this->response['error_image'] = 'Imagen invalida';
 					}
-					
+
 					if ($universidad->save())
 					{
 						$db::commit();
@@ -364,9 +366,9 @@ class UniversidadController extends Controller
 						$this->response['data'] = $universidad;
 						$this->response['message'] = 'Se ha actualizado correctamente';
 					}
-				
-					
-				} catch (PDOException $e) 
+
+
+				} catch (PDOException $e)
 				{
 					$db::rollBack();
 					$this->response['code'] = 5;
@@ -381,7 +383,7 @@ class UniversidadController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function delete($id)
 	{
@@ -400,13 +402,13 @@ class UniversidadController extends Controller
 				$db = Connection::getConnection();
 				$db::beginTransaction();
 				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrado.';
-				try 
+				try
 				{
 					if ($universidad[0]->delete())
 					{
 						$db::commit();
 
-						try 
+						try
 						{
 							if ($universidad[0]->imagen != '' || $universidad[0]->imagen != null)
 							{
@@ -414,17 +416,17 @@ class UniversidadController extends Controller
 								{
 									unlink($this->DIRECTORY . $universidad[0]->imagen);
 								}
-							}	
-						} catch (Exception $e) 
+							}
+						} catch (Exception $e)
 						{
-							
+
 						}
 
 						$this->response['code'] = 1;
 						$this->response['message'] = 'Se ha eliminado correctamente.';
 					}
-				} 
-				catch (Exception $e) 
+				}
+				catch (Exception $e)
 				{
 					$db::rollBack();
 					$this->response['code'] = 5;
@@ -443,7 +445,7 @@ class UniversidadController extends Controller
 
 
 	/**
-	* 
+	*
 	*/
 	public function saveImage()
 	{
@@ -464,10 +466,10 @@ class UniversidadController extends Controller
 					$fichero_subido = $this->DIRECTORY . $nombre_archivo;
 
 					if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
-					{	
+					{
 						$params['saved'] = true;
 						$params['url'] = $nombre_archivo;
-					}		
+					}
 				}
 			}
 		}
@@ -476,15 +478,15 @@ class UniversidadController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	private function checkAttributes(Array $params)
 	{
 		$continuar = true;
 
 		foreach ($this->attributes as $key => $attribute) {
-			if (!array_key_exists($attribute, $params)) 
-			{ 
+			if (!array_key_exists($attribute, $params))
+			{
 				$continuar = false;
 				break;
 			}
@@ -494,7 +496,7 @@ class UniversidadController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	private function sanitize(Array $params)
 	{
@@ -509,9 +511,9 @@ class UniversidadController extends Controller
 					$value = filter_var($value, FILTER_SANITIZE_STRING);
 					$value = htmlspecialchars($value);
 
-					if (is_int($value)) 
-					{ 
-						$value = filter_var($value, FILTER_SANITIZE_NUMBER_INT); 
+					if (is_int($value))
+					{
+						$value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
 						$value = filter_id($value, FILTER_VALIDATE_INT);
 					}
 

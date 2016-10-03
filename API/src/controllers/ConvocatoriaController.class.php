@@ -1,6 +1,6 @@
 <?php
 /**
-* 
+*
 */
 class ConvocatoriaController extends Controller
 {
@@ -15,12 +15,12 @@ class ConvocatoriaController extends Controller
 		'delete' 	=>	'delete'
 	);
 
-	private $DIRECTORY = __DIR__ . '/../../uploads/convocatoria/';
-	private $MIME = 'application/pdf';
-	private $MAX_FILE_UPLOAD = 1572864;
+	private $DIRECTORY;
+	private $MIME;
+	private $MAX_FILE_UPLOAD;
 
 	/**
-	* 
+	*
 	*/
 	private $response = array(
 		'code' 		=>	1,
@@ -29,20 +29,23 @@ class ConvocatoriaController extends Controller
 	);
 
 	/**
-	* 
+	*
 	*/
 	private $attributes = array('nombre', 'fecha_inicio', 'fecha_cierre', 'universidad_id');
 
 	/**
-	* 
+	*
 	*/
 	public function __construct($app = null)
 	{
 		$this->app = $app;
+		$this->DIRECTORY = __DIR__ . '/../../uploads/convocatoria/';
+		$this->MIME = 'application/pdf';
+		$this->MAX_FILE_UPLOAD = 1572864;
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function getAll()
 	{
@@ -80,21 +83,21 @@ class ConvocatoriaController extends Controller
 
 		return $this->response;
 
-	}	
+	}
 
 	/**
-	* 
+	*
 	*/
 	public function getById($convocatoria_id)
 	{
 		$params = $this->sanitize(array($convocatoria_id));
-		
+
 		if (is_int(intval($params[0])))
 		{
 			$convocatoria = Convocatoria::find(intval($params[0]));
 
 			if ($convocatoria != null)
-			{	
+			{
 				$convocatoria->universidad;
 				//unset($value->universidad_id);
 				unset($convocatoria->universidad_id);
@@ -103,7 +106,7 @@ class ConvocatoriaController extends Controller
 				$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../API/uploads/universidad/' . $convocatoria->universidad->imagen : '';
 
 				if (count($convocatoria->emprendedores) > 0)
-				{	
+				{
 					foreach ($convocatoria->emprendedores as $key => $value) {
 						//$value->imagen = ($value->imagen != "" || $value->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $value->imagen : '';
 						$convocatoria->imagen = ($convocatoria->imagen != "" || $convocatoria->imagen != null) ? __DIR__ . '/../../API/uploads/usuario/' . $convocatoria->imagen : '';
@@ -121,9 +124,9 @@ class ConvocatoriaController extends Controller
 			else
 			{
 				$this->response['code'] = 4;
-				$this->response['message'] = 'Recurso no encontrado';		
+				$this->response['message'] = 'Recurso no encontrado';
 			}
-		}	
+		}
 		else
 		{
 			$this->response['code'] = 2;
@@ -134,17 +137,17 @@ class ConvocatoriaController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function create(Array $params)
 	{
-		if (count($params) == 0 || ($this->checkAttributes($params)) == false) 
+		if (count($params) == 0 || ($this->checkAttributes($params)) == false)
 		{
 			$this->response['code'] = 2;
 			$this->response['message'] = 'Todos los parámetros son requeridos';
 			$this->response['atributos'] = $this->checkAttributes($params);
 		}
-		else 
+		else
 		{
 			$params = $this->sanitize($params);
 			$messages = array();
@@ -162,7 +165,7 @@ class ConvocatoriaController extends Controller
 			{
 				$messages[] = 'Fecha inicio no valida';
 			}
-			
+
 			if (strtotime($params['fecha_cierre']) === false)
 			{
 				$messages[] = 'Fecha cierre no valida';
@@ -170,7 +173,7 @@ class ConvocatoriaController extends Controller
 
 			if (Universidad::find(intval($params['universidad_id'])) === null)
 			{
-				$messages[] = 'Universidad con el identificador: \'' . $params['universidad_id'] . '\' no existe';	
+				$messages[] = 'Universidad con el identificador: \'' . $params['universidad_id'] . '\' no existe';
 			}
 
 			if (count($messages) > 0)
@@ -185,7 +188,7 @@ class ConvocatoriaController extends Controller
 				$db::beginTransaction();
 				$saved = false;
 
-				try 
+				try
 				{
 					$inicio = strtotime($params['fecha_inicio']);
 					$fin 		=	strtotime($params['fecha_cierre']);
@@ -199,7 +202,7 @@ class ConvocatoriaController extends Controller
 						$convocatoria->universidad_id = $params['universidad_id'];
 
 						$parametros = $this->saveImage();
-						if ($parametros['saved'] == true) 
+						if ($parametros['saved'] == true)
 						{
 							$convocatoria->path = $parametros['url'];
 						}
@@ -211,13 +214,13 @@ class ConvocatoriaController extends Controller
 
 						if ($convocatoria->save()) { $saved = true; }
 					}
-					else 
+					else
 					{
 						$this->response['message'][] = 'La fecha inicio no puede ser mayor a la fecha fin';
 					}
-					
+
 					if ($saved === true)
-					{	
+					{
 						$convocatoria->path = (strlen($convocatoria->path) > 0) ? $this->DIRECTORY . $convocatoria->path : '';
 						$this->response['code'] = 1;
 						$this->response['data'] = $convocatoria;
@@ -232,7 +235,7 @@ class ConvocatoriaController extends Controller
 						$db::commit();
 					}
 
-				} catch (PDOException $e) 
+				} catch (PDOException $e)
 				{
 					$db::rollBack();
 					$this->response['code'] = 5;
@@ -248,24 +251,24 @@ class ConvocatoriaController extends Controller
 
 
 	/**
-	* 
+	*
 	*/
 	public function update(Array $params)
 	{
-		if (count($params) == 0 || ($this->checkAttributes($params)) == false) 
+		if (count($params) == 0 || ($this->checkAttributes($params)) == false)
 		{
 			$this->response['code'] = 2;
 			$this->response['message'] = 'Todos los parámetros son requeridos';
 			$this->response['atributos'] = $this->checkAttributes($params);
 		}
-		else 
+		else
 		{
 			$params = $this->sanitize($params);
 			$messages = array();
 
 			if (empty($params['id']) || !is_int(intval($params['id'])))
 			{
-				$messages[] = 'Identificador no valido.';	
+				$messages[] = 'Identificador no valido.';
 			}
 
 			if (empty($params['nombre']) || strlen($params['nombre']) == 0 || strlen($params['nombre']) > 255)
@@ -282,7 +285,7 @@ class ConvocatoriaController extends Controller
 			{
 				$messages[] = 'Fecha inicio no valida';
 			}
-			
+
 			if (strtotime($params['fecha_cierre']) === false)
 			{
 				$messages[] = 'Fecha cierre no valida';
@@ -290,7 +293,7 @@ class ConvocatoriaController extends Controller
 
 			if (Universidad::find(intval($params['universidad_id'])) === null)
 			{
-				$messages[] = 'Universidad con el identificador: \'' . $params['universidad_id'] . '\' no existe';	
+				$messages[] = 'Universidad con el identificador: \'' . $params['universidad_id'] . '\' no existe';
 			}
 
 			if (Convocatoria::find(intval($params['id'])) === null)
@@ -310,7 +313,7 @@ class ConvocatoriaController extends Controller
 				$db::beginTransaction();
 				$saved = false;
 
-				try 
+				try
 				{
 					$inicio = strtotime($params['fecha_inicio']);
 					$fin 		=	strtotime($params['fecha_cierre']);
@@ -327,29 +330,29 @@ class ConvocatoriaController extends Controller
 
 							$parametros = $this->saveImage();
 
-							if ($parametros['saved'] == true) 
+							if ($parametros['saved'] == true)
 							{
-								if (file_exists($this->DIRECTORY . $convocatoria->path)) 
-								{ 
-									unlink($this->DIRECTORY . $convocatoria->path); 
+								if (file_exists($this->DIRECTORY . $convocatoria->path))
+								{
+									unlink($this->DIRECTORY . $convocatoria->path);
 								}
-								$convocatoria->path = $parametros['url'];	
+								$convocatoria->path = $parametros['url'];
 							}
 							else
 							{
 								$this->response['message'][] = 'archivo invalido';
 							}
-							
-							if ($convocatoria->save()) { $saved = true; }							
+
+							if ($convocatoria->save()) { $saved = true; }
 						}
-						
-						
+
+
 					}
-					else 
+					else
 					{
 						$this->response['message'][] = 'La fecha inicio no puede ser mayor a la fecha fin';
 					}
-					
+
 					if ($saved === true)
 					{
 						$convocatoria->path = (strlen($convocatoria->path) > 0) ? $this->DIRECTORY . $convocatoria->path : '';
@@ -366,7 +369,7 @@ class ConvocatoriaController extends Controller
 						$db::commit();
 					}
 
-				} catch (PDOException $e) 
+				} catch (PDOException $e)
 				{
 					$db::rollBack();
 					$this->response['code'] = 5;
@@ -382,7 +385,7 @@ class ConvocatoriaController extends Controller
 
 
 	/**
-	* 
+	*
 	*/
 	public function delete($id)
 	{
@@ -403,20 +406,20 @@ class ConvocatoriaController extends Controller
 				$db::beginTransaction();
 				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
 
-				try 
+				try
 				{
-					if (file_exists($this->DIRECTORY . $convocatoria[0]->path)) 
-					{ 
-						unlink($this->DIRECTORY . $convocatoria[0]->path); 
+					if (file_exists($this->DIRECTORY . $convocatoria[0]->path))
+					{
+						unlink($this->DIRECTORY . $convocatoria[0]->path);
 					}
 					if ($convocatoria[0]->delete())
-					{	
+					{
 						$db::commit();
 						$this->response['code'] = 1;
 						$this->response['message'] = 'Se ha eliminado correctamente';
 					}
-				} 
-				catch (Exception $e) 
+				}
+				catch (Exception $e)
 				{
 					$db::rollBack();
 					$this->response['e'] = $e->getMessage();
@@ -435,7 +438,7 @@ class ConvocatoriaController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	public function saveImage()
 	{
@@ -444,7 +447,7 @@ class ConvocatoriaController extends Controller
 		if (!empty($_FILES) && $_FILES['file']['error'] === 0)
 		{
 
-			if ($_FILES['size'] <= $this->MAX_FILE_UPLOAD) 
+			if ($_FILES['size'] <= $this->MAX_FILE_UPLOAD)
 			{
 				$recurso 	= finfo_open(FILEINFO_MIME_TYPE);
 				$mime 		=	finfo_file($recurso, $_FILES['file']['tmp_name']);
@@ -456,10 +459,10 @@ class ConvocatoriaController extends Controller
 					$fichero_subido = $this->DIRECTORY . $nombre_archivo;
 
 					if (move_uploaded_file($_FILES['file']['tmp_name'], $fichero_subido))
-					{	
+					{
 						$params['saved'] = true;
 						$params['url'] = $nombre_archivo;
-					}		
+					}
 				}
 			}
 		}
@@ -607,15 +610,15 @@ class ConvocatoriaController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	private function checkAttributes(Array $params)
 	{
 		$continuar = true;
 
 		foreach ($this->attributes as $key => $attribute) {
-			if (!array_key_exists($attribute, $params)) 
-			{ 
+			if (!array_key_exists($attribute, $params))
+			{
 				$continuar = false;
 				break;
 			}
@@ -625,7 +628,7 @@ class ConvocatoriaController extends Controller
 	}
 
 	/**
-	* 
+	*
 	*/
 	private function sanitize(Array $params)
 	{
@@ -640,9 +643,9 @@ class ConvocatoriaController extends Controller
 					$value = filter_var($value, FILTER_SANITIZE_STRING);
 					$value = htmlspecialchars($value);
 
-					if (is_int($value)) 
-					{ 
-						$value = filter_var($value, FILTER_SANITIZE_NUMBER_INT); 
+					if (is_int($value))
+					{
+						$value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
 						$value = filter_id($value, FILTER_VALIDATE_INT);
 					}
 
