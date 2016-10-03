@@ -252,15 +252,20 @@
         'isMentor': 0,
         'type': 3
       };
-      UserService.sigup(data)
-      .then(function(response) {
-        console.log(response);
-        $scope.success = true;
-      })
-      .catch(function(error) {
-        console.log(error);
-        $scope.success = false;
-      });
+      if($scope.form.password!=$scope.form.confirm){
+        alert("Las contaseñas no coinciden");
+        $("#form_confirm").focus();
+      }else{
+        UserService.sigup(data)
+        .then(function(response) {
+          console.log(response);
+          $scope.success = true;
+        })
+        .catch(function(error) {
+          console.log(error);
+          $scope.success = false;
+        });
+      }
     };
 
 
