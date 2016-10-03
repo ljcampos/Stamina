@@ -9,7 +9,7 @@
 			$scope.userList = null;
 			MenthorService.getUsers()
 			.then(function(response) {
-				$scope.userList = response.data;			
+				$scope.userList = response.data;	
 			})
 			.catch(function(error) {
 				console.log(error);
@@ -17,12 +17,14 @@
 		}
 
 		$scope.getDataUser=function(){
-			console.log('controller un solo usuario')
 			$scope.id= $state.params.id;
 			$scope.user= null;
 			MenthorService.getUser($scope.id)
 			.then(function(response) {
+				console.log("//////////////////////////...........")
+				console.log(response)
 				$scope.user = response.data;
+				console.log("//////////////////////////...........")
 			})
 			.catch(function(error) {
 				console.log(error);

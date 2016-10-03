@@ -11,8 +11,7 @@
 
 		function getUsers() {
 			var users = $q.defer();
-			var data={'type':2}
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/',data)
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/?type=2')
 			.success(function(response) {
 				users.resolve(response);
 			})
@@ -24,9 +23,8 @@
 		}
 
 		function getUser(id){
-			var data={'type':2}
 			var user= $q.defer();
-			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/', data)
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/')
 			.success(function(response) {
 				user.resolve(response);
 			})

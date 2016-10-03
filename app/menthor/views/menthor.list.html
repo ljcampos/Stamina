@@ -2,10 +2,10 @@
 <div class="m-b-lg" ng-init='getDataUsers()'>
   <div class="panel-card bg-white p clearfix m-b-xs" ng-repeat='user in userList'>
     <div class="pull-right text-sm text-muted">
-      <button ui-sref="admin.menthor.view({id:user.roles[0].pivot.user_id})" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+      <button ui-sref="admin.menthor.view({id:user.usuario_id})" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
         <i class="fa fa-eye"></i>
       </button>
-      <button ui-sref="admin.menthor.edit({id:user.roles[0].pivot.user_id})" class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+      <button ui-sref="admin.menthor.edit({id:user.usuario_id})" class="btn btn-sm btn-success waves-effect" tooltip="Editar">
                   <i class="fa fa-pencil"></i>
       </button>
       <button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
@@ -15,22 +15,22 @@
     <div class="row">
       <div class="col-md-1">
         <!--<a class="pull-left m-r">-->
-          <img ng-src="images/a10.jpg" class="img-responsive rounded" src="images/a9.jpg">
+          <img  ng-src="images/not_image/1.jpg" class="img-responsive rounded" src="images/not_image/1.jpg">
         <!--</a>-->
       </div>
       <div class="clear col-md-9">
-        <a ui-sref='admin.menthor.view({id:user.roles[0].pivot.user_id})'>
+        <a ui-sref='admin.menthor.view({id:user.usuario_id})'>
           <div>
-            <h4 class="text-md ng-binding" ui-sref='admin.menthor.view({id:user.roles[0].pivot.user_id})' style="margin:0px;">
+            <h4 class="text-md ng-binding" ui-sref='admin.menthor.view({id:user.usuario_id})' style="margin:0px;">
             {{user.nombre}} {{user.paterno}} {{user.materno}}
             </h4>
           </div>
           <strong>
-            {{user.email}}
+            {{user.cargo}}
           </strong>
           <!--<span class="label bg-light m-l-sm ng-binding">angular</span>-->
           <div class="text-ellipsis m-t-xs text-muted-dk text-sm ng-binding">          
-          {{user.roles[0].descr}}
+          {{user.descr}}
           </div>
         </a>
       </div>      
