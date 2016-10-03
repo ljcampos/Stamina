@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
-	angular.module('entrepreneur').controller('EntrepreneurProfileController', ['$scope', 'AnnouncementService', EntrepreneurProfileController]);
-	function EntrepreneurProfileController($scope, AnnouncementService) {
+	angular.module('entrepreneur').controller('EntrepreneurProfileController', ['$scope', 'AnnouncementService', 'UserService', EntrepreneurProfileController]);
+	function EntrepreneurProfileController($scope, AnnouncementService, UserService) {
 		$scope.valEditInfoBasic		=	true;
 		$scope.valSaveInfoBasic		=	false;
 		$scope.valEditInfoContac	=	true;
@@ -12,11 +12,11 @@
 		$scope.init = function() {
 			getDatos();
 		};
-		
+
 		angular.element(document).ready(function() {
 			$scope.init();
 		});
-		
+
 		function getDatos() {
 			UserService.getUserById($scope.user.data.roles[0].pivot.user_id)
 			.then(function(response) {
@@ -29,7 +29,7 @@
 				console.log(error);
 			});
 		}
-		
+
 		function saveUser(datos) {
 			UserService.updateUser($scope.user.data.roles[0].pivot.user_id,datos)
 			.then(function(response) {
