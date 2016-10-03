@@ -10,6 +10,7 @@ class UserController extends Controller
 		'one'			=>	'getById',
 		'add' 		=>	'create',
 		'update'	=>	'update',
+		'pwd'			=>	'changePwd',
 		'suscrip'	=>	'suscribirse',
 		'auth'		=>	'authentication',
 		'img'			=>	'addImage',
@@ -519,6 +520,177 @@ class UserController extends Controller
 
 		return $this->response;
 		
+	}
+
+	/**
+	*
+	*/
+	public function update(Array $params)
+	{
+		$messages = array();
+
+		if (count($params) == 0) { // all the attributes are required
+
+			$this->response['code'] = 2;
+			$this->response['message'] = 'Todos los parámetros son requeridos 1';
+
+		} 
+		else { // update user
+
+			//'email', 'nombre', 'paterno', 'materno',
+			if (!isset($params['email']) || !isset($params['nombre']) || !isset($params['paterno'])
+					|| !isset($params['materno']) )
+			{
+				$this->response['code'] = 2;
+				$this->response['message'] = 'Todos los parámetros son requeridos 22';
+			}
+			else 
+			{
+				$params = $this->sanitize($params);
+				$messages = array();
+
+				if (!isset($params['id']))
+				{
+					$messages[] = 'Debe enviar el id';
+				}
+				elseif (User::find($params['id']) == null)
+				{
+					$messages[] = 'Recurso no encontrado';
+				}
+
+				if (empty($params['email']) || strlen($params['email']) == 0 || strlen($params['email']) > 50)
+				{
+					$messages[] = 'El campo email no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
+				}
+				elseif (count(User::where('email', '=', $params['email'])
+										->where('usuario_id', '!=', $params['id'])->get()) > 0)
+				{
+					$messages[] = 'Ya existe un usuario asociado a la cuenta de correo: \'' . $params['email'] . '\'';
+				}
+
+				if (!filter_var($params['email'], FILTER_VALIDATE_EMAIL))
+				{
+					$messages[] = 'El email no es válido';
+				}
+
+				if (empty($params['nombre']) || strlen($params['nombre']) == 0 || strlen($params['nombre']) > 50)
+				{
+					$messages[] = 'El campo nombre no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
+				}
+
+				if (empty($params['paterno']) || strlen($params['paterno']) == 0 || strlen($params['paterno']) > 50)
+				{
+					$messages[] = 'El campo paterno no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
+				}
+
+				if (empty($params['materno']) || strlen($params['materno']) == 0 || strlen($params['materno']) > 50)
+				{	
+					$messages[] = 'El campo paterno no puede quedar vacío ni tener una longitud mayor a 50 caracteres';
+				}
+
+				if (count($messages) > 0)
+				{
+					$this->response['code'] = 2;
+					$this->response['data'] = $params;
+					$this->response['message'] = $messages;
+				}
+				else
+				{
+					$db = Connection::getConnection();
+					$db::beginTransaction();
+					$saved = false;
+
+					try 
+					{
+						// Modelo Usuario
+						$user = User::find($params['id']);
+						$user->email = $params['email'];
+						$user->persona->nombre = $params['nombre'];
+						$user->persona->apellido_paterno = $params['paterno'];
+						$user->persona->apellido_materno = $params['materno'];
+						$user->persona->save();
+						$user->save();
+
+						$this->response['code'] = 1;
+						$this->response['data'][] = $usr;
+						$this->response['message'] = 'Se ha actualizado de manera correcta';
+						$db::commit();
+
+					} catch (PDOException $e) 
+					{
+						$db::rollBack();
+						$this->response['code'] = 5;
+						$this->response['data'][] = $params;
+						$this->response['message'][] = 'No se ha podido completar la acción, inténtelo más tarde.';
+						$this->response['message'][] = $e->getMessage();
+					}
+				}
+			}
+		}
+
+		return $this->response;	
+	}
+
+	/**
+	*
+	*/
+	public function changePwd(Array $params)
+	{
+		$params = $this->sanitize($params);
+
+		if (!isset($params['id']) || !$params['pwd'])
+		{
+			$this->response['code'] = 4;
+			$this->response['message'] = 'Todos los parámetros son requeridos';
+		}
+		else 
+		{
+			$user = User::find($params['id']);			
+			if ($user != null)
+			{
+				if ($params['pwd'] != "" || $params['pwd'] != null)
+				{
+					$db = Connection::getConnection();
+					$db::beginTransaction();
+
+					try 
+					{
+						$salt 	= hash('sha256', uniqid());
+						$token 	= hash('sha256', uniqid());
+						$pwd 		= $params['pwd'] + $salt;
+						$pwd 		= hash('sha256', $pwd);
+
+						$user->salt = $salt;
+						$user->token = $token;
+						$user->password = $pwd;
+
+						if ($user->save()) {
+							$db::commit();
+							$this->response['code'] = 1;
+							$this->response['message'] = 'Se cambió la contraseña';
+						}
+					} 
+					catch (Exception $e) 
+					{
+						$db::rollBack();
+						$this->response['code'] = 5;
+						$this->response['message'] = 'Ocurrió un error';
+					}
+				}
+				else
+				{	
+					$this->response['code'] = 4;
+					$this->response['message'] = 'Contraseña vacía';
+				}
+			}
+			else 
+			{
+				$this->response['code'] = 4;
+				$this->response['message'] = 'Recurso no encontrado';
+			}
+		}
+
+		return $this->response;
 	}
 
 	/**
