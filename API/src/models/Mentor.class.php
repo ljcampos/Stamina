@@ -14,4 +14,8 @@ class Mentor extends Model {
 		return $this->belongsTo('User', 'usuario_id', 'mentor_id');
 	}
 
+	public function persona () {
+		return $this->hasOne('Persona', 'persona_id', 'mentor_id');
+	}
+
 }

@@ -52,9 +52,9 @@
         <img src="images/not_image/3.jpg" class="w-full circle md-whiteframe-z1">
         <br>
         <br>
-        <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
+        <!--<button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn-custom btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw bg-white">
           <i class="mdi-image-image i-20"></i> Cambiar Foto
-        </button>
+        </button>-->
         <!--<br><br>
         <span class="label bg-white label-lg">Gabriel Regalado Sanchez</span>-->
       </div>
@@ -66,40 +66,43 @@
                 <h2>Información Básica</h2>
               </div>
               <div class="card-tools">
-                <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-custom">
+                <button ng-if="valEditInfoBasic" ng-click="editInfoBasic()" md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-custom">
                   <i class="mdi-editor-mode-edit i-20"></i>EDITAR
+                </button>
+                <button ng-if="valSaveInfoBasic" ng-click="saveInfoBasic(datos)" md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-custom">
+                  <i class="mdi-content-save i-20"></i>GUARDAR
                 </button>
               </div>
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input class="md-input has-value" disabled value="Gabriel">
+                      <input class="md-input has-value" disabled ng-model="datos.nombre" id="user_nombres">
                       <label>Nombre(s)</label>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input class="md-input has-value" disabled value="Regalado">
+                      <input class="md-input has-value" disabled ng-model="datos.paterno" id="user_apellido_pat">
                       <label>Apellido Paterno</label>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input class="md-input has-value" disabled value="Sanchez">
+                      <input class="md-input has-value" disabled ng-model="datos.materno" id="user_apellido_mat">
                       <label>Apellido Materno</label>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input type="date" class="md-input has-value" disabled value="26/12/1992">
+                      <input type="date" class="md-input has-value" disabled value="26/12/1992" id="user_nacimiento">
                       <label>Fecha de nacimiento</label>
                     </div>
                   </div>
                   <div class="col-md-4" style="margin-top:-8px;">
                     <small>Género</small>
                     <div class="">
-                      <select class="form-control has-value" disabled>
+                      <select class="form-control has-value" disabled id="user_genero">
                         <option>Elija una opción</option>
                         <option selected>Másculino</option>
                         <option>Femenino</option>
@@ -116,21 +119,24 @@
                 <h2>Información de Contacto</h2>
               </div>
               <div class="card-tools">
-                <button ui-sref='entrepreneur.dashboard' md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-custom">
+                <button ng-if="valEditInfoContac" ng-click="editInfoContac()" md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-custom">
                   <i class="mdi-editor-mode-edit i-20"></i>EDITAR
+                </button>
+                <button ng-if="valSaveInfoContac" ng-click="saveInfoContac(datos)" md-ink-ripple="" class="btn btn-stroke b-2x m-b btn-fw md-btn md-raised m-b btn-fw btn-custom">
+                  <i class="mdi-content-save i-20"></i>GUARDAR
                 </button>
               </div>
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="md-form-group float-label">
-                      <input type="email" class="md-input has-value" disabled value="isc.resg92@gmail.com">
+                      <input type="email" class="md-input has-value" disabled ng-model="datos.email" id="user_email">
                       <label>Correo Electrónico</label>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="md-form-group float-label">
-                      <input class="md-input has-value" disabled value="999 318 7691">
+                      <input class="md-input has-value" disabled ng-model="datos.telefono" id="user_telefono">
                       <label>Teléfono</label>
                     </div>
                   </div>

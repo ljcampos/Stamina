@@ -42,6 +42,7 @@
 		.state('entrepreneur.profile', {
 			url: '/perfil',
 			templateUrl: 'app/entrepreneur/views/entrepreneur.profile.html',
+			controller: 'EntrepreneurProfileController',
 			data: {
 				requireLogin: true,
 				role: 3
@@ -50,6 +51,7 @@
 		.state('entrepreneur.menthors', {
 			url: '/ponentes_y_mentores',
 			templateUrl: 'app/entrepreneur/views/menthors.html',
+			controller: 'MenthorsController',
 			data: {
 				requireLogin: true,
 				role: 3

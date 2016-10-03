@@ -50,6 +50,37 @@ $app->group('/api/v1/usuario', function ()
 	})->setName('get_one_user');
 
 	/**
+	* 
+	*/
+	$this->post('/{usuario_id}/update/', function ($request, $response, $args) 
+	{
+		$usuario_id = $args['usuario_id'];
+		$params = $request->getParams();
+		$params['id'] = $usuario_id;
+		$controller = new UserController();
+		$json = $controller->callAction('update', $params);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('user_update');
+
+	/**
+	* 
+	*/
+	$this->post('/{usuario_id}/passwd/', function ($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$params['id'] = $args['usuario_id'];
+		$controller = new UserController();
+		$json = $controller->callAction('pwd', $params);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('change_pwd');
+
+	/**
 	*
 	**/
 	$this->get('/facebook/{id}', function($request, $response, $args) {
@@ -132,6 +163,29 @@ $app->group('/api/v1/usuario', function ()
 	})->setName('sus_conv');
 
 });
+
+/**
+*
+*/
+$app->group('/api/v1/usuarios/mentores', function () 
+{
+
+	/**
+	* 
+	*/
+	$this->get('/', function ($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$controller = new MentorController();
+		$json = $controller->callAction('all', $params);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('get_users_mentores');
+
+});
+
 
 /**
 * 
@@ -351,19 +405,6 @@ $app->group('/api/v1/roles', function ()
 		return $response->withJson($json, $code);
 
 	})->setName('list_rol');
-
-	/**
-	* 
-	*/
-	$this->get('/menthor/', function ($request, $response, $args) 
-	{
-		$controller = new RolController();
-		$json = $controller->callAction('busMen');
-
-		$code = ($json['code'] == 1) ? 200 : 401;
-		return $response->withJson($json, $code);
-
-	})->setName('list_mentores');
 
 	/**
 	* 

@@ -5,9 +5,23 @@
 	function MenthorService($q, $http, API) {
 		return {
 			getUsers : getUsers,
+			getMenthors : getMenthors,
 			getUser  : getUser,
 			addUser  : addUser
 		};
+
+		function getMenthors() {
+			var users = $q.defer();
+			$http.get('http://www.stamina.dev/API/public/api/v1/usuarios/mentores/')
+			.success(function(response) {
+				users.resolve(response);
+			})
+			.error(function(error) {
+				console.log(error);
+				users.reject(error);
+			});
+			return users.promise;
+		}
 
 		function getUsers() {
 			var users = $q.defer();

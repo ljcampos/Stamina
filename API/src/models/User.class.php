@@ -31,7 +31,7 @@ class User extends Model {
 	}
 
 	public function mentor () {
-		return $this->hasMany('Mentor', 'mentor_id', 'usuario_id');
+		return $this->hasOne('Mentor', 'mentor_id', 'usuario_id');
 	}
 
 	public function emprendedorConvocatoria () {

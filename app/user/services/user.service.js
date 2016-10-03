@@ -10,6 +10,8 @@
       sigup: sigup,
       getToken: getToken,
       isLogged: isLogged,
+      getUserById: getUserById,
+      updateUser: updateUser,
       logout: logout,
       getUser: getUser,
       isAdmin: isAdmin,
@@ -22,6 +24,34 @@
     function getAllUsers() {
       var users = $q.defer();
       $http.get('https://jsonplaceholder.typicode.com/users')
+      .success(function(response) {
+        console.log(response);
+        users.resolve(response);
+      })
+      .error(function(error) {
+        console.log(error);
+        users.reject(error);
+      });
+      return users.promise;
+    }
+
+    function getUserById(id) {
+      var users = $q.defer();
+      $http.get('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/')
+      .success(function(response) {
+        console.log(response);
+        users.resolve(response);
+      })
+      .error(function(error) {
+        console.log(error);
+        users.reject(error);
+      });
+      return users.promise;
+    }
+
+    function updateUser(id,datos) {
+      var users = $q.defer();
+      $http.post('http://www.stamina.dev/API/public/api/v1/usuario/'+id+'/update/',datos)
       .success(function(response) {
         console.log(response);
         users.resolve(response);
