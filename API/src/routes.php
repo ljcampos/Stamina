@@ -144,6 +144,29 @@ $app->group('/api/v1/usuario', function ()
 });
 
 /**
+*
+*/
+$app->group('/api/v1/usuarios/mentores', function () 
+{
+
+	/**
+	* 
+	*/
+	$this->get('/', function ($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$controller = new MentorController();
+		$json = $controller->callAction('all', $params);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('get_users_mentores');
+
+});
+
+
+/**
 * 
 */
 $app->group('/api/v1/universidad', function ()
@@ -361,19 +384,6 @@ $app->group('/api/v1/roles', function ()
 		return $response->withJson($json, $code);
 
 	})->setName('list_rol');
-
-	/**
-	* 
-	*/
-	$this->get('/menthor/', function ($request, $response, $args) 
-	{
-		$controller = new RolController();
-		$json = $controller->callAction('busMen');
-
-		$code = ($json['code'] == 1) ? 200 : 401;
-		return $response->withJson($json, $code);
-
-	})->setName('list_mentores');
 
 	/**
 	* 

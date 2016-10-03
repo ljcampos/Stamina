@@ -954,19 +954,6 @@ class UserController extends Controller
 		return $this->response;
 	}
 	
-	/**
-	*
-	*/
-	public function usuariosMentores ()
-	{
-		
-		$usuarios = User::with('mentor')->get();
-
-		$this->response['data'] = $usuarios;
-		$this->response['message'] = 'Lista de mentores';
-		
-		return $this->response;
-	}
 
 	/**
 	* 
