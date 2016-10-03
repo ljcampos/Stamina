@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
-	angular.module('entrepreneur').controller('EntrepreneurProfileController', ['$scope', 'UserService', EntrepreneurProfileController]);
-	function EntrepreneurProfileController($scope, UserService) {
+	angular.module('entrepreneur').controller('EntrepreneurProfileController', ['$scope', 'AnnouncementService', EntrepreneurProfileController]);
+	function EntrepreneurProfileController($scope, AnnouncementService) {
 		$scope.valEditInfoBasic		=	true;
 		$scope.valSaveInfoBasic		=	false;
 		$scope.valEditInfoContac	=	true;
