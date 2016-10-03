@@ -516,7 +516,23 @@ class UserController extends Controller
 							$rol = Role::where('rol', '=', 'admin')->get();
 							if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
 						}
+						elseif ($type === 4 && $type != null) // Usuarios de tipo universidad
+						{
+							$rol = Role::where('rol', '=', 'universidad')->get();
+							if (count($rol) > 0) {
+								$rol_id = $rol[0]->rol_id;
 
+								$universidad = new Universidad();
+								//$universidad->universidad_id = $user->usuario_id;
+								$universidad->usuario_id = $user->usuario_id;
+								$universidad->nombre = $params['nombre'];
+								$universidad->fecha_inicio_servicio = $params['inicio_servicio'];
+								$universidad->fecha_final_servicio = $params['final_servicio'];
+								$universidad->estado_id = 1;
+
+								if ($universidad->save()) { $saved = true; }
+							}
+						}
 						// Asociación Usuario - Rol
 						$rol = new RolUsuario();
 						$rol->rol_id = $rol_id;
