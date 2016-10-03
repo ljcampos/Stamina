@@ -17,8 +17,8 @@
 			<li class="active">
 				<a href="" data-toggle="tab" data-target="#tab_1">Sección #1</a>
 			</li>
-			<li class="disable">
-				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_2">Sección #2</a>
+			<li >
+				<a  href="" data-toggle="tab" data-target="#tab_2">Sección #2</a>
 			</li>
 			<li class="disable">
 				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_3">Sección #3</a>
@@ -55,30 +55,33 @@
                   </div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input class="md-input" required="">
+                      <input class="md-input" required="" ng-model='objSection1.firstname'>
                       <label>Apellido Paterno</label>
                     </div>
                   </div>
                   <div class="col-md-4">
   									<div class="md-form-group float-label">
-  										<input class="md-input" required="">
+  										<input class="md-input" required="" ng-model='objSection1.lastname'>
   										<label>Apellido Materno</label>
                     </div>
   								</div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input type="date" class="md-input has-value" required="">
+                      <input type="date" class="md-input has-value" required="" ng-model='objSection1.birthdate'>
                       <label>Fecha de nacimiento</label>
                     </div>
                   </div>
                   <div class="col-md-4" style="margin-top:-8px;">
                     <label>Género</label>
                     <div class="">
-                      <select class="form-control has-value">
+                      <!-- <select class="form-control has-value">
                         <option>Elija una opción</option>
                         <option>Másculino</option>
                         <option>Femenino</option>
+                      </select> -->
+                      <select ng-options='data.name for data in objSection1.gender.options track by data.id' ng-model='objSection1.gender.selected'>
                       </select>
+                      <!-- {{gender.selected}} -->
                     </div>
                   </div>
                 </div>
@@ -90,13 +93,13 @@
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                    <input class="md-input" required="">
+                    <input class="md-input" required="" ng-model='objSection1.email'>
                     <label>Email</label>
                   </div>
                   <div class="col-md-12">
                     </div>
                     <div class="md-form-group float-label">
-                    <input class="md-input" required="">
+                    <input class="md-input" required="" ng-model='objSection1.phone'>
                     <label>Teléfono Móvil</label>
                     </div>
                   </div>
@@ -109,19 +112,19 @@
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input" required="">
+                      <input class="md-input" required="" ng-model='objSection1.schoolnivel'>
                       <label>Nivel Académico</label>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input" required="">
+                      <input class="md-input" required="" ng-model='objSection1.schoolname'>
                       <label>Escuela de Procedencia</label>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input" required="">
+                      <input class="md-input" required="" ng-model='objSection1.schoolnow'>
                       <label>Escuela de Formación</label>
                     </div>
                   </div>

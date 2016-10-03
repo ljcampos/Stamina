@@ -45,10 +45,13 @@
               </div>
             </div>
             <div class="col-sm-12">
-                <select class="form-control" ng-model="announce.universidad_id">
+                <!-- <select class="form-control" ng-model="announce.universidad_id">
                   <option selected value="">Elija una Universidad</option>
                   <option ng-repeat="university in univesityList" value="{{university.universidad_id}}" ng-selected="selected_universidad==university.universidad_id">{{university.nombre}}</option>
-                </select>
+                </select> -->
+                <!-- {{announce.universidad.universidad_id}} -->
+                <!-- {{univesityList}} -->
+                <select class="form-control" ng-options="universidad.nombre for universidad in univesityList track by universidad.universidad_id" ng-model='announce.universidad'></select>
                 <br>
             </div>
             <div class="col-sm-6">
