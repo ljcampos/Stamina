@@ -17,8 +17,8 @@
 			<li class="active">
 				<a href="" data-toggle="tab" data-target="#tab_1">Sección #1</a>
 			</li>
-			<li >
-				<a  href="" data-toggle="tab" data-target="#tab_2">Sección #2</a>
+			<li ng-class='btnSection2 === false ? "active": "disable"'>
+				<a ng-class='btnSection2 === false ? "": "disabledTab"' href="" data-toggle="tab" data-target="#tab_2">Sección #2</a>
 			</li>
 			<li class="disable">
 				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_3">Sección #3</a>
