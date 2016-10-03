@@ -1,16 +1,15 @@
 (function() {
 	'use strict';
 
-	angular.module('announcement').controller('AnnouncementController', ['$scope', 'AnnouncementService', AnnouncementController]);
+	angular.module('announcement').controller('AnnouncementAddController', ['$scope', 'AnnouncementService', 'Upload', AnnouncementAddController]);
 
-	function AnnouncementController($scope, AnnouncementService) {
+	function AnnouncementAddController($scope, AnnouncementService, Upload) {
 		$scope.text = 'xsdfsf';
-		$scope.announcesList = {};
-		$scope.announcesAvailableList = {};
+		$scope.announce = {};
+		$scope.univesityList = {};
 		
 		$scope.init = function() {
 			getAnnouncements();
-			getAnnouncementsAvailable();
 		};
 
 		angular.element(document).ready(function() {
@@ -18,18 +17,10 @@
 		});
 
 		function getAnnouncements() {
-			AnnouncementService.getAllAnnouncements()
+			AnnouncementService.getAllUniversities()
 			.then(function(response) {
-				$scope.announcesList = response.data;
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
-		}
-		function getAnnouncementsAvailable() {
-			AnnouncementService.getAnnouncementsAvailable()
-			.then(function(response) {
-				$scope.announcesAvailableList = response.data;
+				console.log(response);
+				$scope.univesityList = response.data;
 			})
 			.catch(function(error) {
 				console.log(error);
@@ -46,21 +37,37 @@
 			});
 		};
 
-		$scope.addAnnouncement = function() {
+		$scope.addAnnouncement = function(announce, file) {
 			var data = {};
-			data.value1 = '';
-			data.value2 = '';
-			data.value3 = '';
-			data.value4 = '';
-			data.value5 = '';
 
-			AnnouncementService.addAnnouncement(data)
-			.then(function(response) {
-				console.log(response);
+			data.nombre 			=	announce.nombre;
+			data.universidad_id 	=	announce.universidad;
+			//data.path 				=	"stamina_convocatoria.pdf";
+			data.fecha_inicio 		=	announce.fecha_inicio;
+			data.fecha_cierre 		=	announce.fecha_final;
+			data.file				=	file;
+
+			// console.log(data);
+
+			file.upload = Upload.upload({
+				url: 'http://www.stamina.dev/API/public/api/v1/convocatoria/',
+				method: 'POST',
+				data: data
 			})
-			.catch(function(error) {
-				console.log(error);
+			.then(function(res) {
+				console.log(res);
+			})
+			.catch(function(err) {
+				console.log(err);
 			});
+
+			// AnnouncementService.addAnnouncement(data)
+			// .then(function(response) {
+			// 	console.log(response);
+			// })
+			// .catch(function(error) {
+			// 	console.log(error);
+			// });
 		};
 
 		$scope.updateAnnouncement = function() {

@@ -24,6 +24,20 @@ $app->group('/api/v1/usuario', function ()
 	/**
 	* 
 	*/
+	$this->get('/{usuario_id}/convocatorias/', function ($request, $response, $args)
+	{
+		$usuario_id = $args['usuario_id'];
+		$controller = new UserController();
+		$json = $controller->callAction('empCon', $usuario_id);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('get_one_user_convocatoria');
+
+	/**
+	* 
+	*/
 	$this->get('/{usuario_id}/', function ($request, $response, $args)
 	{
 		$usuario_id = $args['usuario_id'];
@@ -151,6 +165,29 @@ $app->group('/api/v1/usuario', function ()
 });
 
 /**
+*
+*/
+$app->group('/api/v1/usuarios/mentores', function () 
+{
+
+	/**
+	* 
+	*/
+	$this->get('/', function ($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$controller = new MentorController();
+		$json = $controller->callAction('all', $params);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('get_users_mentores');
+
+});
+
+
+/**
 * 
 */
 $app->group('/api/v1/universidad', function ()
@@ -246,6 +283,48 @@ $app->group('/api/v1/convocatoria', function ()
 		return $response->withJson($json, $code);
 
 	})->setName('all_convocatorias');
+
+	/**
+	* 
+	*/
+	$this->get('/actuales/', function ($request, $response, $args)
+	{
+
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('conAct');
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('all_convocatorias_actuales');
+
+	/**
+	*
+	*/
+	$this->get('/proximas/', function ($request, $response, $args)
+	{
+
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('conPro');
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('all_convocatorias_proximas');
+
+	/**
+	*
+	*/
+	$this->get('/pasadas/', function ($request, $response, $args)
+	{
+
+		$controller = new ConvocatoriaController();
+		$json = $controller->callAction('conPas');
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('all_convocatorias_pasadas');
 
 	/**
 	* 
@@ -735,7 +814,9 @@ $app->group('/api/v1/formularioAplicacion', function ()
 
 	})->setName('create_seccion');
 
-
+	/**
+	*
+	*/
 	$this->get('/{id}/', function ($request, $response, $args)
 	{
 		$controller = new FormularioAplicacionController();
@@ -747,6 +828,26 @@ $app->group('/api/v1/formularioAplicacion', function ()
 
 	})->setName('formulario_aplicacion_by_id');
 
+	/**
+	*
+	*/
+	$this->get('/{id}/preguntas/', function ($request, $response, $args)
+	{
+		$id_secion = $args['id'];
+		$controller = new FormularioAplicacionController();
+		$json = $controller->callAction('forPre', $id_secion);
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+		// header('Content-Type: application/json');
+		// echo $json;
+		//echo $_GET["callback"]."(" . $json . ")";
+
+	})->setName('formulario_aplicacion_by_id');
+
+	/**
+	*
+	*/
 	$this->post('/update/{id}/', function ($request, $response, $args)
 	{
 		$id = $args['id'];

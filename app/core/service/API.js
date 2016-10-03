@@ -4,13 +4,16 @@
 	angular.module('core').service('API', ['$q', API]);
 
 	function API($q) {
+		//var base = 'http://www.futuremakers.staminaacc.com/API/public/api/v1/';
 		var base = 'http://www.stamina.dev/API/public/api/v1/';
+		//var base = 'http://www.staminaprod.dev/API/public/api/v1/';
 
 		return {
-			'users': {
+			'user': {
 				'list': base + 'usuario/',
 				'ById': base + 'usuario/:id/',
-				'add': base + 'usuario/'
+				'add': base + 'usuario/',
+				'facebookUserById': base + 'usuario/facebook/:id'
 			},
 			'auth': {
 				'signin': base + 'usuario/auth/',
@@ -28,7 +31,8 @@
 				'ById': base + 'convocatoria/:id/',
 				'add': base + 'convocatoria/',
 				'update': base + 'convocatoria/:id/update/',
-				'delete': base + 'convocatoria/:id/delete/'
+				'delete': base + 'convocatoria/:id/delete/',
+				'aviable': base + 'convocatoria/actuales/'
 			},
 			'rol': {
 				'list': base + 'roles/',

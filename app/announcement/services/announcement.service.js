@@ -1,25 +1,118 @@
 (function() {
 	'use strict';
 
-	angular.module('announcement').service('AnnouncementService', ['$q', '$http', AnnouncementService]);
+	angular.module('announcement').service('AnnouncementService', ['$q', '$http', 'API', AnnouncementService]);
 
-	function AnnouncementService($q, $http) {
+	function AnnouncementService($q, $http, API) {
 		return {
-			getUsers: getUsers
+			getAllUniversities: getAllUniversities,
+			getAllAnnouncements: getAllAnnouncements,
+			getAnnouncementsAvailable: getAnnouncementsAvailable,
+			getAnnouncementById: getAnnouncementById,
+			addAnnouncement: addAnnouncement,
+			editAnnouncement: editAnnouncement,
+			deleteAnnouncement: deleteAnnouncement
+
 		};
 
-		function getUsers() {
-			var users = $q.defer();
-			$http.get('https://jsonplaceholder.typicode.com/users')
+		function getAllUniversities() {
+			var universityDefer = $q.defer();
+			$http.get(API.university.list)
 			.success(function(response) {
-				console.log(response);
-				users.resolve(response);
+				universityDefer.resolve(response);
 			})
 			.error(function(error) {
+				universityDefer.reject(error);
 				console.log(error);
-				users.reject(error);
 			});
-			return users.promise;
+			return universityDefer.promise;
+		}
+
+		function getAllAnnouncements() {
+			var announcementDefer = $q.defer();
+
+			$http.get(API.announcement.list)
+			.success(function(response) {
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+
+			return announcementDefer.promise;
+		}
+		function getAnnouncementsAvailable() {
+			var announcementDefer = $q.defer();
+
+			$http.get(API.announcement.aviable)
+			.success(function(response) {
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+
+			return announcementDefer.promise;
+		}
+
+		function getAnnouncementById(id) {
+			var announcementDefer = $q.defer();
+
+			$http.get(API.announcement.ById.replace(':id', id))
+			.success(function(response) {
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+
+			return announcementDefer.promise;
+		}
+
+		function addAnnouncement(data) {
+			var announcementDefer = $q.defer();
+
+			$http.post(API.announcement.add, data)
+			.success(function(response) {
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+
+			return announcementDefer.promise;
+		}
+
+		function editAnnouncement(data) {
+			var announcementDefer = $q.defer();
+			$http.put(API.user.add, data)
+			.success(function(response) {
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+			return announcementDefer.promise;
+		}
+
+		function deleteAnnouncement(id) {
+			var announcementDefer = $q.defer();
+
+			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', id)
+			.success(function(response) {
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+
+			return announcementDefer.promise;
 		}
 	}
 } ());

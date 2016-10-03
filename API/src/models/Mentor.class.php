@@ -10,4 +10,12 @@ class Mentor extends Model {
 	protected 	$primaryKey =	'mentor_id';
 	public 		$timestamps =	false;
 
+	public function usuario () {
+		return $this->belongsTo('User', 'usuario_id', 'mentor_id');
+	}
+
+	public function persona () {
+		return $this->hasOne('Persona', 'persona_id', 'mentor_id');
+	}
+
 }

@@ -40,14 +40,14 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="md-form-group float-label">
-                <input class="md-input" required ng-model="announce.nombre">
+                <input class="md-input has-value" required ng-model="announce.nombre">
                 <label>Nombre de la convocatoria</label>
               </div>
             </div>
             <div class="col-sm-12">
-                <select class="form-control" ng-model="announce.universidad">
+                <select class="form-control" ng-model="announce.universidad_id">
                   <option selected value="">Elija una Universidad</option>
-                  <option ng-repeat="university in univesityList" value="{{university.universidad_id}}">{{university.nombre}}</option>
+                  <option ng-repeat="university in univesityList" value="university.universidad_id" ng-selected="selected_universidad==university.universidad_id">{{university.nombre}}</option>
                 </select>
                 <br>
             </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-sm-6">
               <div class="md-form-group float-label">
-                <input class="md-input has-value" name="datePicker4" id="datePicker4" required readonly type="text"  ng-model="announce.fecha_final">
+                <input class="md-input has-value" name="datePicker4" id="datePicker4" required readonly type="text"  ng-model="announce.fecha_cierre">
                 <label>Fecha Final</label>
               </div>
             </div>
@@ -77,7 +77,7 @@
   <div class="row row-center">
     <div class="col-md-7 col-center">
       <div class="pull-right">
-        <button class="btn btn-lg btn-success" ng-click="addAnnouncement(announce, file)">
+        <button class="btn btn-lg btn-success" ng-click="editAnnouncement(announce, file)">
           Guardar
         </button>
       </div>

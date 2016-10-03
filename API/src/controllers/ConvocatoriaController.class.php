@@ -7,6 +7,9 @@ class ConvocatoriaController extends Controller
 	static $routes = array(
 		'all' 		=>	'getAll',
 		'one' 		=>	'getById',
+		'conAct'	=>	'convocatoriasActuales',
+		'conPro'	=>	'convocatoriasProximas',
+		'conPas'	=>	'convocatoriasPasadas',
 		'add' 		=>	'create',
 		'update'	=>	'update',
 		'delete' 	=>	'delete'
@@ -48,17 +51,20 @@ class ConvocatoriaController extends Controller
 		if(count($convocatorias) > 0)
 		{
 			foreach ($convocatorias as $key => $value) {
-				$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
+				//$value->path = (strlen($value->path) > 0) ? /*$this->DIRECTORY . */'/uploads/convocatoria/' . $value->path : '';
+				$value->path = $value->path;
 				unset($value->universidad->user->password);
 				unset($value->universidad->user->salt);
 				unset($value->universidad->user->token);
 				$value->universidad->user->status;
-				$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				//$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				$value->universidad->imagen = $value->universidad->imagen;
 
 				if (count($value->emprendedores) > 0)
 				{
 					foreach ($value->emprendedores as $k => $val) {
-						$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						//$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						$val->imagen = $val->imagen;
 						unset($val->password);
 						unset($val->salt);
 						unset($val->token);
@@ -90,14 +96,18 @@ class ConvocatoriaController extends Controller
 			if ($convocatoria != null)
 			{	
 				$convocatoria->universidad;
-				unset($value->universidad_id);
-				$convocatoria->path = (strlen($convocatoria->path) > 0) ? $this->DIRECTORY . $convocatoria->path : '';
-				$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $convocatoria->universidad->imagen : '';
+				//unset($value->universidad_id);
+				unset($convocatoria->universidad_id);
+				$convocatoria->path = (strlen($convocatoria->path) > 0) ? /*$this->DIRECTORY .*/ '/API/uploads/convocatoria/' .  $convocatoria->path : '';
+				$convocatoria->path = $convocatoria->path;
+				$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../API/uploads/universidad/' . $convocatoria->universidad->imagen : '';
 
 				if (count($convocatoria->emprendedores) > 0)
 				{	
 					foreach ($convocatoria->emprendedores as $key => $value) {
-						$value->imagen = ($value->imagen != "" || $value->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $value->imagen : '';
+						//$value->imagen = ($value->imagen != "" || $value->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $value->imagen : '';
+						$convocatoria->imagen = ($convocatoria->imagen != "" || $convocatoria->imagen != null) ? __DIR__ . '/../../API/uploads/usuario/' . $convocatoria->imagen : '';
+						$convocatoria->imagen = $convocatoria->imagen;
 						unset($convocatoria->emprendedores[$key]->token);
 						unset($convocatoria->emprendedores[$key]->password);
 						unset($convocatoria->emprendedores[$key]->salt);
@@ -457,6 +467,144 @@ class ConvocatoriaController extends Controller
 		return $params;
 	}
 
+	/**
+	*
+	*/
+	public function convocatoriasActuales()
+	{
+		$fechaActual 	= date('Y-m-d');
+		$ayer		 	= date('Y-m-d', strtotime('-1 day'));
+
+		$convocatorias 	= Convocatoria::with('universidad')
+									 ->where('fecha_inicio', '<=', $fechaActual)
+									 ->where('fecha_cierre', '>=', $fechaActual)
+									 ->orderBy('fecha_inicio', 'ASC')
+									 ->get();
+
+		if(count($convocatorias) > 0)
+		{
+			foreach ($convocatorias as $key => $value) {
+				//$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
+				$value->path = $value->path;
+				unset($value->universidad->user->password);
+				unset($value->universidad->user->salt);
+				unset($value->universidad->user->token);
+				$value->universidad->user->status;
+				//$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				$value->universidad->imagen = $value->universidad->imagen;
+
+				if (count($value->emprendedores) > 0)
+				{
+					foreach ($value->emprendedores as $k => $val) {
+						//$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						$val->imagen = $val->imagen;
+						unset($val->password);
+						unset($val->salt);
+						unset($val->token);
+						unset($val->pivot);
+					}
+				}
+			}
+		}
+
+		$this->response['code'] = 1;
+		$this->response['data'] = $convocatorias;
+		$this->response['message'] = 'Correcto';
+
+		return $this->response;
+	}
+
+	/**
+	*
+	*/
+	public function convocatoriasProximas()
+	{
+		$fechaActual 	= date('Y-m-d');
+		$ayer		 	= date('Y-m-d', strtotime('-1 day'));
+
+		$convocatorias 	= Convocatoria::with('universidad')
+									 ->where('fecha_inicio', '>', $fechaActual)
+									 ->orderBy('fecha_inicio', 'ASC')
+									 ->get();
+
+		if(count($convocatorias) > 0)
+		{
+			foreach ($convocatorias as $key => $value) {
+				//$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
+				$value->path = $value->path;
+				unset($value->universidad->user->password);
+				unset($value->universidad->user->salt);
+				unset($value->universidad->user->token);
+				$value->universidad->user->status;
+				//$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				$value->universidad->imagen = $value->universidad->imagen;
+
+				if (count($value->emprendedores) > 0)
+				{
+					foreach ($value->emprendedores as $k => $val) {
+						//$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						$val->imagen = $val->imagen;
+						unset($val->password);
+						unset($val->salt);
+						unset($val->token);
+						unset($val->pivot);
+					}
+				}
+			}
+		}
+
+		$this->response['code'] = 1;
+		$this->response['data'] = $convocatorias;
+		$this->response['message'] = 'Correcto';
+
+		return $this->response;
+	}
+
+	/**
+	*
+	*/
+	public function convocatoriasPasadas()
+	{
+		$fechaActual 	= date('Y-m-d');
+		$ayer		 	= date('Y-m-d', strtotime('-1 day'));
+
+		$convocatorias 	= Convocatoria::with('universidad')
+									 ->where('fecha_cierre', '<', $fechaActual)
+									 ->orderBy('fecha_inicio', 'ASC')
+									 ->get();
+
+		if(count($convocatorias) > 0)
+		{
+			foreach ($convocatorias as $key => $value) {
+				//$value->path = (strlen($value->path) > 0) ? $this->DIRECTORY . $value->path : '';
+				$value->path = $value->path;
+				unset($value->universidad->user->password);
+				unset($value->universidad->user->salt);
+				unset($value->universidad->user->token);
+				$value->universidad->user->status;
+				//$value->universidad->imagen = (strlen($value->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $value->universidad->imagen : '';
+				$value->universidad->imagen = $value->universidad->imagen;
+
+				if (count($value->emprendedores) > 0)
+				{
+					foreach ($value->emprendedores as $k => $val) {
+						//$val->imagen = ($val->imagen != "" || $val->imagen != null) ? __DIR__ . '/../../uploads/usuario/' . $val->imagen : '';
+						$val->imagen = $val->imagen;
+						unset($val->password);
+						unset($val->salt);
+						unset($val->token);
+						unset($val->pivot);
+					}
+				}
+			}
+		}
+
+		$this->response['code'] = 1;
+		$this->response['data'] = $convocatorias;
+		$this->response['message'] = 'Correcto';
+
+		return $this->response;
+	}
 
 	/**
 	* 
