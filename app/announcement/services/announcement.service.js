@@ -7,6 +7,8 @@
 			getAllAnnouncements: getAllAnnouncements,
 			getAnnouncementsAvailable: getAnnouncementsAvailable,
 			getAnnouncementById: getAnnouncementById,
+			getAnnouncementsNext: getAnnouncementsNext,
+			getAnnouncementsPast: getAnnouncementsPast,
 			addAnnouncement: addAnnouncement,
 			editAnnouncement: editAnnouncement,
 			deleteAnnouncement: deleteAnnouncement
@@ -38,6 +40,30 @@
 		function getAnnouncementsAvailable() {
 			var announcementDefer = $q.defer();
 			$http.get(API.announcement.aviable)
+			.success(function(response) {
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+			return announcementDefer.promise;
+		}
+		function getAnnouncementsNext() {
+			var announcementDefer = $q.defer();
+			$http.get(API.announcement.next)
+			.success(function(response) {
+				announcementDefer.resolve(response);
+			})
+			.error(function(error) {
+				announcementDefer.reject(error);
+				console.log(error);
+			});
+			return announcementDefer.promise;
+		}
+		function getAnnouncementsPast() {
+			var announcementDefer = $q.defer();
+			$http.get(API.announcement.past)
 			.success(function(response) {
 				announcementDefer.resolve(response);
 			})

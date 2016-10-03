@@ -7,10 +7,14 @@
 		$scope.text = 'xsdfsf';
 		$scope.announcesList = {};
 		$scope.announcesAvailableList = {};
+		$scope.announcesNextList = {};
+		$scope.announcesPastList = {};
 		
 		$scope.init = function() {
 			getAnnouncements();
 			getAnnouncementsAvailable();
+			getAnnouncementsNext();
+			getAnnouncementsPast();
 		};
 
 		angular.element(document).ready(function() {
@@ -21,6 +25,24 @@
 			AnnouncementService.getAllAnnouncements()
 			.then(function(response) {
 				$scope.announcesList = response.data;
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+		}
+		function getAnnouncementsNext() {
+			AnnouncementService.getAnnouncementsNext()
+			.then(function(response) {
+				$scope.announcesNextList = response.data;
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+		}
+		function getAnnouncementsPast() {
+			AnnouncementService.getAnnouncementsPast()
+			.then(function(response) {
+				$scope.announcesPastList = response.data;
 			})
 			.catch(function(error) {
 				console.log(error);
