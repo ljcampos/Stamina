@@ -14,7 +14,12 @@
   </div>
 	<div class="col-lg-10 col-center">
 		<ul class="nav nav-tabs nav-justified">
-			<li class="active">
+         <!-- {{tab.title}} -->
+         <!-- ng-click='isActiveTab(tab)' -->
+         <li ng-repeat="tab in tabs" class="{{tab.class}}">
+            <a class="{{tab.subClass}}" href="" data-toggle="tab" data-target="{{tab.target}}">{{tab.title}}</a>
+         </li>
+			<!-- <li class="active">
 				<a href="" data-toggle="tab" data-target="#tab_1">Sección #1</a>
 			</li>
 			<li ng-class='btnSection2 === false ? "active": "disable"'>
@@ -34,7 +39,7 @@
 			</li>
 			<li class="disable">
 				<a class="disabledTab" href="" data-toggle="tab" data-target="#tab_7">Sección #7</a>
-			</li>
+			</li> -->
 		</ul>
     <div class="md-whiteframe-z2 bg-white">
 			<div class="tab-content p m-b-md clear b-t b-t-2x">
@@ -136,12 +141,12 @@
               <div class='col-lg-12'>
                 <div class='pull-right'>
                   <button class='btn btn-lg btn-success' ng-click='saveSection1()'>Guardar</button>
-                  <button class='btn btn-lg btn-info' ng-disabled='btnSection1'>Siguiente</button>
+                  <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>
             </div>
-					</form>
-				</div>
+            </form>
+         </div>
         <!-- section 2 -->
         <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_2">
           <form>
@@ -155,7 +160,7 @@
                     <div class="form-group form-group-lg">
                       <label class="col-sm-12 control-label"><strong>1.- Nombre del Proyecto</strong></label>
                       <div class="col-sm-12">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" ng-model='objSection2.pName'>
                       </div>
                     </div>
                   </div>
@@ -163,7 +168,7 @@
                     <div class="form-group">
                       <label class="col-sm-12 control-label"><br><strong>2. Cuéntanos sobre el problema, oportunidad o necesidad no satisfecha que has detectado.</strong></label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.description'></textarea>
                       </div>
                     </div>
                   </div>
@@ -173,7 +178,7 @@
                         <br><strong>3. ¿Quién o quienes  tienen este problema o necesidad? Háblanos un poco de tu target  de mercado.</strong><small>(Causas, sus efectos emocionales o sociales, sus aspiraciones y motivaciones. Haz un esfuerzo por identificar y satisfacer un nicho de mercado)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.description2'></textarea>
                       </div>
                     </div>
                   </div>
@@ -183,7 +188,7 @@
                         <br><strong>4. ¿Tienes “idea” de cuántas personas podrían tener este problema?</strong><small>(Estimaciones, Características Socio-demográficas, ubicación geográfica, Fuente de datos.) *No se vale decir "Todo el Mundo".  Haz un esfuerzo por ser lo más específico posible)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.description3'></textarea>
                       </div>
                     </div>
                   </div>
@@ -193,7 +198,7 @@
                         <br><strong>5. ¿Haz platicado con alguna persona representativa de tu "Nicho de mercado" para corroborar que existe dicha “Oportunidad” de negocio o únicamente existe en tu mente?</strong><small>(Menciona si has utilizado alguna herramienta como encuestas en persona u online, entrevistas formales o informales, grabaciones, etc. y si has encontrado alguna correlación como resultado de esto)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.description4'></textarea>
                       </div>
                     </div>
                   </div>
@@ -203,7 +208,7 @@
                         <br><strong>6. ¿Cómo planeas resolver el problema o satisfacer la necesidad identificada? ¿Qué solución visualizas para esto?</strong><small>(Describe brevemente si es a través de innovación en producto, servicio o modelo de negocio. Explícanos el proceso y las tres principales características o funciones de tu solución)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.description5'></textarea>
                       </div>
                     </div>
                   </div>
@@ -213,7 +218,7 @@
                         <br><strong>7. Utilizas alguna aplicación de la Tecnología, hechizo obscuro o poción mágica para resolver el problema?</strong><small>(Procura investigar antes qué es Tecnología para evitar errores)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.description6'></textarea>
                       </div>
                     </div>
                   </div>
@@ -223,7 +228,7 @@
                         <br><strong>8. ¿Ha desarrollado algún prototipo de la solución?</strong><small>(Prototipo de Alta Fidelidad, Video animado sobre el funcionamiento, bosquejo, mock-up, empaque, etc.)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.description7'></textarea>
                       </div>
                     </div>
                   </div>
@@ -233,7 +238,7 @@
                         <br><strong>9. ¿Has invertido capital propio para el desarrollo del prototipo? Si / no ¿Cuánto?</strong>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.description8'></textarea>
                       </div>
                     </div>
                   </div>
@@ -338,10 +343,19 @@
                         <br><strong>11. Link de un video donde aparezcas explicando tu proyecto</strong><small>(duración de 1:30 min)</small>
                       </label>
                       <div class="col-sm-12">
-                        <input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=*">
+                        <input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=*" ng-model='objSection2.link'>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class='row'>
+              <div class='col-lg-12'>
+                <div class='pull-right'>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection2()'>Guardar</button>
+                  <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>
             </div>
@@ -360,11 +374,13 @@
                     <div class="form-group-lg">
                       <label class="col-sm-12 control-label"><strong>12. ¿Cuentas con un equipo para el desarrollo del proyecto?</strong></label>
                       <div class="col-sm-12">
-                        <select class="form-control">
+                        <!-- <select class="form-control">
                           <option>Elija Una Opción</option>
                           <option>Sí, tengo un equipo para el proyecto</option>
                           <option>No, tengo un equipo para el proyecto</option>
-                        </select>
+                        </select> -->
+                        <select class="form-control" ng-options='data.name for data in objSection3.team.options track by data.id' ng-model='objSection3.team.selected'>
+                      </select>
                       </div>
                     </div>
                   </div>
@@ -382,43 +398,43 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Nombre(s)</strong>
-                          <input class="form-control">
+                          <input class="form-control" ng-model='objSection3.name'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Apellido Paterno</strong>
-                          <input class="form-control">
+                          <input class="form-control" ng-model='objSection3.firstName'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Apellido Materno</strong>
-                          <input class="form-control">
+                          <input class="form-control" ng-model='objSection3.lastName'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Teléfono</strong>
-                          <input class="form-control">
+                          <input class="form-control" ng-model='objSection3.phone'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Correo</strong>
-                          <input class="form-control">
+                          <input class="form-control" ng-model='objSection3.email'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Nivel Académico</strong>
-                          <input class="form-control">
+                          <input class="form-control" ng-model='objSection3.School'>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <strong>Describe el rol que desempeña dentro del equipo (Cuáles son las actividades que realiza en el proyecto)</strong>
-                          <textarea class="form-control"></textarea>
+                          <textarea class="form-control" ng-model='objSection3.descriptio'></textarea>
                         </div>
                       </div>
                     </div>
@@ -426,15 +442,25 @@
                   <div class="col-md-5">
                     <div class="form-group">
                       <strong>De las siguientes habilidades, ¿Cuáles se encuentran cubiertas por los miembros fundadores?</strong>
-                      <textarea class="form-control"></textarea>
+                      <textarea class="form-control" ng-model='objSection3.descriptio2'></textarea>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class='row'>
+              <div class='col-lg-12'>
+                <div class='pull-right'>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection3()'>Guardar</button>
+                  <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>
             </div>
           </form>
 				</div>
 				<!-- section 4 -->
+        <!-- section 4 -->
         <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_4">
           <form>
             <div class="row">
@@ -471,7 +497,7 @@
                         <br><strong>14. Qué porcentaje de participación accionaría tiene cada socio?</strong>
                       </label>
                       <div class="col-sm-12">
-                        <input class="form-control">
+                        <input class="form-control" ng-model='objSection4.answer1'>
                       </div>
                     </div>
                   </div>
@@ -481,7 +507,7 @@
                         <br><strong>15. Han platicado qué porcentaje accionario le corresponderá a cada uno de los integrantes del proyecto si este se constituye legalmente?</strong>
                       </label>
                       <div class="col-sm-12">
-                        <input class="form-control">
+                        <input class="form-control" ng-model='objSection4.answer2'>
                       </div>
                     </div>
                   </div>
@@ -502,7 +528,7 @@
                             <div class="row">
                               <div class="col-md-2">
                                 <label class="md-check">
-                                  <input type="radio" name="radio" class="has-value">
+                                  <input type="radio" name="radio" class="has-value" >
                                   <i class="indigo"></i> Sí
                                 </label>
                               </div>
@@ -518,158 +544,176 @@
                 </div>
               </div>
             </div>
-          </form>
-				</div>
-				<!-- section 5 -->
-        <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_5">
-					<form>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="row">
-                  <div class="col-md-12 text-center">
-                    <h4>Experiencia</h4>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="col-sm-12 control-label">
-                        <strong>1. ¿Has colaborado en el desarrollo de algún producto, servicio tecnológico ó proyecto de investigación? Si, ¿Cúal?</strong>
-                      </label>
-                      <div class="col-sm-12">
-                        <textarea class="form-control" rows="4"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="col-sm-12 control-label">
-                        <br><strong>2. ¿Has participado en la creación o gestión de alguna empresa? (Ya sea como fundador o como colaborador) Si, menciona que papel juegas</strong>
-                      </label>
-                      <div class="col-sm-12">
-                        <textarea class="form-control" rows="4"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="col-sm-12 control-label">
-                        <br><strong>3. Menciona el reto más grande de tu vida y cómo lo solucionaste?<small>(No aplica para situaciones amorosas, ni escolares)</small></strong>
-                      </label>
-                      <div class="col-sm-12">
-                        <textarea class="form-control" rows="5"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="row">
-                  <div class="col-md-12 text-center">
-                    <h4>Apoyo</h4>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="col-sm-12 control-label">
-                        <strong>1. Por qué eres un buen candidato para formar parte del programa de entrenamiento?</strong>
-                      </label>
-                      <div class="col-sm-12">
-                        <textarea class="form-control" rows="3"></textarea> 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="col-sm-12 control-label">
-                        <br><strong>2. ¿Qué tipo de apoyo esperas recibir de los Organizadores de la Convocatoria, si quedarás seleccionado?</strong>
-                      </label>
-                      <div class="col-sm-12">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Dirección Estratégica en Innovación
-                            </label>
-                            <br>
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Agencias de Marketing
-                            </label>
-                            <br>
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Vinculación con Mercados 
-                            </label>
-                            <br>
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Desarrollo de Prototipo
-                            </label>
-                            <br>
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Vinculación con Fondos Públicos
-                            </label>
-                            <br>
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Vinculación con Fondos Privados / Ángeles Inversionistas
-                            </label>
-                            <br>
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Apoyo en Elaboración de Campaña de Crowdfunding
-                            </label>
-                            <br>
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Conformación Legal de Empresa
-                            </label>
-                            <br>
-                            <label class="md-check">
-                              <input type="checkbox" class="has-value">
-                              <i class="grey-900"></i>Internet de las Cosas (IoT)
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="col-sm-12 control-label">
-                        <br><strong>2. ¿Cómo te enteraste de la convocatoria?</strong>
-                      </label>
-                      <div class="col-sm-6">
-                        <label class="md-check">
-                        <input type="radio" name="radio" class="has-value">
-                        <i class="indigo"></i>Web
-                        </label><br>
-                        <label class="md-check">
-                        <input type="radio" name="radio" class="has-value">
-                        <i class="indigo"></i>Redes Sociales
-                        </label><br>
-                        <label class="md-check">
-                        <input type="radio" name="radio" class="has-value">
-                        <i class="indigo"></i>Medios Impresos o Tradicionales
-                        </label>
-                      </div>
-                      <div class="col-sm-6">
-                        <label class="md-check">
-                        <input type="radio" name="radio" class="has-value">
-                        <i class="indigo"></i>Invitación Personalizada
-                        </label><br>
-                        <label class="md-check">
-                        <input type="radio" name="radio" class="has-value">
-                        <i class="indigo"></i>Red de Amigos
-                        </label><br>
-                      </div>
-                    </div>
-                  </div>
+            <hr />
+            <div class='row'>
+              <div class='col-lg-12'>
+                <div class='pull-right'>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection4()'>Guardar</button>
+                  <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>
             </div>
           </form>
 				</div>
-				<!-- section 6 -->
+			<!-- section 5 -->
+        <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_5">
+				<form>
+               <div class="row">
+                 <div class="col-md-6">
+                   <div class="row">
+                     <div class="col-md-12 text-center">
+                       <h4>Experiencia</h4>
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group">
+                         <label class="col-sm-12 control-label">
+                           <strong>1. ¿Has colaborado en el desarrollo de algún producto, servicio tecnológico ó proyecto de investigación? Si, ¿Cúal?</strong>
+                         </label>
+                         <div class="col-sm-12">
+                           <textarea class="form-control" rows="4" ng-model='objSection5.description'></textarea>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group">
+                         <label class="col-sm-12 control-label">
+                           <br><strong>2. ¿Has participado en la creación o gestión de alguna empresa? (Ya sea como fundador o como colaborador) Si, menciona que papel juegas</strong>
+                         </label>
+                         <div class="col-sm-12">
+                           <textarea class="form-control" rows="4" ng-model='objSection5.description2'></textarea>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group">
+                         <label class="col-sm-12 control-label">
+                           <br><strong>3. Menciona el reto más grande de tu vida y cómo lo solucionaste?<small>(No aplica para situaciones amorosas, ni escolares)</small></strong>
+                         </label>
+                         <div class="col-sm-12">
+                           <textarea class="form-control" rows="5" ng-model='objSection5.description3'></textarea>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="col-md-6">
+                   <div class="row">
+                     <div class="col-md-12 text-center">
+                       <h4>Apoyo</h4>
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group">
+                         <label class="col-sm-12 control-label">
+                           <strong>1. Por qué eres un buen candidato para formar parte del programa de entrenamiento?</strong>
+                         </label>
+                         <div class="col-sm-12">
+                           <textarea class="form-control" rows="3" ng-model='objSection5.description4'></textarea>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group">
+                         <label class="col-sm-12 control-label">
+                           <br><strong>2. ¿Qué tipo de apoyo esperas recibir de los Organizadores de la Convocatoria, si quedarás seleccionado?</strong>
+                         </label>
+                         <div class="col-sm-12">
+                           <div class="row">
+                             <div class="col-md-12">
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Dirección Estratégica en Innovación
+                               </label>
+                               <br>
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Agencias de Marketing
+                               </label>
+                               <br>
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Vinculación con Mercados 
+                               </label>
+                               <br>
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Desarrollo de Prototipo
+                               </label>
+                               <br>
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Vinculación con Fondos Públicos
+                               </label>
+                               <br>
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Vinculación con Fondos Privados / Ángeles Inversionistas
+                               </label>
+                               <br>
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Apoyo en Elaboración de Campaña de Crowdfunding
+                               </label>
+                               <br>
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Conformación Legal de Empresa
+                               </label>
+                               <br>
+                               <label class="md-check">
+                                 <input type="checkbox" class="has-value">
+                                 <i class="grey-900"></i>Internet de las Cosas (IoT)
+                               </label>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group">
+                         <label class="col-sm-12 control-label">
+                           <br><strong>2. ¿Cómo te enteraste de la convocatoria?</strong>
+                         </label>
+                         <div class="col-sm-6">
+                           <label class="md-check">
+                           <input type="radio" name="radio" class="has-value">
+                           <i class="indigo"></i>Web
+                           </label><br>
+                           <label class="md-check">
+                           <input type="radio" name="radio" class="has-value">
+                           <i class="indigo"></i>Redes Sociales
+                           </label><br>
+                           <label class="md-check">
+                           <input type="radio" name="radio" class="has-value">
+                           <i class="indigo"></i>Medios Impresos o Tradicionales
+                           </label>
+                         </div>
+                         <div class="col-sm-6">
+                           <label class="md-check">
+                           <input type="radio" name="radio" class="has-value">
+                           <i class="indigo"></i>Invitación Personalizada
+                           </label><br>
+                           <label class="md-check">
+                           <input type="radio" name="radio" class="has-value">
+                           <i class="indigo"></i>Red de Amigos
+                           </label><br>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </form>
+             <hr />
+            <div class='row'>
+              <div class='col-lg-12'>
+                <div class='pull-right'>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection5()'>Guardar</button>
+                  <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
+                </div>
+              </div>
+            </div>
+			</div>
+			<!-- section 6 -->
         <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_6">
           <form>
             <div class="row">
@@ -725,10 +769,11 @@
           </form>
 				</div>
         <!-- section 7 -->
+        <!-- <div>
 				<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_7">
 					Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher.
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
