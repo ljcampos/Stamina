@@ -10,6 +10,7 @@
 			addUserUniversity: addUserUniversity,
 			getUniversityById: getUniversityById,
 			editUniversity: editUniversity,
+			deleteUniversity: deleteUniversity,
 			getUsers: getUsers
 		};
 
@@ -18,7 +19,7 @@
 			$http.get(API.university.list)
 			.success(function(response) {
 				universityDefer.resolve(response);
-				console.log(response);
+				
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
@@ -60,7 +61,20 @@
 			$http.post(API.university.update.replace(':id', id),data)
 			.success(function(response) {
 				universityDefer.resolve(response);
-				console.log(response);
+				
+			})
+			.error(function(error) {
+				universityDefer.reject(error);
+				console.log(error);
+			});
+			return universityDefer.promise;
+		}
+
+		function deleteUniversity(id) {
+			var universityDefer = $q.defer();
+			$http.post(API.university.delete.replace(':id', id))
+			.success(function(response) {
+				universityDefer.resolve(response);
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
@@ -86,7 +100,7 @@
 			var users = $q.defer();
 			$http.get('https://jsonplaceholder.typicode.com/users')
 			.success(function(response) {
-				console.log(response);
+				
 				users.resolve(response);
 			})
 			.error(function(error) {

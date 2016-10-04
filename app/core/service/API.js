@@ -25,7 +25,7 @@
 				'ById': base + 'universidad/:id/',
 				'add': base + 'universidad/',
 				'update': base + 'universidad/:id/update/',
-				'delete': base + '...'
+				'delete': base + 'universidad/:id/delete/'
 			},
 			'announcement': {
 				'list': base + 'convocatoria/',

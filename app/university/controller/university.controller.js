@@ -19,7 +19,6 @@
 		function getUniversities() {
 			UniversityService.getAllUniversities()
 			.then(function(response) {
-				console.log(response);
 				$scope.universityList = response.data;
 			})
 			.catch(function(error) {
@@ -54,6 +53,13 @@
 		$scope.deleteUniversity = function(id) {
 			var r = confirm("¿Está seguro de que desea eliminar permanentemente el elemento especificado de la base de datos?");
 			if(r){
+				UniversityService.deleteUniversity(id)
+				.then(function(response) {
+					getUniversities();
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
 				console.log("CODIGO ELIMINAR");
 			}
 		};
