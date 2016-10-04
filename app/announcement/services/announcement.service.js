@@ -4,6 +4,7 @@
 	function AnnouncementService($q, $http, API) {
 		return {
 			getAllUniversities: getAllUniversities,
+			validAnnouncementApplied: validAnnouncementApplied,
 			getAllAnnouncements: getAllAnnouncements,
 			getAnnouncementsAvailable: getAnnouncementsAvailable,
 			getAnnouncementById: getAnnouncementById,
@@ -13,6 +14,18 @@
 			editAnnouncement: editAnnouncement,
 			deleteAnnouncement: deleteAnnouncement
 		};
+		function validAnnouncementApplied(id) {
+			var userDefer = $q.defer();
+			$http.get(API.announcement.entrepreneur_announce.replace(':id', id))
+			.success(function(response) {
+				userDefer.resolve(response);
+			})
+			.error(function(error) {
+				userDefer.reject(error);
+				console.log(error);
+			});
+			return userDefer.promise;
+		}
 		function getAllUniversities() {
 			var universityDefer = $q.defer();
 			$http.get(API.university.list)

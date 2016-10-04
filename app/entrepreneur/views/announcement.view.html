@@ -21,11 +21,14 @@
 <div class="box-inner padding">
 	<div class="row row-center">
 		<div class="col-lg-10 col-md-10 col-sm-11 col-xs-12 col-center">
+			<br ng-if="!isApplied">
+			<br ng-if="!isApplied">
+			<br ng-if="!isApplied">
 			<button ui-sref='entrepreneur.announcements' md-ink-ripple="" class="btn btn-rounded btn-stroke btn-addon bg-white b-2x m-b btn-fw da">
 				<i class="mdi-navigation-arrow-back i-24"></i>Regresar
 			</button>
 			<div class="pull-right">
-				<button ng-click="applyAnnouncement(announce.id,user.data.roles[0].pivot.user_id)" class="btn btn-lg b-2x m-b btn btn-fw btn-custom">
+				<button ng-if="isApplied" ng-click="applyAnnouncement(announce.id,user.data.roles[0].pivot.user_id)" class="btn btn-lg b-2x m-b btn btn-fw btn-custom">
 					<span class="block clear text-left m-v-xs">
 						<b class="text-lg block font-bold">APLICA</b>
 					</span>
