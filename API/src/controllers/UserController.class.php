@@ -1125,7 +1125,7 @@ class UserController extends Controller
 /*			*/}
 			else
 			{
-				$this->response['code'] = 1;
+				$this->response['code'] = 4;
 				$this->response['message'] = 'El usuario con el identificador \'' . $params[0] . '\' no existe.';		
 			}
 		}
