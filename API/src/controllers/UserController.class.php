@@ -453,17 +453,6 @@ class UserController extends Controller
 						$persona->apellido_materno = $params['materno'];
 						$persona->save();
 
-						$imagen = $this->addImage();
-
-						if ($imagen['saved'] === true)
-						{
-							$user->imagen = $imagen['url'];
-						}
-						else
-						{
-							$user->imagen = '';
-							$this->response['error_image'] = 'Imagen invalida';
-						}
 
 						$type = intval($params['type']);
 						$rol_id = 0;
@@ -956,7 +945,6 @@ class UserController extends Controller
 									$db::commit();
 
 									$this->response['code'] = 1;
-									$this->response['saved'] = true;
 									$this->response['data'] = $fichero_subido;
 									$this->response['message'] = 'Se ha guardado correctamente';
 								}
