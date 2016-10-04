@@ -1070,58 +1070,59 @@ class UserController extends Controller
 		if (is_int(intval($params[0])))
 		{
 			$usuario_id = intval($params[0]);
-			$usuario = User::with('convocatorias')
-						   ->where('usuario_id', '=', $usuario_id)
-						   ->whereNotIn('estatus', [1])
-						   ->orderBy('usuario_id', 'DESC')
+			$usuario = EmprendedorConvocatoria::with('convocatorias')
+						   ->where('id_emprendedor', '=', $usuario_id)
+						   ->where('estatus', '!=', '1')
+						   ->orderBy('id', 'DESC')
+						   ->limit(1)
 						   ->get();
 
 			if (count($usuario) > 0)
 			{
-				$usr = new User();
-				$usr->usuario_id 	= $usuario[0]->usuario_id;
-				$usr->username 		= $usuario[0]->username;
-				$usr->nombre 		= $usuario[0]->persona->nombre;
-				$usr->paterno 		= $usuario[0]->persona->apellido_paterno;
-				$usr->materno 		= $usuario[0]->persona->apellido_materno;
-				$usr->email 		= $usuario[0]->email;
-				$usr->imagen 		= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario' . $usuario[0]->imagen : '';
-				$usr->last_login 	= $usuario[0]->last_login;
-				$usr->estatus 		= $usuario[0]->status;
-				$usr->roles 		= $usuario[0]->roles;
+				// $usr = new User();
+				// $usr->usuario_id 	= $usuario[0]->usuario_id;
+				// $usr->username 		= $usuario[0]->username;
+				// $usr->nombre 		= $usuario[0]->persona->nombre;
+				// $usr->paterno 		= $usuario[0]->persona->apellido_paterno;
+				// $usr->materno 		= $usuario[0]->persona->apellido_materno;
+				// $usr->email 		= $usuario[0]->email;
+				// $usr->imagen 		= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario' . $usuario[0]->imagen : '';
+				// $usr->last_login 	= $usuario[0]->last_login;
+				// $usr->estatus 		= $usuario[0]->status;
+				// $usr->roles 		= $usuario[0]->roles;
 
-				if (count($usr->roles) > 0)
-				{
-					foreach ($usr->roles as $key => $rol) {
+				/*if (count($usr->roles) > 0)
+				{*/
+					/*foreach ($usr->roles as $key => $rol) {
 						if (strtoupper($rol->rol) === 'MENTOR')
 						{
 							$mentor = Mentor::find($usr->usuario_id);
 							$usr->cargo = $mentor->cargo;
 							$usr->descr = $mentor->descr;
-						}
+						}*/
 
-						if (strtoupper($rol->rol) === 'EMPRENDEDOR')
-						{
-							if (count($usr->convocatorias) > 0)
+						/*if (strtoupper($rol->rol) === 'EMPRENDEDOR')
+						{*/
+					/*		if (count($usuario->convocatorias) > 0)
 							{
-								foreach ($usr->convocatorias as $llave => $convocatoria) {
+								foreach ($usuario->convocatorias as $llave => $convocatoria) {
 									$convocatoria->path = (strlen($convocatoria->path) > 0) ? __DIR__ . '/../../uploads/convocatoria/' . $convocatoria->path : '';
 									$convocatoria->universidad;
 									$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $convocatoria->universidad->imagen : '';
 									unset($convocatoria->universidad_id);
 									unset($convocatoria->pivot);
 								}
-							}
-						}
+							}*/
+						// }
 
-						$rol->permisos;
-					}
-				}
+						// $rol->permisos;
+					// }
+				// }
 
 				$this->response['code'] = 1;
-				$this->response['data'] = $usr;
+				$this->response['data'] = $usuario;
 				$this->response['message'] = 'Recurso encontrado';
-			}
+/*			*/}
 			else
 			{
 				$this->response['code'] = 4;
