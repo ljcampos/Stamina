@@ -1072,7 +1072,7 @@ class UserController extends Controller
 			$usuario_id = intval($params[0]);
 			$usuario = EmprendedorConvocatoria::with('convocatorias')
 						   ->where('id_emprendedor', '=', $usuario_id)
-						   ->where('estatus', '!=', '1')
+						   ->where('estatus', '!=', '0')
 						   ->orderBy('id', 'DESC')
 						   ->limit(1)
 						   ->get();
