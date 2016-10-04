@@ -49,6 +49,12 @@
       templateUrl: 'app/aplicationform/views/aplicationform.html'
     })
 
+    .state('admin.profile', {
+      url: '/profile',
+      controller: 'EntrepreneurProfileController',
+      templateUrl: 'app/core/views/profile.html'
+    })
+
     .state('entrepreneur', {
       templateUrl: 'app/templates/layouts/entrepreneur_layout.html',
       controller: 'UserController'
