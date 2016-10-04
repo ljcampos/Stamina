@@ -8,6 +8,7 @@
 		.state('entrepreneur.form', {
 			url: '/formulario',
 			templateUrl: 'app/entrepreneur/views/application.form.html',
+			controller: 'AplicationFormController',
 			data: {
 				requireLogin: true,
 				role: 3
