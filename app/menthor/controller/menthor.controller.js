@@ -4,6 +4,23 @@
 	angular.module('menthor').controller('MenthorController', ['$scope','$state', 'MenthorService', MenthorController]);
 
 	function MenthorController($scope,$state, MenthorService) {
+		$scope.menthorsList = {};
+		$scope.init = function() {
+			getMenthors();
+		};
+		angular.element(document).ready(function() {
+			$scope.init();
+		});
+		function getMenthors() {
+			MenthorService.getMenthors()
+			.then(function(response) {
+				$scope.menthorsList = response.data;
+				console.log(response);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+		}
 		$scope.getDataUsers=function(){
 			console.log($state);
 			$scope.userList = null;
