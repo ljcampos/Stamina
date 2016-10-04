@@ -490,18 +490,6 @@ class UserController extends Controller
 						$persona->apellido_materno = $params['materno'];
 						$persona->save();
 
-						$imagen = $this->addImage();
-
-						if ($imagen['saved'] === true)
-						{
-							$user->imagen = $imagen['url'];
-						}
-						else
-						{
-							$user->imagen = '';
-							$this->response['error_image'] = 'Imagen invalida';
-						}
-
 						$type = intval($params['type']);
 						$rol_id = 0;
 						
