@@ -14,7 +14,8 @@ class UserController extends Controller
 		'suscrip'	=>	'suscribirse',
 		'auth'		=>	'authentication',
 		'img'			=>	'addImage',
-		'search'	=>  'search'
+		'search'	=>  'search',
+		'empCon'	=>	'emprendedorConvocatoria'
 	);
 
 	private $DIRECTORY = __DIR__ . '/../../uploads/usuario/';
@@ -488,6 +489,18 @@ class UserController extends Controller
 						$persona->apellido_paterno = $params['paterno'];
 						$persona->apellido_materno = $params['materno'];
 						$persona->save();
+
+						$imagen = $this->addImage();
+
+						if ($imagen['saved'] === true)
+						{
+							$user->imagen = $imagen['url'];
+						}
+						else
+						{
+							$user->imagen = '';
+							$this->response['error_image'] = 'Imagen invalida';
+						}
 
 						$type = intval($params['type']);
 						$rol_id = 0;
@@ -996,6 +1009,7 @@ class UserController extends Controller
 									$db::commit();
 
 									$this->response['code'] = 1;
+									$this->response['saved'] = true;
 									$this->response['data'] = $fichero_subido;
 									$this->response['message'] = 'Se ha guardado correctamente';
 								}
@@ -1044,6 +1058,84 @@ class UserController extends Controller
 
 		return $this->response;
 	}
+
+	/**
+	*
+	*/
+	public function emprendedorConvocatoria($usuario_id)
+	{
+
+		$params = $this->sanitize(array($usuario_id));
+
+		if (is_int(intval($params[0])))
+		{
+			$usuario_id = intval($params[0]);
+			$usuario = User::with('convocatorias')
+						   ->where('usuario_id', '=', $usuario_id)
+						   ->orderBy('usuario_id', 'DESC')
+						   ->get();
+
+			if (count($usuario) > 0)
+			{
+				$usr = new User();
+				$usr->usuario_id 	= $usuario[0]->usuario_id;
+				$usr->username 		= $usuario[0]->username;
+				$usr->nombre 		= $usuario[0]->persona->nombre;
+				$usr->paterno 		= $usuario[0]->persona->apellido_paterno;
+				$usr->materno 		= $usuario[0]->persona->apellido_materno;
+				$usr->email 		= $usuario[0]->email;
+				$usr->imagen 		= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario' . $usuario[0]->imagen : '';
+				$usr->last_login 	= $usuario[0]->last_login;
+				$usr->estatus 		= $usuario[0]->status;
+				$usr->roles 		= $usuario[0]->roles;
+
+				if (count($usr->roles) > 0)
+				{
+					foreach ($usr->roles as $key => $rol) {
+						if (strtoupper($rol->rol) === 'MENTOR')
+						{
+							$mentor = Mentor::find($usr->usuario_id);
+							$usr->cargo = $mentor->cargo;
+							$usr->descr = $mentor->descr;
+						}
+
+						if (strtoupper($rol->rol) === 'EMPRENDEDOR')
+						{
+							if (count($usr->convocatorias) > 0)
+							{
+								foreach ($usr->convocatorias as $llave => $convocatoria) {
+									$convocatoria->path = (strlen($convocatoria->path) > 0) ? __DIR__ . '/../../uploads/convocatoria/' . $convocatoria->path : '';
+									$convocatoria->universidad;
+									$convocatoria->universidad->imagen = (strlen($convocatoria->universidad->imagen) > 0) ? __DIR__ . '/../../uploads/universidad/' . $convocatoria->universidad->imagen : '';
+									unset($convocatoria->universidad_id);
+									unset($convocatoria->pivot);
+								}
+							}
+						}
+
+						$rol->permisos;
+					}
+				}
+
+				$this->response['code'] = 1;
+				$this->response['data'] = $usr;
+				$this->response['message'] = 'Recurso encontrado';
+			}
+			else
+			{
+				$this->response['code'] = 4;
+				$this->response['message'] = 'El usuario con el identificador \'' . $params[0] . '\' no existe.';		
+			}
+		}
+		else
+		{
+			$this->response['code'] = 2;
+			$this->response['message'] = 'El identificador del usuario debe ser de tipo número.';
+		}
+
+		return $this->response;
+	}
+
 
 	/**
 	* 
