@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row row-center">
-        <div class="col-md-5 col-center">
+        <div class="col-md-4 col-left">
             <div class="card">
                 <div class="card-heading">
                     <h2>Información General</h2>
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-center">
+        <div class="col-md-4 col-left">
             <div class="card">
                 <div class="card-heading">
                     <h2>Datos de acceso</h2>
@@ -75,6 +75,25 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-4 col-center">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Foto del mentor</h2>
+                </div>
+                <div class="card-body">
+                    <img class="col-md-12 col-center" ngf-thumbnail="photo || 'images/not_image/3.jpg'">
+                </div>
+                <div class="card-heading col-center">
+                    <button class="md-btn md-raised m-b bg-white waves-effect" ngf-select ng-model="photo" name="photo" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}">
+                        Seleccionar   
+                    </button>
+                    <button class="md-btn md-raised m-b bg-white waves-effect" ng-click="upload(photo)">
+                        Guardar
+                    </button>
+
                 </div>
             </div>
         </div>

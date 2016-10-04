@@ -17,7 +17,6 @@
 		}
 
 		$scope.getDataUser=function(){
-			console.log('controller un solo usuario')
 			$scope.id= $state.params.id;
 			$scope.user= null;
 			MenthorService.getUser($scope.id)
@@ -56,6 +55,16 @@
 			}else{
 				$scope.success='Las contraseñas son diferentes. Inténtelo nuevamente';
 			}
+		}
+
+		$scope.upload= function(photo){
+			MenthorService.uploadFile($scope.id,photo)
+			.then(function(response){
+				console.log(response);
+			})
+			.catch(function(error){
+				console.log(error);
+			});
 		}
 	}
 } ());

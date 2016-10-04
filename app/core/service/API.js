@@ -51,7 +51,8 @@
 				'ById': base + '...',
 				'add': base + '...',
 				'edit': base + '...',
-				'delete': base + '...'
+				'delete': base + '...',
+				'upload': base + 'usuarios/:id/imagen/'
 			}
 		};
 	}
