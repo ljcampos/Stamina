@@ -52,7 +52,11 @@
     .state('admin.profile', {
       url: '/profile',
       controller: 'EntrepreneurProfileController',
-      templateUrl: 'app/core/views/profile.html'
+      templateUrl: 'app/core/views/profile.html',
+      data: {
+        requireLogin: true,
+        role: 1
+      }
     })
 
     .state('entrepreneur', {
