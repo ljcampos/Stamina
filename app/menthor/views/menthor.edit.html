@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row row-center">
-        <div class="col-md-4 col-left">
+        <div class="col-md-5 col-center">
             <div class="card">
                 <div class="card-heading">
                     <h2>Información General</h2>
@@ -14,42 +14,70 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.nombre}}">
+                                <input class="md-input has-value" required ng-model='user.nombre' ng-value="user.nombre">
                                 <label>Nombre
                                 </label>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.paterno}}">
+                                <input class="md-input has-value" required ng-model='user.paterno' ng-value="user.paterno">
                                 <label>Apelido paterno
                                 </label>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.materno}}">
+                                <input class="md-input has-value" required ng-model='user.paterno' ng-value="user.materno">
                                 <label>Apellido materno
                                 </label>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <input class="md-input has-value" required value="{{user.estatus.descr}}">
+                                <input class="md-input has-value" required ng-model='user.cargo'>
                                 <label>Cargo</label>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="md-form-group float-label">
-                                <textarea class="md-input has-value" rows="3">{{user.estatus.descr}}</textarea>
+                                <textarea class="md-input has-value" rows="3" required ng-model='user.descr'></textarea>
                                 <label>Descripción</label>
                             </div>
+                        </div>
+                        <div class="pull-right">
+                            <div id="message"></div>
+                            <button ng-click="update(user)" class="btn btn-lg btn-success">
+                                Guardar
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-left">
+        <div class="col-md-5 col-left">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Foto del mentor</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <img style="width: 400px; height: auto;" ngf-thumbnail="photo || 'images/not_image/1.jpg'" ng-src="{{user.imagen}}">
+                    </div>
+                </div>
+                <div class="card-heading col-center">
+                    <button class="md-btn md-raised m-b bg-white waves-effect" ngf-select ng-model="photo" name="photo" ngf-accept="'image/*'">
+                        Seleccionar foto  
+                    </button>
+                    <button class="md-btn md-raised m-b bg-success waves-effect" ng-click="upload(photo)">
+                        Guardar foto
+                    </button>
+                </div>
+                <div id="message"></div>
+            </div>
+        </div>
+
+        <!--div class="col-md-4 col-left">
             <div class="card">
                 <div class="card-heading">
                     <h2>Datos de acceso</h2>
@@ -77,34 +105,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-         <div class="col-md-4 col-center">
-            <div class="card">
-                <div class="card-heading">
-                    <h2>Foto del mentor</h2>
-                </div>
-                <div class="card-body">
-                    <img class="col-md-12 col-center" ngf-thumbnail="photo || 'images/not_image/3.jpg'">
-                </div>
-                <div class="card-heading col-center">
-                    <button class="md-btn md-raised m-b bg-white waves-effect" ngf-select ng-model="photo" name="photo" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}">
-                        Seleccionar   
-                    </button>
-                    <button class="md-btn md-raised m-b bg-white waves-effect" ng-click="upload(photo)">
-                        Guardar
-                    </button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row row-center">
-        <div class="col-md-9 col-center">
-            <div class="pull-right">
-                <button class="btn btn-lg btn-success">
-                    Guardar
-                </button>
-            </div>
-        </div>
+        </div-->
     </div>
 </div>

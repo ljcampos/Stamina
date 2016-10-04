@@ -4,8 +4,8 @@
 	angular.module('menthor').controller('MenthorController', ['$scope','$state', 'MenthorService', MenthorController]);
 
 	function MenthorController($scope,$state, MenthorService) {
+
 		$scope.getDataUsers=function(){
-			console.log($state);
 			$scope.userList = null;
 			MenthorService.getUsers()
 			.then(function(response) {
@@ -22,13 +22,14 @@
 			MenthorService.getUser($scope.id)
 			.then(function(response) {
 				$scope.user = response.data;
+				//console.log(response.data)
 			})
 			.catch(function(error) {
 				console.log(error);
 			});
 		}
 
-		$scope.add=function(){
+		$scope.add = function(){
 			var data={
 			'username': $scope.form.name,
 	        'nombre'  : $scope.form.name,
@@ -45,25 +46,46 @@
 				$scope.success = null;
 				MenthorService.addUser(data)
 				.then(function(response) {
-					console.log('REGISTRADO:::::::::::')
-					$state.go('admin.menthor.list');
+					$("#message").html('Mentor registrado correctamente');
+					$("#message").attr('class','card-heading col-center alert alert-success').show().fadeOut(4000);
 				})
 				.catch(function(error) {
-					$scope.success='<strong class="mdi-alert-error">No se completo el proceso de grabado</strong>';
 					console.log(error);
+					$("#message").html('No se completo el proceso de registro');
+					$("#message").attr('class','card-heading col-center alert alert-danger').show().fadeOut(4000);
+			
 				});
 			}else{
-				$scope.success='Las contraseñas son diferentes. Inténtelo nuevamente';
+				$("#message").html('Las contraseñas son diferentes. Inténtelo nuevamente');
+				$("#message").attr('class','card-heading col-center alert alert-warning').show().fadeOut(4000);
+			
 			}
 		}
 
-		$scope.upload= function(photo){
+		$scope.update = function(user){
+			console.log('actualizado...')
+		    MenthorService.updateUser($scope.id,user)
+		    .then(function(response){
+				$("#message").html('Mentor actualizado correctamente');
+				$("#message").attr('class','card-heading col-center alert alert-success').show().fadeOut(4000);
+			
+		    })
+		    .catch(function(error){	
+		    	$("#message").html('Error all intentar actualizar al usuario');
+				$("#message").attr('class','card-heading col-center alert alert-danger').show().fadeOut(4000);		    });
+		}
+
+		$scope.upload = function(photo){
 			MenthorService.uploadFile($scope.id,photo)
 			.then(function(response){
-				console.log(response);
+				//console.log(response);
+				$("#message").html('Imagen guardada correctamente');
+				$("#message").attr('class','card-heading col-center alert alert-success').show().fadeOut(4000);
 			})
 			.catch(function(error){
 				console.log(error);
+				$("#message").html('Error al subir la imagen');
+				$("#message").attr('class','card-heading col-center alert alert-danger').show().fadeOut(4000);
 			});
 		}
 	}

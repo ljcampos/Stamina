@@ -8,6 +8,7 @@
 			getMenthors : getMenthors,
 			getUser  : getUser,
 			addUser  : addUser,
+			updateUser : updateUser,
 			uploadFile : uploadFile
 		};
 
@@ -63,11 +64,23 @@
 	      	return userDefer.promise;
 	    }
 
+	    function updateUser(id,data){
+	    	var userDefer= $q.defer();
+	    	console.log(data)
+	    	$http.post(API.menthor.update.replace(':id',id), data)
+	    	.success(function(response){
+	    		userDefer.resolve(response);
+	    	})
+	    	.error(function(error){
+	    		userDefer.reject(error)
+	    	});
+	    	return userDefer.promise;
+	    }
+
 	    function uploadFile(id,file){
 	    	var fd = new FormData();
 	    	fd.append('file',file);
 	    	var userDefer= $q.defer();
-	    	console.log(API.menthor.upload.replace(':id', id));
 	    	$http.post(API.menthor.upload.replace(':id', id), fd,{
 	    		transformRequest: angular.identity, headers: {'Content-Type': undefined}
 	    	})

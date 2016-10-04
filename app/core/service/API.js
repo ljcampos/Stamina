@@ -49,10 +49,10 @@
 			'menthor': {
 				'list': base + 'usuarios/mentores/',
 				'ById': base + '...',
-				'add': base + '...',
-				'edit': base + '...',
+				'add' : base + '...',
 				'delete': base + '...',
-				'upload': base + 'usuarios/:id/imagen/'
+				'upload': base + 'usuario/:id/imagen/',
+				'update': base + 'usuario/:id/update/'
 			}
 		};
 	}

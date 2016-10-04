@@ -91,7 +91,7 @@ class UserController extends Controller
 				$usr->paterno = $value->persona->apellido_paterno;
 				$usr->materno = $value->persona->apellido_materno;
 				$usr->email = $value->email;
-				$usr->imagen = ($value->imagen != "" || $value->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario'. $value->imagen : '';
+				$usr->imagen = ($value->imagen != "" || $value->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario/'. $value->imagen : '';
 				$usr->last_login = $value->last_login;
 				$usr->estatus = $value->status;
 
@@ -203,7 +203,7 @@ class UserController extends Controller
 				$usr->paterno 		= $usuario[0]->persona->apellido_paterno;
 				$usr->materno 		= $usuario[0]->persona->apellido_materno;
 				$usr->email 			= $usuario[0]->email;
-				$usr->imagen 			= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario' . $usuario[0]->imagen : '';
+				$usr->imagen 			= ($usuario[0]->imagen != "" || $usuario[0]->imagen != null) ? /*$this->DIRECTORY*/ '/API/uploads/usuario/' . $usuario[0]->imagen : '';
 				$usr->last_login 	= $usuario[0]->last_login;
 				$usr->estatus 		= $usuario[0]->status;
 				$usr->roles 			= $usuario[0]->roles;
@@ -668,7 +668,7 @@ class UserController extends Controller
 						$user->save();
 
 						$this->response['code'] = 1;
-						$this->response['data'][] = $usr;
+						$this->response['data'] = $user;
 						$this->response['message'] = 'Se ha actualizado de manera correcta';
 						$db::commit();
 
@@ -678,7 +678,6 @@ class UserController extends Controller
 						$this->response['code'] = 5;
 						$this->response['data'][] = $params;
 						$this->response['message'][] = 'No se ha podido completar la acción, inténtelo más tarde.';
-						$this->response['message'][] = $e->getMessage();
 					}
 				}
 			}
@@ -1007,6 +1006,7 @@ class UserController extends Controller
 									$db::rollBack();
 									$this->response['code'] = 5;
 									$this->response['message'] = 'Ocurrió un error SQL.';
+									$this->response['otro'] = $e->getMessage();
 								}
 							}
 							else
