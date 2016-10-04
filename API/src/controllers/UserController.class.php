@@ -1019,6 +1019,7 @@ class UserController extends Controller
 			$usuario_id = intval($params[0]);
 			$usuario = User::with('convocatorias')
 						   ->where('usuario_id', '=', $usuario_id)
+						   ->where('estatus', '!=', '1')
 						   ->orderBy('usuario_id', 'DESC')
 						   ->get();
 
