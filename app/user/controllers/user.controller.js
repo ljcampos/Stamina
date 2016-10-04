@@ -25,8 +25,12 @@
     };
 
     angular.element(document).ready(function() {
-			$scope.init();
-		});
+      $scope.init();
+    });
+    
+    function gotoSignIn(){
+      $state.go('entrepreneur.dashboard');
+    }
 
     function facebookPicture() {
       console.log('picture');
@@ -260,6 +264,7 @@
         .then(function(response) {
           console.log(response);
           $scope.success = true;
+          setTimeout(gotoSignIn(), 5000);
         })
         .catch(function(error) {
           console.log(error);
