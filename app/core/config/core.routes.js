@@ -66,6 +66,7 @@
 
     .state('entrepreneur.dashboard', {
       url: '/emprendedor',
+      controller: 'PanelEntrepreneurController',
       templateUrl: '/app/entrepreneur/views/_entrepreneur.home.html',
       data: {
         requireLogin: true,
