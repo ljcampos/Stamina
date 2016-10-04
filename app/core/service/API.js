@@ -53,6 +53,10 @@
 				'delete': base + '...',
 				'upload': base + 'usuario/:id/imagen/',
 				'update': base + 'usuario/:id/update/'
+			},
+			'faqs': {
+				'actual' : base + '/faq/',
+				'upload' : base + '/faq/',
 			}
 		};
 	}

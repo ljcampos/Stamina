@@ -1,2 +1,2 @@
 'use strict';
-config.addModule('faq', []);
+config.addModule('faq', ['ngFileUpload']);

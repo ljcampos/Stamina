@@ -1,16 +1,16 @@
 (function() {
 	'use strict';
 
-	angular.module('faq').service('FaqService', ['$q', '$http', FaqService]);
+	angular.module('faq').service('FaqService', ['$q', '$http','API', FaqService]);
 
-	function FaqService($q, $http) {
+	function FaqService($q, $http, API) {
 		return {
-			getUsers: getUsers
+			uploadFile: uploadFile,
 		};
 
-		function getUsers() {
+		function uploadFile(file) {
 			var users = $q.defer();
-			$http.get('https://jsonplaceholder.typicode.com/users')
+			$http.post(API.faqs.upload, file)
 			.success(function(response) {
 				console.log(response);
 				users.resolve(response);
@@ -21,5 +21,6 @@
 			});
 			return users.promise;
 		}
+
 	}
 } ());
