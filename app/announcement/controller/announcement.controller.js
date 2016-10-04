@@ -85,31 +85,19 @@
 			});
 		};
 
-		$scope.updateAnnouncement = function() {
-			var data = {};
-			data.value1 = '';
-			data.value2 = '';
-			data.value3 = '';
-			data.value4 = '';
-			data.value5 = '';
-
-			AnnouncementService.updateAnnouncement(data)
-			.then(function(response) {
-				console.log(response);
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
-		};
-
-		$scope.deleteAnnouncement = function() {
-			AnnouncementService.deleteAnnouncement(id)
-			.then(function(response) {
-				console.log(response);
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
+		$scope.deleteAnnouncement = function(id) {
+			var r = confirm("¿Está seguro de que desea eliminar permanentemente el elemento especificado de la base de datos?");
+			if(r){
+				AnnouncementService.deleteAnnouncement(id)
+				.then(function(response) {
+					$scope.init();
+					$state.go('admin.announcement.list');
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+				console.log("CODIGO ELIMINAR");
+			}
 		};
 	}
 

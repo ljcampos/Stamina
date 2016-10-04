@@ -27,7 +27,7 @@
 <div class="box-inner padding">
   <div class="row row-center">
     <div class="col-md-7 col-center">
-      <button class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</button>
+      <button ui-sref='admin.announcement.list' class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</button>
     </div>
   </div>
   <div class="row row-center">
@@ -45,7 +45,7 @@
               </div>
             </div>
             <div class="col-sm-12">
-                <select class="form-control" ng-model="announce.universidad">
+                <select class="form-control" ng-model="announce.universidad" required>
                   <option selected value="">Elija una Universidad</option>
                   <option ng-repeat="university in univesityList" value="{{university.universidad_id}}">{{university.nombre}}</option>
                 </select>

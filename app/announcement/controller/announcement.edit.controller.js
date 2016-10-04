@@ -25,7 +25,6 @@
 			.then(function(response) {
 				$scope.selected_universidad = response.data.universidad.universidad_id;
 				$scope.announce = response.data;
-				console.log(response);
 			})
 			.catch(function(error) {
 				console.log(error);
@@ -34,7 +33,6 @@
 		function getAllUniversities() {
 			AnnouncementService.getAllUniversities()
 			.then(function(response) {
-				console.log(response);
 				$scope.univesityList = response.data;
 			})
 			.catch(function(error) {
@@ -57,6 +55,7 @@
 			})
 			.then(function(res) {
 				console.log(res);
+				$state.go('admin.announcement.list');
 			})
 			.catch(function(err) {
 				console.log(err);

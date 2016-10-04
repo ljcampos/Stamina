@@ -123,16 +123,16 @@
 			return announcementDefer.promise;
 		}
 		function deleteAnnouncement(id) {
-			var announcementDefer = $q.defer();
-			$http.post('http://www.stamina.dev/API/public/api/v1/usuario/', id)
+			var announceDefer = $q.defer();
+			$http.post(API.announcement.delete.replace(':id', id))
 			.success(function(response) {
-				announcementDefer.resolve(response);
+				announceDefer.resolve(response);
 			})
 			.error(function(error) {
-				announcementDefer.reject(error);
+				announceDefer.reject(error);
 				console.log(error);
 			});
-			return announcementDefer.promise;
+			return announceDefer.promise;
 		}
 	}
 } ());
