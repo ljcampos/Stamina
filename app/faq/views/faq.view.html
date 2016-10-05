@@ -1,12 +1,16 @@
-<div class="box-inner padding">
-	<div class="row row-center">
-		<div class="col-md-9 col-center">
-			<div class="pull-right">
-				<button class="md-btn md-raised m-b btn-fw bg-white waves-effect" ng-if="userData.data.roles[0].pivot.rol_id==1">Subir Archivo</button>
+<form name="form"'>
+	<div class="box-inner padding">
+		<div class="row row-center">
+			<div class="col-md-9 col-center">			
+				<button class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</button>
+				<div class="pull-right">
+					<input type="button" ng-click="subir(file)" class="md-btn md-raised m-b btn-fw bg-success waves-effect" ng-if="file" value="Guardar">
+					<button class="md-btn md-raised m-b btn-fw bg-white waves-effect" ngf-select ng-model="file" ngf-pattern="'application/pdf'"  ngf-accept="'application/pdf'">Subir Archivo</button>
+				</div>
+			</div>
+			<div class="col-md-9 col-center">			
+				<iframe ngf-thumbnail="file || 'ViewerJS/?zoom=page-width#/API/uploads/faq/faq.pdf'" width="100%" height="600px" allowfullscreen webkitallowfullscreen></iframe>
 			</div>
 		</div>
-		<div class="col-md-9 col-center">
-			<iframe src="ViewerJS/?zoom=page-width#/pdfs/FAQs.pdf" width="100%" height="600px" allowfullscreen webkitallowfullscreen></iframe>
-		</div>
 	</div>
-</div>
+</form>

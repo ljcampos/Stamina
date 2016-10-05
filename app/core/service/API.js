@@ -52,9 +52,14 @@
 			'menthor': {
 				'list': base + 'usuarios/mentores/',
 				'ById': base + '...',
-				'add': base + '...',
-				'edit': base + '...',
-				'delete': base + '...'
+				'add' : base + '...',
+				'delete': base + '...',
+				'upload': base + 'usuario/:id/imagen/',
+				'update': base + 'usuario/:id/update/'
+			},
+			'faqs': {
+				'actual' : base + '/faq/',
+				'upload' : base + '/faq/',
 			}
 		};
 	}

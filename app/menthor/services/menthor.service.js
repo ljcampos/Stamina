@@ -7,7 +7,9 @@
 			getUsers : getUsers,
 			getMenthors : getMenthors,
 			getUser  : getUser,
-			addUser  : addUser
+			addUser  : addUser,
+			updateUser : updateUser,
+			uploadFile : uploadFile
 		};
 
 		function getMenthors() {
@@ -25,8 +27,7 @@
 
 		function getUsers() {
 			var users = $q.defer();
-			var data={'type':2};
-			$http.get(API.user.list,data)
+			$http.get(API.user.list+'?type=2')
 			.success(function(response) {
 				users.resolve(response);
 			})
@@ -38,9 +39,8 @@
 		}
 
 		function getUser(id){
-			var data={'type':2};
 			var user= $q.defer();
-			$http.get(API.user.list +id+'/', data)
+			$http.get(API.user.list +id+'/')
 			.success(function(response) {
 				user.resolve(response);
 			})
@@ -62,6 +62,37 @@
 	        	userDefer.reject(error);
 	      	});
 	      	return userDefer.promise;
+	    }
+
+	    function updateUser(id,data){
+	    	var userDefer= $q.defer();
+	    	console.log(data)
+	    	$http.post(API.menthor.update.replace(':id',id), data)
+	    	.success(function(response){
+	    		userDefer.resolve(response);
+	    	})
+	    	.error(function(error){
+	    		userDefer.reject(error)
+	    	});
+	    	return userDefer.promise;
+	    }
+
+	    function uploadFile(id,file){
+	    	var fd = new FormData();
+	    	fd.append('file',file);
+	    	var userDefer= $q.defer();
+	    	$http.post(API.menthor.upload.replace(':id', id), fd,{
+	    		transformRequest: angular.identity, headers: {'Content-Type': undefined}
+	    	})
+	    	.success(function(response){
+	    		userDefer.resolve(response);
+	    		console.log(response);
+	    	})
+	    	.error(function(error){
+	    		console.log(error);
+	    		userDefer.reject(error);
+	    	});
+	    	return userDefer.promise;
 	    }
 	}
 } ());

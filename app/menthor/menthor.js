@@ -1,2 +1,2 @@
 'use strict';
-config.addModule('menthor', []);
+config.addModule('menthor', ['ngFileUpload']);
