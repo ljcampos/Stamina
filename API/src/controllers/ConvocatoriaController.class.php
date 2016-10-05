@@ -116,7 +116,16 @@ class ConvocatoriaController extends Controller
 						unset($convocatoria->emprendedores[$key]->salt);
 						unset($convocatoria->emprendedores[$key]->pivot);
 					}
+
+					if (count($convocatoria->persona) > 0)
+					{
+						foreach ($convocatoria->persona as $key => $value) {
+							$convocatoria->emprendedores[$key]->persona = $convocatoria->persona;
+						}
+					}
+					unset($convocatoria->persona);
 				}
+
 				$this->response['code'] = 1;
 				$this->response['data'] = $convocatoria->toArray();
 				$this->response['message'] = 'Recurso encontrado';
