@@ -2,10 +2,10 @@
 <div class="m-b-lg">
   <div class="panel-card bg-white p clearfix m-b-xs" ng-repeat='menthor in menthorsList'>
     <div class="pull-right text-sm text-muted">
-      <button ui-sref="admin.menthor.view({id:user.usuario_id})" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+      <button ui-sref="admin.menthor.view({id:menthor.mentor_id})" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
         <i class="fa fa-eye"></i>
       </button>
-      <button ui-sref="admin.menthor.edit({id:user.usuario_id})" class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+      <button ui-sref="admin.menthor.edit({id:menthor.mentor_id})" class="btn btn-sm btn-success waves-effect" tooltip="Editar">
                   <i class="fa fa-pencil"></i>
       </button>
       <button class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
@@ -15,22 +15,22 @@
     <div class="row">
       <div class="col-md-1">
         <!--<a class="pull-left m-r">-->
-          <img ng-src="{{user.imagen}}" class="img-responsive rounded" src="images/not_image/4.jpg">
+          <img ng-src="{{menthor.persona.imagen}}" class="img-responsive rounded" src="images/not_image/4.jpg">
         <!--</a>-->
       </div>
       <div class="clear col-md-9">
-        <a ui-sref='admin.menthor.view({id:user.usuario_id})'>
+        <a ui-sref='admin.menthor.view({id:menthor.mentor_id})'>
           <div>
-            <h4 class="text-md ng-binding" ui-sref='admin.menthor.view({id:user.usuario_id})' style="margin:0px;">
-            {{user.nombre}} {{user.paterno}} {{user.materno}}
+            <h4 class="text-md ng-binding" ui-sref='admin.menthor.view({id:menthor.mentor_id})' style="margin:0px;">
+            {{menthor.persona.nombre}} {{menthor.persona.apellido_paterno}} {{menthor.persona.apellido_materno}}
             </h4>
           </div>
           <strong>
-            {{user.cargo}}
+            {{menthor.cargo}}
           </strong>
           <!--<span class="label bg-light m-l-sm ng-binding">angular</span>-->
           <div class="text-ellipsis m-t-xs text-muted-dk text-sm ng-binding">          
-            {{user.descr}}
+            {{menthor.descr}}
           </div>
         </a>
       </div>      
