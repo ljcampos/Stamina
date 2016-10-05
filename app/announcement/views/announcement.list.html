@@ -13,214 +13,212 @@
 		font-size: 20px;
 	}
 </style>
-<div ng-if="user.data.roles[0].pivot.rol_id==1">
-	<div class="md-whiteframe-z0">
-		<ul class="nav nav-lines nav-tabs nav-justified grey-800 tabs-convocatorias">
-			<li>
-				<a href="" data-toggle="tab" data-target="#tab_1">TODAS</a>
-			</li>
-			<li class="active">
-				<a href="" data-toggle="tab" data-target="#tab_2">ACTIVAS</a>
-			</li>
-			<li>
-				<a href="" data-toggle="tab" data-target="#tab_3">PRÓXIMAS</a>
-			</li>
-			<li>
-				<a href="" data-toggle="tab" data-target="#tab_4">PASADAS</a>
-			</li>
-		</ul>
-		<div class="tab-content p m-b-md clear b-t b-t-2x">
-			<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_1">
-				<div class="panel panel-card p table-responsive">
-					<table class="table table-striped b-t b-b">
-						<thead>
-							<tr>
-								<th>Convocatoria</th>
-								<th>Universidad</th>
-								<th style="text-align:center;">Fecha Inicio</th>
-								<th style="text-align:center;">Fecha Final</th>
-								<th ng-if="user.data.roles[0].pivot.rol_id==1"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr role="row" ng-repeat="announce in announcesList">
-								<td style="vertical-align:middle;">{{announce.nombre}}</td>
-								<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
-								<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
-								<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
-								<td ng-if="user.data.roles[0].pivot.rol_id==1">
-									<div class="hidden-xs hidden-sm pull-right">
-										<a target="_blank" href="API/uploads/convocatoria/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-											<i class="fa fa-file"></i>
-										</a>
-										<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-											<i class="fa fa-pencil"></i>
-										</button>
-										<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
-									<div class="hidden-md hidden-lg pull-right">
-										<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-											<i class="fa fa-file"></i>
-										</button>
-										<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-											<i class="fa fa-pencil"></i>
-										</button>
-										<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>				
-				</div>
+<div class="md-whiteframe-z0">
+	<ul class="nav nav-lines nav-tabs nav-justified grey-800 tabs-convocatorias">
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_1">TODAS</a>
+		</li>
+		<li class="active">
+			<a href="" data-toggle="tab" data-target="#tab_2">ACTIVAS</a>
+		</li>
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_3">PRÓXIMAS</a>
+		</li>
+		<li>
+			<a href="" data-toggle="tab" data-target="#tab_4">PASADAS</a>
+		</li>
+	</ul>
+	<div class="tab-content p m-b-md clear b-t b-t-2x">
+		<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_1">
+			<div class="panel panel-card p table-responsive">
+				<table class="table table-striped b-t b-b">
+					<thead>
+						<tr>
+							<th>Convocatoria</th>
+							<th>Universidad</th>
+							<th style="text-align:center;">Fecha Inicio</th>
+							<th style="text-align:center;">Fecha Final</th>
+							<th ng-if="user.data.roles[0].pivot.rol_id==1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr role="row" ng-repeat="announce in announcesList">
+							<td style="vertical-align:middle;">{{announce.nombre}}</td>
+							<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
+							<td ng-if="user.data.roles[0].pivot.rol_id==1">
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="API/uploads/convocatoria/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>				
 			</div>
-			<div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_2">
-				<div class="panel panel-card table-responsive">
-					<table class="table table-striped b-t b-b">
-						<thead>
-							<tr>
-								<th>Convocatoria</th>
-								<th>Universidad</th>
-								<th style="text-align:center;">Fecha Inicio</th>
-								<th style="text-align:center;">Fecha Final</th>
-								<th ng-if="user.data.roles[0].pivot.rol_id==1"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr role="row" ng-repeat="announce in announcesAvailableList">
-								<td style="vertical-align:middle;">{{announce.nombre}}</td>
-								<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
-								<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
-								<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
-								<td ng-if="user.data.roles[0].pivot.rol_id==1">
-									<div class="hidden-xs hidden-sm pull-right">
-										<a target="_blank" href="API/uploads/convocatoria/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-											<i class="fa fa-file"></i>
-										</a>
-										<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-											<i class="fa fa-pencil"></i>
-										</button>
-										<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
-									<div class="hidden-md hidden-lg pull-right">
-										<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-											<i class="fa fa-file"></i>
-										</button>
-										<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-											<i class="fa fa-pencil"></i>
-										</button>
-										<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_2">
+			<div class="panel panel-card table-responsive">
+				<table class="table table-striped b-t b-b">
+					<thead>
+						<tr>
+							<th>Convocatoria</th>
+							<th>Universidad</th>
+							<th style="text-align:center;">Fecha Inicio</th>
+							<th style="text-align:center;">Fecha Final</th>
+							<th ng-if="user.data.roles[0].pivot.rol_id==1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr role="row" ng-repeat="announce in announcesAvailableList">
+							<td style="vertical-align:middle;">{{announce.nombre}}</td>
+							<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
+							<td ng-if="user.data.roles[0].pivot.rol_id==1">
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="API/uploads/convocatoria/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
-				<div class="panel panel-card table-responsive">
-					<table class="table table-striped b-t b-b">
-						<thead>
-							<tr>
-								<th>Convocatoria</th>
-								<th>Universidad</th>
-								<th style="text-align:center;">Fecha Inicio</th>
-								<th style="text-align:center;">Fecha Final</th>
-								<th ng-if="user.data.roles[0].pivot.rol_id==1"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr role="row" ng-repeat="announce in announcesNextList">
-								<td style="vertical-align:middle;">{{announce.nombre}}</td>
-								<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
-								<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
-								<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
-								<td ng-if="user.data.roles[0].pivot.rol_id==1">
-									<div class="hidden-xs hidden-sm pull-right">
-										<a target="_blank" href="API/uploads/convocatoria/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-											<i class="fa fa-file"></i>
-										</a>
-										<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-											<i class="fa fa-pencil"></i>
-										</button>
-										<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
-									<div class="hidden-md hidden-lg pull-right">
-										<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-											<i class="fa fa-file"></i>
-										</button>
-										<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-											<i class="fa fa-pencil"></i>
-										</button>
-										<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
+			<div class="panel panel-card table-responsive">
+				<table class="table table-striped b-t b-b">
+					<thead>
+						<tr>
+							<th>Convocatoria</th>
+							<th>Universidad</th>
+							<th style="text-align:center;">Fecha Inicio</th>
+							<th style="text-align:center;">Fecha Final</th>
+							<th ng-if="user.data.roles[0].pivot.rol_id==1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr role="row" ng-repeat="announce in announcesNextList">
+							<td style="vertical-align:middle;">{{announce.nombre}}</td>
+							<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
+							<td ng-if="user.data.roles[0].pivot.rol_id==1">
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="API/uploads/convocatoria/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_4">
-				<div class="panel panel-card table-responsive">
-					<table class="table table-striped b-t b-b">
-						<thead>
-							<tr>
-								<th>Convocatoria</th>
-								<th>Universidad</th>
-								<th style="text-align:center;">Fecha Inicio</th>
-								<th style="text-align:center;">Fecha Final</th>
-								<th ng-if="user.data.roles[0].pivot.rol_id==1"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr role="row" ng-repeat="announce in announcesPastList">
-								<td style="vertical-align:middle;">{{announce.nombre}}</td>
-								<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
-								<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
-								<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
-								<td ng-if="user.data.roles[0].pivot.rol_id==1">
-									<div class="hidden-xs hidden-sm pull-right">
-										<a target="_blank" href="API/uploads/convocatoria/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-											<i class="fa fa-file"></i>
-										</a>
-										<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
-											<i class="fa fa-pencil"></i>
-										</button>
-										<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
-									<div class="hidden-md hidden-lg pull-right">
-										<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-											<i class="fa fa-file"></i>
-										</button>
-										<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
-											<i class="fa fa-pencil"></i>
-										</button>
-										<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<div role="tabpanel" class="tab-pane animated fadeIn" id="tab_4">
+			<div class="panel panel-card table-responsive">
+				<table class="table table-striped b-t b-b">
+					<thead>
+						<tr>
+							<th>Convocatoria</th>
+							<th>Universidad</th>
+							<th style="text-align:center;">Fecha Inicio</th>
+							<th style="text-align:center;">Fecha Final</th>
+							<th ng-if="user.data.roles[0].pivot.rol_id==1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr role="row" ng-repeat="announce in announcesPastList">
+							<td style="vertical-align:middle;">{{announce.nombre}}</td>
+							<td style="vertical-align:middle;">{{announce.universidad.nombre}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_inicio}}</td>
+							<td style="text-align:center;vertical-align:middle;">{{announce.fecha_cierre}}</td>
+							<td ng-if="user.data.roles[0].pivot.rol_id==1">
+								<div class="hidden-xs hidden-sm pull-right">
+									<a target="_blank" href="API/uploads/convocatoria/{{announce.path}}" class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</a>
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-sm btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-sm btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+								<div class="hidden-md hidden-lg pull-right">
+									<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+										<i class="fa fa-file"></i>
+									</button>
+									<button ui-sref='admin.announcement.edit({id:announce.id})' class="btn btn-xs btn-success waves-effect" tooltip="Editar">
+										<i class="fa fa-pencil"></i>
+									</button>
+									<button ng-click="deleteAnnouncement(announce.id)" class="btn btn-xs btn-danger waves-effect" tooltip="Eliminar">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-	<a ui-sref='admin.announcement.add' class="md-btn md-fab md-fab-bottom-right pos-fix teal" ng-if="user.data.roles[0].pivot.rol_id==1">
-	  <i class="mdi-content-add i-24"></i>
-	</a>
 </div>
+<a ui-sref='admin.announcement.add' class="md-btn md-fab md-fab-bottom-right pos-fix teal" ng-if="user.data.roles[0].pivot.rol_id==1">
+  <i class="mdi-content-add i-24"></i>
+</a>
