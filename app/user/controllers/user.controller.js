@@ -29,14 +29,14 @@
     });
 
     function facebookPicture() {
-      console.log('picture');
+     // console.log('picture');
       UserService.getFacebookPicture()
       .then(function(response) {
-        console.log(response);
+        //console.log(response);
         $scope.facebookImage.url = response.data.url;
       })
       .catch(function(error) {
-        console.log(error);
+        //console.log(error);
         $scope.facebookImage.url = 'images/not_image/3.jpg';
       });
     }
@@ -48,7 +48,7 @@
         // check if the facebook user is registred
         UserService.getFacebookUserById(fbResponse.id)
         .then(function(userResponse) {
-          console.log(userResponse);
+          //console.log(userResponse);
           // facebook user data
           var credentials = {
             'email': fbResponse.email,
@@ -57,7 +57,7 @@
           // login into webpage
           UserService.sigin(credentials)
           .then(function(response) {
-            console.log(response);
+            //console.log(response);
             if (response.code === 1) {
               if (response.data.roles[0].rol_id === 3) {
                 $state.go('entrepreneur.dashboard');
@@ -68,13 +68,13 @@
           })
           // login not correct
           .catch(function(loginError) {
-            console.log(loginError);
+            //console.log(loginError);
           });
         })
         // user isn't registred
         .catch(function(userError) {
-          console.log(userError);
-          console.log(fbResponse);
+          //console.log(userError);
+          //console.log(fbResponse);
 
           var newUser = {};
           newUser.username = fbResponse.name;
@@ -88,7 +88,7 @@
           // create new user with facebook data
           UserService.sigup(newUser)
           .then(function(response) {
-            console.log(response);
+            //console.log(response);
             // $scope.success = true;
 
             var credentials = {
@@ -98,7 +98,7 @@
             // login into webpage
             UserService.sigin(credentials)
             .then(function(response) {
-              console.log(response);
+              //console.log(response);
               if (response.code === 1) {
                 if (response.data.roles[0].rol_id === 3) {
                   $state.go('entrepreneur.dashboard');
@@ -109,12 +109,12 @@
             })
             // login not correct
             .catch(function(loginError) {
-              console.log(loginError);
+              //console.log(loginError);
             });
 
           })
           .catch(function(error) {
-            console.log(error);
+            //console.log(error);
             // $scope.success = false;
           });
 
@@ -125,7 +125,7 @@
         // if (error.status === 'not_authorized') {
         //   $state.go('signup');
         // }
-        console.log(FbError);
+        //console.log(FbError);
       });
     };
 
@@ -133,11 +133,11 @@
       var newUser = {};
       UserService.facebookSignup()
       .then(function(FbResponse) {
-        console.log(FbResponse);
+        //console.log(FbResponse);
 
         UserService.getFacebookUserById(FbResponse.id)
         .then(function(userResponse) {
-          console.log(userResponse);
+         // console.log(userResponse);
 
           var credentials = {
             'email': FbResponse.email,
@@ -146,7 +146,7 @@
           // login into webpage
           UserService.sigin(credentials)
           .then(function(response) {
-            console.log(response);
+           // console.log(response);
             if (response.code === 1) {
               if (response.data.roles[0].rol_id === 3) {
                 $state.go('entrepreneur.dashboard');
@@ -157,11 +157,11 @@
           })
           // login not correct
           .catch(function(loginError) {
-            console.log(loginError);
+           // console.log(loginError);
           });
         })
         .catch(function(userError) {
-          console.log(userError);
+          //console.log(userError);
           newUser.username = FbResponse.name;
           newUser.nombre = FbResponse.name;
           newUser.paterno = FbResponse.first_name;
@@ -173,7 +173,7 @@
           // create new user with facebook data
           UserService.sigup(newUser)
           .then(function(response) {
-            console.log(response);
+            //console.log(response);
             $scope.success = true;
 
             var credentials = {
@@ -183,7 +183,7 @@
             // login into webpage
             UserService.sigin(credentials)
             .then(function(response) {
-              console.log(response);
+              //console.log(response);
               if (response.code === 1) {
                 if (response.data.roles[0].rol_id === 3) {
                   $scope.facebookImage = fbResponse.picture.data.url;
@@ -195,23 +195,23 @@
             })
             // login not correct
             .catch(function(loginError) {
-              console.log(loginError);
+              //console.log(loginError);
             });
           })
           .catch(function(error) {
-            console.log(error);
+            //console.log(error);
             $scope.success = false;
           });
         });
 
       })
       .catch(function(FbError) {
-        console.log(FbError);
+        //console.log(FbError);
       });
     };
 
     $scope.login = function() {
-      console.log($scope.email, $scope.password);
+      //console.log($scope.email, $scope.password);
       var credentials = {
         'email': $scope.email,
         'pwd': $scope.password
@@ -219,7 +219,7 @@
       UserService.sigin(credentials)
       .then(function(response) {
         if (response.code === 1) {
-          console.log(response.data.roles[0].rol_id);
+          //console.log(response.data.roles[0].rol_id);
           if (response.data.roles[0].rol_id === 3) {
             $state.go('entrepreneur.dashboard');
           } else {
@@ -231,7 +231,7 @@
           $scope.error = true;
       })
       .catch(function(error) {
-        console.log(error);
+        //console.log(error);
         $scope.error = true;
       });
     };
@@ -258,11 +258,11 @@
       }else{
         UserService.sigup(data)
         .then(function(response) {
-          console.log(response);
+          //console.log(response);
           $scope.success = true;
         })
         .catch(function(error) {
-          console.log(error);
+          //console.log(error);
           $scope.success = false;
         });
       }

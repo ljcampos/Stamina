@@ -27,7 +27,7 @@
 				$scope.announce = response.data;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		}
 		function getAllUniversities() {
@@ -36,7 +36,7 @@
 				$scope.univesityList = response.data;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		}
 
@@ -54,11 +54,11 @@
 				data: data
 			})
 			.then(function(res) {
-				console.log(res);
+				//console.log(res);
 				$state.go('admin.announcement.list');
 			})
 			.catch(function(err) {
-				console.log(err);
+				//console.log(err);
 			});
 		};
 	}

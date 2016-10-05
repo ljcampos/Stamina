@@ -23,7 +23,7 @@
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return universityDefer.promise;
 		}
@@ -46,11 +46,11 @@
 			$http.get(API.university.ById.replace(':id',id))
 			.success(function(response) {
 				universityDefer.resolve(response);
-				console.log(response);
+				//console.log(response);
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 
 			return universityDefer.promise;
@@ -65,7 +65,7 @@
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return universityDefer.promise;
 		}
@@ -78,7 +78,7 @@
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return universityDefer.promise;
 		}
@@ -91,7 +91,7 @@
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return universityDefer.promise;
 		}
@@ -104,7 +104,7 @@
 				users.resolve(response);
 			})
 			.error(function(error) {
-				console.log(error);
+				//console.log(error);
 				users.reject(error);
 			});
 			return users.promise;

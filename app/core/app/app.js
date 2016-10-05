@@ -14,9 +14,9 @@
     // });
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-      console.log('paso');
+      //console.log('paso');
       var requireLogin = toState.data.requireLogin;
-      console.log(UserService.isLogged());
+      //console.log(UserService.isLogged());
 
       $window.fbAsyncInit = function() {
         FB.init({

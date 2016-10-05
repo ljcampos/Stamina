@@ -19,7 +19,7 @@
 				users.resolve(response);
 			})
 			.error(function(error) {
-				console.log(error);
+				//console.log(error);
 				users.reject(error);
 			});
 			return users.promise;
@@ -32,7 +32,7 @@
 				users.resolve(response);
 			})
 			.error(function(error) {
-				console.log(error);
+				//console.log(error);
 				users.reject(error);
 			});
 			return users.promise;
@@ -45,7 +45,7 @@
 				user.resolve(response);
 			})
 			.error(function(error) {
-				console.log(error);
+				//console.log(error);
 				user.reject(error);
 			});
 			return user.promise;
@@ -58,7 +58,7 @@
 	        	userDefer.resolve(response);
 	      	})
 	      	.error(function(error) {
-	        	console.log(error);
+	        	//console.log(error);
 	        	userDefer.reject(error);
 	      	});
 	      	return userDefer.promise;
@@ -66,13 +66,13 @@
 
 	    function updateUser(id,data){
 	    	var userDefer= $q.defer();
-	    	console.log(data)
+	    	//console.log(data);
 	    	$http.post(API.menthor.update.replace(':id',id), data)
 	    	.success(function(response){
 	    		userDefer.resolve(response);
 	    	})
 	    	.error(function(error){
-	    		userDefer.reject(error)
+	    		userDefer.reject(error);
 	    	});
 	    	return userDefer.promise;
 	    }
@@ -86,10 +86,10 @@
 	    	})
 	    	.success(function(response){
 	    		userDefer.resolve(response);
-	    		console.log(response);
+	    		//console.log(response);
 	    	})
 	    	.error(function(error){
-	    		console.log(error);
+	    		//console.log(error);
 	    		userDefer.reject(error);
 	    	});
 	    	return userDefer.promise;

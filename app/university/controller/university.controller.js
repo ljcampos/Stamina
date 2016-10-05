@@ -22,9 +22,9 @@
 				$scope.universityList = response.data;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
-		};
+		}
 
 		/* :::::::::::::::::::::::::::::::::: */
 
@@ -43,11 +43,11 @@
 			
 			UniversityService.addUserUniversity(data)
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 				$state.go('admin.university.list');
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 		$scope.deleteUniversity = function(id) {
@@ -58,9 +58,9 @@
 					getUniversities();
 				})
 				.catch(function(error) {
-					console.log(error);
+					//console.log(error);
 				});
-				console.log("CODIGO ELIMINAR");
+				//console.log("CODIGO ELIMINAR");
 			}
 		};
 	}

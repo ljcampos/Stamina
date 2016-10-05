@@ -25,11 +25,11 @@
       var users = $q.defer();
       $http.get('https://jsonplaceholder.typicode.com/users')
       .success(function(response) {
-        console.log(response);
+        //console.log(response);
         users.resolve(response);
       })
       .error(function(error) {
-        console.log(error);
+        //console.log(error);
         users.reject(error);
       });
       return users.promise;
@@ -39,11 +39,11 @@
       var users = $q.defer();
       $http.get(API.user.ById.replace(':id', id))
       .success(function(response) {
-        console.log(response);
+        //console.log(response);
         users.resolve(response);
       })
       .error(function(error) {
-        console.log(error);
+        //console.log(error);
         users.reject(error);
       });
       return users.promise;
@@ -53,11 +53,11 @@
       var users = $q.defer();
       $http.post(API.user.update.replace(':id', id), datos)
       .success(function(response) {
-        console.log(response);
+        //console.log(response);
         users.resolve(response);
       })
       .error(function(error) {
-        console.log(error);
+       // console.log(error);
         users.reject(error);
       });
       return users.promise;
@@ -69,11 +69,11 @@
 
       $http.get(API.user.facebookUserById.replace(':id', id))
       .success(function(response) {
-        console.log(response);
+        //console.log(response);
         userDefer.resolve(response);
       })
       .error(function(error) {
-        console.log(error);
+        //console.log(error);
         userDefer.reject(error);
       });
 
@@ -84,11 +84,11 @@
       var facebookUser = $q.defer();
       getFacebookUserStatus()
       .then(function(response) {
-        console.log(response);
+        //console.log(response);
         facebookUser.resolve(getFacebookUserData(response));
       })
       .catch(function(error) {
-        console.log(error);
+        //console.log(error);
         facebookUser.reject(error);
       });
       return facebookUser.promise;
@@ -98,11 +98,11 @@
       var facebookUser = $q.defer();
       getFacebookUserStatus()
       .then(function(response) {
-        console.log(response);
+        //console.log(response);
         facebookUser.resolve(getFacebookUserData(response));
       })
       .catch(function(error) {
-        console.log(error);
+        //console.log(error);
         //FBLogin();
         facebookUser.reject(error);
       });
@@ -118,11 +118,11 @@
         } else if (response.status === 'not_authorized') {
           // user is logged but hasn't permissions
           //facebookUser.reject(response);
-          console.log('not_authorized');
+          //console.log('not_authorized');
           facebookUser.resolve(FBLogin());
         } else {
           // user is not logged
-          console.log('not logged');
+          //console.log('not logged');
           facebookUser.resolve(FBLogin());
         }
       });
@@ -132,12 +132,12 @@
     function FBLogin(response) {
       var facebookUser = $q.defer();
       FB.login(function(response) {
-        console.log(response);
+        //console.log(response);
         if (response.authResponse) {
-          console.log('paso');
+         // console.log('paso');
           facebookUser.resolve(getFacebookUserData(response));
         } else {
-          console.log('no paso');
+          //console.log('no paso');
           facebookUser.reject(response);
         }
       }, {scope: 'public_profile, email'});
@@ -170,12 +170,12 @@
 
       $http.post(API.auth.signin, credentials)
       .success(function(response) {
-        console.log(response);
+        //console.log(response);
         userDefer.resolve(response);
         setToken('sds561dsd', response);
       })
       .error(function(error) {
-        console.log(error);
+       // console.log(error);
         userDefer.reject(error);
       });
 
@@ -187,11 +187,11 @@
 
       $http.post(API.auth.signup, data)
       .success(function(response) {
-        console.log(response);
+       // console.log(response);
         userDefer.resolve(response);
       })
       .error(function(error) {
-        console.log(error);
+        //console.log(error);
         userDefer.reject(error);
       });
       return userDefer.promise;

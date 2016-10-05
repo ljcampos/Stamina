@@ -16,7 +16,7 @@
 			getAnnouncementsAvailable();
 			getAnnouncementsNext();
 			getAnnouncementsPast();
-			console.log($scope.user);
+			//console.log($scope.user);
 		};
 
 		angular.element(document).ready(function() {
@@ -29,7 +29,7 @@
 				$scope.announcesList = response.data;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		}
 		function getAnnouncementsNext() {
@@ -38,7 +38,7 @@
 				$scope.announcesNextList = response.data;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		}
 		function getAnnouncementsPast() {
@@ -47,7 +47,7 @@
 				$scope.announcesPastList = response.data;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		}
 		function getAnnouncementsAvailable() {
@@ -56,17 +56,17 @@
 				$scope.announcesAvailableList = response.data;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		}
 
 		$scope.getAnnouncementByID = function() {
 			AnnouncementService.getAnnouncementById(id)
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 
@@ -80,10 +80,10 @@
 
 			AnnouncementService.addAnnouncement(data)
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 
@@ -96,9 +96,9 @@
 					$state.go('admin.announcement.list');
 				})
 				.catch(function(error) {
-					console.log(error);
+					//console.log(error);
 				});
-				console.log("CODIGO ELIMINAR");
+				//console.log("CODIGO ELIMINAR");
 			}
 		};
 	}

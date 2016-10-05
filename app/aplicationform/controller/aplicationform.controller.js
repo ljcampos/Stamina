@@ -11,10 +11,10 @@
 			AplicationformService.getQuestionsSection1(2)
 			.then(function(response) {
 				$scope.questionsList = response;
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 		angular.element(document).ready(function () {

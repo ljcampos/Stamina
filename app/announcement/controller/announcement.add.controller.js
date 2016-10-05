@@ -19,21 +19,21 @@
 		function getAnnouncements() {
 			AnnouncementService.getAllUniversities()
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 				$scope.univesityList = response.data;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		}
 
 		$scope.getAnnouncementByID = function() {
 			AnnouncementService.getAnnouncementById(id)
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 
@@ -55,10 +55,10 @@
 				data: data
 			})
 			.then(function(res) {
-				console.log(res);
+				//console.log(res);
 			})
 			.catch(function(err) {
-				console.log(err);
+				//console.log(err);
 			});
 
 			// AnnouncementService.addAnnouncement(data)
@@ -80,20 +80,20 @@
 
 			AnnouncementService.updateAnnouncement(data)
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 
 		$scope.deleteAnnouncement = function() {
 			AnnouncementService.deleteAnnouncement(id)
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 	}

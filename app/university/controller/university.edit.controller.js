@@ -20,7 +20,7 @@
 				$scope.universidad_id 	= response.data.universidad_id;
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		}
 		$scope.editUniversity = function(university, image) {
@@ -39,19 +39,19 @@
 				data: data
 			})
 			.then(function(res) {
-				console.log(res);
+				//console.log(res);
 				$state.go('admin.university.list');
 			})
 			.catch(function(err) {
-				console.log(err);
+				//console.log(err);
 			});
 			UniversityService.editUniversity($stateParams.id,data)
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 				$state.go('admin.university.list');
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 	}

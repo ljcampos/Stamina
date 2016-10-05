@@ -22,7 +22,7 @@
 			})
 			.error(function(error) {
 				userDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return userDefer.promise;
 		}
@@ -34,7 +34,7 @@
 			})
 			.error(function(error) {
 				universityDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return universityDefer.promise;
 		}
@@ -46,7 +46,7 @@
 			})
 			.error(function(error) {
 				announcementDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return announcementDefer.promise;
 		}
@@ -58,7 +58,7 @@
 			})
 			.error(function(error) {
 				announcementDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return announcementDefer.promise;
 		}
@@ -70,7 +70,7 @@
 			})
 			.error(function(error) {
 				announcementDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return announcementDefer.promise;
 		}
@@ -82,7 +82,7 @@
 			})
 			.error(function(error) {
 				announcementDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return announcementDefer.promise;
 		}
@@ -94,7 +94,7 @@
 			})
 			.error(function(error) {
 				announcementDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return announcementDefer.promise;
 		}
@@ -106,7 +106,7 @@
 			})
 			.error(function(error) {
 				announcementDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return announcementDefer.promise;
 		}
@@ -118,7 +118,7 @@
 			})
 			.error(function(error) {
 				announcementDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return announcementDefer.promise;
 		}
@@ -130,7 +130,7 @@
 			})
 			.error(function(error) {
 				announceDefer.reject(error);
-				console.log(error);
+				//console.log(error);
 			});
 			return announceDefer.promise;
 		}

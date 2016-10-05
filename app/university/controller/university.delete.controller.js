@@ -16,10 +16,10 @@
 
 		$scope.deleteUniversity = function(id) {
 			var r = confirm("Press a button!");
-			if (r == true) {
-				console.log("ELIMINAR");
+			if (r === true) {
+				//console.log("ELIMINAR");
 			} else {
-				console.log("CANCELAR");
+				//console.log("CANCELAR");
 			}
 		};
 
@@ -37,11 +37,11 @@
 			
 			UniversityService.addUserUniversity(data)
 			.then(function(response) {
-				console.log(response);
+				//console.log(response);
 				$state.go('admin.university.list');
 			})
 			.catch(function(error) {
-				console.log(error);
+				//console.log(error);
 			});
 		};
 	}
