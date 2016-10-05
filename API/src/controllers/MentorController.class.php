@@ -37,7 +37,7 @@ class MentorController extends Controller
 	public function getAll ()
 	{
 		
-		$usuarios = Mentor::with('persona')->get();
+		$usuarios = Mentor::with('usuario')->with('persona')->get();
 
 		$this->response['data'] = $usuarios;
 		$this->response['message'] = 'Lista de mentores';

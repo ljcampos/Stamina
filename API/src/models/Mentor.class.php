@@ -11,7 +11,7 @@ class Mentor extends Model {
 	public 		$timestamps =	false;
 
 	public function usuario () {
-		return $this->belongsTo('User', 'usuario_id', 'mentor_id');
+		return $this->hasOne('User', 'usuario_id', 'mentor_id');
 	}
 
 	public function persona () {
