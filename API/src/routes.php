@@ -1,12 +1,73 @@
 <?php
 // Routes
 
+$middleware = function ($request, $response, $next) {
+	
+	$isOk = false;
+	$params = $request->getParams();
+
+	if (isset($params['user_token'])) {
+
+		$token 	= strip_tags($params['user_token']);
+		$token 	= filter_var($token, FILTER_SANITIZE_STRING);
+
+		Connection::conecting();
+		$user 	=	User::where('token', '=', $token)->get();
+		if (count($user) > 0) { $isOk = true; }
+	}
+
+	if ($isOk === true) {
+		return $response = $next($request, $response);
+	} else {
+		return $response->withJson(
+			array('code' => 5,'message' => 'No tiene permiso'), 
+			401);
+	}
+
+};
+
+
+/**
+* 
+*/
+$app->post('/auth/', function ($request, $response, $args) 
+{
+	$post = $request->getParams();
+	$controller = new UserController();
+	$json = $controller->callAction('auth', $post);
+
+	if ($json['code'] == 2 || $json['code'] == 4) {
+    return $response
+	          ->withHeader('Content-type', 'application/json')
+  	        ->withJson($json, 401);
+    }
+    return $response
+            ->withHeader('Content-type', 'application/json')
+            ->withJson($json, 200);
+
+})->setName('auth')->add($middleware);
+
+
+/**
+* 
+*/
+$this->post('/', function ($request, $response, $args) 
+{
+	$post = $request->getParams();
+	$controller = new UserController();
+	$json = $controller->callAction('add', $post);
+
+	$code = ($json['code'] == 1) ? 200 : 401;
+	return $response->withJson($json, $code);
+
+})->setName('create_user')->add($middleware);
+
+
 /**
 * 
 */
 $app->group('/api/v1/usuario', function () 
 {
-
 	/**
 	* 
 	*/
@@ -98,39 +159,6 @@ $app->group('/api/v1/usuario', function ()
             ->withJson($json, 200);
 	})->setName('search');
 
-	/**
-	* 
-	*/
-	$this->post('/', function ($request, $response, $args) 
-	{
-		$post = $request->getParams();
-		$controller = new UserController();
-		$json = $controller->callAction('add', $post);
-
-		$code = ($json['code'] == 1) ? 200 : 401;
-		return $response->withJson($json, $code);
-
-	})->setName('create_user');
-
-	/**
-	* 
-	*/
-	$this->post('/auth/', function ($request, $response, $args) 
-	{
-		$post = $request->getParams();
-		$controller = new UserController();
-		$json = $controller->callAction('auth', $post);
-
-		if ($json['code'] == 2 || $json['code'] == 4) {
-            return $response
-            ->withHeader('Content-type', 'application/json')
-            ->withJson($json, 401);
-        }
-        return $response
-            ->withHeader('Content-type', 'application/json')
-            ->withJson($json, 200);
-
-	})->setName('auth');
 
 	/**
 	* 
@@ -162,7 +190,7 @@ $app->group('/api/v1/usuario', function ()
 
 	})->setName('sus_conv');
 
-});
+})->add($middleware);
 
 /**
 *
@@ -184,7 +212,7 @@ $app->group('/api/v1/usuarios/mentores', function ()
 
 	})->setName('get_users_mentores');
 
-});
+})->add($middleware);;
 
 
 /**
@@ -263,7 +291,7 @@ $app->group('/api/v1/universidad', function ()
 
 	})->setName('delete_univ');
 
-});
+})->add($middleware);
 
 /**
 * 
@@ -385,7 +413,7 @@ $app->group('/api/v1/convocatoria', function ()
 
 	})->setName('delete_conv');
 
-});
+})->add($middleware);
 
 
 /**
@@ -546,7 +574,7 @@ $app->group('/api/v1/roles', function ()
 
 	})->setName('del_permissions_by_role');	
 
-});
+})->add($middleware);
 
 /**
 * 
@@ -625,7 +653,7 @@ $app->group('/api/v1/permisos', function ()
 
 	})->setName('delete_permission');
 
-});
+})->add($middleware);
 
 /**
 * 
@@ -703,7 +731,7 @@ $app->group('/api/v1/estatus', function ()
 
 	})->setName('del_status');
 
-});
+})->add($middleware);
 
 /**
 * 
@@ -781,7 +809,7 @@ $app->group('/api/v1/estados', function ()
 
 	})->setName('delete_estado');
 
-});
+})->add($middleware);
 
 /**
 * 
@@ -874,7 +902,7 @@ $app->group('/api/v1/formularioAplicacion', function ()
 	})->setName('delete_formulario_aplicacion');
 
 
-});
+})->add($middleware);
 
 /**
 * 
@@ -947,7 +975,7 @@ $app->group('/api/v1/pregunta', function ()
 
 	})->setName('delete_question');
 
-});
+})->add($middleware);
 
 /**
 * 
@@ -976,7 +1004,7 @@ $app->group('/api/v1/faq', function ()
 
 	})->setName('post_faq');
 
-});
+})->add($middleware);
 
 $app->group('/api/v1/respuesta', function(){
 	/**
@@ -1044,7 +1072,7 @@ $app->group('/api/v1/respuesta', function(){
 
 	})->setName('delete_answer');
 
-});
+})->add($middleware);
 
 
 $app->group('/api/v1/calificacion', function(){
@@ -1116,7 +1144,7 @@ $app->group('/api/v1/calificacion', function(){
 		echo $json;
 
 	})->setName('delete_score');
-});
+})->add($middleware);
 
 $app->group('/api/v1/promedio', function(){
 	/**
@@ -1188,4 +1216,4 @@ $app->group('/api/v1/promedio', function(){
 
 	})->setName('delete_average');
 
-});
+})->add($middleware);
