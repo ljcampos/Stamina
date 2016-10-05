@@ -1,9 +1,8 @@
 <div class="box-inner padding">
 	<div class="row row-center">
 		<div class="col-md-9 col-center">
-			<button class="md-btn md-raised m-b btn-fw bg-white waves-effect">Regresar</button>
 			<div class="pull-right">
-				<button class="md-btn md-raised m-b btn-fw bg-white waves-effect">Subir Archivo</button>
+				<button class="md-btn md-raised m-b btn-fw bg-white waves-effect" ng-if="userData.data.roles[0].pivot.rol_id==1">Subir Archivo</button>
 			</div>
 		</div>
 		<div class="col-md-9 col-center">

@@ -44,7 +44,7 @@
         var rol = UserService.isAdmin();
 
         if (rol) {
-          if (toState.data.role === 1 || toState.data.role === 2) {
+          if (toState.data.role === 1 || toState.data.role === 2 || toState.data.role === 4) {
             $location.state(toState.name);
           } else {
             $location.url('/');

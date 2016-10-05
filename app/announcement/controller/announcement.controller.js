@@ -1,12 +1,13 @@
 (function() {
 	'use strict';
 
-	angular.module('announcement').controller('AnnouncementController', ['$scope', 'AnnouncementService', AnnouncementController]);
+	angular.module('announcement').controller('AnnouncementController', ['$scope', 'AnnouncementService', 'UserService', AnnouncementController]);
 
-	function AnnouncementController($scope, AnnouncementService) {
+	function AnnouncementController($scope, AnnouncementService, UserService) {
 		$scope.text = 'xsdfsf';
 		$scope.announcesList = {};
 		$scope.announcesAvailableList = {};
+		$scope.user = UserService.getUser();
 		$scope.announcesNextList = {};
 		$scope.announcesPastList = {};
 		
@@ -15,6 +16,7 @@
 			getAnnouncementsAvailable();
 			getAnnouncementsNext();
 			getAnnouncementsPast();
+			console.log($scope.user);
 		};
 
 		angular.element(document).ready(function() {
