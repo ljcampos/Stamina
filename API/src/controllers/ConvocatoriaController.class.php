@@ -94,7 +94,7 @@ class ConvocatoriaController extends Controller
 
 		if (is_int(intval($params[0])))
 		{
-			$convocatoria = Convocatoria::with('persona')->find(intval($params[0]));
+			$convocatoria = Convocatoria::find(intval($params[0]));
 
 			if ($convocatoria != null)
 			{
@@ -115,6 +115,13 @@ class ConvocatoriaController extends Controller
 						unset($convocatoria->emprendedores[$key]->password);
 						unset($convocatoria->emprendedores[$key]->salt);
 						unset($convocatoria->emprendedores[$key]->pivot);
+					}
+				}
+
+				if (count($convocatoria->persona) > 0)
+				{
+					foreach ($convocatoria->persona as $key => $value) {
+						$convocatoria->emprendedores->persona = $convocatoria->persona;
 					}
 				}
 				$this->response['code'] = 1;
