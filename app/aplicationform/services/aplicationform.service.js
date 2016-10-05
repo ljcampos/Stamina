@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('aplicationform').service('AplicationformService', ['$q', '$http', AplicationformService]);
+	angular.module('aplicationform').service('AplicationformService', ['$q', '$http', 'API', AplicationformService]);
 
-	function AplicationformService($q, $http) {
+	function AplicationformService($q, $http, API) {
 		return {
 			getQuestionsSection1: getQuestionsSection1
 		};
@@ -12,7 +12,7 @@
 			var sections1 = [];
 			var sections = $q.defer();
 			//$http.get('https://jsonplaceholder.typicode.com/users')
-			$http.get('http://www.stamina.dev/app/aplicationform/database/db.json')
+			$http.get(API.aplicationform.form)
 			.success(function(response) {
 				for (var i = 0; i < response.length; i++) {
 					if (response[i].id_seccion == seccion) {sections1.push(response[i]);}

@@ -7,6 +7,7 @@
 		//var base = 'http://www.futuremakers.staminaacc.com/API/public/api/v1/';
 		var base = 'http://www.stamina.dev/API/public/api/v1/';
 		//var base = 'http://www.staminaprod.dev/API/public/api/v1/';
+		var baseDB = 'http://www.stamina.dev/';
 
 		return {
 			'user': {
@@ -60,6 +61,9 @@
 			'faqs': {
 				'actual' : base + '/faq/',
 				'upload' : base + '/faq/',
+			},
+			'aplicationform': {
+				'form': baseDB  + 'app/aplicationform/database/db.json'
 			}
 		};
 	}
