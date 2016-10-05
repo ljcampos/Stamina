@@ -1,10 +1,11 @@
 (function() {
 	'use strict';
 
-	angular.module('menthor').controller('MenthorController', ['$scope','$state', 'MenthorService', MenthorController]);
+	angular.module('menthor').controller('MenthorController', ['$scope','$state', 'MenthorService', 'UserService', MenthorController]);
 
-	function MenthorController($scope,$state, MenthorService) {
+	function MenthorController($scope,$state, MenthorService, UserService) {
 		$scope.menthorsList = {};
+		$scope.data = UserService.getUser();
 		$scope.init = function() {
 			getMenthors();
 		};

@@ -52,7 +52,8 @@
     <div class="row row-center">
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-custom" ng-repeat="menthor in menthorsList">
         <div class="text-center">
-          <img src="images/mentores/mentor.jpg" class="w-full circle md-whiteframe-z1">
+          <img ng-src="API/uploads/usuario/{{menthor.usuario.imagen}}" class="w-full circle md-whiteframe-z1" ng-if="menthor.usuario.imagen!=null">
+          <img ng-src="images/not_image/3.jpg" class="w-full circle md-whiteframe-z1" ng-if="menthor.usuario.imagen==null">
           <h4>{{menthor.persona.nombre}} {{menthor.persona.apellido_paterno}} {{menthor.persona.apellido_materno}}</h4>
           <strong>{{menthor.cargo}}</strong>
         </div>

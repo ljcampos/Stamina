@@ -10,7 +10,7 @@
 	      <div class="item">
 	        <img ng-src="{{user.imagen}}" src="images/not_image/3.jpg" class="w-full r-t" alt="{{user.nombre}}">
 	      </div>
-	      <a ui-sref='admin.menthor.edit({id:id})' class="md-btn md-fab md-raised indigo m-r md-fab-offset pull-right waves-effect"><i class="mdi mdi-editor-mode-edit i-24"></i></a>
+	      <a ui-sref='admin.menthor.edit({id:id})' class="md-btn md-fab md-raised indigo m-r md-fab-offset pull-right waves-effect" ng-if="data.data.roles[0].rol_id==1"><i class="mdi mdi-editor-mode-edit i-24"></i></a>
 	      <div class="p">
 	        <h3>{{user.nombre}} {{user.paterno}} {{user.materno}}</h3>
 	        <strong>{{user.cargo}}</strong>
