@@ -18,4 +18,8 @@ class Convocatoria extends Model {
 		return $this->belongsToMany('User', 'emprendedor_convocatoria', 'id_convocatoria', 'id_emprendedor');
 	}
 
+	public function persona () {
+		return $this->belongsToMany('Persona', 'emprendedor_convocatoria', 'id_convocatoria', 'id_emprendedor');
+	}
+
 }

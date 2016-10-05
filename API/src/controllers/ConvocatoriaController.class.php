@@ -94,7 +94,7 @@ class ConvocatoriaController extends Controller
 
 		if (is_int(intval($params[0])))
 		{
-			$convocatoria = Convocatoria::find(intval($params[0]));
+			$convocatoria = Convocatoria::with('persona')->find(intval($params[0]));
 
 			if ($convocatoria != null)
 			{
