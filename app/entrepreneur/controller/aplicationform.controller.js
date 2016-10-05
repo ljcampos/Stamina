@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
-	angular.module('entrepreneur').controller('AplicationFormController', ['$scope', 'UniversityService', AplicationFormController]);
+	angular.module('entrepreneur').controller('AplicationFormController', ['$scope', 'UniversityService', '$filter', AplicationFormController]);
 
-	function AplicationFormController($scope, UniversityService) {
+	function AplicationFormController($scope, UniversityService, $filter) {
 		// buttons disables by default
 		// $scope.btnSection1 = true;
 		// $scope.btnSection2 = true;
@@ -38,115 +38,6 @@
 				{'id': '1','name' :'No, tengo un equipo para el proyecto'}
 			],
 			selected: {'id': '2','name' :'Elija una opción'}
-		};
-
-		$scope.init = function() {
-			loadData();
-		};
-
-		function loadData() {
-			// UniversityService.getAllUniversities()
-			// .then(function(response) {
-			// 	$scope.data = response.data;
-			// })
-			// .catch(function(error) {
-			// 	console.log(error);
-			// });
-			$scope.objSection1.gender.selected = {'id': '0'};
-		}
-
-		$scope.saveSection1 = function() {
-			var result = validateSection($scope.objSection1);
-			console.log($scope.objSection1);
-
-			if (result === 10) {
-				console.log('complete');
-				// $scope.btnSection1 = false;
-				// $scope.btnSection2 = false;
-				// -------------------
-				activeTab(getTab(2));
-
-			} else {
-				console.log('llene todos los campos');
-			}
-		};
-
-		$scope.saveSection2 = function() {
-			var result = validateSection($scope.objSection2);
-			console.log($scope.objSection2);
-
-			// result === 11 falata los checkbox
-			if (result === 10) {
-				console.log('complete');
-				// active the tab component
-				activeTab(getTab(3));
-
-			} else {
-				console.log('llene todos los campos');
-			}
-		};
-
-		$scope.saveSection3 = function() {
-			var result = validateSection($scope.objSection3);
-			console.log($scope.objSection3);
-
-			if (result === 9) {
-				console.log('complete');
-				// active the tab component
-				activeTab(getTab(4));
-
-			} else {
-				console.log('llene todos los campos');
-			}
-		};
-
-		$scope.saveSection4 = function() {
-			var result = validateSection($scope.objSection4);
-			console.log($scope.objSection4);
-
-			// result === 2 faltan los radio buttons
-			if (result === 2) {
-				console.log('complete');
-				// active the tab component
-				activeTab(getTab(5));
-
-			} else {
-				console.log('llene todos los campos');
-			}
-		};
-
-		$scope.saveSection5 = function() {
-			var result = validateSection($scope.objSection5);
-			console.log($scope.objSection5);
-
-			// result === 6 faltan los radio buttons y checkbox
-			if (result === 4) {
-				console.log('complete');
-				// active the tab component
-				activeTab(getTab(6));
-
-			} else {
-				console.log('llene todos los campos');
-			}
-		};
-
-		function getTab(targetId) {
-			var result;
-			angular.forEach($scope.tabs, function(value, key) {
-				if (value.targetId === targetId) {
-					result = value;
-				}
-			});
-			return result;
-		}
-
-		function activeTab(tab) {
-			tab.class = '';
-			tab.subClass = '';
-		}
-
-		$scope.next = function() {
-			console.log('next');
 		};
 
 		$scope.tabs = [{
@@ -191,43 +82,73 @@
 				'class': 'disable',
 				'subClass': 'disabledTab',
 				//'current': false
-			}/*, {
-				'title': 'Sección #7',
-				'target': '#tab_7',
-				'targetId': 7,
-				'class': 'disable',
-				'subClass': 'disabledTab',
-				//'current': false
-		}*/
-		];
+		}];
 
-		// $scope.isActiveTab = function(tab) {
-		// 	// var result = currentTab();
-		// 	// result.current = false;
-		// 	// result.class = '';
-		// 	// result.subClass = '';
-		// 	// console.log(tab);
-		// 	// tab.current = true;
-		// 	// tab.class = 'active';
-		// 	// tab.subClass = '';
+		$scope.init = function() {
+			loadData();
+		};
 
-		// 	return true;
+		function loadData() {
+			// UniversityService.getAllUniversities()
+			// .then(function(response) {
+			// 	$scope.data = response.data;
+			// })
+			// .catch(function(error) {
+			// 	console.log(error);
+			// });
+			//$scope.objSection1.gender.selected = {'id': '0'};
+		}
 
-		// 	/*aria-expanded="true"*/
+		$scope.saveSection = function(data, formNumber) {
+			console.log(data, formNumber);
+			var sizeComplete = false;
+			var formDataComplete = false;
+			var dataSize = getObjectSize(data);
+
+			sizeComplete = validateFormSection(dataSize, formNumber);
+			formDataComplete = validateFormData(data);
+
+			// fomat the date
+			// if ('birthdate' in data) {
+			// 	var dateFormated = $filter('date')(data.birthdate, "dd-MM-yyyy");
+			// 	data.birthdate = dateFormated;
+			// 	console.log(data.birthdate);
+			// }
+
+			if (sizeComplete) {
+				console.log('completo');
+				if (formNumber < 6)
+					activeTab(getTab(formNumber + 1));
+			} else {
+				console.log('no completo');
+			}
+		};
+
+		$scope.$watch('birthdate', function (newValue) {
+			$scope.objSection1.birthdate = $filter('date')(newValue, 'dd-MM-yyyy');
+		});
+
+		function getTab(targetId) {
+			var result;
+			angular.forEach($scope.tabs, function(value, key) {
+				if (value.targetId === targetId) {
+					result = value;
+				}
+			});
+			return result;
+		}
+
+		function activeTab(tab) {
+			tab.class = '';
+			tab.subClass = '';
+		}
+
+		// $scope.next = function() {
+		// 	console.log('next');
 		// };
 
-		// function currentTab(tab) {
-		// 	var result;
-		// 	angular.forEach($scope.tabs, function(value, key) {
-		// 		if (value.current) {
-		// 			result = value;
-		// 		}
-		// 	});
-		// 	return result;
-		// }
-
 		// validate obj size
-		function validateSection(data) {
+		function getObjectSize(data) {
 			var size = 0;
 			var i;
 
@@ -238,6 +159,42 @@
 			}
 
 			return size;
+		}
+
+		function validateFormData(data) {
+			console.log('data', data);
+		}
+
+		function validateFormSection(dataSize, formNumber) {
+			switch(formNumber) {
+				case 1:
+					if (dataSize === 10)
+						return true;
+					break;
+				case 2:
+					if (dataSize >= 11)
+						return true;
+					break;
+				case 3:
+					if (dataSize === 9)
+						return true;
+					break;
+				case 4:
+					if (dataSize === 4)
+						return true;
+					break;
+				case 5:
+					if (dataSize >= 6)
+						return true;
+					break;
+				case 6:
+					console.log(formNumber);
+					if (dataSize === 2)
+						return true;
+					break;
+				default:
+					console.log('No existe el formulario.');
+			}
 		}
 
 		angular.element(document).ready(function() {
