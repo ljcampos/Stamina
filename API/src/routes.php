@@ -51,7 +51,7 @@ $app->post('/auth/', function ($request, $response, $args)
 /**
 * 
 */
-$this->post('/', function ($request, $response, $args) 
+$app->post('/', function ($request, $response, $args) 
 {
 	$post = $request->getParams();
 	$controller = new UserController();
