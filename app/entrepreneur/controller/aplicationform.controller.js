@@ -256,17 +256,18 @@
 							data.respuesta = value;
 							data.id_pregunta = key.substring(1);
 						}
-						data.calificacion_final = 0;
-						data.comentario_final = '';
+						data.calificacion_final = " ";
+						data.comentario_final = " ";
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 						//SERVICE SAVE()
 						console.log(data);
-						/*.then(function(response) {
+						ApplicationFormAnswer.addSection(data)
+						.then(function(response) {
 							console.log(response);
 						})
 						.catch(function(error) {
 							console.log(error);
-						});*/
+						});
 					});
 					// ApplicationFormAnswer.addSection(data)
 					// .then(function(response) {
@@ -296,12 +297,13 @@
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 						//SERVICE SAVE()
 						console.log(data);
-						/*.then(function(response) {
+						ApplicationFormAnswer.addSection(data)
+						.then(function(response) {
 							console.log(response);
 						})
 						.catch(function(error) {
 							console.log(error);
-						});*/
+						});
 					});
 					// ApplicationFormAnswer.addSection(data)
 					// .then(function(response) {
@@ -326,12 +328,13 @@
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 						//SERVICE SAVE()
 						console.log(data);
-						/*.then(function(response) {
+						ApplicationFormAnswer.addSection(data)
+						.then(function(response) {
 							console.log(response);
 						})
 						.catch(function(error) {
 							console.log(error);
-						});*/
+						});
 					});
 					break;
 				case 6:
@@ -356,12 +359,13 @@
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 						//SERVICE SAVE()
 						console.log(data);
-						/*.then(function(response) {
+						ApplicationFormAnswer.addSection(data)
+						.then(function(response) {
 							console.log(response);
 						})
 						.catch(function(error) {
 							console.log(error);
-						});*/
+						});
 					});
 					break;
 				default:
