@@ -306,6 +306,9 @@ class UserController extends Controller
 					$user->estatus_id = 1;
 					$user->save();
 
+					// Se envía el correo
+					$this->sendEmail($params['email']);
+
 					// Modelo Persona
 					$persona = new Persona();
 					$persona->persona_id = $user->usuario_id;
@@ -499,6 +502,9 @@ class UserController extends Controller
 						{
 							$rol = Role::where('rol', '=', 'emprendedor')->get();
 							if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
+
+							// Se envía el correo
+							$this->response['email'] = $this->sendEmail($params['email']);
 						}
 						elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
 						{
@@ -577,6 +583,39 @@ class UserController extends Controller
 		return $this->response;
 
 	}
+	/**
+	*
+	*/
+	private function sendEmail($email)
+	{
+		$process = false;
+
+		try 
+		{
+			$nombre='Stamina Business'; 
+			$mail='soporte@staminaacc.com'; 
+
+    		$cabecera = 'From: '.$nombre ."\r\n". 
+                'Reply-to: '.$mail ."\r\n". 
+                'Mime-Version:1.0'."\r\n". 
+                '"Content-Type: text/plain'."\r\n".                 
+                'X-Mailer: PHP/'.phpversion(); 
+    		$para = $email ; 
+
+    		$asunto = "Bienvenida a nuestra plataforma"; 
+    
+    		$mensaje = "Mensaje de:".$nombre."\r\n". 
+               "Direccion de correo:".$mail."\r\n".
+               "Mensaje: Bienvenido a la plataforma"."\r\n".
+	       "http://www.futuremakers.staminaacc.com/";
+
+    		$process = mail($para,$asunto,utf8_decode($mensaje),$cabecera); 
+
+		}
+		catch (Exception $e) { }
+		return $process;
+	}
+
 
 	/**
 	*
