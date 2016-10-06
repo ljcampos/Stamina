@@ -179,23 +179,27 @@ class RespuestaController extends Controller
 	*/
 	public function update(Array $params)
 	{
-		if (count($params) > 0 && $this->checkAttributes($params) === true)
+		if (count($params) > 0 /*&& $this->checkAttributes($params) === true*/)
 		{
 			$params = $this->sanitize($params);
 			$messages = array();
 
-			if (Respuesta::find($params['id']) == null)
+			$respuestas = Respuesta::where('id_pregunta', '=', $params['id_pregunta'])
+								   ->where('id_emprendedor_convocatoria', '=', $params['id_emp_con'])
+								   ->orderBy('respuesta', 'ASC')->get();
+			
+			if ($respuestas == null)
 			{
 				$messages[] = 'No existe la respuesta.';
 			}
 
-			if (empty($params['respuesta']) || is_null($params['respuesta']) || strlen($params['respuesta']) == 0)
+			if (empty($params['post']['respuesta']) || is_null($params['post']['respuesta']) || strlen($params['post']['respuesta']) == 0)
 			{
 				$messages[] = 'El campo respuesta no debe estar vacío.';
 			}
-			elseif (count(Respuesta::where('respuesta', '=', $params['respuesta'])->get()) > 0)
+			elseif (count(Respuesta::where('respuesta', '=', $params['post']['respuesta'])->get()) > 0)
 			{
-				$messages[] = 'Ya existe una respuesta con el nombre: \'' . $params['respuesta'] . '\'';
+				$messages[] = 'Ya existe una respuesta con el nombre: \'' . $params['post']['respuesta'] . '\'';
 			}
 
 			if (is_int(intval($params['id_pregunta'])) == false)
@@ -203,19 +207,19 @@ class RespuestaController extends Controller
 				$messages[] = 'El campo pregunta debe ser de tipo numérico.';	
 			}
 
-			if (empty($params['calificacion_final']) || is_null($params['calificacion_final']) || strlen($params['calificacion_final']) == 0 || strlen($params['calificacion_final']) > 255)
+			if (empty($params['post']['calificacion_final']) || is_null($params['post']['calificacion_final']) || strlen($params['post']['calificacion_final']) == 0 || strlen($params['post']['calificacion_final']) > 255)
 			{
 				$messages[] = 'El campo comentario final no puede quedar vacío ni contener mas de 255 caracteres.';	
 			}
 
-			if (empty($params['comentario_final']) || is_null($params['comentario_final']) || strlen($params['comentario_final']) == 0 || strlen($params['comentario_final']) > 255)
+			if (empty($params['post']['comentario_final']) || is_null($params['post']['comentario_final']) || strlen($params['post']['comentario_final']) == 0 || strlen($params['post']['comentario_final']) > 255)
 			{
 				$messages[] = 'El campo comentario final no puede quedar vacío.';	
 			}
 
-			if (is_int(intval($params['id_emprendedor_convocatoria'])) == false)
+			if (is_int(intval($params['id_emp_con'])) == false)
 			{
-				$messages[] = 'El campo emprendedor debe ser de tipo numérico.';	
+				$messages[] = 'El campo emprendedor debe ser de tipo numérico.';
 			}
 
 			if (count($messages) > 0)
@@ -231,12 +235,12 @@ class RespuestaController extends Controller
 
 				try 
 				{
-					$respuesta = Respuesta::find($params['id']);
+					$respuesta = Respuesta::find($params['id_pregunta']);
 					$respuesta->id_pregunta = intval($params['id_pregunta']);
-					$respuesta->respuesta = $params['respuesta'];
-					$respuesta->calificacion_final = $params['calificacion_final'];
-					$respuesta->comentario_final = $params['comentario_final'];
-					$respuesta->id_emprendedor_convocatoria = intval($params['id_emprendedor_convocatoria']);
+					$respuesta->respuesta = $params['post']['respuesta'];
+					$respuesta->calificacion_final = $params['post']['calificacion_final'];
+					$respuesta->comentario_final = $params['post']['comentario_final'];
+					$respuesta->id_emprendedor_convocatoria = intval($params['id_emp_con']);
 
 					if ($respuesta->save())
 					{
@@ -255,6 +259,7 @@ class RespuestaController extends Controller
 				{
 					$db::rollBack();
 					$this->response['code'] = 5;
+					$this->response['data'] = $respuestas;
 					$this->response['messages'] = 'Ocurrió un error, favor de contactar al administrador.';
 				}
 			}
@@ -267,8 +272,8 @@ class RespuestaController extends Controller
 			$this->response['message'] = 'Todos los parámetros son requeridos.';
 		}
 
-		$json = json_encode($this->response, JSON_FORCE_OBJECT);
-		return $json;
+		
+		return $this->response;
 	}
 
 	/**

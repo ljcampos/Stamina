@@ -1021,15 +1021,14 @@ $app->group('/api/v1/respuesta', function(){
 	/**
 	* 
 	*/
-	$this->post('/{id}/update/', function ($request, $response, $args)
+	$this->post('/{id_pregunta}/update/{id_emp_con}/', function ($request, $response, $args)
 	{
-		$params = $request->getParams();
-		$params['id'] = $args['id'];
+		$params = array('id_pregunta' => $args['id_pregunta'], 'id_emp_con' => $args['id_emp_con'], 'post' => $request->getParams());
 		$controller = new RespuestaController();
 		$json = $controller->callAction('update', $params);
 
-		header('Content-Type: application/json');
-		echo $json;
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
 		//echo $_GET["callback"]."(" . $json . ")";
 
 	})->setName('update_answer');
