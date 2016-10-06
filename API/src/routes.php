@@ -1043,6 +1043,20 @@ $app->group('/api/v1/respuesta', function(){
 
 	})->setName('delete_answer');
 
+
+	/**
+	* 
+	*/
+	$this->get('/emprendedor/{id}/', function ($request, $response, $args)
+	{
+		$controller = new RespuestaController();
+		$json = $controller->callAction('emp', $args['id']);
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('getRespuestasEmprendedor');
+
 });
 
 

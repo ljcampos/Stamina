@@ -10,6 +10,7 @@ class RespuestaController extends Controller
 		'one'		=>	'getById',
 		'add' 		=>	'create',
 		'update'	=>	'update',
+		'emp'		=>	'getByEmprendedor',
 		'del'		=>	'delete'
 	);
 
@@ -79,6 +80,20 @@ class RespuestaController extends Controller
 
 		$json = json_encode($this->response, JSON_FORCE_OBJECT);
 		return $json;
+	}
+
+
+	/**
+	* 
+	*/
+	public function getByEmprendedor($id)
+	{
+		$params = array($id);
+		$respuestas = Respuesta::where('id_emprendedor_convocatoria', '=', $id)->get();
+		$this->response['data'] = $respuestas;
+		$this->response['code'] = 1;
+
+		return $this->response;
 	}
 
 	/**
