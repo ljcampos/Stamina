@@ -214,8 +214,8 @@
 						}else{
 							data.respuesta = value;
 						}
-						data.calificacion_final = 0;
-						data.comentario_final = '';
+						data.calificacion_final = " ";
+						data.comentario_final = " ";
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 
 						console.log(data);
