@@ -306,6 +306,9 @@ class UserController extends Controller
 					$user->estatus_id = 1;
 					$user->save();
 
+					// Se envía el correo
+					$this->sendEmail($params['email']);
+
 					// Modelo Persona
 					$persona = new Persona();
 					$persona->persona_id = $user->usuario_id;
@@ -499,6 +502,9 @@ class UserController extends Controller
 						{
 							$rol = Role::where('rol', '=', 'emprendedor')->get();
 							if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
+
+							// Se envía el correo
+							$this->response['email'] = $this->sendEmail($params['email']);
 						}
 						elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
 						{
@@ -576,6 +582,41 @@ class UserController extends Controller
 
 		return $this->response;
 
+	}
+
+	/**
+	*
+	*/
+	private function sendEmail($email)
+	{
+		$process = false;
+
+		try 
+		{
+		 	$to = $email;
+			$email_subject = "Prueba envío de correo";
+			$email_body = "
+			        <!DOCTYPE html>
+			        <html>
+			        <head>
+			            <meta charset='utf-8'>
+			        </head>
+			        <body>
+			            <h1>Stamina</h1>
+			            <h2>¡Se ha registrado!</h2>
+			            <p>
+			            	<a href='www.google.com'>Click aquí para ingresar a la plataforma</a> 
+			            </p>
+			        </body>
+			        </html>";
+			 $headers ="Content-Type:text/html";
+			 $headers .= "From: soporte@staminaacc.com\n";
+			 $headers .= "Reply-a: no-reply@staminaacc.com";  
+			 $process	=	mail($to,$email_subject,$email_body,$headers);	
+		 } 
+		 catch (Exception $e) { }
+
+		 return $process;
 	}
 
 	/**
