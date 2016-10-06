@@ -8,7 +8,7 @@ class Respuesta extends Model {
 
 	protected 	$table 		=	'respuesta_pregunta_formulario_aplicacion';
 	protected 	$primaryKey =	'id';
-	public 		$timestamps =	true;
+	public 		$timestamps =	false;
 
 	public function pregunta () {
 		return $this->belongsTo('Pregunta', 'id_pregunta', 'id');
