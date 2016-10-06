@@ -594,7 +594,7 @@ class UserController extends Controller
 		try 
 		{
 		 	$to = $email;
-			$email_subject = "Prueba envío de correo";
+			$email_subject = "Usuario registrado ";
 			$email_body = "
 			        <!DOCTYPE html>
 			        <html>
@@ -605,7 +605,7 @@ class UserController extends Controller
 			            <h1>Stamina</h1>
 			            <h2>¡Se ha registrado!</h2>
 			            <p>
-			            	<a href='www.google.com'>Click aquí para ingresar a la plataforma</a> 
+			            	<a href='http://www.futuremakers.staminaacc.com/'>Click aquí para ingresar a la plataforma</a> 
 			            </p>
 			        </body>
 			        </html>";
