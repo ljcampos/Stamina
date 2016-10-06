@@ -786,45 +786,49 @@ class UserController extends Controller
 		{
 			$db = Connection::getConnection();
 			$db::beginTransaction();
-
-			try
-			{
+			try{
 				$convocatoria = Convocatoria::find(intval($params['convocatoria_id']));
 				$fecha_actual = strtotime(date('Y-m-d'));
-
-				if ($fecha_actual <= strtotime($convocatoria->fecha_cierre))
-				{
+				if ($fecha_actual <= strtotime($convocatoria->fecha_cierre)){
 					$obj = new EmprendedorConvocatoria();
 					$obj->id_emprendedor = $params['usuario_id'];
 					$obj->id_convocatoria = $params['convocatoria_id'];
 					$obj->estatus = intval($params['post']['estatus']);
-
-					if ($obj->save())
-					{
+					if ($obj->save()){
+						//var_dump($obj->id);
 						$db::commit();
+						for($i=1; $i<=37; $i++){ 
+							$objRespuesta = new Respuesta();
+							$objRespuesta->id_pregunta = $i;
+							$objRespuesta->respuesta = " ";
+							$objRespuesta->calificacion_final = " ";
+							$objRespuesta->comentario_final = " ";
+							$objRespuesta->id_emprendedor_convocatoria = $obj->id;
+							if(!$objRespuesta->save()){
+								$this->response['code'] = 6;
+								$this->response['message'] = 'Error al insertar las repuestas';
+								break;
+							}
+						}
 						$this->response['code'] = 1;
 						$this->response['message'] = 'Se ha agregado correctamente';
+						//exit;
 					}
-					else
-					{
+					else{
 						$this->response['code'] = 5;
 						$this->response['message'] = 'Ocurrió un error, favor de intentarlo mas tarde';
 					}
-				}
-				else
-				{
+				}else{
 					$this->response['code'] = 2;
 					$this->response['message'] = 'La fecha actual es mayor a la fecha de cierre de la convocatoria';
 				}
-			}
-			catch (Exception $e)
-			{
+			} catch (Exception $e) {
 				$db::rollBack();
 				$this->response['code'] = 5;
 				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrador.';
+				$this->response['messageotro'] = $e.message;
 			}
 		}
-
 		return $this->response;
 	}
 

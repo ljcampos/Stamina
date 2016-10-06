@@ -24,65 +24,8 @@
 		$scope.objSection6 = {};
 		$scope.objSection7 = {};
 
-		var objSection1r = {};
-		var objSection2r = {};
-		var objSection3r = {};
-		var objSection4r = {};
-		var objSection5r = {};
-		var objSection6r = {};
-		var objSection7r = {};
-
-
-		objSection1r.answer1 = 1;
-		objSection1r.answer2 = 2;
-		objSection1r.answer3 = 3;
-		objSection1r.answer4 = 4;
-		objSection1r.answer5 = 5;
-		objSection1r.answer6 = 6;
-		objSection1r.answer7 = 7;
-		objSection1r.answer8 = 8;
-		objSection1r.answer9 = 9;
-		objSection1r.answer10 = 10;
-
-		objSection2r.answer1 = 11;
-		objSection2r.answer2 = 12;
-		objSection2r.answer3 = 13;
-		objSection2r.answer4 = 14;
-		objSection2r.answer5 = 15;
-		objSection2r.answer6 = 16;
-		objSection2r.answer7 = 17;
-		objSection2r.answer8 = 18;
-		objSection2r.answer9 = 19;
-		objSection2r.answer10 = 20;
-		objSection2r.answer11 = 21;
-
-		objSection3r.answer22 = 22;
-		objSection3r.answer24 = 24;
-		objSection3r.answer25 = 25;
-		objSection3r.answer26 = 26;
-		objSection3r.answer27 = 27;
-		objSection3r.answer28 = 28;
-		objSection3r.answer29 = 29;
-		objSection3r.answer30 = 30;
-		objSection3r.answer31 = 31;
-
-		objSection4r.answer32 = 32;
-		objSection4r.answer33 = 33;
-		objSection4r.answer34 = 34;
-		objSection4r.answer35 = 35;
-
-		objSection5r.answer36 = 36;
-		objSection5r.answer37 = 37;
-		objSection5r.answer38 = 38;
-		objSection5r.answer39 = 39;
-		objSection5r.answer40 = 40;
-		objSection5r.answer41 = 41;
-
-		objSection6r.answer42 = 42;
-		objSection6r.answer43 = 43;
-
 		// default selected data
-		$scope.objSection1.gender = {
+		$scope.objSection1.a5 = {
 			options: [
 			{'id': '2','name' :'Elija una opción'},
 				{'id':'0', 'name': 'masculino'},
@@ -111,36 +54,36 @@
 				'title': 'Sección #2',
 				'target': '#tab_2',
 				'targetId': 2,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #3',
 				'target': '#tab_3',
 				'targetId': 3,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #4',
 				'target': '#tab_4',
 				'targetId': 4,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #5',
 				'target': '#tab_5',
 				'targetId': 5,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #6',
 				'target': '#tab_6',
 				'targetId': 6,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				/*'class': 'disable',
+				'subClass': 'disabledTab',*/
 				//'current': false
 		}];
 
@@ -176,7 +119,7 @@
 			// .catch(function(error) {
 			// 	console.log(error);
 			// });
-			//$scope.objSection1.gender.selected = {'id': '0'};
+			$scope.objSection1.a5.selected = {'name': 'femenino'};
 		}
 
 		$scope.saveSection = function(data, formNumber) {
@@ -184,6 +127,7 @@
 			var sizeComplete = false;
 			var formDataComplete = false;
 			var dataSize = getObjectSize(data);
+			
 
 			sizeComplete = validateFormSection(dataSize, formNumber);
 			formDataComplete = validateFormData(data);
@@ -194,21 +138,21 @@
 			// 	data.birthdate = dateFormated;
 			// 	console.log(data.birthdate);
 			// }
-
 			if (sizeComplete) {
 				console.log('completo');
 				if (formNumber < 6)
 					activeTab(getTab(formNumber + 1));
-
-				setService(formNumber, data, dataSize);
+					//VERIFICAR FUNCION, Y ADECUAR AL NUEVO PANORAMA...
+				setService(formNumber, data, dataSize); 
 			} else {
 				console.log('no completo');
+				setService(formNumber, data, dataSize); 
 			}
 		};
 
-		$scope.$watch('birthdate', function (newValue) {
-			$scope.objSection1.birthdate = $filter('date')(newValue, 'dd-MM-yyyy');
-		});
+		/*$scope.$watch('a4', function (newValue) {
+			$scope.objSection1.a4 = $filter('date')(newValue, 'dd-MM-yyyy');
+		});*/
 
 		function getTab(targetId) {
 			var result;
@@ -252,14 +196,43 @@
 
 			switch(formNumber) {
 				case 1:
-					for(var i= 0; i < dataSize; i++) {
+					console.log(formData);
+					console.log("//////////////////////////////////////////");
+					angular.forEach(formData, function(value, key) {
+						//PONER VALIDACION DE CAPO FECHA, y GÉnero
+						var data = {};
+						//console.log(key.substring(1), value);
+						data.id_pregunta = key.substring(1);
+						if (key.substring(1)==4) {
+							data.respuesta = $filter('date')(value, 'dd-MM-yyyy');
+						}else if(key.substring(1)==5){
+							data.respuesta = value.selected.name;
+						}else{
+							data.respuesta = value;
+						}
+						data.calificacion_final = 0;
+						data.comentario_final = '';
+						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
+
+						//SERVICE SAVE()
+						//ApplicationFormAnswer.addSection(data);
+						console.log(data);
+						/*.then(function(response) {
+							console.log(response);
+						})
+						.catch(function(error) {
+							console.log(error);
+						});*/
+					});
+					//console.log(data);
+					/*for(var i= 0; i < dataSize; i++) {
 						var data = {};
 						data.id_pregunta = objSection1r.answer+'i'+1;
 						data.respuesta = '';
 						data.calificacion_final = 0;
 						data.comentario_final = '';
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
-					}
+					}*/
 					// ApplicationFormAnswer.addSection(data)
 					// .then(function(response) {
 					// 	console.log(response);
