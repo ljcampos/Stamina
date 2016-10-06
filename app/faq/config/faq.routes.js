@@ -17,6 +17,7 @@
     .state('admin.faq.view', {
       url: '/faq/view',
       templateUrl: 'app/faq/views/faq.view.html',
+      controller:'FaqController',
       data: {
         requireLogin: true,
         role: 1

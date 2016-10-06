@@ -10,7 +10,8 @@
 
 		function uploadFile(file) {
 			var users = $q.defer();
-			$http.post(API.faqs.upload, file)
+			
+			$http.post(API.faqs.upload,file)
 			.success(function(response) {
 				console.log(response);
 				users.resolve(response);

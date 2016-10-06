@@ -55,8 +55,15 @@
 				'update': base + 'usuario/:id/update/'
 			},
 			'faqs': {
-				'actual' : base + '/faq/',
-				'upload' : base + '/faq/',
+				'actual' : base + 'faq/',
+				'upload' : base + 'faq/',
+			},			
+			'aplicationform': {
+				'list' : base + 'formularioAplicacion/',
+				'ById' : base + 'formularioAplicacion/:id/',
+				'update' : base + 'formularioAplicacion/update/:id/',
+				'delete' : base + 'formularioAplicacion/:id/delete/',
+				'listQuestion' : base+'formularioAplicacion/:id/preguntas/',
 			}
 		};
 	}
