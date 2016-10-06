@@ -1,7 +1,8 @@
 (function() {
 	'use strict';
-	angular.module('university').controller('UniversityEditController', ['$state', '$stateParams', '$scope', 'UniversityService', 'Upload', UniversityEditController]);
-	function UniversityEditController($state, $stateParams, $scope, UniversityService, Upload) {
+	angular.module('university').controller('UniversityEditController', ['$state', '$stateParams',
+		'$scope', 'UniversityService', 'Upload', 'API', UniversityEditController]);
+	function UniversityEditController($state, $stateParams, $scope, UniversityService, Upload, API) {
 		$scope.university 		= {};
 		$scope.usuario_id 		= {};
 		$scope.universidad_id 	= {};
@@ -32,9 +33,9 @@
 			data.estado_id					=	1;
 			data.usuario_id					=	$scope.usuario_id;
 			data.file						=	image;
-			// console.log(data);
+			// console.log(data); 'http://www.stamina.dev/API/public/api/v1/universidad/'+$stateParams.id+'/update/'
 			image.upload = Upload.upload({
-				url: 'http://www.stamina.dev/API/public/api/v1/universidad/'+$stateParams.id+'/update/',
+				url: API.university.update.replace(':id', $stateParams.id),
 				method: 'POST',
 				data: data
 			})

@@ -1,9 +1,10 @@
 (function() {
 	'use strict';
 
-	angular.module('announcement').controller('AnnouncementEditController', ['$state', '$stateParams', '$scope', 'AnnouncementService', 'Upload', AnnouncementEditController]);
+	angular.module('announcement').controller('AnnouncementEditController', ['$state', '$stateParams',
+		'$scope', 'AnnouncementService', 'Upload', 'API', AnnouncementEditController]);
 
-	function AnnouncementEditController($state, $stateParams, $scope, AnnouncementService, Upload) {
+	function AnnouncementEditController($state, $stateParams, $scope, AnnouncementService, Upload, API) {
 		$scope.text = 'xsdfsf';
 		$scope.announce = {};
 		$scope.announceID = {};
@@ -48,8 +49,9 @@
 			data.fecha_cierre 		=	announce.fecha_cierre;
 			data.file				=	file;
 
+			//'http://www.stamina.dev/API/public/api/v1/convocatoria/'+$scope.announceID+'/update/'
 			file.upload = Upload.upload({
-				url: 'http://www.stamina.dev/API/public/api/v1/convocatoria/'+$scope.announceID+'/update/',
+				url: API.announcement.update.replace(':id', $scope.announceID),
 				method: 'POST',
 				data: data
 			})

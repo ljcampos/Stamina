@@ -4,10 +4,11 @@
 	angular.module('core').service('API', ['$q', API]);
 
 	function API($q) {
-		//var base = 'http://www.futuremakers.staminaacc.com/API/public/api/v1/';
-		var base = 'http://www.stamina.dev/API/public/api/v1/';
+		var base = 'http://www.futuremakers.staminaacc.com/API/public/api/v1/';
+		//var base = 'http://www.stamina.dev/API/public/api/v1/';
 		//var base = 'http://www.staminaprod.dev/API/public/api/v1/';
-		var baseDB = 'http://www.stamina.dev/';
+		//var baseDB = 'http://www.stamina.dev/';
+		var baseDB = 'http://www.futuremakers.staminaacc.com/';
 
 		return {
 			'user': {

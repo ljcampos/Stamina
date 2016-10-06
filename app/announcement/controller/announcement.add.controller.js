@@ -1,9 +1,10 @@
 (function() {
 	'use strict';
 
-	angular.module('announcement').controller('AnnouncementAddController', ['$scope', 'AnnouncementService', 'Upload', AnnouncementAddController]);
+	angular.module('announcement').controller('AnnouncementAddController', ['$scope', 'AnnouncementService',
+		'Upload', 'API', AnnouncementAddController]);
 
-	function AnnouncementAddController($scope, AnnouncementService, Upload) {
+	function AnnouncementAddController($scope, AnnouncementService, Upload, API) {
 		$scope.text = 'xsdfsf';
 		$scope.announce = {};
 		$scope.univesityList = {};
@@ -48,9 +49,10 @@
 			data.file				=	file;
 
 			// console.log(data);
+			//'http://www.stamina.dev/API/public/api/v1/convocatoria/'
 
 			file.upload = Upload.upload({
-				url: 'http://www.stamina.dev/API/public/api/v1/convocatoria/',
+				url: API.announcement.list,
 				method: 'POST',
 				data: data
 			})
