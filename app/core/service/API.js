@@ -63,6 +63,9 @@
 				'actual' : base + '/faq/',
 				'upload' : base + '/faq/',
 			},
+			'answer': {
+				'update' : base + '/respuesta/',
+			},
 			'aplicationform': {
 				'form': baseDB  + 'app/aplicationform/database/db.json'
 			}

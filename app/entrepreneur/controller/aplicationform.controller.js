@@ -18,6 +18,7 @@
 		// sections objects
 		$scope.objSection1 = {};
 		$scope.objSection2 = {};
+		$scope.objSection20prima = "";
 		$scope.objSection3 = {};
 		$scope.objSection4 = {};
 		$scope.objSection5 = {};
@@ -100,7 +101,6 @@
 			.then(function(response) {
 				$scope.idEntreneurConvocatory = response.data[0].id;
 				console.log(response);
-
 				UserService.getUserById(id_user)
 				.then(function(res) {
 					console.log(res);
@@ -119,7 +119,7 @@
 			// .catch(function(error) {
 			// 	console.log(error);
 			// });
-			$scope.objSection1.a5.selected = {'name': 'femenino'};
+			//$scope.objSection1.a5.selected = {'name': 'Elija una opción'};
 		}
 
 		$scope.saveSection = function(data, formNumber) {
@@ -206,7 +206,11 @@
 						if (key.substring(1)==4) {
 							data.respuesta = $filter('date')(value, 'dd-MM-yyyy');
 						}else if(key.substring(1)==5){
-							data.respuesta = value.selected.name;
+							if(value.selected.name!="Elija una opción"){
+								data.respuesta = value.selected.name;
+							}else{
+								data.respuesta = " ";
+							}
 						}else{
 							data.respuesta = value;
 						}
@@ -214,15 +218,15 @@
 						data.comentario_final = '';
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 
-						//SERVICE SAVE()
-						//ApplicationFormAnswer.addSection(data);
 						console.log(data);
-						/*.then(function(response) {
+						//SERVICE SAVE()
+						ApplicationFormAnswer.addSection(data)
+						.then(function(response) {
 							console.log(response);
 						})
 						.catch(function(error) {
 							console.log(error);
-						});*/
+						});
 					});
 					//console.log(data);
 					/*for(var i= 0; i < dataSize; i++) {
@@ -242,6 +246,28 @@
 					// });
 					break;
 				case 2:
+					angular.forEach(formData, function(value, key) {
+						var data = {};
+						var saltar = 0;
+						if((key.substring(1)==20)&&angular.equals(value,"Otro (Especifica)")){
+							data.respuesta = $scope.objSection20prima;
+							data.id_pregunta = key.substring(1);
+						}else{
+							data.respuesta = value;
+							data.id_pregunta = key.substring(1);
+						}
+						data.calificacion_final = 0;
+						data.comentario_final = '';
+						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
+						//SERVICE SAVE()
+						console.log(data);
+						/*.then(function(response) {
+							console.log(response);
+						})
+						.catch(function(error) {
+							console.log(error);
+						});*/
+					});
 					// ApplicationFormAnswer.addSection(data)
 					// .then(function(response) {
 					// 	console.log(response);
@@ -260,6 +286,23 @@
 					// });
 					break;
 				case 4:
+					angular.forEach(formData, function(value, key) {
+						var data = {};
+						var saltar = 0;
+						data.respuesta = value;
+						data.id_pregunta = key.substring(1);
+						data.calificacion_final = 0;
+						data.comentario_final = '';
+						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
+						//SERVICE SAVE()
+						console.log(data);
+						/*.then(function(response) {
+							console.log(response);
+						})
+						.catch(function(error) {
+							console.log(error);
+						});*/
+					});
 					// ApplicationFormAnswer.addSection(data)
 					// .then(function(response) {
 					// 	console.log(response);
@@ -269,13 +312,27 @@
 					// });
 					break;
 				case 5:
-					// ApplicationFormAnswer.addSection(data)
-					// .then(function(response) {
-					// 	console.log(response);
-					// })
-					// .catch(function(error) {
-					// 	console.log(error);
-					// });
+					angular.forEach(formData, function(value, key) {
+						var data = {};
+						var saltar = 0;
+						/*if((key.substring(1)==20)&&angular.equals(value,"Otro (Especifica)")){
+							data.respuesta = $scope.objSection20prima;
+							data.id_pregunta = key.substring(1);
+						}else{*/
+						data.respuesta = value;
+						data.id_pregunta = key.substring(1);
+						data.calificacion_final = 0;
+						data.comentario_final = '';
+						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
+						//SERVICE SAVE()
+						console.log(data);
+						/*.then(function(response) {
+							console.log(response);
+						})
+						.catch(function(error) {
+							console.log(error);
+						});*/
+					});
 					break;
 				case 6:
 					// ApplicationFormAnswer.addSection(data)
@@ -285,6 +342,27 @@
 					// .catch(function(error) {
 					// 	console.log(error);
 					// });
+					angular.forEach(formData, function(value, key) {
+						var data = {};
+						var saltar = 0;
+						/*if((key.substring(1)==20)&&angular.equals(value,"Otro (Especifica)")){
+							data.respuesta = $scope.objSection20prima;
+							data.id_pregunta = key.substring(1);
+						}else{*/
+						data.respuesta = value;
+						data.id_pregunta = key.substring(1);
+						data.calificacion_final = 0;
+						data.comentario_final = '';
+						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
+						//SERVICE SAVE()
+						console.log(data);
+						/*.then(function(response) {
+							console.log(response);
+						})
+						.catch(function(error) {
+							console.log(error);
+						});*/
+					});
 					break;
 				default:
 					console.log('No existe el formulario.');
