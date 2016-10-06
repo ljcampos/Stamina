@@ -19,7 +19,7 @@ class RespuestaController extends Controller
 	private $response = array(
 		'code' 		=>	1,
 		'data'		=>	array(),
-		'message'	=>	''
+		'messages'	=>	''
 	);
 
 	/**
@@ -188,6 +188,7 @@ class RespuestaController extends Controller
 								   ->where('id_emprendedor_convocatoria', '=', $params['id_emp_con'])
 								   ->orderBy('respuesta', 'ASC')->get();
 			
+			//print_r($respuestas);
 			if ($respuestas == null)
 			{
 				$messages[] = 'No existe la respuesta.';
@@ -219,14 +220,14 @@ class RespuestaController extends Controller
 
 			if (is_int(intval($params['id_emp_con'])) == false)
 			{
-				$messages[] = 'El campo emprendedor debe ser de tipo numérico.';
+				$messages[] = 'El campo emprendedor convocatoria debe ser de tipo numérico.';
 			}
 
 			if (count($messages) > 0)
 			{
 				$this->response['code'] = 2;
 				$this->response['data'] = $params;
-				$this->response['message'] = $messages;
+				$this->response['messages'] = $messages;
 			}
 			else
 			{
@@ -235,19 +236,23 @@ class RespuestaController extends Controller
 
 				try 
 				{
-					$respuesta = Respuesta::find($params['id_pregunta']);
-					$respuesta->id_pregunta = intval($params['id_pregunta']);
-					$respuesta->respuesta = $params['post']['respuesta'];
-					$respuesta->calificacion_final = $params['post']['calificacion_final'];
-					$respuesta->comentario_final = $params['post']['comentario_final'];
+
+					$id = $respuestas[0]->id;
+					$respuesta = Respuesta::find($id);
+
+					$respuesta->id_pregunta 				= intval($params['id_pregunta']);
+					$respuesta->respuesta 					= $params['post']['respuesta'];
+					$respuesta->calificacion_final 			= $params['post']['calificacion_final'];
+					$respuesta->comentario_final 			= $params['post']['comentario_final'];
 					$respuesta->id_emprendedor_convocatoria = intval($params['id_emp_con']);
 
+					// print_r($respuesta);
 					if ($respuesta->save())
 					{
 						$db::commit();
 						$this->response['code'] = 1;
 						$this->response['data'] = $respuesta;
-						$this->response['message'] = 'Se ha actualizado correctamente la respuesta.';
+						$this->response['messages'] = 'Se ha actualizado correctamente la respuesta.';
 					}
 					else
 					{
@@ -259,8 +264,9 @@ class RespuestaController extends Controller
 				{
 					$db::rollBack();
 					$this->response['code'] = 5;
-					$this->response['data'] = $respuestas;
+					$this->response['data'] = $respuesta;
 					$this->response['messages'] = 'Ocurrió un error, favor de contactar al administrador.';
+					$this->response['error'] = $e->getMessage();
 				}
 			}
 
@@ -269,7 +275,7 @@ class RespuestaController extends Controller
 		{
 			$this->response['code'] = 2;
 			$this->response['data'] = $params;
-			$this->response['message'] = 'Todos los parámetros son requeridos.';
+			$this->response['messages'] = 'Todos los parámetros son requeridos.';
 		}
 
 		
