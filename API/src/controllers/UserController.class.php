@@ -304,10 +304,7 @@ class UserController extends Controller
 					$user->salt = $salt;
 					$user->token = $token;
 					$user->estatus_id = 1;
-					$user->save();
-
-					// Se envía el correo
-					$this->sendEmail($params['email']);
+					$user->save();					
 
 					// Modelo Persona
 					$persona = new Persona();
@@ -322,7 +319,11 @@ class UserController extends Controller
 
 					if ($type === 3 && $type != null) { // Usuario de tipo emprendedor
 						$rol = Role::where('rol', '=', 'emprendedor')->get();
-						if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
+						if (count($rol) > 0) { 
+							$rol_id = $rol[0]->rol_id; 
+							// Se envía el correo
+							$this->response['email'] = $this->sendEmail($params['email'],$type);
+						}
 					}
 
 					elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
@@ -336,7 +337,10 @@ class UserController extends Controller
 							$mentor->cargo = $params['cargo'];
 							$mentor->descr = $params['descr'];
 
-							if ($mentor->save()) { $saved = true; }
+							if ($mentor->save()) { 
+								$saved = true; 
+								// Se envía el correo
+								$this->response['email'] = $this->sendEmail($params['email'],$type);
 						}
 					}
 					elseif ($type === 1 && $type != null) // Usuarios de tipo administrador
@@ -502,9 +506,8 @@ class UserController extends Controller
 						{
 							$rol = Role::where('rol', '=', 'emprendedor')->get();
 							if (count($rol) > 0) { $rol_id = $rol[0]->rol_id; }
-
 							// Se envía el correo
-							$this->response['email'] = $this->sendEmail($params['email']);
+							$this->response['email'] = $this->sendEmail($params['email'],$type);
 						}
 						elseif ($type === 2 && $type != null) // Usuarios de tipo mentor
 						{
@@ -517,7 +520,11 @@ class UserController extends Controller
 								$mentor->cargo = $params['cargo'];
 								$mentor->descr = $params['descr'];
 
-								if ($mentor->save()) { $saved = true; }
+								if ($mentor->save()) { 
+									$saved = true; 
+									// Se envía el correo
+									$this->response['email'] = $this->sendEmail($params['email'],$type);
+								}
 							}
 						}
 						elseif ($type === 1 && $type != null) // Usuarios de tipo administrador
@@ -586,7 +593,7 @@ class UserController extends Controller
 	/**
 	*
 	*/
-	private function sendEmail($email)
+	private function sendEmail($email, $type)
 	{
 		$process = false;
 
@@ -601,13 +608,20 @@ class UserController extends Controller
                 '"Content-Type: text/plain'."\r\n".                 
                 'X-Mailer: PHP/'.phpversion(); 
     		$para = $email ; 
-
+    		$mensaje = "";
     		$asunto = "Bienvenida a nuestra plataforma"; 
-    
-    		$mensaje = "Mensaje de:".$nombre."\r\n". 
-               "Direccion de correo:".$mail."\r\n".
-               "Mensaje: Bienvenido a la plataforma"."\r\n".
-	       "http://www.futuremakers.staminaacc.com/";
+	    	if($type ==2 ){
+	    		$mensaje = "Mensaje de:".$nombre."\r\n". 
+               	"Direccion de correo:".$mail."\r\n".
+               	"Mensaje: Ha sido registrado como Mentor."."\r\n".
+               	"Solicite las credenciales de acceso a Stamina"."\r\n".
+	       	   	"http://www.futuremakers.staminaacc.com/";
+	    	}else if($type ==3){
+	    		$mensaje = "Mensaje de:".$nombre."\r\n". 
+                "Direccion de correo:".$mail."\r\n".
+                "Mensaje: Bienvenido a la plataforma"."\r\n".
+	       		"http://www.futuremakers.staminaacc.com/";
+	    	}
 
     		$process = mail($para,$asunto,utf8_decode($mensaje),$cabecera); 
 
