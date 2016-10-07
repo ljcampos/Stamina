@@ -61,8 +61,8 @@
 				'title': 'Sección #2',
 				'target': '#tab_2',
 				'targetId': 2,
-				//'class': 'disable',
-				//'subClass': 'disabledTab',
+				'class': 'disable',
+				'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #3',
@@ -75,22 +75,22 @@
 				'title': 'Sección #4',
 				'target': '#tab_4',
 				'targetId': 4,
-				//'class': 'disable',
-				//'subClass': 'disabledTab',
+				'class': 'disable',
+				'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #5',
 				'target': '#tab_5',
 				'targetId': 5,
-				//'class': 'disable',
-				//'subClass': 'disabledTab',
+				'class': 'disable',
+				'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #6',
 				'target': '#tab_6',
 				'targetId': 6,
-				//'class': 'disable',
-				//'subClass': 'disabledTab',
+				'class': 'disable',
+				'subClass': 'disabledTab',
 				//'current': false
 		}];
 
