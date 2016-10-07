@@ -32,9 +32,10 @@
         role: 1
       }
     })
-    .state('admin.answers.entrepreneur', {
-      url: '/answers/entrepreneur/:id',
+    .state('admin.announcement.answers', {
+      url: '/announcement/answers/entrepreneur/:id',
       templateUrl: 'app/announcement/views/admin.answers.entrepreneur.html',
+      controller: 'AnnouncementAnswersController',
       data: {
         requireLogin: true,
         role: 1
