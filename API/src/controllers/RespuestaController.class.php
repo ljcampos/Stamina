@@ -110,7 +110,8 @@ class RespuestaController extends Controller
 	public function getByEmprendedorFull($id)
 	{
 		$params = array($id);
-		$respuestas = Respuesta::where('id_emprendedor_convocatoria', '=', $id)->get();
+		$respuestas = Respuesta::with('pregunta')
+								->where('id_emprendedor_convocatoria', '=', $id)->get();
 
 		foreach($respuestas as $key => $value){
 			$value->id;
