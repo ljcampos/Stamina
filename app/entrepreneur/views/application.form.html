@@ -12,6 +12,24 @@
       <i class="mdi-navigation-arrow-back i-24"></i>Regresar
     </button>
   </div>
+
+
+  <div class='col-lg-10 col-center'>
+    <!-- ng-show="myValue" -->
+    <div id='messageSuccess' ng-show="success" class="alert alert-success alert-dismissable"  role="alert">
+      <div class='text-center'>
+        <span><strong>{{message}}</strong></span>
+      </div>
+    </div>
+
+    <!-- ng-show="myValue" class="ng-hide" -->
+    <div id='messageError' ng-show="error" class="alert alert-danger alert-dismissable"  role="alert">
+      <div class='text-center'>
+        <span><strong>{{message}}</strong></span>
+      </div>
+    </div>
+  </div>
+
 	<div class="col-lg-10 col-center">
 		<ul class="nav nav-tabs nav-justified">
          <!-- {{tab.title}} -->
@@ -45,7 +63,7 @@
 			<div class="tab-content p m-b-md clear b-t b-t-2x">
 				<!-- section 1 -->
         <div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_1">
-          <form>
+          <form name='frmSection1' novalidate="">
             <div class="row">
               <div class="col-md-7">
                 <div class="row">
@@ -54,25 +72,25 @@
                 </div>
                   <div class="col-md-4">
   									<div class="md-form-group float-label">
-  										<input class="md-input has-value" required="" ng-model='objSection2.a1'>
+  										<input class="md-input has-value" required="" ng-model='objSection1.a1'>
   										<label>Nombre(s)</label>
   									</div>
                   </div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input class="md-input has-value" required="" ng-model='objSection2.a2'>
+                      <input class="md-input has-value" required="" ng-model='objSection1.a2'>
                       <label>Apellido Paterno</label>
                     </div>
                   </div>
                   <div class="col-md-4">
   							<div class="md-form-group float-label">
-  								<input class="md-input has-value" required="" ng-model='objSection2.a3'>
+  								<input class="md-input has-value" required="" ng-model='objSection1.a3'>
   							   <label>Apellido Materno</label>
                      </div>
   						</div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input type="date" class="md-input has-value" required="" ng-model='objSection2.a4'>
+                      <input type="date" class="md-input has-value" required="" ng-model='objSection1.a4'>
                       <label>Fecha de nacimiento</label>
                     </div>
                   </div>
@@ -84,7 +102,7 @@
                         <option>Másculino</option>
                         <option>Femenino</option>
                       </select> -->
-                      <select class="form-control" ng-options='data.name for data in objSection2.a5.options track by data.name' ng-model='objSection2.a5.selected'></select>
+                      <select class="form-control" ng-options='data.name for data in objSection1.a5.options track by data.name' ng-model='objSection1.a5.selected'></select>
                       <!-- {{gender.selected}} -->
                     </div>
                   </div>
@@ -97,13 +115,13 @@
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                    <input class="md-input has-value" required="" ng-model='objSection2.a6'>
+                    <input class="md-input has-value" required="" ng-model='objSection1.a6'>
                     <label>Email</label>
                   </div>
                   <div class="col-md-12">
                     </div>
                     <div class="md-form-group float-label">
-                    <input class="md-input has-value" required="" ng-model='objSection2.a7'>
+                    <input class="md-input has-value" required="" ng-model='objSection1.a7'>
                     <label>Teléfono Móvil</label>
                     </div>
                   </div>
@@ -116,19 +134,19 @@
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input has-value" required="" ng-model='objSection2.a8'>
+                      <input class="md-input has-value" required="" ng-model='objSection1.a8'>
                       <label>Nivel Académico</label>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input has-value" required="" ng-model='objSection2.a9'>
+                      <input class="md-input has-value" required="" ng-model='objSection1.a9'>
                       <label>Escuela de Procedencia</label>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input has-value" required="" ng-model='objSection2.a10'>
+                      <input class="md-input has-value" required="" ng-model='objSection1.a10'>
                       <label>Escuela de Formación</label>
                     </div>
                   </div>
@@ -139,8 +157,8 @@
             <div class='row'>
               <div class='col-lg-12'>
                 <div class='pull-right'>
-                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection2, 1)'>Guardar</button>
-                  <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
+                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection1, 1)'>Guardar</button>
+                  <button class='btn btn-lg btn-info' ng-show='!frmSection1.$invalid' ng-click='next()'>Siguiente</button>
                 </div>
               </div>
             </div>
@@ -148,7 +166,7 @@
          </div>
         <!-- section 2 -->
         <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_2">
-          <form>
+          <form name='section2' novalidate="">
             <div class="row">
               <div class="col-md-12">
                 <div class="row">
@@ -159,7 +177,7 @@
                     <div class="form-group form-group-lg">
                       <label class="col-sm-12 control-label"><strong>1.- Nombre del Proyecto</strong></label>
                       <div class="col-sm-12">
-                        <input class="form-control" type="text" ng-model='objSection2.a11'>
+                        <input class="form-control" type="text" ng-model='objSection2.a11' ng-required="true">
                       </div>
                     </div>
                   </div>
@@ -167,7 +185,7 @@
                     <div class="form-group">
                       <label class="col-sm-12 control-label"><br><strong>2. Cuéntanos sobre el problema, oportunidad o necesidad no satisfecha que has detectado.</strong></label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5" ng-model='objSection2.a12'></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.a12' ng-required="true"></textarea>
                       </div>
                     </div>
                   </div>
@@ -177,7 +195,7 @@
                         <br><strong>3. ¿Quién o quienes  tienen este problema o necesidad? Háblanos un poco de tu target  de mercado.</strong><small>(Causas, sus efectos emocionales o sociales, sus aspiraciones y motivaciones. Haz un esfuerzo por identificar y satisfacer un nicho de mercado)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5" ng-model='objSection2.a13'></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.a13' required=""></textarea>
                       </div>
                     </div>
                   </div>
@@ -187,7 +205,7 @@
                         <br><strong>4. ¿Tienes “idea” de cuántas personas podrían tener este problema?</strong><small>(Estimaciones, Características Socio-demográficas, ubicación geográfica, Fuente de datos.) *No se vale decir "Todo el Mundo".  Haz un esfuerzo por ser lo más específico posible)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5" ng-model='objSection2.a14'></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.a14' required=""></textarea>
                       </div>
                     </div>
                   </div>
@@ -197,7 +215,7 @@
                         <br><strong>5. ¿Haz platicado con alguna persona representativa de tu "Nicho de mercado" para corroborar que existe dicha “Oportunidad” de negocio o únicamente existe en tu mente?</strong><small>(Menciona si has utilizado alguna herramienta como encuestas en persona u online, entrevistas formales o informales, grabaciones, etc. y si has encontrado alguna correlación como resultado de esto)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5" ng-model='objSection2.a15'></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.a15' required=""></textarea>
                       </div>
                     </div>
                   </div>
@@ -207,7 +225,7 @@
                         <br><strong>6. ¿Cómo planeas resolver el problema o satisfacer la necesidad identificada? ¿Qué solución visualizas para esto?</strong><small>(Describe brevemente si es a través de innovación en producto, servicio o modelo de negocio. Explícanos el proceso y las tres principales características o funciones de tu solución)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5" ng-model='objSection2.a16'></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.a16' required=""></textarea>
                       </div>
                     </div>
                   </div>
@@ -217,7 +235,7 @@
                         <br><strong>7. Utilizas alguna aplicación de la Tecnología, hechizo obscuro o poción mágica para resolver el problema?</strong><small>(Procura investigar antes qué es Tecnología para evitar errores)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5" ng-model='objSection2.a17'></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.a17' required=""></textarea>
                       </div>
                     </div>
                   </div>
@@ -227,7 +245,7 @@
                         <br><strong>8. ¿Ha desarrollado algún prototipo de la solución?</strong><small>(Prototipo de Alta Fidelidad, Video animado sobre el funcionamiento, bosquejo, mock-up, empaque, etc.)</small>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5" ng-model='objSection2.a18'></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.a18' required=""></textarea>
                       </div>
                     </div>
                   </div>
@@ -237,7 +255,7 @@
                         <br><strong>9. ¿Has invertido capital propio para el desarrollo del prototipo? Si / no ¿Cuánto?</strong>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="5" ng-model='objSection2.a19'></textarea>
+                        <textarea class="form-control" rows="5" ng-model='objSection2.a19' required=""></textarea>
                       </div>
                     </div>
                   </div>
@@ -248,27 +266,27 @@
                       </label>
                       <div class="col-sm-6">
                         <label class="md-check">
-                          <input type="radio" ng-model="objSection2.a20" value="Internet de las Cosas (IoT)">
+                          <input type="radio" ng-model="objSection2.a20" value="Internet de las Cosas (IoT)" required="">
                           <i class="grey-900"></i>Internet de las Cosas (IoT)
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio" ng-model="objSection2.a20" value="Comercio electrónico (e-commerce)">
+                          <input type="radio" ng-model="objSection2.a20" value="Comercio electrónico (e-commerce)" required="">
                           <i class="grey-900"></i>Comercio electrónico (e-commerce)
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio" ng-model="objSection2.a20" value="Salud (Healt Informatics )">
+                          <input type="radio" ng-model="objSection2.a20" value="Salud (Healt Informatics )" required="">
                           <i class="grey-900"></i>Salud (Healt Informatics )
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio" ng-model="objSection2.a20" value="Wearables Tecnhology">
+                          <input type="radio" ng-model="objSection2.a20" value="Wearables Tecnhology" required="">
                           <i class="grey-900"></i>Wearables Tecnhology
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio" ng-model="objSection2.a20" value="Educación (Ed Tech)">
+                          <input type="radio" ng-model="objSection2.a20" value="Educación (Ed Tech)" required="">
                           <i class="grey-900"></i>Educación (Ed Tech)
                         </label>
                         <br>
@@ -278,58 +296,58 @@
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Finanzas (FinTech)">
+                          <input type="radio"  ng-model="objSection2.a20" value="Finanzas (FinTech)" required="">
                           <i class="grey-900"></i>Finanzas (FinTech)
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Video Juegos">
+                          <input type="radio"  ng-model="objSection2.a20" value="Video Juegos" required="">
                           <i class="grey-900"></i>Video Juegos
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Salud & Biotecnología">
+                          <input type="radio"  ng-model="objSection2.a20" value="Salud & Biotecnología" required="">
                           <i class="grey-900"></i>Salud & Biotecnología
                         </label>
                       </div>
                       <div class="col-sm-6">
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="IT & Software">
+                          <input type="radio"  ng-model="objSection2.a20" value="IT & Software" required="">
                           <i class="grey-900"></i>IT & Software
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Mobile & Wireless">
+                          <input type="radio"  ng-model="objSection2.a20" value="Mobile & Wireless" required="">
                           <i class="grey-900"></i>Mobile & Wireless
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Recursos Naturales - minería, alimentos, etc.">
+                          <input type="radio"  ng-model="objSection2.a20" value="Recursos Naturales - minería, alimentos, etc." required="">
                           <i class="grey-900"></i>Recursos Naturales - minería, alimentos, etc.
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Media">
+                          <input type="radio"  ng-model="objSection2.a20" value="Media" required="">
                           <i class="grey-900"></i>Media
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Empresa Social">
+                          <input type="radio"  ng-model="objSection2.a20" value="Empresa Social" required="">
                           <i class="grey-900"></i>Empresa Social
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Social Media/Social Network">
+                          <input type="radio"  ng-model="objSection2.a20" value="Social Media/Social Network" required="">
                           <i class="grey-900"></i>Social Media/Social Network
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Turismo">
+                          <input type="radio"  ng-model="objSection2.a20" value="Turismo" required="">
                           <i class="grey-900"></i>Turismo
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio"  ng-model="objSection2.a20" value="Otro (Especifica)">
+                          <input type="radio"  ng-model="objSection2.a20" value="Otro (Especifica)" required="">
                           <i class="grey-900"></i>Otro (Especifica)
                         </label>
                         <input class="form-control" type="text" placeholder="" ng-model="objSection20prima">
@@ -342,7 +360,7 @@
                         <br><strong>11. Link de un video donde aparezcas explicando tu proyecto</strong><small>(duración de 1:30 min)</small>
                       </label>
                       <div class="col-sm-12">
-                        <input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=*" ng-model='objSection2.a21'>
+                        <input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=*" ng-model='objSection2.a21' required="">
                       </div>
                     </div>
                   </div>
@@ -354,7 +372,7 @@
               <div class='col-lg-12'>
                 <div class='pull-right'>
                   <button class='btn btn-lg btn-success' ng-click='saveSection(objSection2, 2)'>Guardar</button>
-                  <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
+                  <button class='btn btn-lg btn-info' ng-show='!section2.$invalid' ng-click='next()'>Siguiente</button>
                 </div>
               </div>
             </div>
@@ -362,7 +380,7 @@
         </div>
 				<!-- section 3 -->
         <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
-          <form>
+          <form name='section3' novalidate="">
             <div class="row">
               <div class="col-md-12">
                 <div class="row">
@@ -379,11 +397,11 @@
                           <option>No, tengo un equipo para el proyecto</option>
                         </select> -->
                         <!--<select class="form-control" ng-options='data.name for data in objSection2.team.options track by data.id' ng-model='objSection2.team.selected'>-->
-                            <select class="form-control" ng-options='data.name for data in objSection2.a22.options track by data.name' ng-model='objSection2.a22.selected'></select>
+                            <select class="form-control" ng-options='data.name for data in objSection3.a22.options track by data.name' ng-model='objSection3.a22.selected'></select>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-12 text-center" ng-if="objSection2.a22.selected.name=='Sí, tengo un equipo para el proyecto'">
+                  <div class="col-md-12 text-center" ng-if="objSection3.a22.selected.name=='Sí, tengo un equipo para el proyecto'">
                     <br>
                     <button type="button" class="text-sm btn btn-lg btn-rounded btn-stroke btn-accent m-r waves-effect">
                       <i class="fa mdi-social-person-add fa-2x pull-left"></i>
@@ -392,7 +410,7 @@
                       </span>
                     </button>
                   </div>
-                  <div class="col-md-12" ng-if="objSection2.a22.selected.name=='Sí, tengo un equipo para el proyecto'">
+                  <div class="col-md-12" ng-if="objSection3.a22.selected.name=='Sí, tengo un equipo para el proyecto'">
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
@@ -451,7 +469,7 @@
             <div class='row'>
               <div class='col-lg-12'>
                 <div class='pull-right'>
-                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection2, 3)'>Guardar</button>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection3, 3)'>Guardar</button>
                   <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>
