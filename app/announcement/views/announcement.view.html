@@ -1,20 +1,152 @@
-<div class="box-inner padding">
-	<div class="row row-center">
-	  <div class="col-md-6 col-center">
-	    <div class="panel panel-card">
-	      <div class="item">
-	        <img src="images/c5.jpg" class="w-full r-t" alt="Washed Out">
-	      </div>
-	      <a href="edit.menthor.html" class="md-btn md-fab md-raised indigo m-r md-fab-offset pull-right waves-effect"><i class="mdi mdi-editor-mode-edit i-24"></i></a>
-	      <div class="p">
-	        <h3>Nombre del mentor</h3>
-	        <h4>Cargo del mentor</h4>
-	        <p>
-	          The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-	          two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-	        </p>
-	      </div>
-	    </div>
+<style type="text/css">
+	.col-md-3{
+		padding: 0px;
+	}
+	.col-md-9{
+		padding: 0px;
+	}
+	.p-custom{
+		padding-right: 5px;
+		padding-left: 5px;
+	}
+	.blue{
+		background: #5a9ab7;
+		color: white;
+	}
+</style>
+<!--<div class="col-md-12">
+	<div class="panel panel-card blue">
+	  <div class="item">
+	    <img ng-if="(university.imagen=='')" src="images/not_image/3.jpg" class="w-full r-t" alt="{{university.nombre}}">
+	    <img ng-if="(university.imagen!='')" src="{{university.imagen}}" class="w-full r-t" alt="{{university.nombre}}">
 	  </div>
+	  <div class="p p-custom">
+	    <h4 class="text-center">{{university.nombre}}</h4>
+	    <br>
+	    <table class="table b-t b-b">
+			<tr role="row">
+				<td>Fecha Inicio</td>
+				<td>{{university.fecha_inicio_servicio}}</td>
+			</tr>
+			<tr role="row">
+				<td>Fecha Final</td>
+				<td>{{university.fecha_final_servicio}}</td>
+			</tr>
+		</table>
+	  </div>
+	</div>
+</div>-->
+<div class="col-md-12">
+	<ul class="nav nav-tabs nav-justified">
+		<li class="active">
+		  <a href="" data-toggle="tab" data-target="#tab6" aria-expanded="true">Prospectos</a>
+		</li>
+		<li class="">
+		  <a href="" data-toggle="tab" data-target="#tab7" aria-expanded="false">Aplicaciones</a>
+		</li>
+		<li class="">
+		  <a href="" data-toggle="tab" data-target="#tab8" aria-expanded="false">Aceptados</a>
+		</li>
+		<li class="">
+		  <a href="" data-toggle="tab" data-target="#tab9" aria-expanded="false">Estadísticas</a>
+		</li>
+	</ul>
+	<div class="tab-content p b-a no-b-t bg-white m-b-md clear">
+	    <div role="tabpanel" class="tab-pane animated fadeIn active" id="tab6">
+			<table id="dt" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Universidad</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row" ng-repeat="emprendedor in prospectos">
+						<td style="vertical-align:middle;">{{emprendedor.persona.nombre}} {{emprendedor.persona.apellido_paterno}} {{emprendedor.persona.apellido_materno}}</td>
+						<td style="vertical-align:middle;">{{emprendedor.user.email}}</td>
+						<td>
+							<div class="hidden-xs hidden-sm pull-right">
+								<a ui-sref='admin.announcement.answers({id:emprendedor.id})' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
+							</div>
+							<div class="hidden-md hidden-lg pull-right">
+								<a ui-sref='admin.announcement.answers({id:emprendedor.id})' class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	    </div>
+	    <div role="tabpanel" class="tab-pane animated fadeIn" id="tab7">
+			<table id="dt" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Universidad</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row" ng-repeat="emprendedor in aplicaciones">
+						<td style="vertical-align:middle;">{{emprendedor.persona.nombre}} {{emprendedor.persona.apellido_paterno}} {{emprendedor.persona.apellido_materno}}</td>
+						<td style="vertical-align:middle;">{{emprendedor.user.email}}</td>
+						<td>
+							<div class="hidden-xs hidden-sm pull-right">
+								<a ui-sref='admin.announcement.answers({id:emprendedor.id})' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
+							</div>
+							<div class="hidden-md hidden-lg pull-right">
+								<a ui-sref='admin.announcement.answers({id:emprendedor.id})' class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	    </div>
+	    <div role="tabpanel" class="tab-pane animated fadeIn" id="tab8">
+			<table id="dt1" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Universidad</th>
+						<th>Proyecto</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row" ng-repeat="emprendedor in aceptados">
+						<td style="vertical-align:middle;">{{emprendedor.persona.nombre}} {{emprendedor.persona.apellido_paterno}} {{emprendedor.persona.apellido_materno}}</td>
+						<td style="vertical-align:middle;">{{emprendedor.user.email}}</td>
+						<td>
+							<div class="hidden-xs hidden-sm pull-right">
+								<a ui-sref='admin.announcement.answers({id:emprendedor.id})' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
+							</div>
+							<div class="hidden-md hidden-lg pull-right">
+								<a ui-sref='admin.announcement.answers({id:emprendedor.id})' class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	    </div>
+	    <div role="tabpanel" class="tab-pane animated fadeIn" id="tab9">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	    </div>
 	</div>
 </div>

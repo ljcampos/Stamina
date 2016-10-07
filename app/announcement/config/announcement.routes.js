@@ -15,7 +15,8 @@
       }
     })
     .state('admin.announcement.view', {
-      url: '/announcement/view',
+      url: '/announcement/view/:id',
+      controller: 'AnnouncementViewController',
       templateUrl: 'app/announcement/views/announcement.view.html',
       data: {
         requireLogin: true,
@@ -26,6 +27,15 @@
       url: '/announcement/add',
       templateUrl: 'app/announcement/views/announcement.add.html',
       controller: 'AnnouncementAddController',
+      data: {
+        requireLogin: true,
+        role: 1
+      }
+    })
+    .state('admin.announcement.answers', {
+      url: '/announcement/answers/entrepreneur/:id',
+      templateUrl: 'app/announcement/views/admin.answers.entrepreneur.html',
+      controller: 'AnnouncementAnswersController',
       data: {
         requireLogin: true,
         role: 1

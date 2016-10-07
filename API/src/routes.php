@@ -38,6 +38,21 @@ $app->group('/api/v1/usuario', function ()
 	/**
 	* 
 	*/
+	$this->get('/{id_convocatoria}/convocatorias/emprendedores/{estatus}/', function ($request, $response, $args)
+	{
+
+		$params = array('id_convocatoria' => $args['id_convocatoria'], 'estatus' => $args['estatus'],);		
+		$controller = new UserController();
+		$json = $controller->callAction('conEmp', $params);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('get_one_user_convocatoria');
+
+	/**
+	* 
+	*/
 	$this->get('/{usuario_id}/', function ($request, $response, $args)
 	{
 		$usuario_id = $args['usuario_id'];
@@ -1033,6 +1048,22 @@ $app->group('/api/v1/respuesta', function(){
 
 	})->setName('update_answer');
 
+	/**
+	* 
+	*/
+	$this->post('/update/{id_respuesta}/calificacion_y_comentario_final/', function ($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$params['id_respuesta'] = $args['id_respuesta'];
+		$controller = new RespuestaController();
+		$json = $controller->callAction('updateCalComFinal', $params);
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+		//echo $_GET["callback"]."(" . $json . ")";
+
+	})->setName('update_answer_final');
+
 	$this->post('/{id}/delete/', function ($request, $response, $args)
 	{
 		$controller = new RespuestaController();
@@ -1056,6 +1087,19 @@ $app->group('/api/v1/respuesta', function(){
 		return $response->withJson($json, $code);
 
 	})->setName('getRespuestasEmprendedor');
+
+	/**
+	* 
+	*/
+	$this->get('/emprendedor/{id}/completo/', function ($request, $response, $args)
+	{
+		$controller = new RespuestaController();
+		$json = $controller->callAction('empFull', $args['id']);
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('getRespuestasEmprendedorFull');
 
 });
 

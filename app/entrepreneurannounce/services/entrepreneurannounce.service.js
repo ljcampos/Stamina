@@ -5,8 +5,21 @@
 
 	function EntrepreneurannounceService($q, $http, API) {
 		return {
+			getAnnouncementEntrepreneurs: getAnnouncementEntrepreneurs,
 			suscribirse: suscribirse
 		};
+
+		function getAnnouncementEntrepreneurs(id,status) {
+			var entrepreneurannounceDefer = $q.defer();
+			$http.get(API.user.list+id+"/convocatorias/emprendedores/"+status+"/") 
+			.success(function(response){
+				entrepreneurannounceDefer.resolve(response);
+			})
+			.error(function(error){
+				entrepreneurannounceDefer.reject(error);
+			});
+			return entrepreneurannounceDefer.promise;
+		}
 
 		function suscribirse(data) {
 			var entrepreneurannounceDefer = $q.defer();
