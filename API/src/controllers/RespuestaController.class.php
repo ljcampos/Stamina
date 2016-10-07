@@ -10,6 +10,7 @@ class RespuestaController extends Controller
 		'one'		=>	'getById',
 		'add' 		=>	'create',
 		'update'	=>	'update',
+		'updateCalComFinal' => 'updateComentarioFinal',
 		'emp'		=>	'getByEmprendedor',
 		'del'		=>	'delete'
 	);
@@ -266,6 +267,115 @@ class RespuestaController extends Controller
 					unset($respuesta->calificacion_final);
 					unset($respuesta->comentario_final);
 					$respuesta->id_emprendedor_convocatoria = intval($params['id_emp_con']);
+
+					// print_r($respuesta);
+					if ($respuesta->save())
+					{
+						$db::commit();
+						$this->response['code'] = 1;
+						$this->response['data'] = $respuesta;
+						$this->response['messages'] = 'Se ha actualizado correctamente la respuesta.';
+					}
+					else
+					{
+						$this->response['code'] = 5;
+						$this->response['data'] = $respuesta;
+						$this->response['messages'] = 'No se pudo completar la acción, intentelo más tarde.';
+					}
+				} 
+				catch (Exception $e) 
+				{
+					$db::rollBack();
+					$this->response['code'] = 5;
+					$this->response['data'] = $respuesta;
+					$this->response['messages'] = 'Ocurrió un error, favor de contactar al administrador.';
+					$this->response['error'] = $e->getMessage();
+				}
+			}
+
+		}
+		else
+		{
+			$this->response['code'] = 2;
+			$this->response['data'] = $params;
+			$this->response['messages'] = 'Todos los parámetros son requeridos.';
+		}
+
+		
+		return $this->response;
+	}
+
+	/**
+	* 
+	*/
+	public function updateComentarioFinal($params)
+	{
+		if (count($params) > 0 /*&& $this->checkAttributes($params) === true*/)
+		{
+			$params = $this->sanitize($params);
+			$messages = array();
+
+			
+			$respuestas = Respuesta::where('id', '=', $params['id_respuesta'])->get();
+			
+			//print_r($respuestas);
+			if ($respuestas == null)
+			{
+				$messages[] = 'No existe la respuesta.';
+			}
+
+			// if (empty($params['post']['respuesta']) || is_null($params['post']['respuesta']) || strlen($params['post']['respuesta']) == 0)
+			// {
+			// 	$messages[] = 'El campo respuesta no debe estar vacío.';
+			// }
+			// elseif (count(Respuesta::where('respuesta', '=', $params['post']['respuesta'])->get()) > 0)
+			// {
+			// 	$messages[] = 'Ya existe una respuesta con el nombre: \'' . $params['post']['respuesta'] . '\'';
+			// }
+
+			// if (is_int(intval($params['id_pregunta'])) == false)
+			// {
+			// 	$messages[] = 'El campo pregunta debe ser de tipo numérico.';	
+			// }
+
+			if (empty($params['calificacion_final']) || is_null($params['calificacion_final']) || strlen($params['calificacion_final']) == 0 || strlen($params['calificacion_final']) > 255)
+			{
+				$messages[] = 'El campo comentario final no puede quedar vacío ni contener mas de 255 caracteres.';	
+			}
+
+			if (empty($params['comentario_final']) || is_null($params['comentario_final']) || strlen($params['comentario_final']) == 0 || strlen($params['comentario_final']) > 255)
+			{
+				$messages[] = 'El campo comentario final no puede quedar vacío.';	
+			}
+
+			// if (is_int(intval($params['id_emp_con'])) == false)
+			// {
+			// 	$messages[] = 'El campo emprendedor convocatoria debe ser de tipo numérico.';
+			// }
+
+			if (count($messages) > 0)
+			{
+				$this->response['code'] = 2;
+				$this->response['data'] = $params;
+				$this->response['messages'] = $messages;
+			}
+			else
+			{
+				$db = Connection::getConnection();
+				$db::beginTransaction();
+
+				try 
+				{
+
+					$respuesta = Respuesta::find($params['id_respuesta']);
+
+					unset($respuesta->id_pregunta);
+					unset($respuesta->respuesta);
+					$respuesta->calificacion_final	= $params['calificacion_final'];
+					$respuesta->comentario_final 	= $params['comentario_final'];
+					unset($respuesta->id_emprendedor_convocatoria);
+
+
 
 					// print_r($respuesta);
 					if ($respuesta->save())

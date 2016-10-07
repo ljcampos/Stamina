@@ -1033,6 +1033,22 @@ $app->group('/api/v1/respuesta', function(){
 
 	})->setName('update_answer');
 
+	/**
+	* 
+	*/
+	$this->post('/update/{id_respuesta}/calificacion_y_comentario_final/', function ($request, $response, $args)
+	{
+		$params = $request->getParams();
+		$params['id_respuesta'] = $args['id_respuesta'];
+		$controller = new RespuestaController();
+		$json = $controller->callAction('updateCalComFinal', $params);
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+		//echo $_GET["callback"]."(" . $json . ")";
+
+	})->setName('update_answer_final');
+
 	$this->post('/{id}/delete/', function ($request, $response, $args)
 	{
 		$controller = new RespuestaController();
