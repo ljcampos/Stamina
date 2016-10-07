@@ -15,7 +15,8 @@ class UserController extends Controller
 		'auth'		=>	'authentication',
 		'img'			=>	'addImage',
 		'search'	=>  'search',
-		'empCon'	=>	'emprendedorConvocatoria'
+		'empCon'	=>	'emprendedorConvocatoria',
+		'conEmp'	=>	'convocatoriasEmprendedores'
 	);
 
 	private $DIRECTORY;
@@ -1086,18 +1087,18 @@ class UserController extends Controller
 				// $usr->roles 		= $usuario[0]->roles;
 
 				/*if (count($usr->roles) > 0)
-				{*/
-					/*foreach ($usr->roles as $key => $rol) {
+				{
+					foreach ($usr->roles as $key => $rol) {
 						if (strtoupper($rol->rol) === 'MENTOR')
 						{
 							$mentor = Mentor::find($usr->usuario_id);
 							$usr->cargo = $mentor->cargo;
 							$usr->descr = $mentor->descr;
-						}*/
+						}
 
-						/*if (strtoupper($rol->rol) === 'EMPRENDEDOR')
-						{*/
-					/*		if (count($usuario->convocatorias) > 0)
+							if (strtoupper($rol->rol) === 'EMPRENDEDOR')
+						{
+							if (count($usuario->convocatorias) > 0)
 							{
 								foreach ($usuario->convocatorias as $llave => $convocatoria) {
 									$convocatoria->path = (strlen($convocatoria->path) > 0) ? __DIR__ . '/../../uploads/convocatoria/' . $convocatoria->path : '';
@@ -1116,7 +1117,7 @@ class UserController extends Controller
 				$this->response['code'] = 1;
 				$this->response['data'] = $usuario;
 				$this->response['message'] = 'Recurso encontrado';
-/*			*/}
+			}
 			else
 			{
 				$this->response['code'] = 4;
@@ -1126,6 +1127,70 @@ class UserController extends Controller
 		else
 		{
 			$this->response['code'] = 2;
+			$this->response['message'] = 'El identificador del usuario debe ser de tipo número.';
+		}
+
+		return $this->response;
+	}
+
+	/**
+	*
+	*/
+	public function convocatoriasEmprendedores($params)
+	{
+
+		$params = $this->sanitize(array($params));
+		
+		if (is_int(intval($params[0])))
+		{
+
+			$id = $params[0]['id_convocatoria'];
+			$status = $params[0]['estatus'];
+			$usuario = EmprendedorConvocatoria::with('persona')
+						   ->with('user')
+						   ->where('id_convocatoria', '=', $id)
+						   ->where('estatus', '=', $status)
+						   ->orderBy('id', 'ASC')
+						   ->get();
+
+			if (count($usuario) > 0)
+			{
+
+				$usr = new User();
+				$usr->nombre 		= $usuario[0]->persona->nombre;
+				$usr->paterno 		= $usuario[0]->persona->apellido_paterno;
+				$usr->materno 		= $usuario[0]->persona->apellido_materno;
+
+				foreach ($usuario as $key => $value) {
+					unset($usuario[$key]->user->password);
+					unset($usuario[$key]->user->token);
+					unset($usuario[$key]->user->salt);
+					unset($usuario[$key]->user->username);
+					unset($usuario[$key]->user->usuario_id);
+					unset($usuario[$key]->user->estatus_id);
+					unset($usuario[$key]->user->isFacebookUser);
+					unset($usuario[$key]->user->facebookId);
+					unset($usuario[$key]->user->last_login);
+					unset($usuario[$key]->user->imagen);
+					unset($usuario[$key]->user->updated_at);
+					unset($usuario[$key]->user->created_at);
+				}
+
+				$this->response['code'] = 1;
+				$this->response['data'] = $usuario;
+				$this->response['message'] = 'Recurso encontrado';
+			}
+			else
+			{
+				$this->response['code'] = 4;
+				$this->response['data'] = $usuario;
+				$this->response['message'] = 'El usuario con el identificador \'' . $params[0] . '\' no existe.';
+			}
+		}
+		else
+		{
+			$this->response['code'] = 2;
+			$this->response['data'] = $usuario;
 			$this->response['message'] = 'El identificador del usuario debe ser de tipo número.';
 		}
 

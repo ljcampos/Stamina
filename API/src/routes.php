@@ -38,6 +38,21 @@ $app->group('/api/v1/usuario', function ()
 	/**
 	* 
 	*/
+	$this->get('/{id_convocatoria}/convocatorias/emprendedores/{estatus}/', function ($request, $response, $args)
+	{
+
+		$params = array('id_convocatoria' => $args['id_convocatoria'], 'estatus' => $args['estatus'],);		
+		$controller = new UserController();
+		$json = $controller->callAction('conEmp', $params);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('get_one_user_convocatoria');
+
+	/**
+	* 
+	*/
 	$this->get('/{usuario_id}/', function ($request, $response, $args)
 	{
 		$usuario_id = $args['usuario_id'];

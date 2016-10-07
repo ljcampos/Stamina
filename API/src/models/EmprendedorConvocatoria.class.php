@@ -19,7 +19,11 @@ class EmprendedorConvocatoria extends Model {
 	}
 
 	public function user () {
-		return $this->belongsTo('User', 'usuario_id', 'id_emprendedor');
+		return $this->hasOne('User', 'usuario_id', 'id_emprendedor');
+	}
+
+	public function persona () {
+		return $this->hasOne('Persona', 'persona_id', 'id_emprendedor');
 	}
 
 	public function convocatorias() {
