@@ -229,7 +229,7 @@ class RespuestaController extends Controller
 				$messages[] = 'El campo pregunta debe ser de tipo numérico.';	
 			}
 
-			if (empty($params['post']['calificacion_final']) || is_null($params['post']['calificacion_final']) || strlen($params['post']['calificacion_final']) == 0 || strlen($params['post']['calificacion_final']) > 255)
+			/*if (empty($params['post']['calificacion_final']) || is_null($params['post']['calificacion_final']) || strlen($params['post']['calificacion_final']) == 0 || strlen($params['post']['calificacion_final']) > 255)
 			{
 				$messages[] = 'El campo comentario final no puede quedar vacío ni contener mas de 255 caracteres.';	
 			}
@@ -237,7 +237,7 @@ class RespuestaController extends Controller
 			if (empty($params['post']['comentario_final']) || is_null($params['post']['comentario_final']) || strlen($params['post']['comentario_final']) == 0 || strlen($params['post']['comentario_final']) > 255)
 			{
 				$messages[] = 'El campo comentario final no puede quedar vacío.';	
-			}
+			}*/
 
 			if (is_int(intval($params['id_emp_con'])) == false)
 			{
@@ -263,8 +263,8 @@ class RespuestaController extends Controller
 
 					$respuesta->id_pregunta 				= intval($params['id_pregunta']);
 					$respuesta->respuesta 					= $params['post']['respuesta'];
-					$respuesta->calificacion_final 			= $params['post']['calificacion_final'];
-					$respuesta->comentario_final 			= $params['post']['comentario_final'];
+					unset($respuesta->calificacion_final);
+					unset($respuesta->comentario_final);
 					$respuesta->id_emprendedor_convocatoria = intval($params['id_emp_con']);
 
 					// print_r($respuesta);
@@ -278,6 +278,7 @@ class RespuestaController extends Controller
 					else
 					{
 						$this->response['code'] = 5;
+						$this->response['data'] = $respuesta;
 						$this->response['messages'] = 'No se pudo completar la acción, intentelo más tarde.';
 					}
 				} 
