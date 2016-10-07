@@ -15,7 +15,8 @@
       }
     })
     .state('admin.announcement.view', {
-      url: '/announcement/view',
+      url: '/announcement/view/:id',
+      controller: 'AnnouncementViewController',
       templateUrl: 'app/announcement/views/announcement.view.html',
       data: {
         requireLogin: true,
