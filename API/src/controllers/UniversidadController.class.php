@@ -65,6 +65,7 @@ class UniversidadController extends Controller
 				{
 					foreach ($universidad->convocatorias as $k => $conv) {
 						$conv->path = (strlen($conv->path) > 0) ? __DIR__ . '/../../uploads/convocatoria/' . $conv->path : '';
+						$conv->emprendedores;
 					}
 				}
 			}
@@ -392,47 +393,84 @@ class UniversidadController extends Controller
 
 		if (count($universidad) > 0)
 		{
-			if (count($universidad[0]->convocatorias) > 0)
+			$db = Connection::getConnection();
+			$db::beginTransaction();
+
+			try 
 			{
-				$this->response['code'] = 5;
-				$this->response['message'] = 'Existen referencias.';
-			}
-			else
-			{
-				$db = Connection::getConnection();
-				$db::beginTransaction();
-				$this->response['message'] = 'Ocurrió un error, favor de contactar al administrado.';
-				try
+				if (count($universidad[0]->convocatorias) > 0)
 				{
-					if ($universidad[0]->delete())
-					{
-						$db::commit();
+					foreach ($universidad[0]->convocatorias as $key => $convocatoria) {
+						if (count($convocatoria->emprendedores) > 0) {
+							foreach ($convocatoria->emprendedores as $key => $emprendedor) {
+								$emprendedorConvocatoria = EmprendedorConvocatoria::where('id_emprendedor', '=', $emprendedor->usuario_id)
+																		->where('id_convocatoria', '=', $convocatoria->id)->get();
+								$respuestas = Respuesta::where('id_emprendedor_convocatoria', '=', $emprendedorConvocatoria[0]->id)->get();
+								if (count($respuestas) > 0) {
+									foreach ($respuestas as $key => $respuesta) {
+										$calificaciones = Calificacion::where('id_respuesta', '=', $respuesta->id)->get();
+										if (count($calificaciones) > 0) {
+											foreach ($calificaciones as $key => $calificacion) {
+												$calificacion->delete();
+											}
+										}
+										$miembros = Miembro::where('id_respuesta', '=', $respuesta->id)->get();
+										if (count($miembros) > 0) {
+											foreach ($miembros as $key => $miembro) {
+												$miembro->delete();
+											}
+										}
 
-						try
-						{
-							if ($universidad[0]->imagen != '' || $universidad[0]->imagen != null)
-							{
-								if (file_exists($this->DIRECTORY . $universidad[0]->imagen))
-								{
-									unlink($this->DIRECTORY . $universidad[0]->imagen);
+										$respuesta->delete();
+									}
 								}
+
+								$promedios = Promedio::where('id_emprendedor_convocatoria', '=', $emprendedorConvocatoria[0]->id)->get();
+								if (count($promedios) > 0) {
+									foreach ($promedios as $key => $promedio) {
+										$promedio->delete();
+									}
+								}
+
+								$emprendedorConvocatoria[0]->delete();
 							}
-						} catch (Exception $e)
-						{
-
 						}
-
-						$this->response['code'] = 1;
-						$this->response['message'] = 'Se ha eliminado correctamente.';
+						
+						$convocatoria->delete();
 					}
 				}
-				catch (Exception $e)
-				{
-					$db::rollBack();
-					$this->response['code'] = 5;
-					$this->response['message'] = 'Ocurrió un error, favor de contactar al administrado.';
+
+				$usuario = User::find($universidad[0]->usuario_id);				
+
+				if (file_exists($this->DIRECTORY . $universidad[0]->imagen)) { unlink($this->DIRECTORY . $universidad[0]->imagen); }
+
+				$universidad[0]->delete();
+
+				if ($usuario != null) {
+					
+					Persona::where('persona_id', '=', $usuario->usuario_id)->delete();
+					RolUsuario::where('user_id', '=', $usuario->usuario_id)->delete();
+					
+					if ($usuario->imagen != null) {
+						$dir = __DIR__ . '/../../uploads/usuario/';
+						if (file_exists($dir . $usuario->imagen)) {
+						 	unlink($dir . $usuario->imagen);
+						}
+					}
+					$usuario->delete();
 				}
+
+				$db::commit();
+				$this->response['code'] = 1;
+				$this->response['message'] = 'Se ha eliminado correctamente';
 			}
+			catch(PDOException $e)  
+			{
+				$db::rollBack();
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Ocurrió un error';
+			}
+						
 		}
 		else
 		{
