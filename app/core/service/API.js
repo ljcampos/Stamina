@@ -68,6 +68,13 @@
 			},
 			'aplicationform': {
 				'form': baseDB  + 'app/aplicationform/database/db.json'
+			},
+			'member': {
+				'list': base + 'miembro/',
+				'ById': base + 'miembro/:id/',
+				'add': base + 'miembro/',
+				'update': base + 'miembro/:id/update/',
+				'delete': base + 'miembro/:id/delete/'
 			}
 		};
 	}
