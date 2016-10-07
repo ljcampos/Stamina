@@ -219,10 +219,10 @@ class RespuestaController extends Controller
 			{
 				$messages[] = 'El campo respuesta no debe estar vacío.';
 			}
-			/*elseif (count(Respuesta::where('respuesta', '=', $params['post']['respuesta'])->get()) > 0)
-			{
-				$messages[] = 'Ya existe una respuesta con el nombre: \'' . $params['post']['respuesta'] . '\'';
-			}*/
+			// elseif (count(Respuesta::where('respuesta', '=', $params['post']['respuesta'])->get()) > 0)
+			// {
+			// 	$messages[] = 'Ya existe una respuesta con el nombre: \'' . $params['post']['respuesta'] . '\'';
+			// }
 
 			if (is_int(intval($params['id_pregunta'])) == false)
 			{
