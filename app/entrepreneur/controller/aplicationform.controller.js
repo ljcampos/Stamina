@@ -61,36 +61,36 @@
 				'title': 'Sección #2',
 				'target': '#tab_2',
 				'targetId': 2,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #3',
 				'target': '#tab_3',
 				'targetId': 3,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #4',
 				'target': '#tab_4',
 				'targetId': 4,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #5',
 				'target': '#tab_5',
 				'targetId': 5,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
 				'title': 'Sección #6',
 				'target': '#tab_6',
 				'targetId': 6,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 		}];
 
@@ -139,6 +139,42 @@
 							$scope.objSection2['a'+(i+1)] = "";
 						} else {
 							$scope.objSection2['a'+(i+1)] = response.data[i]['a' + (i+1)];
+						}
+					}
+					// section 3
+					if (i > 20 && i <= 21) {
+						// change " " by "" empty space.
+						if (!response.data[i]['a' + (i+1)].trim()) {
+							$scope.objSection3['a'+(i+1)] = "";
+						} else {
+							$scope.objSection3['a'+(i+1)] = response.data[i]['a' + (i+1)];
+						}
+					}
+					// section 4
+					if (i > 21 && i <= 27) {
+						// change " " by "" empty space.
+						if (!response.data[i]['a' + (i+1)].trim()) {
+							$scope.objSection4['a'+(i+1)] = "";
+						} else {
+							$scope.objSection4['a'+(i+1)] = response.data[i]['a' + (i+1)];
+						}
+					}
+					// section 5
+					if (i > 27 && i <= 33) {
+						// change " " by "" empty space.
+						if (!response.data[i]['a' + (i+1)].trim()) {
+							$scope.objSection5['a'+(i+1)] = "";
+						} else {
+							$scope.objSection5['a'+(i+1)] = response.data[i]['a' + (i+1)];
+						}
+					}
+					// section 6
+					if (i > 33 && i <= 36) {
+						// change " " by "" empty space.
+						if (!response.data[i]['a' + (i+1)].trim()) {
+							$scope.objSection6['a'+(i+1)] = "";
+						} else {
+							$scope.objSection6['a'+(i+1)] = response.data[i]['a' + (i+1)];
 						}
 					}
 
@@ -636,7 +672,7 @@
 						return true;
 					break;
 				case 3:
-					if (dataSize === 9)
+					if (dataSize === 1)
 						return true;
 					break;
 				case 4:

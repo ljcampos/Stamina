@@ -13,6 +13,12 @@
   .app{
     overflow-x: hidden;
   }
+  .btn-custom{
+    border-radius: 15px;
+  }
+  .btn-custom:hover{
+    border-radius: 0px;
+  }
 </style>
 <div class="app">
   <div class="row row-center">
@@ -63,10 +69,10 @@
           </div>
           <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-6">
-              <button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md">Registrarme</button>
+              <button md-ink-ripple class="md-btn md-raised grey-900 btn-block p-h-md btn-custom">Registrarme</button>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
-              <button class='md-btn md-raised grey-900 btn-block p-h-md' ng-click='facebookSignup()'>Registrate con &nbsp;<i class='fa fa-facebook-square'></i></button>
+              <button class='md-btn md-raised grey-900 btn-block p-h-md btn-custom' ng-click='facebookSignup()'>Registrarme con &nbsp;<i class='fa fa-facebook-square'></i></button>
             </div>
           </div>
         </form>

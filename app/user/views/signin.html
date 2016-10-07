@@ -7,8 +7,11 @@
   .panel{
     border-radius: 15px;
   }
-  .btn-custom:hover{
+  .btn-custom{
     border-radius: 15px;
+  }
+  .btn-custom:hover{
+    border-radius: 0px;
   }
 </style>
 
@@ -47,7 +50,7 @@
       </form>
       <hr style="">
       <div class='text-center'>
-          <button class='md-btn md-raised grey-900 btn-block p-h-md' ng-click='facebookLogin()'><i class='fa fa-facebook-square'></i> Acceder con facebook</button>
+          <button class='md-btn md-raised grey-900 btn-block p-h-md btn-custom' ng-click='facebookLogin()' style="background: #3b5998;"><i class='fa fa-facebook-square'></i> Acceder con facebook</button>
       </div>
     </div>
     <div class="text-center">
