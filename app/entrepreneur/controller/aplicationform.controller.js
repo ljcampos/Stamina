@@ -51,46 +51,46 @@
 		};
 
 		$scope.tabs = [{
-				'title': 'Seccion #1: Representante',
+				'title': 'Representante',
 				'target': '#tab_1',
 				'targetId': 1,
 				'class': 'active',
 				'subClass': '',
 				//'current': true
 			}, {
-				'title': 'Seccion #2: Proyecto',
+				'title': 'Proyecto',
 				'target': '#tab_2',
 				'targetId': 2,
 				'class': 'disable',
 				'subClass': 'disabledTab',
 				//'current': false
 			}, {
-				'title': 'Seccion #3: Equipo',
+				'title': 'Equipo',
 				'target': '#tab_3',
 				'targetId': 3,
 				'class': 'disable',
 				'subClass': 'disabledTab',
 				//'current': false
 			}, {
-				'title': 'Seccion #4: Legal',
+				'title': 'Legal',
 				'target': '#tab_4',
 				'targetId': 4,
 				'class': 'disable',
 				'subClass': 'disabledTab',
 				//'current': false
 			}, {
-				'title': 'Seccion #5: Experiencia',
+				'title': 'Experiencia',
 				'target': '#tab_5',
 				'targetId': 5,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 			}, {
-				'title': 'Seccion #6: Acuerdos',
+				'title': 'Acuerdos',
 				'target': '#tab_6',
 				'targetId': 6,
-				'class': 'disable',
-				'subClass': 'disabledTab',
+				//'class': 'disable',
+				//'subClass': 'disabledTab',
 				//'current': false
 		}];
 
