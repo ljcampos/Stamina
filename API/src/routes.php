@@ -1234,6 +1234,20 @@ $app->group('/api/v1/miembro', function () {
 	/**
 	* 
 	*/
+	$this->get('/{id}/', function ($request, $response, $args) 
+	{
+		$controller = new MiembroController();
+		$json = $controller->callAction('one', $args['id']);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('obtener_miembro');
+
+	
+	/**
+	* 
+	*/
 	$this->post('/{id}/update/', function ($request, $response, $args) 
 	{
 		$params = $request->getParams();
@@ -1246,18 +1260,19 @@ $app->group('/api/v1/miembro', function () {
 
 	})->setName('agregar_miembros');
 
-
 	/**
 	* 
 	*/
-	$this->get('/{id}/', function ($request, $response, $args) 
+	$this->post('/{id}/delete/', function ($request, $response, $args) 
 	{
+
 		$controller = new MiembroController();
-		$json = $controller->callAction('one', $args['id']);
+		$json = $controller->callAction('del', $args['id']);
 		
 		$code = ($json['code'] == 1) ? 200 : 401;
 		return $response->withJson($json, $code);
 
-	})->setName('miembros');
+	})->setName('eliminar_miembro');
+
 
 });
