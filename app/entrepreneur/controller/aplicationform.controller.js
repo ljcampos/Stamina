@@ -51,42 +51,42 @@
 		};
 
 		$scope.tabs = [{
-				'title': 'Sección #1',
+				'title': 'Seccion #1: Representante',
 				'target': '#tab_1',
 				'targetId': 1,
 				'class': 'active',
 				'subClass': '',
 				//'current': true
 			}, {
-				'title': 'Sección #2',
+				'title': 'Seccion #2: Proyecto',
 				'target': '#tab_2',
 				'targetId': 2,
 				'class': 'disable',
 				'subClass': 'disabledTab',
 				//'current': false
 			}, {
-				'title': 'Sección #3',
+				'title': 'Seccion #3: Equipo',
 				'target': '#tab_3',
 				'targetId': 3,
-				//'class': 'disable',
-				//'subClass': 'disabledTab',
+				'class': 'disable',
+				'subClass': 'disabledTab',
 				//'current': false
 			}, {
-				'title': 'Sección #4',
+				'title': 'Seccion #4: Legal',
 				'target': '#tab_4',
 				'targetId': 4,
 				'class': 'disable',
 				'subClass': 'disabledTab',
 				//'current': false
 			}, {
-				'title': 'Sección #5',
+				'title': 'Seccion #5: Experiencia',
 				'target': '#tab_5',
 				'targetId': 5,
 				'class': 'disable',
 				'subClass': 'disabledTab',
 				//'current': false
 			}, {
-				'title': 'Sección #6',
+				'title': 'Seccion #6: Acuerdos',
 				'target': '#tab_6',
 				'targetId': 6,
 				'class': 'disable',
@@ -144,11 +144,10 @@
 					// section 3
 					if (i > 20 && i <= 21) {
 						// change " " by "" empty space.
-						if (!response.data[i]['a' + (i+1)].trim()) {
-							$scope.objSection3['a'+(i+1)] = "";
-						} else {
-							$scope.objSection3['a'+(i+1)] = response.data[i]['a' + (i+1)];
-						}
+						if (!response.data[i]['a' + (i+1)].trim())
+							$scope.objSection3['a'+ (i+1)].selected.name = 'Elija una opción';
+						else
+							$scope.objSection3['a'+ (i+1)].selected.name = response.data[i]['a' + (i+1)];
 					}
 					// section 4
 					if (i > 21 && i <= 27) {

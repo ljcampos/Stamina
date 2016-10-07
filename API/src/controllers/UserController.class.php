@@ -800,9 +800,9 @@ class UserController extends Controller
 						for($i=1; $i<=37; $i++){ 
 							$objRespuesta = new Respuesta();
 							$objRespuesta->id_pregunta = $i;
-							$objRespuesta->respuesta = " ";
-							$objRespuesta->calificacion_final = " ";
-							$objRespuesta->comentario_final = " ";
+							$objRespuesta->respuesta = "";
+							$objRespuesta->calificacion_final = "";
+							$objRespuesta->comentario_final = "";
 							$objRespuesta->id_emprendedor_convocatoria = $obj->id;
 							if(!$objRespuesta->save()){
 								$this->response['code'] = 6;
