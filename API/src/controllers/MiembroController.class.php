@@ -9,7 +9,8 @@ class MiembroController extends Controller
 		'all' 		=>	'getAll',
 		'one'			=>	'getById',
 		'add' 		=>	'insert',
-		'update'	=>	'update'
+		'update'	=>	'update',
+		'del'			=>	'delete'
 	);
 
 	/**
@@ -261,6 +262,45 @@ class MiembroController extends Controller
 
 		return $this->response;
 	}
+
+	/**
+	*
+	*/
+	public function delete($id)
+	{
+		$params = $this->sanitize(array($id));
+		$miembro = Miembro::find($params[0]);
+
+		if ($miembro != null)
+		{
+			$db = Connection::getConnection();
+			$db::beginTransaction();
+
+			try 
+			{
+				if ($miembro->delete()) 
+				{
+					$db::commit();
+					$this->response['code'] = 1;
+					$this->response['message'] = 'Se ha eliminado correctamente.';		
+				}
+			} 
+			catch (PDOException $e) 
+			{
+				$db::rollBack();
+				$this->response['code'] = 5;
+				$this->response['message'] = 'Ocurrió un error.';	
+			}
+		}
+		else 
+		{
+			$this->response['code'] = 4;
+			$this->response['message'] = 'Recurso no encontrado';
+		}
+
+		return $this->response;
+	}
+
 
 	/**
 	*
