@@ -54,25 +54,25 @@
                 </div>
                   <div class="col-md-4">
   									<div class="md-form-group float-label">
-  										<input class="md-input" required="" ng-model='objSection1.a1'>
+  										<input class="md-input has-value" required="" ng-model='objSection2.a1'>
   										<label>Nombre(s)</label>
   									</div>
                   </div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input class="md-input" required="" ng-model='objSection1.a2'>
+                      <input class="md-input has-value" required="" ng-model='objSection2.a2'>
                       <label>Apellido Paterno</label>
                     </div>
                   </div>
                   <div class="col-md-4">
   							<div class="md-form-group float-label">
-  								<input class="md-input" required="" ng-model='objSection1.a3'>
+  								<input class="md-input has-value" required="" ng-model='objSection2.a3'>
   							   <label>Apellido Materno</label>
                      </div>
   						</div>
                   <div class="col-md-4">
                     <div class="md-form-group float-label">
-                      <input type="date" class="md-input has-value" required="" ng-model='objSection1.a4'>
+                      <input type="date" class="md-input has-value" required="" ng-model='objSection2.a4'>
                       <label>Fecha de nacimiento</label>
                     </div>
                   </div>
@@ -84,8 +84,7 @@
                         <option>Másculino</option>
                         <option>Femenino</option>
                       </select> -->
-                      <select ng-options='data.name for data in objSection1.a5.options track by data.name' ng-model='objSection1.a5.selected'>
-                      </select>
+                      <select class="form-control" ng-options='data.name for data in objSection2.a5.options track by data.name' ng-model='objSection2.a5.selected'></select>
                       <!-- {{gender.selected}} -->
                     </div>
                   </div>
@@ -98,13 +97,13 @@
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                    <input class="md-input" required="" ng-model='objSection1.a6'>
+                    <input class="md-input has-value" required="" ng-model='objSection2.a6'>
                     <label>Email</label>
                   </div>
                   <div class="col-md-12">
                     </div>
                     <div class="md-form-group float-label">
-                    <input class="md-input" required="" ng-model='objSection1.a7'>
+                    <input class="md-input has-value" required="" ng-model='objSection2.a7'>
                     <label>Teléfono Móvil</label>
                     </div>
                   </div>
@@ -117,19 +116,19 @@
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input" required="" ng-model='objSection1.a8'>
+                      <input class="md-input has-value" required="" ng-model='objSection2.a8'>
                       <label>Nivel Académico</label>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input" required="" ng-model='objSection1.a9'>
+                      <input class="md-input has-value" required="" ng-model='objSection2.a9'>
                       <label>Escuela de Procedencia</label>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="md-form-group float-label">
-                      <input class="md-input" required="" ng-model='objSection1.a10'>
+                      <input class="md-input has-value" required="" ng-model='objSection2.a10'>
                       <label>Escuela de Formación</label>
                     </div>
                   </div>
@@ -140,7 +139,7 @@
             <div class='row'>
               <div class='col-lg-12'>
                 <div class='pull-right'>
-                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection1, 1)'>Guardar</button>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection2, 1)'>Guardar</button>
                   <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>
@@ -379,12 +378,12 @@
                           <option>Sí, tengo un equipo para el proyecto</option>
                           <option>No, tengo un equipo para el proyecto</option>
                         </select> -->
-                        <select class="form-control" ng-options='data.name for data in objSection3.team.options track by data.id' ng-model='objSection3.team.selected'>
-                      </select>
+                        <!--<select class="form-control" ng-options='data.name for data in objSection2.team.options track by data.id' ng-model='objSection2.team.selected'>-->
+                            <select class="form-control" ng-options='data.name for data in objSection2.a22.options track by data.name' ng-model='objSection2.a22.selected'></select>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-12 text-center">
+                  <div class="col-md-12 text-center" ng-if="objSection2.a22.selected.name=='Sí, tengo un equipo para el proyecto'">
                     <br>
                     <button type="button" class="text-sm btn btn-lg btn-rounded btn-stroke btn-accent m-r waves-effect">
                       <i class="fa mdi-social-person-add fa-2x pull-left"></i>
@@ -393,56 +392,56 @@
                       </span>
                     </button>
                   </div>
-                  <div class="col-md-7">
+                  <div class="col-md-12" ng-if="objSection2.a22.selected.name=='Sí, tengo un equipo para el proyecto'">
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Nombre(s)</strong>
-                          <input class="form-control" ng-model='objSection3.name'>
+                          <input class="form-control" ng-model='objSectionEquipo.name'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Apellido Paterno</strong>
-                          <input class="form-control" ng-model='objSection3.firstName'>
+                          <input class="form-control" ng-model='objSectionEquipo.firstName'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Apellido Materno</strong>
-                          <input class="form-control" ng-model='objSection3.lastName'>
+                          <input class="form-control" ng-model='objSectionEquipo.lastName'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Teléfono</strong>
-                          <input class="form-control" ng-model='objSection3.phone'>
+                          <input class="form-control" ng-model='objSectionEquipo.phone'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Correo</strong>
-                          <input class="form-control" ng-model='objSection3.email'>
+                          <input class="form-control" ng-model='objSectionEquipo.email'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <strong>Nivel Académico</strong>
-                          <input class="form-control" ng-model='objSection3.School'>
+                          <input class="form-control" ng-model='objSectionEquipo.School'>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <strong>Describe el rol que desempeña dentro del equipo (Cuáles son las actividades que realiza en el proyecto)</strong>
-                          <textarea class="form-control" ng-model='objSection3.descriptio'></textarea>
+                          <textarea class="form-control" ng-model='objSectionEquipo.descriptio'></textarea>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-md-5">
-                    <div class="form-group">
-                      <strong>De las siguientes habilidades, ¿Cuáles se encuentran cubiertas por los miembros fundadores?</strong>
-                      <textarea class="form-control" ng-model='objSection3.descriptio2'></textarea>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <strong>De las siguientes habilidades, ¿Cuáles se encuentran cubiertas por los miembros fundadores?</strong>
+                          <textarea class="form-control" ng-model='objSectionEquipo.descriptio2'></textarea>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -452,7 +451,7 @@
             <div class='row'>
               <div class='col-lg-12'>
                 <div class='pull-right'>
-                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection3, 3)'>Guardar</button>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection2, 3)'>Guardar</button>
                   <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>
@@ -476,13 +475,13 @@
                         <div class="row">
                           <div class="col-md-12">
                             <label class="md-check">
-                              <input type="radio" class="has-value" ng-model='objSection4.a23' value='si'>
+                              <input type="radio" class="has-value" ng-model='objSection2.a23' value='si'>
                               <i class="grey-900"></i> Si
                             </label>
                           </div>
                           <div class="col-md-12">
                             <label class="md-check">
-                              <input type="radio" class="has-value" ng-model='objSection4.a23' value='no'>
+                              <input type="radio" class="has-value" ng-model='objSection2.a23' value='no'>
                               <i class="grey-900"></i> No
                             </label>
                           </div>
@@ -498,12 +497,12 @@
                       </label>
                       <div class="col-sm-12">
                         <label class="md-check">
-                          <input type="radio" class="has-value" ng-model='objSection4.a24' value='si'>
+                          <input type="radio" class="has-value" ng-model='objSection2.a24' value='si'>
                           <i class="grey-900"></i> Si
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio" class="has-value" ng-model='objSection4.a24' value='no'>
+                          <input type="radio" class="has-value" ng-model='objSection2.a24' value='no'>
                           <i class="grey-900"></i> no
                         </label>
                       </div>
@@ -515,7 +514,7 @@
                         <br><strong>14. Qué porcentaje de participación accionaría tiene cada socio?</strong>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="4" ng-model='objSection4.a25'></textarea>
+                        <textarea class="form-control" rows="4" ng-model='objSection2.a25'></textarea>
                       </div>
                     </div>
                   </div>
@@ -525,7 +524,7 @@
                         <br><strong>15. Han platicado qué porcentaje accionario le corresponderá a cada uno de los integrantes del proyecto si este se constituye legalmente?</strong>
                       </label>
                       <div class="col-sm-12">
-                        <textarea class="form-control" rows="4" ng-model='objSection4.a26'></textarea>
+                        <textarea class="form-control" rows="4" ng-model='objSection2.a26'></textarea>
                       </div>
                     </div>
                   </div>
@@ -538,7 +537,7 @@
                         <div class="row">
                           <div class="col-md-2">
                             <label class="md-check">
-                              <input type="radio" class="has-value" ng-model='objSection4.a27' value='no'>
+                              <input type="radio" class="has-value" ng-model='objSection2.a27' value='no'>
                               <i class="grey-900"></i> No
                             </label>
                           </div>
@@ -546,12 +545,12 @@
                             <div class="row">
                               <div class="col-md-2">
                                 <label class="md-check">
-                                  <input type="radio" class="has-value" ng-model='objSection4.a27' value='si'>
+                                  <input type="radio" class="has-value" ng-model='objSection2.a27' value='si'>
                                   <i class="grey-900"></i> Sí
                                 </label>
                               </div>
                               <div class="col-md-5 form-group form-group-sm">
-                                <input class="form-control" type="" name="" placeholder="Podemos saber de Quién?"  ng-model='objSection4.a28'>
+                                <input class="form-control" type="" name="" placeholder="Podemos saber de Quién?"  ng-model='objSection2.a28'>
                               </div>
                             </div>
                           </div>
@@ -566,7 +565,7 @@
             <div class='row'>
               <div class='col-lg-12'>
                 <div class='pull-right'>
-                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection4, 4)'>Guardar</button>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection2, 4)'>Guardar</button>
                   <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>
@@ -588,7 +587,7 @@
                            <strong>1. ¿Has colaborado en el desarrollo de algún producto, servicio tecnológico ó proyecto de investigación? Si, ¿Cúal?</strong>
                          </label>
                          <div class="col-sm-12">
-                           <textarea class="form-control" rows="4" ng-model='objSection5.a29'></textarea>
+                           <textarea class="form-control" rows="4" ng-model='objSection2.a29'></textarea>
                          </div>
                        </div>
                      </div>
@@ -598,7 +597,7 @@
                            <br><strong>2. ¿Has participado en la creación o gestión de alguna empresa? (Ya sea como fundador o como colaborador) Si, menciona que papel juegas</strong>
                          </label>
                          <div class="col-sm-12">
-                           <textarea class="form-control" rows="4" ng-model='objSection5.a30'></textarea>
+                           <textarea class="form-control" rows="4" ng-model='objSection2.a30'></textarea>
                          </div>
                        </div>
                      </div>
@@ -608,7 +607,7 @@
                            <br><strong>3. Menciona el reto más grande de tu vida y cómo lo solucionaste?<small>(No aplica para situaciones amorosas, ni escolares)</small></strong>
                          </label>
                          <div class="col-sm-12">
-                           <textarea class="form-control" rows="5" ng-model='objSection5.a31'></textarea>
+                           <textarea class="form-control" rows="5" ng-model='objSection2.a31'></textarea>
                          </div>
                        </div>
                      </div>
@@ -625,7 +624,7 @@
                            <strong>1. Por qué eres un buen candidato para formar parte del programa de entrenamiento?</strong>
                          </label>
                          <div class="col-sm-12">
-                           <textarea class="form-control" rows="3" ng-model='objSection5.a32'></textarea>
+                           <textarea class="form-control" rows="3" ng-model='objSection2.a32'></textarea>
                          </div>
                        </div>
                      </div>
@@ -639,47 +638,47 @@
                              <div class="col-md-12">
                              <!-- ng-repeat="check5 in checkboxSection5" -->
                              <!-- <label class="md-check">
-                                <input type='checkbox' class="has-value"  name="selectedItemsSection5[]" ng-model='objSection5.selected'/>
+                                <input type='checkbox' class="has-value"  name="selectedItemsSection5[]" ng-model='objSection2.selected'/>
                                 <i class="grey-900"></i>{{check5.value}}
                              </label>
                              <br> -->
                                <label class="md-check">
-                                 <input type="radio" class="has-value" ng-model="objSection5.a33" value="Dirección Estratégica en Innovación">
+                                 <input type="radio" class="has-value" ng-model="objSection2.a33" value="Dirección Estratégica en Innovación">
                                  <i class="grey-900"></i>Dirección Estratégica en Innovación
                                </label>
                                <br>
                                <label class="md-check">
-                                 <input type="radio" class="has-value" ng-model="objSection5.a33" value="Agencias de Marketing">
+                                 <input type="radio" class="has-value" ng-model="objSection2.a33" value="Agencias de Marketing">
                                  <i class="grey-900"></i>Agencias de Marketing
                                </label>
                                <br>
                                <label class="md-check">
-                                 <input type="radio" class="has-value" ng-model="objSection5.a33" value="Vinculación con Mercados ">
+                                 <input type="radio" class="has-value" ng-model="objSection2.a33" value="Vinculación con Mercados ">
                                  <i class="grey-900"></i>Vinculación con Mercados 
                                </label>
                                <br>
                                <label class="md-check">
-                                 <input type="radio" class="has-value" ng-model="objSection5.a33" value="Desarrollo de Prototipo">
+                                 <input type="radio" class="has-value" ng-model="objSection2.a33" value="Desarrollo de Prototipo">
                                  <i class="grey-900"></i>Desarrollo de Prototipo
                                </label>
                                <br>
                                <label class="md-check">
-                                 <input type="radio" class="has-value" ng-model="objSection5.a33" value="Vinculación con Fondos Públicos">
+                                 <input type="radio" class="has-value" ng-model="objSection2.a33" value="Vinculación con Fondos Públicos">
                                  <i class="grey-900"></i>Vinculación con Fondos Públicos
                                </label>
                                <br>
                                <label class="md-check">
-                                 <input type="radio" class="has-value" ng-model="objSection5.a33" value="Vinculación con Fondos Privados / Ángeles Inversionistas">
+                                 <input type="radio" class="has-value" ng-model="objSection2.a33" value="Vinculación con Fondos Privados / Ángeles Inversionistas">
                                  <i class="grey-900"></i>Vinculación con Fondos Privados / Ángeles Inversionistas
                                </label>
                                <br>
                                <label class="md-check">
-                                 <input type="radio" class="has-value" ng-model="objSection5.a33" value="Apoyo en Elaboración de Campaña de Crowdfunding">
+                                 <input type="radio" class="has-value" ng-model="objSection2.a33" value="Apoyo en Elaboración de Campaña de Crowdfunding">
                                  <i class="grey-900"></i>Apoyo en Elaboración de Campaña de Crowdfunding
                                </label>
                                <br>
                                <label class="md-check">
-                                 <input type="radio" class="has-value" ng-model="objSection5.a33" value="Conformación Legal de Empresa">
+                                 <input type="radio" class="has-value" ng-model="objSection2.a33" value="Conformación Legal de Empresa">
                                  <i class="grey-900"></i>Conformación Legal de Empresa
                                </label>
                              </div>
@@ -694,25 +693,25 @@
                          </label>
                          <div class="col-sm-6">
                            <label class="md-check">
-                           <input type="radio" class="has-value" ng-model='objSection5.a34' value='Web'>
+                           <input type="radio" class="has-value" ng-model='objSection2.a34' value='Web'>
                            <i class="grey-900"></i>Web
                            </label><br>
                            <label class="md-check">
-                           <input type="radio" class="has-value" ng-model='objSection5.a34' value='Redes Sociales'>
+                           <input type="radio" class="has-value" ng-model='objSection2.a34' value='Redes Sociales'>
                            <i class="grey-900"></i>Redes Sociales
                            </label><br>
                            <label class="md-check">
-                           <input type="radio" class="has-value" ng-model='objSection5.a34' value='Medios Impresos o Tradicionales'>
+                           <input type="radio" class="has-value" ng-model='objSection2.a34' value='Medios Impresos o Tradicionales'>
                            <i class="grey-900"></i>Medios Impresos o Tradicionales
                            </label>
                          </div>
                          <div class="col-sm-6">
                            <label class="md-check">
-                           <input type="radio" class="has-value" ng-model='objSection5.a34' value='Invitación Personalizada'>
+                           <input type="radio" class="has-value" ng-model='objSection2.a34' value='Invitación Personalizada'>
                            <i class="grey-900"></i>Invitación Personalizada
                            </label><br>
                            <label class="md-check">
-                           <input type="radio" class="has-value" ng-model='objSection5.a34' value='Red de Amigos'>
+                           <input type="radio" class="has-value" ng-model='objSection2.a34' value='Red de Amigos'>
                            <i class="grey-900"></i>Red de Amigos
                            </label><br>
                          </div>
@@ -725,7 +724,7 @@
                <div class='row'>
                  <div class='col-lg-12'>
                    <div class='pull-right'>
-                     <button class='btn btn-lg btn-success' ng-click='saveSection(objSection5, 5)'>Guardar</button>
+                     <button class='btn btn-lg btn-success' ng-click='saveSection(objSection2, 5)'>Guardar</button>
                      <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                    </div>
                  </div>
@@ -750,12 +749,12 @@
                       </label>
                       <div class="col-sm-12">
                         <label class="md-check">
-                          <input type="radio" class="has-value" ng-model='objSection6.a35' value='si'>
+                          <input type="radio" class="has-value" ng-model='objSection2.a35' value='si'>
                           <i class="grey-900"></i> Acepto
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio" class="has-value" ng-model='objSection6.a35' value='no'>
+                          <input type="radio" class="has-value" ng-model='objSection2.a35' value='no'>
                           <i class="grey-900"></i> No Acepto
                         </label>
                       </div>
@@ -771,12 +770,12 @@
                       </label>
                       <div class="col-sm-12">
                         <label class="md-check">
-                          <input type="radio" class="has-value" ng-model='objSection6.a36' value='si'>
+                          <input type="radio" class="has-value" ng-model='objSection2.a36' value='si'>
                           <i class="grey-900"></i> Acepto
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio" class="has-value" ng-model='objSection6.a36' value='no'>
+                          <input type="radio" class="has-value" ng-model='objSection2.a36' value='no'>
                           <i class="grey-900"></i> No Acepto
                         </label>
                       </div>
@@ -792,12 +791,12 @@
                       </label>
                       <div class="col-sm-12">
                         <label class="md-check">
-                          <input type="radio" class="has-value" ng-model='objSection6.a37' value='si'>
+                          <input type="radio" class="has-value" ng-model='objSection2.a37' value='si'>
                           <i class="grey-900"></i> Acepto
                         </label>
                         <br>
                         <label class="md-check">
-                          <input type="radio" class="has-value" ng-model='objSection6.a37' value='no'>
+                          <input type="radio" class="has-value" ng-model='objSection2.a37' value='no'>
                           <i class="grey-900"></i> No Acepto
                         </label>
                       </div>
@@ -810,7 +809,7 @@
             <div class='row'>
               <div class='col-lg-12'>
                 <div class='pull-right'>
-                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection6, 6)'>Guardar</button>
+                  <button class='btn btn-lg btn-success' ng-click='saveSection(objSection2, 6)'>Guardar</button>
                   <!-- <button class='btn btn-lg btn-info' ng-disabled='btnSection1' ng-click='next()'>Siguiente</button> -->
                 </div>
               </div>

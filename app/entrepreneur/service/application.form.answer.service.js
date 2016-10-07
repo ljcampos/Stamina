@@ -4,8 +4,21 @@
 
 	function ApplicationFormAnswer($q, $http, API) {
 		return {
+			getAnswers: getAnswers,
 			addSection: addSection
 		};
+
+		function getAnswers(id_emprendedor_convocatoria) {
+			var answerDefer = $q.defer();
+			$http.get(API.answer.update+"emprendedor/"+id_emprendedor_convocatoria+"/")
+			.success(function(response) {
+				answerDefer.resolve(response);
+			})
+			.error(function(error) {
+				answerDefer.reject(error);
+			});
+			return answerDefer.promise;
+		}
 
 		function addSection(data) {
 			var answerDefer = $q.defer();

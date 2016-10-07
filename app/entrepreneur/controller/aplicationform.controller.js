@@ -16,17 +16,18 @@
 		$scope.user = UserService.getUser();
 
 		// sections objects
-		$scope.objSection1 = {};
-		$scope.objSection2 = {};
-		$scope.objSection20prima = "";
-		$scope.objSection3 = {};
-		$scope.objSection4 = {};
-		$scope.objSection5 = {};
-		$scope.objSection6 = {};
-		$scope.objSection7 = {};
+		$scope.objSection1 			= {};
+		$scope.objSection2 			= {};
+		$scope.objSection20prima 	= "";
+		$scope.objSection3 			= {};
+		$scope.objSection4 			= {};
+		$scope.objSection5 			= {};
+		$scope.objSection6 			= {};
+		$scope.objSection7 			= {};
+		$scope.objSectionEquipo 	= {}; //objSection2.a22.selected.name=='Sí, tengo un equipo para el proyecto'
 
 		// default selected data
-		$scope.objSection1.a5 = {
+		$scope.objSection2.a5 = {
 			options: [
 			{'id': '2','name' :'Elija una opción'},
 				{'id':'0', 'name': 'masculino'},
@@ -35,7 +36,7 @@
 			selected: {'id': '2','name' :'Elija una opción'}
 		};
 
-		$scope.objSection3.team = {
+		$scope.objSection2.a22 = {
 			options: [
 			{'id': '2','name' :'Elija una opción'},
 				{'id':'0', 'name': 'Sí, tengo un equipo para el proyecto'},
@@ -90,20 +91,192 @@
 
 		$scope.init = function() {
 			loadData($scope.user.data.roles[0].pivot.user_id);
+			//loadAnswers($scope.idEntreneurConvocatory);
 		};
 
 		angular.element(document).ready(function() {
 			$scope.init();
+			/*if($scope.objSection2.a5.selected.id==){
+			}
+			$("#btn-agregar-miembro").hide();*/
 		});
+		
+		function loadAnswers(id_emprendedor_convocatoria){
+			ApplicationFormAnswer.getAnswers(id_emprendedor_convocatoria) 
+			.then(function(response) {
+				var res = [];
+				var index=0;
+				var valor = ""; var llave;
+				console.log(response);
+				for(var i = 0; i < response.data.length; i++) {
+					//console.log(response.data[i]);
+					angular.forEach(response.data[i], function(value, key) {
+						//console.log(response.data[i].a1);
+						switch(value){
+							case 1:
+								$scope.objSection2.a1 = response.data[i].a1;
+							break;
+							case 2:
+								$scope.objSection2.a2 = response.data[i].a2;
+							break;
+							case 3:
+								$scope.objSection2.a3 = response.data[i].a3;
+							break;
+							/*case 4:
+								$scope.objSection2.a4 = $filter('date')(response.data[i].a4, 'dd-MM-yyyy');
+							break;*/
+							case 5:
+								$scope.objSection2.a5.selected = {'name': response.data[i].a5};
+							break;
+							case 6:
+								$scope.objSection2.a6 = response.data[i].a6;
+							break;
+							case 7:
+								$scope.objSection2.a7 = response.data[i].a7;
+							break;
+							case 8:
+								$scope.objSection2.a8 = response.data[i].a8;
+							break;
+							case 9:
+								$scope.objSection2.a9 = response.data[i].a9;
+							break;
+							case 10:
+								$scope.objSection2.a10 = response.data[i].a10;
+							break;
+							case 11:
+								$scope.objSection2.a11 = response.data[i].a11;
+							break;
+							case 12:
+								$scope.objSection2.a12 = response.data[i].a12;
+							break;
+							case 13:
+								$scope.objSection2.a13 = response.data[i].a13;
+							break;
+							case 14:
+								$scope.objSection2.a14 = response.data[i].a14;
+							break;
+							case 15:
+								$scope.objSection2.a15 = response.data[i].a15;
+							break;
+							case 16:
+								$scope.objSection2.a16 = response.data[i].a16;
+							break;
+							case 17:
+								$scope.objSection2.a17 = response.data[i].a17;
+							break;
+							case 18:
+								$scope.objSection2.a18 = response.data[i].a18;
+							break;
+							case 19:
+								$scope.objSection2.a19 = response.data[i].a19;
+							break;
+							case 20:
+								if(
+									response.data[i].a20=="Internet de las Cosas (IoT)"||
+									response.data[i].a20=="Comercio electrónico (e-commerce)"||
+									response.data[i].a20=="Salud (Healt Informatics )"||
+									response.data[i].a20=="Wearables Tecnhology"||
+									response.data[i].a20=="Educación (Ed Tech)"||
+									response.data[i].a20=="Energía & Tecnologías Sustentables ( Clean Tech)"||
+									response.data[i].a20=="Finanzas (FinTech)"||
+									response.data[i].a20=="Video Juegos"||
+									response.data[i].a20=="Salud & Biotecnología"||
+									response.data[i].a20=="IT & Software"||
+									response.data[i].a20=="Mobile & Wireless"||
+									response.data[i].a20=="Recursos Naturales - minería, alimentos, etc."||
+									response.data[i].a20=="Media"||
+									response.data[i].a20=="Empresa Social"||
+									response.data[i].a20=="Social Media/Social Network"||
+									response.data[i].a20=="Turismo"
+								){
+									$scope.objSection2.a20 = response.data[i].a20;
+								}else{
+									$scope.objSection2.a20 = "Otro (Especifica)";
+									$scope.objSection20prima = response.data[i].a20;
+								}
+
+							break;
+							case 21:
+								$scope.objSection2.a21 = response.data[i].a21;
+							break;
+							case 22:
+								$scope.objSection2.a22.selected = {'name': response.data[i].a22};
+							break;
+							case 23:
+								$scope.objSection2.a23 = response.data[i].a23;
+							break;
+							case 24:
+								$scope.objSection2.a24 = response.data[i].a24;
+							break;
+							case 25:
+								$scope.objSection2.a25 = response.data[i].a25;
+							break;
+							case 26:
+								$scope.objSection2.a26 = response.data[i].a26;
+							break;
+							case 27:
+								$scope.objSection2.a27 = response.data[i].a27;
+							break;
+							case 28:
+								$scope.objSection2.a28 = response.data[i].a28;
+							break;
+							case 29:
+								$scope.objSection2.a29 = response.data[i].a29;
+							break;
+							case 30:
+								$scope.objSection2.a30 = response.data[i].a30;
+							break;
+							case 31:
+								$scope.objSection2.a31 = response.data[i].a31;
+							break;
+							case 32:
+								$scope.objSection2.a32 = response.data[i].a32;
+							break;
+							case 34:
+								$scope.objSection2.a34 = response.data[i].a34;
+							break;
+							case 35:
+								$scope.objSection2.a35 = response.data[i].a35;
+							break;
+							case 36:
+								$scope.objSection2.a36 = response.data[i].a36;
+							break;
+							case 37:
+								$scope.objSection2.a37 = response.data[i].a37;
+							break;
+						}
+						/*if (key.substring(1)==1) {
+							$scope.objSection2.a1 = value;
+						}*/
+					});
+				}
+				/*angular.forEach(response.data, function(value, key) {
+					console.log(value);
+				});*/
+				/*angular.forEach(response.data, function(value, key) {
+					valor = value.a1;
+					console.log(a1, valor);
+				});*/
+				//console.log(response.data);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+			console.log("/////////////////////");
+			//console.log($scope.objSection2);
+		}
 
 		function loadData(id_user) {
 			AnnouncementService.validAnnouncementApplied(id_user) ///usuario/{usuario_id}/convocatorias/
 			.then(function(response) {
 				$scope.idEntreneurConvocatory = response.data[0].id;
-				console.log(response);
+				
+				loadAnswers(response.data[0].id); //CARGANDO RESPUESTAS
+				
+				//console.log(response);
 				UserService.getUserById(id_user)
 				.then(function(res) {
-					console.log(res);
+					//console.log(res);
 				})
 				.catch(function(err) {
 					console.log(err);
@@ -123,7 +296,7 @@
 		}
 
 		$scope.saveSection = function(data, formNumber) {
-			console.log(data, formNumber);
+			//console.log(data, formNumber);
 			var sizeComplete = false;
 			var formDataComplete = false;
 			var dataSize = getObjectSize(data);
@@ -278,6 +451,32 @@
 					// });
 					break;
 				case 3:
+					angular.forEach(formData, function(value, key) {
+						var data = {};
+						var saltar = 0;
+						if(key.substring(1)==22){
+							if(value.selected.name!="Elija una opción"){
+								data.respuesta = value.selected.name;
+							}else{
+								data.respuesta = " ";
+							}
+						}else{
+							data.respuesta = value;
+						}
+						data.id_pregunta = key.substring(1);
+						data.calificacion_final = " ";
+						data.comentario_final = " ";
+						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
+						//SERVICE SAVE()
+						console.log(data);
+						ApplicationFormAnswer.addSection(data)
+						.then(function(response) {
+							console.log(response);
+						})
+						.catch(function(error) {
+							console.log(error);
+						});
+					});
 					// ApplicationFormAnswer.addSection(data)
 					// .then(function(response) {
 					// 	console.log(response);
@@ -292,8 +491,8 @@
 						var saltar = 0;
 						data.respuesta = value;
 						data.id_pregunta = key.substring(1);
-						data.calificacion_final = 0;
-						data.comentario_final = '';
+						data.calificacion_final = " ";
+						data.comentario_final = " ";
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 						//SERVICE SAVE()
 						console.log(data);
@@ -323,8 +522,8 @@
 						}else{*/
 						data.respuesta = value;
 						data.id_pregunta = key.substring(1);
-						data.calificacion_final = 0;
-						data.comentario_final = '';
+						data.calificacion_final = " ";
+						data.comentario_final = " ";
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 						//SERVICE SAVE()
 						console.log(data);
@@ -354,8 +553,8 @@
 						}else{*/
 						data.respuesta = value;
 						data.id_pregunta = key.substring(1);
-						data.calificacion_final = 0;
-						data.comentario_final = '';
+						data.calificacion_final = " ";
+						data.comentario_final = " ";
 						data.id_emprendedor_convocatoria = $scope.idEntreneurConvocatory;
 						//SERVICE SAVE()
 						console.log(data);

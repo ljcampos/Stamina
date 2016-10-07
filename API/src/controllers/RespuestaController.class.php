@@ -90,7 +90,13 @@ class RespuestaController extends Controller
 	{
 		$params = array($id);
 		$respuestas = Respuesta::where('id_emprendedor_convocatoria', '=', $id)->get();
-		$this->response['data'] = $respuestas;
+		$respuestasParser = array();
+		foreach($respuestas as $key => $value){
+			//var_dump($value->id);
+			array_push($respuestasParser, array('a'.$value->id_pregunta => $value->respuesta, 'index' => $value->id_pregunta));
+		}
+		//$this->response['data'] = $respuestas;
+		$this->response['data'] = $respuestasParser;
 		$this->response['code'] = 1;
 
 		return $this->response;
@@ -213,10 +219,10 @@ class RespuestaController extends Controller
 			{
 				$messages[] = 'El campo respuesta no debe estar vacío.';
 			}
-			elseif (count(Respuesta::where('respuesta', '=', $params['post']['respuesta'])->get()) > 0)
+			/*elseif (count(Respuesta::where('respuesta', '=', $params['post']['respuesta'])->get()) > 0)
 			{
 				$messages[] = 'Ya existe una respuesta con el nombre: \'' . $params['post']['respuesta'] . '\'';
-			}
+			}*/
 
 			if (is_int(intval($params['id_pregunta'])) == false)
 			{
