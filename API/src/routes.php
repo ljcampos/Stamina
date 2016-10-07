@@ -1073,6 +1073,19 @@ $app->group('/api/v1/respuesta', function(){
 
 	})->setName('getRespuestasEmprendedor');
 
+	/**
+	* 
+	*/
+	$this->get('/emprendedor/{id}/completo/', function ($request, $response, $args)
+	{
+		$controller = new RespuestaController();
+		$json = $controller->callAction('empFull', $args['id']);
+
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('getRespuestasEmprendedorFull');
+
 });
 
 

@@ -12,6 +12,7 @@ class RespuestaController extends Controller
 		'update'	=>	'update',
 		'updateCalComFinal' => 'updateComentarioFinal',
 		'emp'		=>	'getByEmprendedor',
+		'empFull'	=>	'getByEmprendedorFull',
 		'del'		=>	'delete'
 	);
 
@@ -98,6 +99,23 @@ class RespuestaController extends Controller
 		}
 		//$this->response['data'] = $respuestas;
 		$this->response['data'] = $respuestasParser;
+		$this->response['code'] = 1;
+
+		return $this->response;
+	}
+
+	/**
+	* 
+	*/
+	public function getByEmprendedorFull($id)
+	{
+		$params = array($id);
+		$respuestas = Respuesta::where('id_emprendedor_convocatoria', '=', $id)->get();
+
+		foreach($respuestas as $key => $value){
+			$value->id;
+		}
+		$this->response['data'] = $respuestas;
 		$this->response['code'] = 1;
 
 		return $this->response;
