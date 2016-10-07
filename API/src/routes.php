@@ -1202,3 +1202,77 @@ $app->group('/api/v1/promedio', function(){
 	})->setName('delete_average');
 
 });
+
+$app->group('/api/v1/miembro', function () {
+
+	/**
+	* 
+	*/
+	$this->get('/', function ($request, $response, $args) 
+	{
+		$controller = new MiembroController();
+		$json = $controller->callAction('all');
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('miembros');
+
+	/**
+	* 
+	*/
+	$this->post('/', function ($request, $response, $args) 
+	{
+		$controller = new MiembroController();
+		$json = $controller->callAction('add', $request->getParams());
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('agregar_miembros');
+
+	/**
+	* 
+	*/
+	$this->get('/{id}/', function ($request, $response, $args) 
+	{
+		$controller = new MiembroController();
+		$json = $controller->callAction('one', $args['id']);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('obtener_miembro');
+
+	
+	/**
+	* 
+	*/
+	$this->post('/{id}/update/', function ($request, $response, $args) 
+	{
+		$params = $request->getParams();
+		$params['id'] = $args['id'];
+		$controller = new MiembroController();
+		$json = $controller->callAction('update', $params);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('agregar_miembros');
+
+	/**
+	* 
+	*/
+	$this->post('/{id}/delete/', function ($request, $response, $args) 
+	{
+
+		$controller = new MiembroController();
+		$json = $controller->callAction('del', $args['id']);
+		
+		$code = ($json['code'] == 1) ? 200 : 401;
+		return $response->withJson($json, $code);
+
+	})->setName('eliminar_miembro');
+
+
+});
