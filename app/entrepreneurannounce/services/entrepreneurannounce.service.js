@@ -11,7 +11,7 @@
 
 		function getAnnouncementEntrepreneurs(id,status) {
 			var entrepreneurannounceDefer = $q.defer();
-			$http.post(API.user.list+id+"/convocatorias/emprendedores/"+status+"/") 
+			$http.get(API.user.list+id+"/convocatorias/emprendedores/"+status+"/") 
 			.success(function(response){
 				entrepreneurannounceDefer.resolve(response);
 			})

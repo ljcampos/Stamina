@@ -58,106 +58,26 @@
 					<tr>
 						<th>Nombre</th>
 						<th>Universidad</th>
-						<th>Proyecto</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr role="row" ng-repeat="valor in valores">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Instituto Tecnológico de Mérida</td>
-						<td style="vertical-align:middle;">Proyecto A</td>
+					<tr role="row" ng-repeat="emprendedor in prospectos">
+						<td style="vertical-align:middle;">{{emprendedor.persona.nombre}} {{emprendedor.persona.apellido_paterno}} {{emprendedor.persona.apellido_materno}}</td>
+						<td style="vertical-align:middle;">{{emprendedor.user.email}}</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
+								<a ui-sref='admin.answers.entrepreneur(id:emprendedor.id)' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+									Respuestas
 								</a>
-
 							</div>
 							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
+								<a ui-sref='admin.answers.entrepreneur(id:emprendedor.id)' class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
 							</div>
 						</td>
 					</tr>
-					<!--<tr role="row">
-						<td style="vertical-align:middle;">Irving Gerardo Campos Yah</td>
-						<td style="vertical-align:middle;">Universidad Autónoma de Yucatán</td>
-						<td style="vertical-align:middle;">Proyecto B</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Aarón López Sosa</td>
-						<td style="vertical-align:middle;">Universidad Tecnologica de Tabasco</td>
-						<td style="vertical-align:middle;">Proyecto C</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">José Joaquín Contreras Jorge</td>
-						<td style="vertical-align:middle;">Universidad Tecnologica Metropolitana</td>
-						<td style="vertical-align:middle;">Proyecto J</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Fernando Hernandez</td>
-						<td style="vertical-align:middle;">Universidad del Valle de México</td>
-						<td style="vertical-align:middle;">Proyecto F</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>-->
 				</tbody>
 			</table>
 	    </div>
@@ -167,87 +87,26 @@
 					<tr>
 						<th>Nombre</th>
 						<th>Universidad</th>
-						<th>Proyecto</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Instituto Tecnológico de Mérida</td>
-						<td style="vertical-align:middle;">Proyecto A</td>
+					<tr role="row" ng-repeat="emprendedor in aplicaciones">
+						<td style="vertical-align:middle;">{{emprendedor.persona.nombre}} {{emprendedor.persona.apellido_paterno}} {{emprendedor.persona.apellido_materno}}</td>
+						<td style="vertical-align:middle;">{{emprendedor.user.email}}</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
+								<a ui-sref='admin.answers.entrepreneur(id:emprendedor.id)' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+									Respuestas
 								</a>
-
 							</div>
 							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
+								<a ui-sref='admin.answers.entrepreneur(id:emprendedor.id)' class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
 							</div>
 						</td>
 					</tr>
-					<!--<tr role="row">
-						<td style="vertical-align:middle;">Aarón López Sosa</td>
-						<td style="vertical-align:middle;">Universidad Tecnologica de Tabasco</td>
-						<td style="vertical-align:middle;">Proyecto C</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">José Joaquín Contreras Jorge</td>
-						<td style="vertical-align:middle;">Universidad Tecnologica Metropolitana</td>
-						<td style="vertical-align:middle;">Proyecto J</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">Fernando Hernandez</td>
-						<td style="vertical-align:middle;">Universidad del Valle de México</td>
-						<td style="vertical-align:middle;">Proyecto F</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>-->
 				</tbody>
 			</table>
 	    </div>
@@ -262,63 +121,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr role="row">
-						<td style="vertical-align:middle;">Gabriel Regalado Sanchez</td>
-						<td style="vertical-align:middle;">Instituto Tecnológico de Mérida</td>
-						<td style="vertical-align:middle;">Proyecto A</td>
+					<tr role="row" ng-repeat="emprendedor in aceptados">
+						<td style="vertical-align:middle;">{{emprendedor.persona.nombre}} {{emprendedor.persona.apellido_paterno}} {{emprendedor.persona.apellido_materno}}</td>
+						<td style="vertical-align:middle;">{{emprendedor.user.email}}</td>
 						<td>
 							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
+								<a ui-sref='admin.answers.entrepreneur(id:emprendedor.id)' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
+									Respuestas
 								</a>
-
 							</div>
 							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
+								<a ui-sref='admin.answers.entrepreneur(id:emprendedor.id)' class="btn btn-xs btn-info waves-effect" tooltip="Ver">
+									Respuestas
+								</a>
 							</div>
 						</td>
 					</tr>
-					<!--<tr role="row">
-						<td style="vertical-align:middle;">Irving Gerardo Campos Yah</td>
-						<td style="vertical-align:middle;">Universidad Autónoma de Yucatán</td>
-						<td style="vertical-align:middle;">Proyecto B</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>
-					<tr role="row">
-						<td style="vertical-align:middle;">José Joaquín Contreras Jorge</td>
-						<td style="vertical-align:middle;">Universidad Tecnologica Metropolitana</td>
-						<td style="vertical-align:middle;">Proyecto J</td>
-						<td>
-							<div class="hidden-xs hidden-sm pull-right">
-								<a ui-sref='admin.university.view' class="btn btn-sm btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</a>
-
-							</div>
-							<div class="hidden-md hidden-lg pull-right">
-								<button class="btn btn-xs btn-info waves-effect" tooltip="Ver">
-									<i class="fa fa-eye"></i>
-								</button>
-
-							</div>
-						</td>
-					</tr>-->
 				</tbody>
 			</table>
 	    </div>

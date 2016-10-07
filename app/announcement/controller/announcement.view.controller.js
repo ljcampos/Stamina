@@ -2,22 +2,45 @@
 	'use strict';
 	angular.module('announcement').controller('AnnouncementViewController', ['$state', '$stateParams', '$scope', 'EntrepreneurannounceService', 'UserService', AnnouncementController]);
 	function AnnouncementController($state, $stateParams, $scope, EntrepreneurannounceService, UserService) {
-		$scope.text = 'xsdfsf';
-		$scope.valores = {};
+		$scope.prospectos 		= {};
+		$scope.aplicaciones 	= {};
+		$scope.aceptados 		= {};
 		$scope.init = function() {
-			getAnnouncementEntrepreneurs($stateParams.id,1);
+			getAnnouncementEntrepreneursProspectos($stateParams.id,1);
+			getAnnouncementEntrepreneursAplicaciones($stateParams.id,2);
+			getAnnouncementEntrepreneursAceptados($stateParams.id,3);
 		};
 		angular.element(document).ready(function() {
 			$scope.init();
 		});
-		function getAnnouncementEntrepreneurs(id,status) {
+		function getAnnouncementEntrepreneursProspectos(id,status) {
 			EntrepreneurannounceService.getAnnouncementEntrepreneurs(id,status)
 			.then(function(response) {
-				$scope.valores = response.data;
-				console.log(response);
+				console.log(response.data);
+				$scope.prospectos = response.data;
 			})
 			.catch(function(error) {
-				//console.log(error);
+				console.log(error);
+			});
+		}
+		function getAnnouncementEntrepreneursAplicaciones(id,status) {
+			EntrepreneurannounceService.getAnnouncementEntrepreneurs(id,status)
+			.then(function(response) {
+				console.log(response.data);
+				$scope.aplicaciones = response.data;
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+		}
+		function getAnnouncementEntrepreneursAceptados(id,status) {
+			EntrepreneurannounceService.getAnnouncementEntrepreneurs(id,status)
+			.then(function(response) {
+				console.log(response.data);
+				$scope.aceptados = response.data;
+			})
+			.catch(function(error) {
+				console.log(error);
 			});
 		}
 	}
