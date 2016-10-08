@@ -85,11 +85,4 @@ module.exports = function(grunt) {
 	// Register tasks
 	grunt.registerTask('default', ['tags:buildDev']);
 	grunt.registerTask('prod', ['concat:libs', 'concat:app', 'uglify:js', 'tags:buildProd']);
-
-	// grunt.event.on('watch', function(action, filepath) {
-	// 	if(grunt.file.isMatch(grunt.config('watch.styles.files'), filepath)) {
-	// 		grunt.config('compass.dev.options.specify', [filepath]);
-	// 	}
-	// });
-
 }
